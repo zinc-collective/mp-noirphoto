@@ -17,24 +17,6 @@
 //add version
 #import "VersionWatermark.h"
 
-@interface UIWindow (PBRedsafi)
-
-- (void)layoutSubviews;
-
-@end
-
-@implementation UIWindow (PBRedsafi)
-
-- (void)layoutSubviews{
-	
-//bret
-//#ifdef MACRO__VERSION__
-//	UIView *view = [self viewWithTag:1000];
-//	[self bringSubviewToFront:view];
-//#endif
-}
-
-@end
 
 
 
@@ -44,15 +26,12 @@
 @synthesize viewController;
 @synthesize navigationCtrlor;
 @synthesize curTransfrom;
-@synthesize bForceAcceler;
-@synthesize curXYState;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
     // Override point for customization after app launch  
 	self.curTransfrom = CGAffineTransformIdentity;
-	self.bForceAcceler = YES;
 	
 
 	UINavigationController *navCtrlor = [[UINavigationController alloc] initWithRootViewController:viewController];
@@ -72,7 +51,6 @@
 		{
 			_splash = [[SplashCtrlor alloc] initWithNibName:@"Splash-iPad" bundle:nil];
 			_splash.delegate = self;
-			_splash.bCanRotate = YES;
 			
 			_splashNav = [[UINavigationController alloc] initWithRootViewController:_splash];
 			[_splashNav setNavigationBarHidden:YES];
@@ -120,24 +98,10 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-	self.bForceAcceler = YES;
+    
 }
 
 
-
-- (void)changedAccerateXY:(AccelerXYState)xyState
-{
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		UIViewController *visible = [self.navigationCtrlor visibleViewController];
-		
-		if([visible isKindOfClass:[InfoCtrlor class]])
-		{
-			InfoCtrlor *infoClr = (InfoCtrlor*)visible;
-			[infoClr changeContentForAccerateXY:xyState];
-		}
-	}
-}
 -(BOOL)checkPhotoExistFromPath:(NSString*)path
 {
 	NSString *filePath = [NSHomeDirectory() stringByAppendingString:path];

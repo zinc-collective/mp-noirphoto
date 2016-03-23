@@ -7,7 +7,6 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "Accelerater.h"
 
 
 @class SplashCtrlor;
@@ -29,7 +28,6 @@
 	UIImagePickerController *_imagePicker;
 	
 	UIInterfaceOrientation _curOrientation;
-	BOOL bCanRotate;
 	
 	UIView *_maskView;
 	UIActivityIndicatorView *_spinner;
@@ -41,7 +39,6 @@
 @property (nonatomic, retain) UIButton *albumBtn;
 @property (nonatomic, retain) UIButton *infoBtn;
 @property (nonatomic, retain) UIImageView *backView;
-@property (nonatomic) BOOL bCanRotate;
 
 
 #pragma mark -

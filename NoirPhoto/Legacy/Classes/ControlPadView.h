@@ -11,8 +11,6 @@
 #import "TintsView.h"
 #import "AdjustView.h"
 
-#import "Accelerater.h"
-
 @class ControlPadView;
 @protocol ControlPadViewDelegate <NSObject>
 @optional
@@ -55,7 +53,6 @@
 -(void)choosePresetsBtnForIndex:(NSInteger)index bNeedReturn:(BOOL)bReturn;
 -(void)chooseTintsBtnForIndex:(NSInteger)index bNeedReturn:(BOOL)bReturn;
 
--(void)rotateForAccerateXY:(AccelerXYState)xyState;
 
 
 @end

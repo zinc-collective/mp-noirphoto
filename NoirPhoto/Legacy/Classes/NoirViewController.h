@@ -12,9 +12,9 @@
 #import "Preset.h"
 #import "Tint.h"
 #import "SplashCtrlor.h"
-#import "Accelerater.h"
 #import "VignetteView.h"
 #import "Parameter.h"
+#import "NoirPhoto-Swift.h"
 
 
 
@@ -43,7 +43,7 @@ typedef struct {
 
 
 //@class QuartzView;
-@interface NoirViewController : UIViewController <UIPopoverControllerDelegate, VignetteDelegate, UIAlertViewDelegate, AccelerateDelegate, SplashCtrlorDelegate, ControlPadViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface NoirViewController : UIViewController <UIPopoverControllerDelegate, VignetteDelegate, UIAlertViewDelegate, SplashCtrlorDelegate, ControlPadViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
 	
 	UIImageView			 *photoView;
 	UIImageView			 *photoFullView;
@@ -77,8 +77,6 @@ typedef struct {
 	
 	SplashCtrlor         *splashCtrlor;
 	
-	Accelerater          *accelerater;
-	
 	BOOL				 _bPhotoRotated;
 	
 	NSString             *mCircleImageName;
@@ -108,7 +106,6 @@ typedef struct {
 	
 	UIButton *fullBtn;
 	
-	AccelerXYState accelerXYState2;
 	UIView *blackBackground;
 	
 	NSMutableDictionary *imageMetadata;
@@ -135,7 +132,6 @@ typedef struct {
 @property (nonatomic, retain) UIButton	     *infoBtn;
 @property (nonatomic, retain) UIImageView	 *tintMaskView;
 @property (nonatomic, retain) SplashCtrlor   *splashCtrlor;
-@property (nonatomic, retain) Accelerater    *accelerater;
 @property (nonatomic, retain) NSString       *mCircleImageName;
 @property (nonatomic, retain) NSString		 *mPresetReviewImageName;
 @property (nonatomic, retain) NSString		 *mPresetReviewMaskImageName;
@@ -183,7 +179,6 @@ typedef struct {
 - (void)alertWithSaveMessage:(NSString*)message withTitle:(NSString*)aTitle;
 - (CGRect)photoRenderRectForImageSize:(CGSize)imageSize withImageViewRect:(CGRect)viewRect;
 - (void)showSplashView:(BOOL)bShow;
-- (void)rotateButtonsForAccerateXY:(AccelerXYState)xyState;
 - (UIImage*)imageAddAlphaForImage:(UIImage*)image;
 - (UIImage*)rotatePhotoToFit:(UIImage*)image withOriatation:(UIImageOrientation)orientation;
 - (UIImage*)rotatePhotoToOriginal:(UIImage*)image originOriatation:(UIImageOrientation)orientation;

@@ -7,7 +7,6 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "Accelerater.h"
 
 @interface InfoCtrlor : UIViewController {
 
@@ -22,8 +21,6 @@
 #pragma mark -
 #pragma mark in use functions
 -(IBAction)backAction:(id)sender;
--(void)changeContentForAccerateXY:(AccelerXYState)xyState;
--(void)initContentForAccerateXY:(AccelerXYState)xyState;
 
 
 @end

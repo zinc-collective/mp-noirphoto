@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomPickerView.h"
-#import "Accelerater.h"
 
 
 #define inside_slider_default_value   0.0
@@ -49,7 +48,5 @@
 #pragma mark in use functions
 -(void)addAdjusts;
 -(void)returnAdjustValueToDelegate:(BOOL)isFinal;
-
--(void)rotateForAccerateXY:(AccelerXYState)xyState;
 
 @end

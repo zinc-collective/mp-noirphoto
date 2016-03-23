@@ -25,7 +25,6 @@
 @synthesize albumBtn;
 @synthesize infoBtn;
 @synthesize backView;
-@synthesize bCanRotate;
 
 
 #pragma mark -
@@ -33,7 +32,6 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         // Custom initialization
-		bCanRotate = NO;
     }
     
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -94,30 +92,14 @@ int isRotate = 0;
 
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
-        _curOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+		backView.image = [UIImage imageNamed:@"splash-iPad.png"];
+		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load-iPad.png"] forState:UIControlStateNormal];
+		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel-iPad.png"] forState:UIControlStateHighlighted];
+		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel-iPad.png"] forState:UIControlStateDisabled];
+		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel-iPad.png"] forState:UIControlStateSelected];
 		
-		if(_curOrientation == UIInterfaceOrientationPortrait || _curOrientation == UIInterfaceOrientationPortraitUpsideDown)
-		{
-			backView.image = [UIImage imageNamed:@"splash-iPad.png"];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load-iPad.png"] forState:UIControlStateNormal];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel-iPad.png"] forState:UIControlStateHighlighted];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel-iPad.png"] forState:UIControlStateDisabled];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel-iPad.png"] forState:UIControlStateSelected];
-			
-			_maskView.frame = CGRectMake(0, 0, 768, 1024);
-			_spinner.frame = CGRectMake((768-25.0)/2, (1024-25.0)/2, 25.0, 25.0);
-		}
-		else
-		{
-			backView.image = [UIImage imageNamed:@"splash-iPad-Landscape.png"];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_Landscape-iPad.png"] forState:UIControlStateNormal];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel_Landscape-iPad.png"] forState:UIControlStateHighlighted];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel_Landscape-iPad.png"] forState:UIControlStateDisabled];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel_Landscape-iPad.png"] forState:UIControlStateSelected];
-			
-			_maskView.frame = CGRectMake(0, 0, 1024, 768);
-			_spinner.frame = CGRectMake((1024-25.0)/2, (768-25.0)/2, 25.0, 25.0);
-		}
+		_maskView.frame = CGRectMake(0, 0, 768, 1024);
+		_spinner.frame = CGRectMake((768-25.0)/2, (1024-25.0)/2, 25.0, 25.0);
 	}
 }
 - (void)viewDidAppear:(BOOL)animated
@@ -128,38 +110,19 @@ int isRotate = 0;
 {
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{		
-		//-----
-		if(toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown)
-		{
-			backView.image = [UIImage imageNamed:@"splash-iPad.png"];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load-iPad.png"] forState:UIControlStateNormal];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel-iPad.png"] forState:UIControlStateHighlighted];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel-iPad.png"] forState:UIControlStateDisabled];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel-iPad.png"] forState:UIControlStateSelected];
-			
-			_maskView.frame = CGRectMake(0, 0, 768, 1024);
-			_spinner.frame = CGRectMake((768-25.0)/2, (1024-25.0)/2, 25.0, 25.0);
-		}
-		else
-		{
-			backView.image = [UIImage imageNamed:@"splash-iPad-Landscape.png"];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_Landscape-iPad.png"] forState:UIControlStateNormal];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel_Landscape-iPad.png"] forState:UIControlStateHighlighted];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel_Landscape-iPad.png"] forState:UIControlStateDisabled];
-			[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel_Landscape-iPad.png"] forState:UIControlStateSelected];
-			
-			_maskView.frame = CGRectMake(0, 0, 1024, 768);
-			_spinner.frame = CGRectMake((1024-25.0)/2, (768-25.0)/2, 25.0, 25.0);
-		}
+		backView.image = [UIImage imageNamed:@"splash-iPad.png"];
+		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load-iPad.png"] forState:UIControlStateNormal];
+		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel-iPad.png"] forState:UIControlStateHighlighted];
+		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel-iPad.png"] forState:UIControlStateDisabled];
+		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel-iPad.png"] forState:UIControlStateSelected];
+		
+		_maskView.frame = CGRectMake(0, 0, 768, 1024);
+		_spinner.frame = CGRectMake((768-25.0)/2, (1024-25.0)/2, 25.0, 25.0);
         
         //helpBtn.frame = CGRectMake(200, 200, 200, 200);
 		//-----
         
-        if(toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-            helpBtn.frame = CGRectMake(690, 950, 85, 85);
-        } else {
-            helpBtn.frame = CGRectMake(950, 0, 85, 85);
-        }
+        helpBtn.frame = CGRectMake(690, 950, 85, 85);
 		
 		if(self.albumBtn != nil && self.albumBtn.enabled == NO)
 		{
@@ -167,38 +130,6 @@ int isRotate = 0;
 			[_imagePickerPopover dismissPopoverAnimated:NO];
 		}
 	}
-}
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		if(self.albumBtn != nil && self.albumBtn.enabled == NO)
-		{
-			[self albumAction:nil];
-		}
-	}
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		_curOrientation = toInterfaceOrientation;
-		return self.bCanRotate;
-	}
-	else
-	{
-		return NO;
-	}
-}
-//bret
-- (BOOL)shouldAutorotate
-{
-	return YES;
-}
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskAll;
 }
 
 
@@ -265,87 +196,6 @@ int isRotate = 0;
 	_spinner.hidden = YES;
 	_maskView.hidden = YES;
 }
-
-/*
--(void)changeForAccerateXY:(AccelerXYState)xyState
-{
-	
-	CGAffineTransform transfm;
-	if(xyState == accelerXYStatePortrait || xyState == accelerXYStatePortraitUpsideDown)
-	{
-		backView.frame = CGRectMake(0, 0, 768, 1024);
-		albumBtn.frame = CGRectMake(0, 0, 768, 1024);
-		
-		backView.image = [UIImage imageNamed:@"splash-iPad.png"];
-		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load-iPad.png"] forState:UIControlStateNormal];
-		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel-iPad.png"] forState:UIControlStateHighlighted];
-		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel-iPad.png"] forState:UIControlStateDisabled];
-		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel-iPad.png"] forState:UIControlStateSelected];
-	}
-	
-	else if(xyState == accelerXYStateLandscapeLeft || xyState == accelerXYStateLandscapeRight)
-	{
-		backView.frame = CGRectMake(-128, 128, 1024, 768);
-		albumBtn.frame = CGRectMake(-128, 128, 1024, 768);
-		
-		backView.image = [UIImage imageNamed:@"splash-iPad-Landscape.png"];
-		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_Landscape-iPad.png"] forState:UIControlStateNormal];
-		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel_Landscape-iPad.png"] forState:UIControlStateHighlighted];
-		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel_Landscape-iPad.png"] forState:UIControlStateDisabled];
-		[albumBtn setBackgroundImage:[UIImage imageNamed:@"btn_splash_load_sel_Landscape-iPad.png"] forState:UIControlStateSelected];
-	}
-	
-	
-	[UIView beginAnimations:@"rotate" context:nil]; 
-	[UIView setAnimationCurve:UIViewAnimationCurveLinear]; 
-	[UIView setAnimationDuration:0.3f];
-	
-	
-	if(xyState == accelerXYStatePortrait)
-	{
-		transfm = CGAffineTransformIdentity;
-		backView.transform = transfm;
-		albumBtn.transform = transfm;
-		infoBtn.transform = transfm;
-		
-		backView.frame = CGRectMake(0, 0, 768, 1024);
-		albumBtn.frame = CGRectMake(0, 0, 768, 1024);
-		infoBtn.center = CGPointMake(614, 118);
-	}
-	else if(xyState == accelerXYStatePortraitUpsideDown)
-	{
-		transfm = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI);
-		backView.transform = transfm;
-		albumBtn.transform = transfm;
-		infoBtn.transform = transfm;
-		
-		backView.frame = CGRectMake(0, 0, 768, 1024);
-		albumBtn.frame = CGRectMake(0, 0, 768, 1024);
-		infoBtn.center = CGPointMake(768-614, 1024-118);
-	}
-	else if(xyState == accelerXYStateLandscapeLeft)
-	{
-		transfm = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI/2);
-		backView.transform = transfm;
-		albumBtn.transform = transfm;
-		infoBtn.transform = transfm;
-		
-		infoBtn.center = CGPointMake(100, 1024-925);
-	}
-	else if(xyState == accelerXYStateLandscapeRight)
-	{
-		transfm = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI/2);
-		backView.transform = transfm;
-		albumBtn.transform = transfm;
-		infoBtn.transform = transfm;
-		
-		infoBtn.center = CGPointMake(768-100, 925);
-	}
-	
-	[UIView commitAnimations];
-	
-}
-*/
 
 
 

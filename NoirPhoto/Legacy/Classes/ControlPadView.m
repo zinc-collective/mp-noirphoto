@@ -162,13 +162,6 @@
 
 
 
-- (void)rotateForAccerateXY:(AccelerXYState)xyState
-{
-	[_adjustView rotateForAccerateXY:xyState];
-
-}
-
-
 #pragma mark -
 #pragma mark delegate functions
 //PresetsViewDelegate

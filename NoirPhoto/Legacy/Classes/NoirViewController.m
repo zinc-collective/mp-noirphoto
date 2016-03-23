@@ -75,7 +75,6 @@
 @synthesize infoBtn;
 @synthesize tintMaskView;
 @synthesize splashCtrlor;
-@synthesize accelerater;
 @synthesize mCircleImageName;
 @synthesize mPresetReviewImageName;
 @synthesize mPresetReviewMaskImageName;
@@ -379,18 +378,12 @@ void loadGaindLUT()
 		SplashCtrlor *splash = [[SplashCtrlor alloc] initWithNibName:splashNibName bundle:nil];
 		self.splashCtrlor = splash;
 		self.splashCtrlor.delegate = self;
-		self.splashCtrlor.bCanRotate = NO;
 		self.splashCtrlor.view.alpha = 0.0;
 		[self.view addSubview:self.splashCtrlor.view];
 		
 		//show splash
 		[self showSplashView:YES];
 	}
-	
-	//add accelerater
-	Accelerater *acceler = [[Accelerater alloc] initWithType:accelerXY];
-	self.accelerater = acceler;
-	self.accelerater.delegate = self;
 	
 	
 	//add saving mask
@@ -790,20 +783,6 @@ void loadGaindLUT()
 	[self infoAction:nil];
 }
 
-//AccelerateDelegate
--(void)iPhoneRotateForState:(AccelerXYState)xyState
-{	
-    //bret
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)
-    {
-        if (!IS_IPAD)
-        {
-            if (imagePickerOnScreen)
-                return;
-        }
-    }
-    [self rotateButtonsForAccerateXY:xyState];
-}
 
 //UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
@@ -879,8 +858,6 @@ void loadGaindLUT()
 	[UIView setAnimationDelegate:self];
 	//[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:photoFullView cache:YES];
 	
-	NSLog(@"rotate2 : %d", accelerXYState2);
-	
 	if (isFull == 0) {
 		
 		//[self.view addSubview:blackBackground];
@@ -904,55 +881,16 @@ void loadGaindLUT()
 			//_vignetteView.transform = CGAffineTransformMakeRotation(-M_PI/2.0);
 			_vignetteView.frame = photo_full_view_rect_ipad2;
 			
-			if(accelerXYState2 == accelerXYStatePortrait || accelerXYState2 == accelerXYStatePortraitUpsideDown){
+			if (renderedPhoto.size.width/renderedPhoto.size.height < 768/photoImageViewH) {
+				CGFloat w = photoImageViewH*renderedPhoto.size.width/renderedPhoto.size.height;
+				CGFloat h = photoImageViewH;
 				
-				if (renderedPhoto.size.width/renderedPhoto.size.height < 768/photoImageViewH) {
-					CGFloat w = photoImageViewH*renderedPhoto.size.width/renderedPhoto.size.height;
-					CGFloat h = photoImageViewH;
-					
-					_photoRenderRect2 = _photoRenderRect;
-					_photoRenderRect = CGRectMake((768-w)/2, 0, w, h);
-					
-					//[_vignetteFullView setVignetteForParam:param photoRect:CGRectMake((768-w)/2, 0, w, h)];
-				} else {
-					CGFloat w = 768;
-					CGFloat h = 768*renderedPhoto.size.height/renderedPhoto.size.width;
-					
-					_photoRenderRect2 = _photoRenderRect;
-					_photoRenderRect = CGRectMake(0, (photoImageViewH-h)/2, w, h);
-					
-					//[_vignetteFullView setVignetteForParam:param photoRect:CGRectMake(0, (photoImageViewH-h)/2, w, h)];
-				}
+				_photoRenderRect2 = _photoRenderRect;
+				_photoRenderRect = CGRectMake((768-w)/2, 0, w, h);
 				
-				//NSLog(@"renderedPhoto, x=%f, y=%f",0, (1024-h)/2);
-				//				NSLog(@"renderedPhoto, w=%f, h=%f",w, h);
-				
-				
-			} else if(accelerXYState2 == accelerXYStateLandscapeLeft || accelerXYState2 == accelerXYStateLandscapeRight) {
-				
-				if (renderedPhoto.size.width/renderedPhoto.size.height > photoImageViewH/768) {
-					CGFloat w = photoImageViewH;
-					CGFloat h = photoImageViewH*renderedPhoto.size.height/renderedPhoto.size.width;
-					
-					_photoRenderRect2 = _photoRenderRect;
-					_photoRenderRect = CGRectMake(0, (768-h)/2, w, h);
-					
-					//[_vignetteFullView setVignetteForParam:param photoRect:CGRectMake(0, (768-h)/2, w, h)];
-				} else {
-					CGFloat w = 768*renderedPhoto.size.width/renderedPhoto.size.height;
-					CGFloat h = 768;
-					
-					_photoRenderRect2 = _photoRenderRect;
-					_photoRenderRect = CGRectMake((photoImageViewH-w)/2, 0, w, h);
-					
-					//[_vignetteFullView setVignetteForParam:param photoRect:CGRectMake((photoImageViewH-w)/2, 0, w, h)];
-				}
-				
-				//NSLog(@"renderedPhoto h, x=%f, y=%f",(1024-w)/2, 0);
-				//				NSLog(@"renderedPhoto h, w=%f, h=%f",w, h);
-				
+				//[_vignetteFullView setVignetteForParam:param photoRect:CGRectMake((768-w)/2, 0, w, h)];
 			}
-			
+				
 			[_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
 			
 			//[_vignetteFullView setVignetteForParam:param photoRect:photoFullView.frame];
@@ -1576,144 +1514,7 @@ void loadGaindLUT()
 		[UIView commitAnimations];
 	}
 }
-- (void)rotateButtonsForAccerateXY:(AccelerXYState)xyState
-{
-	NSLog(@"rotate : %d", xyState);
-	
-	accelerXYState2 = xyState;
-	
-	[UIView beginAnimations:@"rotate" context:nil]; 
-	[UIView setAnimationCurve:UIViewAnimationCurveLinear]; 
-	[UIView setAnimationDuration:0.3f];
-	
-	
-	CGAffineTransform transfm;
-	//CGAffineTransform transfm_upsidedown; //bret
-	if(xyState == accelerXYStatePortrait)
-	{
-		transfm = CGAffineTransformRotate(CGAffineTransformIdentity, 0.0);
-	}
-	else if(xyState == accelerXYStatePortraitUpsideDown)
-	{
-		transfm = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI);
-		//transfm_upsidedown = CGAffineTransformRotate(CGAffineTransformIdentity, 0.0); //bret
-	}
-	else if(xyState == accelerXYStateLandscapeLeft)
-	{
-		transfm = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI/2);
-	}
-	else if(xyState == accelerXYStateLandscapeRight)
-	{
-		transfm = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI/2);
-	}
-	
-	self.loadBtn.transform = transfm;
-	self.saveBtn.transform = transfm;
-	self.infoBtn.transform = transfm;
-	
-	
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		//bret
-        //if (accelerXYState2 == accelerXYStatePortraitUpsideDown)
-        //    self.photoView.transform = transfm_upsidedown;
-        //else
-            self.photoView.transform = transfm;
-        
-        //self.photoView.transform = transfm;
-		_vignetteView.transform = transfm;
-		[_ctrlPadView rotatePresetShowViewForTransform:transfm];
-		
-		Parameter *param = [self parameterWithPreset:self.preset];
-		
-		//baiwei add for full view
-		if (isFull == 1) {
-			float photoImageViewH = 1024-ctrl_pad_head_ipad;
-			
-			//full photo view
-			//photoView.transform = CGAffineTransformMakeRotation(-M_PI/2.0);
-			photoView.frame = photo_full_view_rect_ipad2;
-			photoView.image = renderedPhoto;
-			
-			//full vignette view
-			//_vignetteView.transform = CGAffineTransformMakeRotation(-M_PI/2.0);
-			_vignetteView.frame = photo_full_view_rect_ipad2;
-			
-			if(accelerXYState2 == accelerXYStatePortrait || accelerXYState2 == accelerXYStatePortraitUpsideDown){
-				
-				if (renderedPhoto.size.width/renderedPhoto.size.height < 768/photoImageViewH) {
-					CGFloat w = photoImageViewH*renderedPhoto.size.width/renderedPhoto.size.height;
-					CGFloat h = photoImageViewH;
-					
-					//_photoRenderRect2 = _photoRenderRect;
-					_photoRenderRect = CGRectMake((768-w)/2, 0, w, h);
-					
-					//[_vignetteFullView setVignetteForParam:param photoRect:CGRectMake((768-w)/2, 0, w, h)];
-				} else {
-					CGFloat w = 768;
-					CGFloat h = 768*renderedPhoto.size.height/renderedPhoto.size.width;
-					
-					//_photoRenderRect2 = _photoRenderRect;
-					_photoRenderRect = CGRectMake(0, (photoImageViewH-h)/2, w, h);
-					
-					//[_vignetteFullView setVignetteForParam:param photoRect:CGRectMake(0, (photoImageViewH-h)/2, w, h)];
-				}
-				
-				//NSLog(@"renderedPhoto, x=%f, y=%f",0, (1024-h)/2);
-				//				NSLog(@"renderedPhoto, w=%f, h=%f",w, h);
-				
-				
-			} else if(accelerXYState2 == accelerXYStateLandscapeLeft || accelerXYState2 == accelerXYStateLandscapeRight) {
-				
-				if (renderedPhoto.size.width/renderedPhoto.size.height > photoImageViewH/768) {
-					CGFloat w = photoImageViewH;
-					CGFloat h = photoImageViewH*renderedPhoto.size.height/renderedPhoto.size.width;
-					
-					//_photoRenderRect2 = _photoRenderRect;
-					_photoRenderRect = CGRectMake(0, (768-h)/2, w, h);
-					
-					//[_vignetteFullView setVignetteForParam:param photoRect:CGRectMake(0, (768-h)/2, w, h)];
-				} else {
-					CGFloat w = 768*renderedPhoto.size.width/renderedPhoto.size.height;
-					CGFloat h = 768;
-					
-					//_photoRenderRect2 = _photoRenderRect;
-					_photoRenderRect = CGRectMake((photoImageViewH-w)/2, 0, w, h);
-					
-					//[_vignetteFullView setVignetteForParam:param photoRect:CGRectMake((photoImageViewH-w)/2, 0, w, h)];
-				}
-				
-				//NSLog(@"renderedPhoto h, x=%f, y=%f",(1024-w)/2, 0);
-				//				NSLog(@"renderedPhoto h, w=%f, h=%f",w, h);
-				
-			}
-			
-			[_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
-		}
-	}
-	
-	[_ctrlPadView rotateForAccerateXY:xyState]; 
-	
-	[UIView commitAnimations];
-	
-	
-	//save transform to app delegate
-	NoirAppDelegate * delegate = (NoirAppDelegate*)[[UIApplication sharedApplication] delegate];
-	delegate.curTransfrom = transfm;
-	delegate.curXYState = xyState;
-	[delegate changedAccerateXY:xyState];
-	
-	
-	//发动splash的旋转
-    // "Rotary engine splash" (via Google Translate)
-//	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-//	{
-//		if(self.splashCtrlor.view.alpha != 0.0)
-//		{
-//			[self.splashCtrlor changeForAccerateXY:xyState];
-//		}
-//	}
-}
+
 
 -(UIImage*)imageAddAlphaForImage:(UIImage *)image
 {

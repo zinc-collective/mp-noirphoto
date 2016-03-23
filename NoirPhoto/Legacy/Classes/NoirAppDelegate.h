@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Accelerater.h"
 #import "SplashCtrlor.h"
 
 @class NoirViewController;
@@ -18,8 +17,6 @@
 	UINavigationController *navigationCtrlor;
 	
 	CGAffineTransform    curTransfrom;
-	BOOL bForceAcceler;
-	AccelerXYState curXYState;
 	
 	SplashCtrlor *_splash;
 	UINavigationController *_splashNav;
@@ -29,11 +26,8 @@
 @property (nonatomic, retain) IBOutlet NoirViewController *viewController;
 @property (nonatomic, retain) UINavigationController *navigationCtrlor;
 @property (nonatomic)         CGAffineTransform    curTransfrom;
-@property (nonatomic)         BOOL bForceAcceler;
-@property (nonatomic) AccelerXYState curXYState;
 
 
-- (void)changedAccerateXY:(AccelerXYState)xyState;
 -(BOOL)checkPhotoExistFromPath:(NSString*)path;
 
 @end
