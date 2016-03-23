@@ -759,7 +759,7 @@ void loadGaindLUT()
 	}
 	else
 	{
-		[picker dismissModalViewControllerAnimated:YES];
+        [picker dismissViewControllerAnimated:YES completion:^{}];
 	}
 
 }
@@ -767,7 +767,7 @@ void loadGaindLUT()
 {
     //bret
     imagePickerOnScreen = NO;
-	[picker dismissModalViewControllerAnimated:YES];
+    [picker dismissViewControllerAnimated:YES completion:^{}];
 }
 
 //bret
@@ -1106,15 +1106,8 @@ void loadGaindLUT()
 	}
 	else
 	{
-		//bret
         imagePickerOnScreen = YES;
-        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)
-        {
-            [self presentModalViewController:imagePicker animated:NO];
-        }else
-        {
-            [self presentViewController:imagePicker animated:TRUE completion:nil];
-        }
+        [self presentViewController:imagePicker animated:TRUE completion:nil];
         //[self.view.window.rootViewController presentViewController:imagePicker animated:YES completion:nil];
 //		UIImagePickerController *picker = [[UIImagePickerController alloc] init];
 //		picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
