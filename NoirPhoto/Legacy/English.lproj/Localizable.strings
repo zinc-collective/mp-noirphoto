@@ -1,0 +1,18 @@
+/* 
+   Localizable.strings
+   Noir
+
+   Created by mac on 10-7-19.
+   Copyright 2010 __MyCompanyName__. All rights reserved.
+ */
+
+//NSLocalizedString(@"hello", nil) //sample use code
+
+
+//alert messages
+"control pad reset alert title"    = "Noir";
+"control pad reset alert message"  = "Do you want reset to default preset?";
+"control pad reset alert OK"       = "OK";
+"control pad reset alert Cancel"   = "Cancel";
+
+
