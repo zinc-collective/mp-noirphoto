@@ -108,12 +108,6 @@
 	return YES;
 }
 
-- (NSUInteger) application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
-{
-    NSLog (@"supportedInterfaceOrientationsForWindow");
-    return UIInterfaceOrientationMaskPortrait;
-}
-
 - (void)applicationWillTerminate:(UIApplication *)application
 {
 	[self.viewController savePresetToUserDefault];

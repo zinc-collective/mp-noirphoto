@@ -94,7 +94,7 @@ int isRotate = 0;
 
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
-		_curOrientation = self.interfaceOrientation;
+        _curOrientation = [[UIApplication sharedApplication] statusBarOrientation];
 		
 		if(_curOrientation == UIInterfaceOrientationPortrait || _curOrientation == UIInterfaceOrientationPortraitUpsideDown)
 		{

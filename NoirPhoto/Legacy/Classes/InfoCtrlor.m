@@ -89,7 +89,7 @@
 		imageName = @"info_desc-iPad.png";
 		scrollWidth = 768.0;
 	}
-	else if(xyState == accelerXYStateLandscapeLeft || xyState == accelerXYStateLandscapeRight)
+	else // if(xyState == accelerXYStateLandscapeLeft || xyState == accelerXYStateLandscapeRight)
 	{
 		scrollRect = CGRectMake(-128.0, 128.0, 1024.0, 768.0);
 		imageName = @"info_desc_landscape-iPad.png";

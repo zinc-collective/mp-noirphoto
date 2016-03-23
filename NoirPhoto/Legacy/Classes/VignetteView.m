@@ -375,7 +375,7 @@
 		}
 		else if(touch.tapCount == 2)
 		{
-			acType == actionReset;
+			acType = actionReset;
 		}
 		else
 		{
