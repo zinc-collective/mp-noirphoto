@@ -55,7 +55,7 @@
 			shakeStart = [[NSDate alloc] init];
 		}
 		
-		if(fabsf(acceleration.x) > 2.0 || fabsf(acceleration.y) > 2.0 || fabsf(acceleration.z) > 2.0)
+		if(fabs(acceleration.x) > 2.0 || fabs(acceleration.y) > 2.0 || fabs(acceleration.z) > 2.0)
 		{
 			shakeCount++;
 			if(shakeCount>4)

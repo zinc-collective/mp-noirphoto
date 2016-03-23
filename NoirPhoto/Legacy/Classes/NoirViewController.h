@@ -209,7 +209,6 @@ typedef struct {
 -(void)changeTintMaskForIndex:(NSInteger)index;
 -(UIImage*)limitedSourcePhoto:(UIImage*)source forLimitPixel:(float)limit; //限制原始图片的大小，并返回限制以后的图片
 
--(BOOL)checkIfiPhone4;
 -(BOOL)checkIfTallScreen;
 -(void)fullBtn:(id)sender;
 

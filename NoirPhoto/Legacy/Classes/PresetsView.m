@@ -191,7 +191,7 @@
 			id data = (id)[itemDic valueForKey:@"data"];
 			[self.delegate presetsButtonChooseIndex:index data:data];
 			
-			NSLog(@"selected preset: %d", index);
+//			NSLog(@"selected preset: %d", index);
 		}
 	}
 }
@@ -295,8 +295,8 @@
 {
 	self.mAlert.hidden = NO;
 	
-	NoirAppDelegate * delegate = (NoirAppDelegate*)[[UIApplication sharedApplication] delegate];
-	self.mAlert.transform = delegate.curTransfrom;
+	NoirAppDelegate * del = (NoirAppDelegate*)[[UIApplication sharedApplication] delegate];
+	self.mAlert.transform = del.curTransfrom;
 }
 
 
