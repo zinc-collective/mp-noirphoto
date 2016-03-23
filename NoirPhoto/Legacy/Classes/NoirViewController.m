@@ -512,7 +512,7 @@ void loadGaindLUT()
 	_bPreseting = YES;
 	
 	//save preset choose index to user default
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:index] forKey:@"last_preset_index"];
+	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:index] forKey:@"last_preset_index"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 	
 }
@@ -1229,7 +1229,7 @@ void loadGaindLUT()
 		[dic setObject:[NSNumber numberWithFloat:apreset.expInside] forKey:@"expInside"];
 		[dic setObject:[NSNumber numberWithFloat:apreset.expOutside] forKey:@"expOutside"];
 		[dic setObject:[NSNumber numberWithFloat:apreset.contrast] forKey:@"contrast"];
-		[dic setObject:[NSNumber numberWithInt:apreset.tintIndex] forKey:@"tintIndex"];
+		[dic setObject:[NSNumber numberWithInteger:apreset.tintIndex] forKey:@"tintIndex"];
 		[dic setObject:[NSNumber numberWithFloat:apreset.ellipseCenterX] forKey:@"ellipseCenterX"];
 		[dic setObject:[NSNumber numberWithFloat:apreset.ellipseCenterY] forKey:@"ellipseCenterY"];
 		[dic setObject:[NSNumber numberWithFloat:apreset.ellipseA] forKey:@"ellipseA"];
@@ -1355,7 +1355,7 @@ void loadGaindLUT()
 	renderArgs.ellipse_a		= apreset.ellipseA;
 	renderArgs.ellipse_b		= apreset.ellipseB;
 	renderArgs.ellipse_angle	= apreset.ellipseAngle;
-	renderArgs.tint				= apreset.tintIndex;
+	renderArgs.tint				= (int) apreset.tintIndex;
 	
 	
 	//-----for test
@@ -1426,7 +1426,7 @@ void loadGaindLUT()
 	
 	Preset *apreset = (Preset*)[params objectForKey:@"render_preset"];
 	UIImage *image = (UIImage*)[params objectForKey:@"render_image"];
-	NSInteger changeType = [(NSNumber*)[params objectForKey:@"render_changeType"] intValue];
+	ChangeType changeType = [(NSNumber*)[params objectForKey:@"render_changeType"] intValue];
 	
 	ffRenderArguments renderArgs = [self argumentsWithPreset:apreset];
 	self.renderedPhoto = [self renderForArguments:renderArgs useImage:image changeType:changeType];
@@ -2109,8 +2109,8 @@ void loadGaindLUT()
 -(BOOL)checkIfTallScreen
 {
     int height = [[ UIScreen mainScreen ] bounds ].size.height;
-    int width  = [[ UIScreen mainScreen ] bounds ].size.width;
-        
+//    int width  = [[ UIScreen mainScreen ] bounds ].size.width;
+    
     return  ( fabs( ( double ) height - ( double )568 ) < DBL_EPSILON );
 }
 
@@ -2314,7 +2314,7 @@ void loadGaindLUT()
 	{
 		//self.photo = [self imageWithImage:originPhoto scaledToSize:CGSizeMake(photoPlaceRect.size.width, photoPlaceRect.size.height)];
 		if ([self checkIfiPhone4] == YES) {
-            CGSize photoSize = CGSizeMake(photoPlaceRect.size.width*2, photoPlaceRect.size.height*2);            
+//            CGSize photoSize = CGSizeMake(photoPlaceRect.size.width*2, photoPlaceRect.size.height*2);            
 			self.photo = [self imageWithImage:originPhoto scaledToSize:CGSizeMake(photoPlaceRect.size.width*2, photoPlaceRect.size.height*2) renderedForUI:NO];
  
 		} else {
@@ -2323,7 +2323,7 @@ void loadGaindLUT()
 	}
 	//self.photo = [self imageWithImage:originPhoto scaledToSize:CGSizeMake(photoPlaceRect.size.width, photoPlaceRect.size.height)];
 
-    CGSize imageSize = self.photo.size;
+//    CGSize imageSize = self.photo.size;
 	
 	// NOTE: Why are we rotating the source image depending on runtime device?
     // 6/2013 - Charles Ruggiero, Red Conductor
@@ -2391,10 +2391,10 @@ void loadGaindLUT()
 }
 -(void)changeTintMaskForIndex:(NSInteger)index
 {
-	NSString *tintMaskName = [NSString stringWithFormat:@"tint_mask_%d.png", index];
+	NSString *tintMaskName = [NSString stringWithFormat:@"tint_mask_%zd.png", index];
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
-		tintMaskName = [NSString stringWithFormat:@"tint_mask_iPad_%d.png", index];
+		tintMaskName = [NSString stringWithFormat:@"tint_mask_iPad_%zd.png", index];
 	}
 	
 	self.tintMaskView.image = [UIImage imageNamed:tintMaskName];
@@ -2457,8 +2457,8 @@ void loadGaindLUT()
 {	
 	if(_sourceImg == nil) return nil;
 	
-	int width = CGImageGetWidth(_sourceImg.CGImage);
-	int height = CGImageGetHeight(_sourceImg.CGImage);	
+	CGFloat width = CGImageGetWidth(_sourceImg.CGImage);
+	CGFloat height = CGImageGetHeight(_sourceImg.CGImage);
 	
 	CGPoint point = renderArgs.ellipse_center;
 	CGPoint centre = point;
@@ -2541,15 +2541,15 @@ void loadGaindLUT()
 {
 	if(_sourceImg == nil) return nil;
 	
-	int _width = CGImageGetWidth(_sourceImg.CGImage);
-	int _height = CGImageGetHeight(_sourceImg.CGImage);	
+	CGFloat _width = CGImageGetWidth(_sourceImg.CGImage);
+	CGFloat _height = CGImageGetHeight(_sourceImg.CGImage);
 	CFDataRef sourceData = CGDataProviderCopyData(CGImageGetDataProvider(_sourceImg.CGImage));
 	int *m_sourcedata = (int *)CFDataGetBytePtr(sourceData);
 	uint8_t *sourceb = (unsigned char *)&m_sourcedata[0];
 	
 	// Prepare inGain LUT
 	//
-	int inGain_i = (int) abs(255 * (renderArgs.inExp * 0.25));		
+	int inGain_i = (int) fabs(255 * (renderArgs.inExp * 0.25));
 	int inGain[256];
 	if ( renderArgs.inExp > 0.0 )
 	{
@@ -2568,7 +2568,7 @@ void loadGaindLUT()
 	
 	// Prepare outGain LUT
 	//
-	int outGain_i = (int) abs(255 * (renderArgs.outExp  * 0.25));
+	int outGain_i = (int) fabs(255 * (renderArgs.outExp  * 0.25));
 	int outGain[256];
 	if ( renderArgs.outExp > 0.0 )
 	{
@@ -2779,11 +2779,11 @@ void loadGaindLUT()
 {
 	if(self.preset == nil) return;
 	
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:self.preset.index] forKey:@"save_preset_index"];
+	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:self.preset.index] forKey:@"save_preset_index"];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:self.preset.expInside] forKey:@"save_preset_expInside"];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:self.preset.expOutside] forKey:@"save_preset_expOutside"];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:self.preset.contrast] forKey:@"save_preset_contrast"];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:self.preset.tintIndex] forKey:@"save_preset_tintIndex"];
+	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:self.preset.tintIndex] forKey:@"save_preset_tintIndex"];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:self.preset.ellipseCenterX] forKey:@"save_preset_ellipseCenterX"];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:self.preset.ellipseCenterY] forKey:@"save_preset_ellipseCenterY"];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:self.preset.ellipseA] forKey:@"save_preset_ellipseA"];
