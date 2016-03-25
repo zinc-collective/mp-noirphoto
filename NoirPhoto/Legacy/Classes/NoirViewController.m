@@ -94,7 +94,6 @@
 @synthesize _vignetteView;
 
 @synthesize _vignetteFullView;
-@synthesize loadPhoto;
 
 
 #pragma mark -
@@ -382,14 +381,6 @@ void loadGaindLUT()
 	[self.view addSubview:self.savingSpinner];
     
     
-    NSAssert(self.loadPhoto != NULL, @"Must set loadPhoto before loading");
-	//set tint and adjust position
-	[_ctrlPadView chooseTintsBtnForIndex:self.preset.tintIndex bNeedReturn:NO];
-	[_ctrlPadView setAdjustsForExpinside:self.preset.expInside expOutside:self.preset.expOutside contrast:self.preset.contrast];
-	[self changeTintMaskForIndex:self.preset.tintIndex];
-	
-	[self initUsedPropertiesAndUIForOriginPhoto:self.loadPhoto];
-	
     //bret button fix-up for the 4 inch display
     if (IS_IPHONE_5)
     {
@@ -411,7 +402,14 @@ void loadGaindLUT()
     }
 }
 
--(void)loadWithOriginPhoto:(UIImage*)originPhoto {
+-(void)loadWithSavedPhoto:(UIImage *)image {
+	//set tint and adjust position
+	[_ctrlPadView chooseTintsBtnForIndex:self.preset.tintIndex bNeedReturn:NO];
+	[_ctrlPadView setAdjustsForExpinside:self.preset.expInside expOutside:self.preset.expOutside contrast:self.preset.contrast];
+	[self changeTintMaskForIndex:self.preset.tintIndex];
+	
+	[self initUsedPropertiesAndUIForOriginPhoto:image];
+	
 }
 
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
@@ -621,11 +619,30 @@ void loadGaindLUT()
 	//if(_bSavingOriginPhoto) return;
     //bret
     imagePickerOnScreen = NO;
+	NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+    UIImage * selected = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    [self pickPhoto:assetURL image:selected];
 	
-	float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	{
+		[self.imagePickerPopover dismissPopoverAnimated:YES];
+		self.loadBtn.enabled = YES;
+	}
+	else
+	{
+        [picker dismissViewControllerAnimated:YES completion:^{}];
+	}
+
+}
+
+-(void)pickPhoto:(NSURL*)assetURL image:(UIImage*)selected {
 	
-	if (version > 4.1) {
-		NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+	if(selected == nil) return;
+    
+//	float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+//	
+//	if (version > 4.1) {
 		
 		ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
 		[library assetForURL:assetURL
@@ -648,19 +665,17 @@ void loadGaindLUT()
 				 }
 				failureBlock:^(NSError *error) {
 				}];
-	} else {
-		imageMetadata = nil;
-		
-		NSFileManager *fileManage = [NSFileManager defaultManager];
-		NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-		NSString *path=[paths    objectAtIndex:0];
-		[fileManage removeItemAtPath:[path stringByAppendingPathComponent: metadata_plist] error:nil];
-		
-		
-	}
+//	} else {
+//		imageMetadata = nil;
+//		
+//		NSFileManager *fileManage = [NSFileManager defaultManager];
+//		NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+//		NSString *path=[paths    objectAtIndex:0];
+//		[fileManage removeItemAtPath:[path stringByAppendingPathComponent: metadata_plist] error:nil];
+//		
+//		
+//	}
 	
-	UIImage * selected = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-	if(selected == nil) return;
 	//NSLog(@"selected origation: %d", selected.imageOrientation);
 	
 	/*	
@@ -711,18 +726,8 @@ void loadGaindLUT()
 	//save origin photo
 	_bSavingOriginPhoto = YES;
 	[NSThread detachNewThreadSelector:@selector(saveOriginPhoto:) toTarget:self withObject:self.sourcePhoto];
-	
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		[self.imagePickerPopover dismissPopoverAnimated:YES];
-		self.loadBtn.enabled = YES;
-	}
-	else
-	{
-        [picker dismissViewControllerAnimated:YES completion:^{}];
-	}
-
 }
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     //bret

@@ -8,7 +8,15 @@
 
 import UIKit
 
-class SplashViewController: UIViewController {
+protocol SplashDelegate : class {
+    func splashDidPickImage(image: UIImage, url: NSURL)
+}
+
+class SplashViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    var imagePicker : UIImagePickerController?
+    weak var delegate : SplashDelegate?
+    
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
     }
@@ -26,9 +34,27 @@ class SplashViewController: UIViewController {
     
     @IBAction func handleLibrary(sender: AnyObject) {
         print("LIBRARY")
+        let picker = UIImagePickerController()
+        picker.sourceType = .PhotoLibrary
+        picker.delegate = self
+        
+        self.presentViewController(picker, animated: true, completion: nil)
+        
+        self.imagePicker = picker
     }
     
     @IBAction func unwindToSplash() {
         print("SPLASH")
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        print("PICKED IMAGE")
+        
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let assetURL = info[UIImagePickerControllerReferenceURL] as! NSURL
+        // I can't display it myself, need to pass it back
+        
+        self.imagePicker?.dismissViewControllerAnimated(true, completion: nil)
+        self.delegate?.splashDidPickImage(image, url: assetURL)
     }
 }

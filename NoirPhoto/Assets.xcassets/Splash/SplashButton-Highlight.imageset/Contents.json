@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "iphone",
+      "filename" : "btn_splash_load_sel.png",
       "scale" : "1x"
     },
     {

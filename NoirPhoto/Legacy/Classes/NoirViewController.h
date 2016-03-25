@@ -148,8 +148,6 @@ typedef struct {
 @property (nonatomic, retain) VignetteView* _vignetteView;
 @property (nonatomic, retain) VignetteView* _vignetteFullView;
 
-@property (nonatomic, retain) UIImage * loadPhoto;
-
 
 #pragma mark -
 #pragma mark in use functios @for UI
@@ -218,6 +216,8 @@ typedef struct {
 -(Preset*)presetFromUserDefault;
 
 #pragma mark Loading
+-(void)pickPhoto:(NSURL*)assetURL image:(UIImage*)image;
+-(void)loadWithSavedPhoto:(UIImage*)image;
 
 
 

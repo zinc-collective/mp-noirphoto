@@ -12,7 +12,7 @@ import UIKit
 let SaveOriginPhotoPath = "/Documents/origin_photo.jpg"
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
 
     var window: UIWindow?
     
@@ -24,26 +24,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.navigationController = self.window!.rootViewController as! NavigationViewController
         
-        // create both view controllers
-//        var splashName = "Splash"
-//        if (UI_USER_INTERFACE_IDIOM() == .Pad) {
-//            splashName = "Splash-iPad"
-//        }
         self.splashController = UIStoryboard(name: "Splash", bundle: nil)
                                     .instantiateViewControllerWithIdentifier("SplashViewController") as! SplashViewController
-        self.viewController = NoirViewController(nibName: "NoirViewController", bundle: nil)
-        
+        self.splashController.delegate = self
+        self.viewController = NoirScaleHackViewController(nibName: "NoirViewController", bundle: nil)
         
         // load last used photo
-        if self.checkPhotoExistFromPath(SaveOriginPhotoPath) {
-            self.viewController.loadPhoto = self.viewController.loadPhotoFromPath(SaveOriginPhotoPath)
-            self.navigationController.viewControllers = [self.viewController]
-        }
-        else {
+//        if self.checkPhotoExistFromPath(SaveOriginPhotoPath) {
+//            let image = self.viewController.loadPhotoFromPath(SaveOriginPhotoPath)!
+//            self.navigationController.viewControllers = [self.viewController]
+//            self.viewController.loadWithSavedPhoto(image)
+//        }
+//        else {
             self.navigationController.viewControllers = [self.splashController]
-        }
+//        }
+        
+        // HACK: scale view controller, until we have time to fix it
+//        print("WIDTH", self.viewController.view.frame.size)
+//        self.viewController.view.transform = CGAffineTransformMakeScale(1.2, 1.2)
         
         return true
+    }
+    
+    func splashDidPickImage(image: UIImage, url: NSURL) {
+        self.viewController.pickPhoto(url, image: image)
+        self.navigationController.viewControllers = [self.viewController]
     }
 
     func applicationWillResignActive(application: UIApplication) {
