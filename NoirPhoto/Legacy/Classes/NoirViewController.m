@@ -1027,8 +1027,9 @@ void loadGaindLUT()
 		infoNibName = @"Info-iPad";
 	}
 	
-//	InfoCtrlor *infoCtrlor = [[InfoCtrlor alloc] initWithNibName:infoNibName bundle:nil];
-//	[self.navigationController pushViewController:infoCtrlor animated:YES];
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Info" bundle:NULL];
+    UIViewController * vc = [sb instantiateViewControllerWithIdentifier:@"InfoViewController"];
+    [self.navigationController pushViewController:vc animated:true];
 }
 
 -(void)initElementsForControlPad

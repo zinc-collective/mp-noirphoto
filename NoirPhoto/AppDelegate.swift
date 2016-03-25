@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
 //        if self.checkPhotoExistFromPath(SaveOriginPhotoPath) {
 //            let image = self.viewController.loadPhotoFromPath(SaveOriginPhotoPath)!
 //            self.navigationController.viewControllers = [self.viewController]
+//            // this must go last (refactor needed)
 //            self.viewController.loadWithSavedPhoto(image)
 //        }
 //        else {
@@ -47,8 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
     }
     
     func splashDidPickImage(image: UIImage, url: NSURL) {
-        self.viewController.pickPhoto(url, image: image)
         self.navigationController.viewControllers = [self.viewController]
+        // this must go last (refactor needed)
+        self.viewController.pickPhoto(url, image: image)
     }
 
     func applicationWillResignActive(application: UIApplication) {
