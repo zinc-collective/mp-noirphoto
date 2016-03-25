@@ -11,7 +11,7 @@
 #import "RConfigFile.h"
 #include <sys/types.h>
 #include <sys/sysctl.h>
-#import "InfoCtrlor.h"
+//#import "InfoCtrlor.h"
 #import "NoirAppDelegate.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "DeviceDetect.h"
@@ -1067,8 +1067,8 @@ void loadGaindLUT()
 		infoNibName = @"Info-iPad";
 	}
 	
-	InfoCtrlor *infoCtrlor = [[InfoCtrlor alloc] initWithNibName:infoNibName bundle:nil];
-	[self.navigationController pushViewController:infoCtrlor animated:YES];
+//	InfoCtrlor *infoCtrlor = [[InfoCtrlor alloc] initWithNibName:infoNibName bundle:nil];
+//	[self.navigationController pushViewController:infoCtrlor animated:YES];
 }
 
 -(void)initElementsForControlPad

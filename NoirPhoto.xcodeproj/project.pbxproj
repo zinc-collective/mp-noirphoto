@@ -10,6 +10,8 @@
 		78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78330FA81CA43D6F00B04CFD /* SplashViewController.swift */; };
 		783B0F171CA5921E002A77AB /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F161CA5921E002A77AB /* InfoViewController.swift */; };
 		783B0F191CA597D5002A77AB /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F181CA597D5002A77AB /* NavigationViewController.swift */; };
+		783B0F1B1CA5A476002A77AB /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 783B0F1A1CA5A476002A77AB /* Info.storyboard */; };
+		783B0F1F1CA5A4DD002A77AB /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 783B0F1E1CA5A4DD002A77AB /* Splash.storyboard */; };
 		7875813D1CA2E98400100514 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7875813C1CA2E98400100514 /* AppDelegate.swift */; };
 		787581421CA2E98400100514 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 787581401CA2E98400100514 /* Main.storyboard */; };
 		787581441CA2E98400100514 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 787581431CA2E98400100514 /* Assets.xcassets */; };
@@ -17,7 +19,6 @@
 		787581E01CA2EBF000100514 /* NoirAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581B51CA2EBF000100514 /* NoirAppDelegate.m */; };
 		787581E11CA2EBF000100514 /* PresetsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581B61CA2EBF000100514 /* PresetsView.m */; };
 		787581E21CA2EBF000100514 /* TintsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581B71CA2EBF000100514 /* TintsView.m */; };
-		787581E31CA2EBF000100514 /* InfoCtrlor.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581B91CA2EBF000100514 /* InfoCtrlor.m */; };
 		787581E41CA2EBF000100514 /* NoirViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581BB1CA2EBF000100514 /* NoirViewController.m */; };
 		787581E51CA2EBF000100514 /* SplashCtrlor.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581BD1CA2EBF000100514 /* SplashCtrlor.m */; };
 		787581E71CA2EBF000100514 /* AdjustView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581C11CA2EBF000100514 /* AdjustView.m */; };
@@ -31,7 +32,6 @@
 		787581EF1CA2EBF000100514 /* QuartzView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581D41CA2EBF000100514 /* QuartzView.m */; };
 		787581F01CA2EBF000100514 /* RConfigFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581D51CA2EBF000100514 /* RConfigFile.m */; };
 		787581F11CA2EBF000100514 /* RScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581D71CA2EBF000100514 /* RScrollView.m */; };
-		787581F21CA2EBF000100514 /* SplashInfoCtrlor.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581DA1CA2EBF000100514 /* SplashInfoCtrlor.m */; };
 		787581F31CA2EBF000100514 /* Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581DC1CA2EBF000100514 /* Tint.m */; };
 		787581F41CA2EBF000100514 /* VignetteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581DF1CA2EBF000100514 /* VignetteView.m */; };
 		7875820A1CA2EC2400100514 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 787581F81CA2EC2400100514 /* circle.png */; };
@@ -177,16 +177,13 @@
 		787584091CA2EC9600100514 /* tint_mask_iPad_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 787583D41CA2EC9600100514 /* tint_mask_iPad_1.png */; };
 		7875840A1CA2EC9600100514 /* tint_mask_iPad_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 787583D51CA2EC9600100514 /* tint_mask_iPad_2.png */; };
 		7875840B1CA2EC9600100514 /* tint_mask_iPad_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 787583D61CA2EC9600100514 /* tint_mask_iPad_3.png */; };
-		7875840C1CA2EC9600100514 /* Info-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787583D71CA2EC9600100514 /* Info-iPad.xib */; };
 		7875840D1CA2EC9600100514 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787583D81CA2EC9600100514 /* MainWindow-iPad.xib */; };
 		7875840E1CA2EC9600100514 /* NoirViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787583D91CA2EC9600100514 /* NoirViewController-iPad.xib */; };
 		7875840F1CA2EC9600100514 /* Splash-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787583DA1CA2EC9600100514 /* Splash-iPad.xib */; };
-		787584161CA2ECAC00100514 /* Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787584101CA2ECAC00100514 /* Info.xib */; };
 		787584171CA2ECAC00100514 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787584111CA2ECAC00100514 /* MainWindow.xib */; };
 		787584181CA2ECAC00100514 /* NoirViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787584121CA2ECAC00100514 /* NoirViewController.xib */; };
 		787584191CA2ECAC00100514 /* Splash.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787584131CA2ECAC00100514 /* Splash.xib */; };
 		7875841A1CA2ECAC00100514 /* Splash568.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787584141CA2ECAC00100514 /* Splash568.xib */; };
-		7875841B1CA2ECAC00100514 /* SplashInfo-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787584151CA2ECAC00100514 /* SplashInfo-iPad.xib */; };
 		7875841F1CA2ECE700100514 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7875841D1CA2ECE700100514 /* Localizable.strings */; };
 		787584251CA2EE9F00100514 /* close_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 787584211CA2EE9F00100514 /* close_btn.png */; };
 		787584261CA2EE9F00100514 /* version_info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 787584221CA2EE9F00100514 /* version_info.plist */; };
@@ -197,6 +194,8 @@
 		78330FA81CA43D6F00B04CFD /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		783B0F161CA5921E002A77AB /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		783B0F181CA597D5002A77AB /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		783B0F1A1CA5A476002A77AB /* Info.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
+		783B0F1E1CA5A4DD002A77AB /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		787581391CA2E98400100514 /* NoirPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoirPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7875813C1CA2E98400100514 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		787581411CA2E98400100514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -208,7 +207,6 @@
 		787581B61CA2EBF000100514 /* PresetsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PresetsView.m; path = Legacy/Classes/PresetsView.m; sourceTree = "<group>"; };
 		787581B71CA2EBF000100514 /* TintsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TintsView.m; path = Legacy/Classes/TintsView.m; sourceTree = "<group>"; };
 		787581B81CA2EBF000100514 /* DeviceDetect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceDetect.h; path = Legacy/Classes/DeviceDetect.h; sourceTree = "<group>"; };
-		787581B91CA2EBF000100514 /* InfoCtrlor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoCtrlor.m; path = Legacy/Classes/InfoCtrlor.m; sourceTree = "<group>"; };
 		787581BA1CA2EBF000100514 /* NoirViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoirViewController.h; path = Legacy/Classes/NoirViewController.h; sourceTree = "<group>"; };
 		787581BB1CA2EBF000100514 /* NoirViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoirViewController.m; path = Legacy/Classes/NoirViewController.m; sourceTree = "<group>"; };
 		787581BC1CA2EBF000100514 /* RConfigFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RConfigFile.h; path = Legacy/Classes/RConfigFile.h; sourceTree = "<group>"; };
@@ -223,7 +221,6 @@
 		787581C71CA2EBF000100514 /* EllipseVertex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EllipseVertex.m; path = Legacy/Classes/EllipseVertex.m; sourceTree = "<group>"; };
 		787581C81CA2EBF000100514 /* EllipseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EllipseView.h; path = Legacy/Classes/EllipseView.h; sourceTree = "<group>"; };
 		787581C91CA2EBF000100514 /* EllipseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EllipseView.m; path = Legacy/Classes/EllipseView.m; sourceTree = "<group>"; };
-		787581CA1CA2EBF000100514 /* InfoCtrlor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoCtrlor.h; path = Legacy/Classes/InfoCtrlor.h; sourceTree = "<group>"; };
 		787581CB1CA2EBF000100514 /* MyScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyScrollView.h; path = Legacy/Classes/MyScrollView.h; sourceTree = "<group>"; };
 		787581CC1CA2EBF000100514 /* MyScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyScrollView.m; path = Legacy/Classes/MyScrollView.m; sourceTree = "<group>"; };
 		787581CD1CA2EBF000100514 /* NoirAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoirAppDelegate.h; path = Legacy/Classes/NoirAppDelegate.h; sourceTree = "<group>"; };
@@ -238,8 +235,6 @@
 		787581D61CA2EBF000100514 /* RScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RScrollView.h; path = Legacy/Classes/RScrollView.h; sourceTree = "<group>"; };
 		787581D71CA2EBF000100514 /* RScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RScrollView.m; path = Legacy/Classes/RScrollView.m; sourceTree = "<group>"; };
 		787581D81CA2EBF000100514 /* SplashCtrlor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashCtrlor.h; path = Legacy/Classes/SplashCtrlor.h; sourceTree = "<group>"; };
-		787581D91CA2EBF000100514 /* SplashInfoCtrlor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashInfoCtrlor.h; path = Legacy/Classes/SplashInfoCtrlor.h; sourceTree = "<group>"; };
-		787581DA1CA2EBF000100514 /* SplashInfoCtrlor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplashInfoCtrlor.m; path = Legacy/Classes/SplashInfoCtrlor.m; sourceTree = "<group>"; };
 		787581DB1CA2EBF000100514 /* Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tint.h; path = Legacy/Classes/Tint.h; sourceTree = "<group>"; };
 		787581DC1CA2EBF000100514 /* Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tint.m; path = Legacy/Classes/Tint.m; sourceTree = "<group>"; };
 		787581DD1CA2EBF000100514 /* TintsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TintsView.h; path = Legacy/Classes/TintsView.h; sourceTree = "<group>"; };
@@ -388,16 +383,13 @@
 		787583D41CA2EC9600100514 /* tint_mask_iPad_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tint_mask_iPad_1.png; sourceTree = "<group>"; };
 		787583D51CA2EC9600100514 /* tint_mask_iPad_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tint_mask_iPad_2.png; sourceTree = "<group>"; };
 		787583D61CA2EC9600100514 /* tint_mask_iPad_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tint_mask_iPad_3.png; sourceTree = "<group>"; };
-		787583D71CA2EC9600100514 /* Info-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Info-iPad.xib"; sourceTree = "<group>"; };
 		787583D81CA2EC9600100514 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		787583D91CA2EC9600100514 /* NoirViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "NoirViewController-iPad.xib"; sourceTree = "<group>"; };
 		787583DA1CA2EC9600100514 /* Splash-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Splash-iPad.xib"; sourceTree = "<group>"; };
-		787584101CA2ECAC00100514 /* Info.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Info.xib; path = Legacy/Info.xib; sourceTree = "<group>"; };
 		787584111CA2ECAC00100514 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = Legacy/MainWindow.xib; sourceTree = "<group>"; };
 		787584121CA2ECAC00100514 /* NoirViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NoirViewController.xib; path = Legacy/NoirViewController.xib; sourceTree = "<group>"; };
 		787584131CA2ECAC00100514 /* Splash.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Splash.xib; path = Legacy/Splash.xib; sourceTree = "<group>"; };
 		787584141CA2ECAC00100514 /* Splash568.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Splash568.xib; path = Legacy/Splash568.xib; sourceTree = "<group>"; };
-		787584151CA2ECAC00100514 /* SplashInfo-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "SplashInfo-iPad.xib"; path = "Legacy/SplashInfo-iPad.xib"; sourceTree = "<group>"; };
 		7875841E1CA2ECE700100514 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = Localizable.strings; sourceTree = "<group>"; };
 		787584211CA2EE9F00100514 /* close_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_btn.png; sourceTree = "<group>"; };
 		787584221CA2EE9F00100514 /* version_info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = version_info.plist; sourceTree = "<group>"; };
@@ -421,8 +413,10 @@
 			children = (
 				787581451CA2E98400100514 /* LaunchScreen.storyboard */,
 				787581401CA2E98400100514 /* Main.storyboard */,
-				78330FA81CA43D6F00B04CFD /* SplashViewController.swift */,
+				783B0F1A1CA5A476002A77AB /* Info.storyboard */,
 				783B0F161CA5921E002A77AB /* InfoViewController.swift */,
+				783B0F1E1CA5A4DD002A77AB /* Splash.storyboard */,
+				78330FA81CA43D6F00B04CFD /* SplashViewController.swift */,
 				783B0F181CA597D5002A77AB /* NavigationViewController.swift */,
 			);
 			name = UI;
@@ -483,7 +477,6 @@
 				787581B61CA2EBF000100514 /* PresetsView.m */,
 				787581B71CA2EBF000100514 /* TintsView.m */,
 				787581B81CA2EBF000100514 /* DeviceDetect.h */,
-				787581B91CA2EBF000100514 /* InfoCtrlor.m */,
 				787581BA1CA2EBF000100514 /* NoirViewController.h */,
 				787581BB1CA2EBF000100514 /* NoirViewController.m */,
 				787581BC1CA2EBF000100514 /* RConfigFile.h */,
@@ -497,7 +490,6 @@
 				787581C71CA2EBF000100514 /* EllipseVertex.m */,
 				787581C81CA2EBF000100514 /* EllipseView.h */,
 				787581C91CA2EBF000100514 /* EllipseView.m */,
-				787581CA1CA2EBF000100514 /* InfoCtrlor.h */,
 				787581CB1CA2EBF000100514 /* MyScrollView.h */,
 				787581CC1CA2EBF000100514 /* MyScrollView.m */,
 				787581CE1CA2EBF000100514 /* Parameter.h */,
@@ -512,8 +504,6 @@
 				787581D71CA2EBF000100514 /* RScrollView.m */,
 				787581D81CA2EBF000100514 /* SplashCtrlor.h */,
 				787581BD1CA2EBF000100514 /* SplashCtrlor.m */,
-				787581D91CA2EBF000100514 /* SplashInfoCtrlor.h */,
-				787581DA1CA2EBF000100514 /* SplashInfoCtrlor.m */,
 				787581DB1CA2EBF000100514 /* Tint.h */,
 				787581DC1CA2EBF000100514 /* Tint.m */,
 				787581DD1CA2EBF000100514 /* TintsView.h */,
@@ -526,12 +516,10 @@
 		787581F51CA2EC0D00100514 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				787584101CA2ECAC00100514 /* Info.xib */,
 				787584111CA2ECAC00100514 /* MainWindow.xib */,
 				787584121CA2ECAC00100514 /* NoirViewController.xib */,
 				787584131CA2ECAC00100514 /* Splash.xib */,
 				787584141CA2ECAC00100514 /* Splash568.xib */,
-				787584151CA2ECAC00100514 /* SplashInfo-iPad.xib */,
 				7875833D1CA2EC6900100514 /* Presets_current.pList */,
 				7875833E1CA2EC6900100514 /* Presets_default.pList */,
 				7875841C1CA2ECE700100514 /* English.lproj */,
@@ -679,7 +667,6 @@
 			isa = PBXGroup;
 			children = (
 				787583A51CA2EC9600100514 /* image-iPad */,
-				787583D71CA2EC9600100514 /* Info-iPad.xib */,
 				787583D81CA2EC9600100514 /* MainWindow-iPad.xib */,
 				787583D91CA2EC9600100514 /* NoirViewController-iPad.xib */,
 				787583DA1CA2EC9600100514 /* Splash-iPad.xib */,
@@ -879,13 +866,11 @@
 				787583E41CA2EC9600100514 /* btn_home_info-iPad.png in Resources */,
 				787583291CA2EC5900100514 /* Icon.png in Resources */,
 				7875820E1CA2EC2400100514 /* circle_show.png in Resources */,
-				787584161CA2ECAC00100514 /* Info.xib in Resources */,
 				787583E31CA2EC9600100514 /* adjust_mask-iPad.png in Resources */,
 				7875840E1CA2EC9600100514 /* NoirViewController-iPad.xib in Resources */,
 				787583EF1CA2EC9600100514 /* btn_splash_load_sel-iPad.png in Resources */,
 				7875833B1CA2EC5900100514 /* tint_mask_3.png in Resources */,
 				787582D21CA2EC3800100514 /* tint_mask_0@2x.png in Resources */,
-				7875841B1CA2ECAC00100514 /* SplashInfo-iPad.xib in Resources */,
 				7875841A1CA2ECAC00100514 /* Splash568.xib in Resources */,
 				787582D31CA2EC3800100514 /* tint_mask_1@2x.png in Resources */,
 				787582161CA2EC2400100514 /* preset_review_mask.png in Resources */,
@@ -906,6 +891,7 @@
 				7875830E1CA2EC5900100514 /* adjust_in_out.png in Resources */,
 				7875832E1CA2EC5900100514 /* splash.png in Resources */,
 				787582C11CA2EC3800100514 /* ctrl_pad_bg@2x.png in Resources */,
+				783B0F1F1CA5A4DD002A77AB /* Splash.storyboard in Resources */,
 				787582191CA2EC2400100514 /* preset_review_mask_sel.png in Resources */,
 				787583181CA2EC5900100514 /* btn_load.png in Resources */,
 				787582CF1CA2EC3800100514 /* tint_btn_sel_1@2x.png in Resources */,
@@ -919,6 +905,7 @@
 				787583E81CA2EC9600100514 /* btn_info_back_sel-iPad.png in Resources */,
 				787582CD1CA2EC3800100514 /* tint_btn_3@2x.png in Resources */,
 				787584051CA2EC9600100514 /* tint_btn_sel_iPad_1.png in Resources */,
+				783B0F1B1CA5A476002A77AB /* Info.storyboard in Resources */,
 				7875821A1CA2EC2400100514 /* preset_review_mask_sel_4.png in Resources */,
 				7875830C1CA2EC5900100514 /* adjust_contrast3.png in Resources */,
 				787582BA1CA2EC3800100514 /* btn_info_back_sel@2x.png in Resources */,
@@ -962,7 +949,6 @@
 				787582C01CA2EC3800100514 /* btn_splash_load_sel@2x.png in Resources */,
 				787582101CA2EC2400100514 /* NOIR_brite_LUT.png in Resources */,
 				7875820D1CA2EC2400100514 /* circle_render.png in Resources */,
-				7875840C1CA2EC9600100514 /* Info-iPad.xib in Resources */,
 				787582121CA2EC2400100514 /* preset_back_iPad.png in Resources */,
 				787582C31CA2EC3800100514 /* Default@2x.png in Resources */,
 				787583351CA2EC5900100514 /* tint_btn_sel_1.png in Resources */,
@@ -997,9 +983,7 @@
 				787581F41CA2EBF000100514 /* VignetteView.m in Sources */,
 				787581EC1CA2EBF000100514 /* MyScrollView.m in Sources */,
 				7875813D1CA2E98400100514 /* AppDelegate.swift in Sources */,
-				787581F21CA2EBF000100514 /* SplashInfoCtrlor.m in Sources */,
 				787581E81CA2EBF000100514 /* ControlPadView.m in Sources */,
-				787581E31CA2EBF000100514 /* InfoCtrlor.m in Sources */,
 				787581EA1CA2EBF000100514 /* EllipseVertex.m in Sources */,
 				783B0F171CA5921E002A77AB /* InfoViewController.swift in Sources */,
 				787581EB1CA2EBF000100514 /* EllipseView.m in Sources */,

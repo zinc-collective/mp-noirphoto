@@ -6,7 +6,6 @@
 //
 
 #import "SplashCtrlor.h"
-#import "SplashInfoCtrlor.h"
 #include <sys/types.h>
 #include <sys/sysctl.h>
 #import "DeviceDetect.h"
@@ -138,19 +137,19 @@ int isRotate = 0;
 #pragma mark in use functions
 -(IBAction)infoAction:(id)sender
 {
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		//push to splash info page
-		SplashInfoCtrlor *splashInfo = [[SplashInfoCtrlor alloc] initWithNibName:@"SplashInfo-iPad" bundle:nil];
-		[self.navigationController pushViewController:splashInfo animated:YES];
-	}
-	else
-	{
-		if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(splashInfoActioned)])
-		{
-			[self.delegate splashInfoActioned];
-		}
-	}
+//	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+//	{
+//		//push to splash info page
+//		SplashInfoCtrlor *splashInfo = [[SplashInfoCtrlor alloc] initWithNibName:@"SplashInfo-iPad" bundle:nil];
+//		[self.navigationController pushViewController:splashInfo animated:YES];
+//	}
+//	else
+//	{
+//		if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(splashInfoActioned)])
+//		{
+//			[self.delegate splashInfoActioned];
+//		}
+//	}
 }
 -(IBAction)albumAction:(id)sender
 {

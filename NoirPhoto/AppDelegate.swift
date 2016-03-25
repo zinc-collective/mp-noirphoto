@@ -13,13 +13,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var splashController : SplashCtrlor?
-    var viewController : NoirViewController?
+    var splashController : SplashViewController!
+    var viewController : NoirViewController!
+    var navigationController : NavigationViewController!
     
-//    var viewController: NoirViewController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        self.navigationController = self.window!.rootViewController as! NavigationViewController
+        
+        // create both view controllers
+        self.splashController = UIStoryboard(name: "Splash", bundle: nil)
+                                    .instantiateViewControllerWithIdentifier("SplashViewController") as! SplashViewController
+        self.viewController = NoirViewController(nibName: "NoirViewController", bundle: nil)
+            
+        self.navigationController.viewControllers = [self.splashController]
         return true
     }
 
@@ -29,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        viewController?.savePresetToUserDefault()
+        viewController.savePresetToUserDefault()
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -41,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(application: UIApplication) {
-        viewController?.savePresetToUserDefault()
+        viewController.savePresetToUserDefault()
     }
     
     

@@ -8,7 +8,6 @@
 
 #import "NoirAppDelegate.h"
 #import "NoirViewController.h"
-#import "InfoCtrlor.h"
 
 
 #define save_origin_photo_path		@"/Documents/origin_photo.jpg"

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Info View Controller-->
+        <scene sceneID="pyM-c1-mnR">
+            <objects>
+                <viewController storyboardIdentifier="InfoViewController" id="vg3-F6-hbn" customClass="InfoViewController" customModule="NoirPhoto" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="l0R-P2-WJa"/>
+                        <viewControllerLayoutGuide type="bottom" id="KUc-Jq-c6y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tCA-w7-1lv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="InfoBackground" translatesAutoresizingMaskIntoConstraints="NO" id="K3a-7n-lFh">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYH-ca-T01">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rCq-5Y-QXB">
+                                <rect key="frame" x="8" y="15" width="37" height="37"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                <state key="normal" backgroundImage="btn_info_back.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled" backgroundImage="btn_info_back_sel.png"/>
+                                <state key="selected" backgroundImage="btn_info_back_sel.png"/>
+                                <state key="highlighted" backgroundImage="btn_info_back_sel.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="handleBack" destination="vg3-F6-hbn" eventType="touchUpInside" id="ddZ-0O-KnG"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gYH-ca-T01" firstAttribute="leading" secondItem="tCA-w7-1lv" secondAttribute="leading" id="24H-Qh-z7e"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gYH-ca-T01" secondAttribute="trailing" constant="-20" id="5e6-zY-4Dp"/>
+                            <constraint firstItem="K3a-7n-lFh" firstAttribute="top" secondItem="l0R-P2-WJa" secondAttribute="bottom" id="GCk-DV-dvk"/>
+                            <constraint firstAttribute="trailing" secondItem="gYH-ca-T01" secondAttribute="trailing" id="GhR-gA-yHZ"/>
+                            <constraint firstItem="K3a-7n-lFh" firstAttribute="leading" secondItem="tCA-w7-1lv" secondAttribute="leading" id="Iyq-KU-26F"/>
+                            <constraint firstItem="KUc-Jq-c6y" firstAttribute="top" secondItem="gYH-ca-T01" secondAttribute="bottom" id="ObZ-qj-XD8"/>
+                            <constraint firstItem="gYH-ca-T01" firstAttribute="top" secondItem="l0R-P2-WJa" secondAttribute="bottom" constant="-20" id="P36-4f-Xvm"/>
+                            <constraint firstItem="KUc-Jq-c6y" firstAttribute="top" secondItem="gYH-ca-T01" secondAttribute="bottom" id="Q2h-zt-avG"/>
+                            <constraint firstItem="rCq-5Y-QXB" firstAttribute="top" secondItem="l0R-P2-WJa" secondAttribute="bottom" constant="15" id="VMp-xR-bb0"/>
+                            <constraint firstItem="gYH-ca-T01" firstAttribute="leading" secondItem="tCA-w7-1lv" secondAttribute="leadingMargin" constant="-20" id="dBP-vz-HSr"/>
+                            <constraint firstItem="KUc-Jq-c6y" firstAttribute="top" secondItem="K3a-7n-lFh" secondAttribute="bottom" id="jlq-BF-vtT"/>
+                            <constraint firstItem="rCq-5Y-QXB" firstAttribute="leading" secondItem="tCA-w7-1lv" secondAttribute="leading" constant="8" id="pIL-pd-lW1"/>
+                            <constraint firstAttribute="trailing" secondItem="K3a-7n-lFh" secondAttribute="trailing" id="tQE-L0-DaE"/>
+                            <constraint firstItem="gYH-ca-T01" firstAttribute="top" secondItem="l0R-P2-WJa" secondAttribute="bottom" id="yQW-YD-RxJ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5e6-zY-4Dp"/>
+                                <exclude reference="dBP-vz-HSr"/>
+                                <exclude reference="P36-4f-Xvm"/>
+                                <exclude reference="Q2h-zt-avG"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="scrollView" destination="gYH-ca-T01" id="n3c-YJ-6Zr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r3s-U6-8vb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="486" y="1119"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="InfoBackground" width="320" height="480"/>
+        <image name="btn_info_back.png" width="37" height="37"/>
+        <image name="btn_info_back_sel.png" width="37" height="37"/>
+    </resources>
+</document>

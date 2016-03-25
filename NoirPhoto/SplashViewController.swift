@@ -19,7 +19,7 @@ class SplashViewController: UIViewController {
     
     @IBAction func handleInfo(sender: AnyObject) {
         print("INFO")
-        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let sb = UIStoryboard(name: "Info", bundle: nil)
         let vc = sb.instantiateViewControllerWithIdentifier("InfoViewController")
         self.navigationController?.pushViewController(vc, animated: true)
     }

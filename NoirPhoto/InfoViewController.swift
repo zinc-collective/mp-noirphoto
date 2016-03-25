@@ -24,11 +24,6 @@ class InfoViewController: UIViewController {
         self.scrollView.addSubview(imageView)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
     }
@@ -38,7 +33,6 @@ class InfoViewController: UIViewController {
     }
     
     @IBAction func handleBack() {
-        print("BACK")
         self.navigationController?.popViewControllerAnimated(true)
     }
 }
