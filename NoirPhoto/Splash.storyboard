@@ -20,10 +20,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SplashBottom" translatesAutoresizingMaskIntoConstraints="NO" id="7Q1-Ch-3Nx">
-                                <rect key="frame" x="-4" y="318" width="328" height="249.5"/>
+                                <rect key="frame" x="-4" y="319" width="328" height="249"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="7Q1-Ch-3Nx" secondAttribute="height" multiplier="320:243" id="ciz-V1-H25"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="-11" width="768" height="583.5"/>
+                                </variation>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SplashTitle" translatesAutoresizingMaskIntoConstraints="NO" id="fGS-eK-eKd">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="235"/>
@@ -35,6 +38,7 @@
                                 <rect key="frame" x="0.0" y="88" width="320" height="480"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="SdQ-Yx-00g" secondAttribute="height" multiplier="2:3" id="7Ju-tt-unj"/>
+                                    <constraint firstAttribute="height" constant="480" id="InC-W0-XKg"/>
                                     <constraint firstAttribute="width" secondItem="SdQ-Yx-00g" secondAttribute="height" multiplier="2:3" id="aOA-Mo-lCc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -49,6 +53,7 @@
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="7Ju-tt-unj"/>
                                         <exclude reference="aOA-Mo-lCc"/>
                                     </mask>
                                 </variation>
@@ -101,6 +106,7 @@
                     <navigationItem key="navigationItem" id="4PK-8O-lbP"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kfg-Yc-XWb" userLabel="First Responder" sceneMemberID="firstResponder"/>
