@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // load last used photo
         if self.checkPhotoExistFromPath(SaveOriginPhotoPath) {
+            self.viewController.loadPhoto = self.viewController.loadPhotoFromPath(SaveOriginPhotoPath)
             self.navigationController.viewControllers = [self.viewController]
         }
         else {

@@ -11,7 +11,6 @@
 #import "ControlPadView.h"
 #import "Preset.h"
 #import "Tint.h"
-#import "SplashCtrlor.h"
 #import "VignetteView.h"
 #import "Parameter.h"
 
@@ -42,7 +41,7 @@ typedef struct {
 
 
 //@class QuartzView;
-@interface NoirViewController : UIViewController <UIPopoverControllerDelegate, VignetteDelegate, UIAlertViewDelegate, SplashCtrlorDelegate, ControlPadViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface NoirViewController : UIViewController <UIPopoverControllerDelegate, VignetteDelegate, UIAlertViewDelegate, ControlPadViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
 	
 	UIImageView			 *photoView;
 	UIImageView			 *photoFullView;
@@ -73,8 +72,6 @@ typedef struct {
 	
 	CGRect               _photoRenderRect;  //是一个相对值，相对于photo view的 rect值，原点也是相对于photoview的位置
 		CGRect               _photoRenderRect2;
-	
-	SplashCtrlor         *splashCtrlor;
 	
 	BOOL				 _bPhotoRotated;
 	
@@ -130,7 +127,6 @@ typedef struct {
 @property (nonatomic, retain) UIButton		 *saveBtn;
 @property (nonatomic, retain) UIButton	     *infoBtn;
 @property (nonatomic, retain) UIImageView	 *tintMaskView;
-@property (nonatomic, retain) SplashCtrlor   *splashCtrlor;
 @property (nonatomic, retain) NSString       *mCircleImageName;
 @property (nonatomic, retain) NSString		 *mPresetReviewImageName;
 @property (nonatomic, retain) NSString		 *mPresetReviewMaskImageName;
@@ -151,6 +147,8 @@ typedef struct {
 
 @property (nonatomic, retain) VignetteView* _vignetteView;
 @property (nonatomic, retain) VignetteView* _vignetteFullView;
+
+@property (nonatomic, retain) UIImage * loadPhoto;
 
 
 #pragma mark -
@@ -177,7 +175,6 @@ typedef struct {
 -(UIImage*)imageCompiledForOriginImage:(UIImage*)originImage maskImage:(UIImage*)maskImage;
 - (void)alertWithSaveMessage:(NSString*)message withTitle:(NSString*)aTitle;
 - (CGRect)photoRenderRectForImageSize:(CGSize)imageSize withImageViewRect:(CGRect)viewRect;
-- (void)showSplashView:(BOOL)bShow;
 - (UIImage*)imageAddAlphaForImage:(UIImage*)image;
 - (UIImage*)rotatePhotoToFit:(UIImage*)image withOriatation:(UIImageOrientation)orientation;
 - (UIImage*)rotatePhotoToOriginal:(UIImage*)image originOriatation:(UIImageOrientation)orientation;
@@ -220,6 +217,7 @@ typedef struct {
 -(void)savePresetToUserDefault;
 -(Preset*)presetFromUserDefault;
 
+#pragma mark Loading
 
 
 

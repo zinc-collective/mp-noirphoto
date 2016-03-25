@@ -74,7 +74,6 @@
 @synthesize saveBtn;
 @synthesize infoBtn;
 @synthesize tintMaskView;
-@synthesize splashCtrlor;
 @synthesize mCircleImageName;
 @synthesize mPresetReviewImageName;
 @synthesize mPresetReviewMaskImageName;
@@ -95,6 +94,7 @@
 @synthesize _vignetteView;
 
 @synthesize _vignetteFullView;
+@synthesize loadPhoto;
 
 
 #pragma mark -
@@ -364,27 +364,6 @@ void loadGaindLUT()
 	[self initElementsForControlPad];
 	[self.view insertSubview:_ctrlPadView atIndex:2];
 	
-	//init splash ctrlor
-	NSString *splashNibName = @"Splash";
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		splashNibName = @"Splash-iPad";
-	}
-	if (IS_IPHONE_5)
-        splashNibName = @"Splash568";
-    
-	if(UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)
-	{
-		SplashCtrlor *splash = [[SplashCtrlor alloc] initWithNibName:splashNibName bundle:nil];
-		self.splashCtrlor = splash;
-		self.splashCtrlor.delegate = self;
-		self.splashCtrlor.view.alpha = 0.0;
-		[self.view addSubview:self.splashCtrlor.view];
-		
-		//show splash
-		[self showSplashView:YES];
-	}
-	
 	
 	//add saving mask
 	UIView *smView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -401,25 +380,16 @@ void loadGaindLUT()
 	self.savingSpinner.hidden = YES;
 	[self.savingSpinner stopAnimating];
 	[self.view addSubview:self.savingSpinner];
-	
-	
-	//recover the App UI for last time used Photo
-	UIImage *originPhoto = [self loadPhotoFromPath:save_origin_photo_path];
-	if(originPhoto != nil)
-	{
-		//set tint and adjust position
-		[_ctrlPadView chooseTintsBtnForIndex:self.preset.tintIndex bNeedReturn:NO];
-		[_ctrlPadView setAdjustsForExpinside:self.preset.expInside expOutside:self.preset.expOutside contrast:self.preset.contrast];
-		[self changeTintMaskForIndex:self.preset.tintIndex];
-		
-		[self initUsedPropertiesAndUIForOriginPhoto:originPhoto];
-		
-		if(UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)
-		{
-			[self showSplashView:NO];
-		}
-	}
     
+    
+    NSAssert(self.loadPhoto != NULL, @"Must set loadPhoto before loading");
+	//set tint and adjust position
+	[_ctrlPadView chooseTintsBtnForIndex:self.preset.tintIndex bNeedReturn:NO];
+	[_ctrlPadView setAdjustsForExpinside:self.preset.expInside expOutside:self.preset.expOutside contrast:self.preset.contrast];
+	[self changeTintMaskForIndex:self.preset.tintIndex];
+	
+	[self initUsedPropertiesAndUIForOriginPhoto:self.loadPhoto];
+	
     //bret button fix-up for the 4 inch display
     if (IS_IPHONE_5)
     {
@@ -439,6 +409,9 @@ void loadGaindLUT()
         frame.origin.y += IPHONE5_HEIGHT_DIFFERENCE;
         tintMaskView.frame = frame;
     }
+}
+
+-(void)loadWithOriginPhoto:(UIImage*)originPhoto {
 }
 
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
@@ -649,11 +622,6 @@ void loadGaindLUT()
     //bret
     imagePickerOnScreen = NO;
 	
-	if(UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)
-	{
-		[self showSplashView:NO];
-	}
-	
 	float version = [[[UIDevice currentDevice] systemVersion] floatValue];
 	
 	if (version > 4.1) {
@@ -747,7 +715,6 @@ void loadGaindLUT()
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
 		[self.imagePickerPopover dismissPopoverAnimated:YES];
-		//self.splashCtrlor.albumBtn.enabled = YES;
 		self.loadBtn.enabled = YES;
 	}
 	else
@@ -772,16 +739,6 @@ void loadGaindLUT()
     }
 }
 
-
-//SplashCtrlorDelegate
--(void)splashAlbumActioned:(id)sender
-{
-	[self loadAction:sender];
-}
--(void)splashInfoActioned
-{
-	[self infoAction:nil];
-}
 
 
 //UIAlertViewDelegate
@@ -840,7 +797,6 @@ void loadGaindLUT()
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
 	//[popoverController release];
-	//self.splashCtrlor.albumBtn.enabled = YES;
 	self.loadBtn.enabled = YES;
 }
 
@@ -1039,7 +995,6 @@ void loadGaindLUT()
 							   permittedArrowDirections:UIPopoverArrowDirectionAny
 											   animated:YES];
 		
-		//self.splashCtrlor.albumBtn.enabled = NO;
 		self.loadBtn.enabled = NO;
 	}
 	else
@@ -1479,38 +1434,6 @@ void loadGaindLUT()
 	return CGRectMake(px, py, pw, ph);
 }
 
--(void)showSplashView:(BOOL)bShow
-{
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		return;
-	}
-	
-	if(bShow)
-	{
-		if(self.splashCtrlor.view.alpha == 1.0) return;
-		
-		//		[UIView beginAnimations:@"movement" context:nil]; 
-		//		[UIView setAnimationCurve:UIViewAnimationCurveLinear]; 
-		//		[UIView setAnimationDuration:0.3f];
-		
-		self.splashCtrlor.view.alpha = 1.0;
-		
-		//		[UIView commitAnimations];
-	}
-	else
-	{
-		if(self.splashCtrlor.view.alpha == 0.0) return;
-		
-		[UIView beginAnimations:@"movement" context:nil]; 
-		[UIView setAnimationCurve:UIViewAnimationCurveLinear]; 
-		[UIView setAnimationDuration:0.3f];
-		
-		self.splashCtrlor.view.alpha = 0.0;
-		
-		[UIView commitAnimations];
-	}
-}
 
 
 -(UIImage*)imageAddAlphaForImage:(UIImage *)image
