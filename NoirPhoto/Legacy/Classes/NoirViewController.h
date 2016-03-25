@@ -14,7 +14,6 @@
 #import "SplashCtrlor.h"
 #import "VignetteView.h"
 #import "Parameter.h"
-#import "NoirPhoto-Swift.h"
 
 
 

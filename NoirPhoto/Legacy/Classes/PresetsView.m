@@ -294,9 +294,6 @@
 - (void)didPresentAlertView:(UIAlertView *)alertView
 {
 	self.mAlert.hidden = NO;
-	
-	NoirAppDelegate * del = (NoirAppDelegate*)[[UIApplication sharedApplication] delegate];
-	self.mAlert.transform = del.curTransfrom;
 }
 
 

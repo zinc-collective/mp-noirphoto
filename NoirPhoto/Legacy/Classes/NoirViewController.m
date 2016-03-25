@@ -1444,9 +1444,6 @@ void loadGaindLUT()
 - (void)didPresentAlertView:(UIAlertView *)alertView
 {
 	self._alert.hidden = NO;
-	
-	NoirAppDelegate * delegate = (NoirAppDelegate*)[[UIApplication sharedApplication] delegate];
-	self._alert.transform = delegate.curTransfrom;
 }
 
 - (CGRect)photoRenderRectForImageSize:(CGSize)imageSize withImageViewRect:(CGRect)viewRect

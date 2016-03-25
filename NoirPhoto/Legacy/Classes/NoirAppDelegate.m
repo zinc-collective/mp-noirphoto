@@ -25,13 +25,9 @@
 @synthesize window;
 @synthesize viewController;
 @synthesize navigationCtrlor;
-@synthesize curTransfrom;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    
-    // Override point for customization after app launch  
-	self.curTransfrom = CGAffineTransformIdentity;
 	
 
 	UINavigationController *navCtrlor = [[UINavigationController alloc] initWithRootViewController:viewController];

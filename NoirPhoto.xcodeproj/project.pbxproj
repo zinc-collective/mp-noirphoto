@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78330FA81CA43D6F00B04CFD /* SplashViewController.swift */; };
+		783B0F171CA5921E002A77AB /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F161CA5921E002A77AB /* InfoViewController.swift */; };
+		783B0F191CA597D5002A77AB /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F181CA597D5002A77AB /* NavigationViewController.swift */; };
 		7875813D1CA2E98400100514 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7875813C1CA2E98400100514 /* AppDelegate.swift */; };
-		7875813F1CA2E98400100514 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7875813E1CA2E98400100514 /* ViewController.swift */; };
 		787581421CA2E98400100514 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 787581401CA2E98400100514 /* Main.storyboard */; };
 		787581441CA2E98400100514 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 787581431CA2E98400100514 /* Assets.xcassets */; };
 		787581471CA2E98400100514 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 787581451CA2E98400100514 /* LaunchScreen.storyboard */; };
@@ -75,8 +77,6 @@
 		787582C31CA2EC3800100514 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7875829A1CA2EC3800100514 /* Default@2x.png */; };
 		787582C41CA2EC3800100514 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7875829B1CA2EC3800100514 /* Icon@2x.png */; };
 		787582C51CA2EC3800100514 /* Icon_Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7875829C1CA2EC3800100514 /* Icon_Small@2x.png */; };
-		787582C61CA2EC3800100514 /* info_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7875829D1CA2EC3800100514 /* info_bg@2x.png */; };
-		787582C71CA2EC3800100514 /* info_desc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7875829E1CA2EC3800100514 /* info_desc@2x.png */; };
 		787582C81CA2EC3800100514 /* splash568@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7875829F1CA2EC3800100514 /* splash568@2x.png */; };
 		787582C91CA2EC3800100514 /* splash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 787582A01CA2EC3800100514 /* splash@2x.png */; };
 		787582CA1CA2EC3800100514 /* tint_btn_0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 787582A11CA2EC3800100514 /* tint_btn_0@2x.png */; };
@@ -163,7 +163,6 @@
 		787583F31CA2EC9600100514 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 787583BE1CA2EC9600100514 /* Default-Portrait.png */; };
 		787583F41CA2EC9600100514 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 787583BF1CA2EC9600100514 /* Icon-72.png */; };
 		787583F51CA2EC9600100514 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 787583C01CA2EC9600100514 /* Icon-Small-50.png */; };
-		787583F61CA2EC9600100514 /* info_bg-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 787583C11CA2EC9600100514 /* info_bg-iPad.png */; };
 		787583FB1CA2EC9600100514 /* info_desc-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 787583C61CA2EC9600100514 /* info_desc-iPad.png */; };
 		787583FF1CA2EC9600100514 /* splash-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 787583CA1CA2EC9600100514 /* splash-iPad.png */; };
 		787584001CA2EC9600100514 /* tint_btn_iPad_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 787583CB1CA2EC9600100514 /* tint_btn_iPad_0.png */; };
@@ -195,9 +194,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		78330FA81CA43D6F00B04CFD /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		783B0F161CA5921E002A77AB /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		783B0F181CA597D5002A77AB /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		787581391CA2E98400100514 /* NoirPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoirPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7875813C1CA2E98400100514 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7875813E1CA2E98400100514 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		787581411CA2E98400100514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		787581431CA2E98400100514 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		787581461CA2E98400100514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -287,8 +288,6 @@
 		7875829A1CA2EC3800100514 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		7875829B1CA2EC3800100514 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		7875829C1CA2EC3800100514 /* Icon_Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_Small@2x.png"; sourceTree = "<group>"; };
-		7875829D1CA2EC3800100514 /* info_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info_bg@2x.png"; sourceTree = "<group>"; };
-		7875829E1CA2EC3800100514 /* info_desc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info_desc@2x.png"; sourceTree = "<group>"; };
 		7875829F1CA2EC3800100514 /* splash568@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash568@2x.png"; sourceTree = "<group>"; };
 		787582A01CA2EC3800100514 /* splash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash@2x.png"; sourceTree = "<group>"; };
 		787582A11CA2EC3800100514 /* tint_btn_0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tint_btn_0@2x.png"; sourceTree = "<group>"; };
@@ -375,7 +374,6 @@
 		787583BE1CA2EC9600100514 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		787583BF1CA2EC9600100514 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		787583C01CA2EC9600100514 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
-		787583C11CA2EC9600100514 /* info_bg-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info_bg-iPad.png"; sourceTree = "<group>"; };
 		787583C61CA2EC9600100514 /* info_desc-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info_desc-iPad.png"; sourceTree = "<group>"; };
 		787583CA1CA2EC9600100514 /* splash-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash-iPad.png"; sourceTree = "<group>"; };
 		787583CB1CA2EC9600100514 /* tint_btn_iPad_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tint_btn_iPad_0.png; sourceTree = "<group>"; };
@@ -418,6 +416,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		78330FAA1CA43D7900B04CFD /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				787581451CA2E98400100514 /* LaunchScreen.storyboard */,
+				787581401CA2E98400100514 /* Main.storyboard */,
+				78330FA81CA43D6F00B04CFD /* SplashViewController.swift */,
+				783B0F161CA5921E002A77AB /* InfoViewController.swift */,
+				783B0F181CA597D5002A77AB /* NavigationViewController.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		787581301CA2E98400100514 = {
 			isa = PBXGroup;
 			children = (
@@ -438,10 +448,8 @@
 			isa = PBXGroup;
 			children = (
 				7875813C1CA2E98400100514 /* AppDelegate.swift */,
-				7875813E1CA2E98400100514 /* ViewController.swift */,
-				787581401CA2E98400100514 /* Main.storyboard */,
 				787581431CA2E98400100514 /* Assets.xcassets */,
-				787581451CA2E98400100514 /* LaunchScreen.storyboard */,
+				78330FAA1CA43D7900B04CFD /* UI */,
 				787581481CA2E98400100514 /* Info.plist */,
 				787581B41CA2EBEF00100514 /* NoirPhoto-Bridging-Header.h */,
 				7875814E1CA2EA5C00100514 /* Legacy */,
@@ -479,7 +487,6 @@
 				787581BA1CA2EBF000100514 /* NoirViewController.h */,
 				787581BB1CA2EBF000100514 /* NoirViewController.m */,
 				787581BC1CA2EBF000100514 /* RConfigFile.h */,
-				787581BD1CA2EBF000100514 /* SplashCtrlor.m */,
 				787581C01CA2EBF000100514 /* AdjustView.h */,
 				787581C11CA2EBF000100514 /* AdjustView.m */,
 				787581C21CA2EBF000100514 /* ControlPadView.h */,
@@ -504,6 +511,7 @@
 				787581D61CA2EBF000100514 /* RScrollView.h */,
 				787581D71CA2EBF000100514 /* RScrollView.m */,
 				787581D81CA2EBF000100514 /* SplashCtrlor.h */,
+				787581BD1CA2EBF000100514 /* SplashCtrlor.m */,
 				787581D91CA2EBF000100514 /* SplashInfoCtrlor.h */,
 				787581DA1CA2EBF000100514 /* SplashInfoCtrlor.m */,
 				787581DB1CA2EBF000100514 /* Tint.h */,
@@ -589,8 +597,6 @@
 				7875829A1CA2EC3800100514 /* Default@2x.png */,
 				7875829B1CA2EC3800100514 /* Icon@2x.png */,
 				7875829C1CA2EC3800100514 /* Icon_Small@2x.png */,
-				7875829D1CA2EC3800100514 /* info_bg@2x.png */,
-				7875829E1CA2EC3800100514 /* info_desc@2x.png */,
 				7875829F1CA2EC3800100514 /* splash568@2x.png */,
 				787582A01CA2EC3800100514 /* splash@2x.png */,
 				787582A11CA2EC3800100514 /* tint_btn_0@2x.png */,
@@ -704,7 +710,6 @@
 				787583BE1CA2EC9600100514 /* Default-Portrait.png */,
 				787583BF1CA2EC9600100514 /* Icon-72.png */,
 				787583C01CA2EC9600100514 /* Icon-Small-50.png */,
-				787583C11CA2EC9600100514 /* info_bg-iPad.png */,
 				787583C61CA2EC9600100514 /* info_desc-iPad.png */,
 				787583CA1CA2EC9600100514 /* splash-iPad.png */,
 				787583CB1CA2EC9600100514 /* tint_btn_iPad_0.png */,
@@ -829,7 +834,6 @@
 				787583E61CA2EC9600100514 /* btn_info-iPad.png in Resources */,
 				787583301CA2EC5900100514 /* tint_btn_0.png in Resources */,
 				787584191CA2ECAC00100514 /* Splash.xib in Resources */,
-				787582C71CA2EC3800100514 /* info_desc@2x.png in Resources */,
 				787584011CA2EC9600100514 /* tint_btn_iPad_1.png in Resources */,
 				787583E51CA2EC9600100514 /* btn_home_info_sel-iPad.png in Resources */,
 				787584031CA2EC9600100514 /* tint_btn_iPad_3.png in Resources */,
@@ -892,7 +896,6 @@
 				787582D11CA2EC3800100514 /* tint_btn_sel_3@2x.png in Resources */,
 				787583151CA2EC5900100514 /* btn_info.png in Resources */,
 				7875830A1CA2EC5900100514 /* adjust_contrast.png in Resources */,
-				787583F61CA2EC9600100514 /* info_bg-iPad.png in Resources */,
 				787583251CA2EC5900100514 /* Icon-40.png in Resources */,
 				787583311CA2EC5900100514 /* tint_btn_1.png in Resources */,
 				787582CC1CA2EC3800100514 /* tint_btn_2@2x.png in Resources */,
@@ -958,7 +961,6 @@
 				787582C51CA2EC3800100514 /* Icon_Small@2x.png in Resources */,
 				787582C01CA2EC3800100514 /* btn_splash_load_sel@2x.png in Resources */,
 				787582101CA2EC2400100514 /* NOIR_brite_LUT.png in Resources */,
-				787582C61CA2EC3800100514 /* info_bg@2x.png in Resources */,
 				7875820D1CA2EC2400100514 /* circle_render.png in Resources */,
 				7875840C1CA2EC9600100514 /* Info-iPad.xib in Resources */,
 				787582121CA2EC2400100514 /* preset_back_iPad.png in Resources */,
@@ -977,11 +979,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				787581F11CA2EBF000100514 /* RScrollView.m in Sources */,
-				7875813F1CA2E98400100514 /* ViewController.swift in Sources */,
 				787581E91CA2EBF000100514 /* CustomPickerView.m in Sources */,
 				787581E41CA2EBF000100514 /* NoirViewController.m in Sources */,
+				783B0F191CA597D5002A77AB /* NavigationViewController.swift in Sources */,
 				787581E51CA2EBF000100514 /* SplashCtrlor.m in Sources */,
 				787581E71CA2EBF000100514 /* AdjustView.m in Sources */,
+				78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */,
 				787581E21CA2EBF000100514 /* TintsView.m in Sources */,
 				787581E11CA2EBF000100514 /* PresetsView.m in Sources */,
 				787581ED1CA2EBF000100514 /* Parameter.m in Sources */,
@@ -998,6 +1001,7 @@
 				787581E81CA2EBF000100514 /* ControlPadView.m in Sources */,
 				787581E31CA2EBF000100514 /* InfoCtrlor.m in Sources */,
 				787581EA1CA2EBF000100514 /* EllipseVertex.m in Sources */,
+				783B0F171CA5921E002A77AB /* InfoViewController.swift in Sources */,
 				787581EB1CA2EBF000100514 /* EllipseView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
