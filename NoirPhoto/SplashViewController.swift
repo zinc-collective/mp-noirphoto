@@ -37,6 +37,15 @@ class SplashViewController: UIViewController, UIImagePickerControllerDelegate, U
         let picker = UIImagePickerController()
         picker.sourceType = .PhotoLibrary
         picker.delegate = self
+        picker.modalPresentationStyle = .Popover
+        
+        // hand picked origin to line up with ipad. This is ignored for iphone
+        // the splash screen uses full-screen button sizes
+        let buttonSize = CGSize(width: 40, height: 40) // size of the image
+        let buttonOrigin = CGPoint(x: view.frame.size.width - buttonSize.width - 76, y: view.frame.size.height - buttonSize.height - 80)
+        
+        picker.popoverPresentationController?.sourceView = self.view
+        picker.popoverPresentationController?.sourceRect = CGRect(origin: buttonOrigin, size: buttonSize)
         
         self.presentViewController(picker, animated: true, completion: nil)
         
