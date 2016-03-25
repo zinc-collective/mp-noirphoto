@@ -22,7 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.navigationController = self.window!.rootViewController as! NavigationViewController
         
         // create both view controllers
-        self.splashController = UIStoryboard(name: "Splash", bundle: nil)
+        var splashName = "Splash"
+        if (UI_USER_INTERFACE_IDIOM() == .Pad) {
+            splashName = "Splash-iPad"
+        }
+        self.splashController = UIStoryboard(name: splashName, bundle: nil)
                                     .instantiateViewControllerWithIdentifier("SplashViewController") as! SplashViewController
         self.viewController = NoirViewController(nibName: "NoirViewController", bundle: nil)
             
