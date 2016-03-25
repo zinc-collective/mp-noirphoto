@@ -187,8 +187,8 @@
 		787581411CA2E98400100514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		787581431CA2E98400100514 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		787581461CA2E98400100514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		787581481CA2E98400100514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		787581B41CA2EBEF00100514 /* NoirPhoto-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NoirPhoto-Bridging-Header.h"; sourceTree = "<group>"; };
+		787581481CA2E98400100514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = NoirPhoto/Info.plist; sourceTree = "<group>"; };
+		787581B41CA2EBEF00100514 /* NoirPhoto-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NoirPhoto-Bridging-Header.h"; path = "NoirPhoto/NoirPhoto-Bridging-Header.h"; sourceTree = "<group>"; };
 		787581B51CA2EBF000100514 /* NoirAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoirAppDelegate.m; path = Legacy/Classes/NoirAppDelegate.m; sourceTree = "<group>"; };
 		787581B61CA2EBF000100514 /* PresetsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PresetsView.m; path = Legacy/Classes/PresetsView.m; sourceTree = "<group>"; };
 		787581B71CA2EBF000100514 /* TintsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TintsView.m; path = Legacy/Classes/TintsView.m; sourceTree = "<group>"; };
@@ -397,6 +397,8 @@
 			isa = PBXGroup;
 			children = (
 				7875813B1CA2E98400100514 /* NoirPhoto */,
+				787581481CA2E98400100514 /* Info.plist */,
+				787581B41CA2EBEF00100514 /* NoirPhoto-Bridging-Header.h */,
 				7875813A1CA2E98400100514 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -415,10 +417,7 @@
 				7875813C1CA2E98400100514 /* AppDelegate.swift */,
 				787581431CA2E98400100514 /* Assets.xcassets */,
 				78330FAA1CA43D7900B04CFD /* UI */,
-				787581481CA2E98400100514 /* Info.plist */,
-				787581B41CA2EBEF00100514 /* NoirPhoto-Bridging-Header.h */,
 				7875814E1CA2EA5C00100514 /* Legacy */,
-				7875818D1CA2EAE400100514 /* Resources */,
 			);
 			path = NoirPhoto;
 			sourceTree = "<group>";
@@ -431,13 +430,6 @@
 				787581F51CA2EC0D00100514 /* Resources */,
 			);
 			name = Legacy;
-			sourceTree = "<group>";
-		};
-		7875818D1CA2EAE400100514 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		787581B31CA2EBC500100514 /* Classes */ = {

@@ -8,6 +8,9 @@
 
 import UIKit
 
+
+let SaveOriginPhotoPath = "/Documents/origin_photo.jpg"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -29,8 +32,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.splashController = UIStoryboard(name: splashName, bundle: nil)
                                     .instantiateViewControllerWithIdentifier("SplashViewController") as! SplashViewController
         self.viewController = NoirViewController(nibName: "NoirViewController", bundle: nil)
-            
-        self.navigationController.viewControllers = [self.splashController]
+        
+        
+        // load last used photo
+        if self.checkPhotoExistFromPath(SaveOriginPhotoPath) {
+            self.navigationController.viewControllers = [self.viewController]
+        }
+        else {
+            self.navigationController.viewControllers = [self.splashController]
+        }
+        
         return true
     }
 
