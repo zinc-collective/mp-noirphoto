@@ -164,9 +164,7 @@
 		787584091CA2EC9600100514 /* tint_mask_iPad_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 787583D41CA2EC9600100514 /* tint_mask_iPad_1.png */; };
 		7875840A1CA2EC9600100514 /* tint_mask_iPad_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 787583D51CA2EC9600100514 /* tint_mask_iPad_2.png */; };
 		7875840B1CA2EC9600100514 /* tint_mask_iPad_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 787583D61CA2EC9600100514 /* tint_mask_iPad_3.png */; };
-		7875840D1CA2EC9600100514 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787583D81CA2EC9600100514 /* MainWindow-iPad.xib */; };
 		7875840E1CA2EC9600100514 /* NoirViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787583D91CA2EC9600100514 /* NoirViewController-iPad.xib */; };
-		7875840F1CA2EC9600100514 /* Splash-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787583DA1CA2EC9600100514 /* Splash-iPad.xib */; };
 		787584171CA2ECAC00100514 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787584111CA2ECAC00100514 /* MainWindow.xib */; };
 		787584181CA2ECAC00100514 /* NoirViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787584121CA2ECAC00100514 /* NoirViewController.xib */; };
 		787584191CA2ECAC00100514 /* Splash.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787584131CA2ECAC00100514 /* Splash.xib */; };
@@ -357,9 +355,7 @@
 		787583D41CA2EC9600100514 /* tint_mask_iPad_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tint_mask_iPad_1.png; sourceTree = "<group>"; };
 		787583D51CA2EC9600100514 /* tint_mask_iPad_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tint_mask_iPad_2.png; sourceTree = "<group>"; };
 		787583D61CA2EC9600100514 /* tint_mask_iPad_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tint_mask_iPad_3.png; sourceTree = "<group>"; };
-		787583D81CA2EC9600100514 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = "<group>"; };
-		787583D91CA2EC9600100514 /* NoirViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "NoirViewController-iPad.xib"; sourceTree = "<group>"; };
-		787583DA1CA2EC9600100514 /* Splash-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Splash-iPad.xib"; sourceTree = "<group>"; };
+		787583D91CA2EC9600100514 /* NoirViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "NoirViewController-iPad.xib"; path = "Legacy/Resources-iPad/NoirViewController-iPad.xib"; sourceTree = "<group>"; };
 		787584111CA2ECAC00100514 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = Legacy/MainWindow.xib; sourceTree = "<group>"; };
 		787584121CA2ECAC00100514 /* NoirViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NoirViewController.xib; path = Legacy/NoirViewController.xib; sourceTree = "<group>"; };
 		787584131CA2ECAC00100514 /* Splash.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Splash.xib; path = Legacy/Splash.xib; sourceTree = "<group>"; };
@@ -431,8 +427,8 @@
 			isa = PBXGroup;
 			children = (
 				787584201CA2EE9F00100514 /* Version */,
-				787581F51CA2EC0D00100514 /* Resources */,
 				787581B31CA2EBC500100514 /* Classes */,
+				787581F51CA2EC0D00100514 /* Resources */,
 			);
 			name = Legacy;
 			sourceTree = "<group>";
@@ -493,12 +489,13 @@
 			children = (
 				787584111CA2ECAC00100514 /* MainWindow.xib */,
 				787584121CA2ECAC00100514 /* NoirViewController.xib */,
+				787583D91CA2EC9600100514 /* NoirViewController-iPad.xib */,
 				787584131CA2ECAC00100514 /* Splash.xib */,
 				787584141CA2ECAC00100514 /* Splash568.xib */,
 				7875833D1CA2EC6900100514 /* Presets_current.pList */,
 				7875833E1CA2EC6900100514 /* Presets_default.pList */,
 				7875841C1CA2ECE700100514 /* English.lproj */,
-				787583A41CA2EC9600100514 /* Resources-iPad */,
+				787583A51CA2EC9600100514 /* image-iPad */,
 				787582D61CA2EC5900100514 /* image */,
 				787582831CA2EC3800100514 /* image@2x */,
 				787581F71CA2EC2400100514 /* renderImage */,
@@ -631,18 +628,6 @@
 			path = Legacy/image;
 			sourceTree = "<group>";
 		};
-		787583A41CA2EC9600100514 /* Resources-iPad */ = {
-			isa = PBXGroup;
-			children = (
-				787583A51CA2EC9600100514 /* image-iPad */,
-				787583D81CA2EC9600100514 /* MainWindow-iPad.xib */,
-				787583D91CA2EC9600100514 /* NoirViewController-iPad.xib */,
-				787583DA1CA2EC9600100514 /* Splash-iPad.xib */,
-			);
-			name = "Resources-iPad";
-			path = "Legacy/Resources-iPad";
-			sourceTree = "<group>";
-		};
 		787583A51CA2EC9600100514 /* image-iPad */ = {
 			isa = PBXGroup;
 			children = (
@@ -673,7 +658,8 @@
 				787583D51CA2EC9600100514 /* tint_mask_iPad_2.png */,
 				787583D61CA2EC9600100514 /* tint_mask_iPad_3.png */,
 			);
-			path = "image-iPad";
+			name = "image-iPad";
+			path = "Legacy/Resources-iPad/image-iPad";
 			sourceTree = "<group>";
 		};
 		7875841C1CA2ECE700100514 /* English.lproj */ = {
@@ -784,7 +770,6 @@
 				787583E51CA2EC9600100514 /* btn_home_info_sel-iPad.png in Resources */,
 				787584031CA2EC9600100514 /* tint_btn_iPad_3.png in Resources */,
 				787583191CA2EC5900100514 /* btn_load_sel.png in Resources */,
-				7875840F1CA2EC9600100514 /* Splash-iPad.xib in Resources */,
 				787583121CA2EC5900100514 /* adjust_mask.png in Resources */,
 				787583221CA2EC5900100514 /* Icon-120.png in Resources */,
 				7875832F1CA2EC5900100514 /* splash568.png in Resources */,
@@ -875,7 +860,6 @@
 				787584251CA2EE9F00100514 /* close_btn.png in Resources */,
 				787583131CA2EC5900100514 /* btn_home_info.png in Resources */,
 				787582B11CA2EC3800100514 /* adjust_in_out2@2x.png in Resources */,
-				7875840D1CA2EC9600100514 /* MainWindow-iPad.xib in Resources */,
 				787584071CA2EC9600100514 /* tint_btn_sel_iPad_3.png in Resources */,
 				787582B51CA2EC3800100514 /* adjust_mask@2x.png in Resources */,
 				787582B61CA2EC3800100514 /* btn_home_info@2x.png in Resources */,
