@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,14 +15,68 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SplashBottom" translatesAutoresizingMaskIntoConstraints="NO" id="lob-s9-nJH">
+                                <rect key="frame" x="0.0" y="324.5" width="320" height="243.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="lob-s9-nJH" secondAttribute="height" multiplier="320:243" id="LHr-7a-cY0"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SplashTitle" translatesAutoresizingMaskIntoConstraints="NO" id="ynh-D6-jQQ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="235"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ynh-D6-jQQ" secondAttribute="height" multiplier="64:47" id="eO6-vV-IZS"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashFull" translatesAutoresizingMaskIntoConstraints="NO" id="e5g-PL-2dg">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="Wn4-0k-I3N"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Wn4-0k-I3N"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                    <mask key="constraints">
+                                        <include reference="Wn4-0k-I3N"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.015686274510000001" green="0.015686274510000001" blue="0.015686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="lob-s9-nJH" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="7gA-12-cuD"/>
+                            <constraint firstAttribute="trailing" secondItem="lob-s9-nJH" secondAttribute="trailing" id="Ame-Yv-PcK"/>
+                            <constraint firstItem="ynh-D6-jQQ" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="C7a-xY-HSF"/>
+                            <constraint firstAttribute="trailing" secondItem="e5g-PL-2dg" secondAttribute="trailing" id="OFY-Ot-vNu"/>
+                            <constraint firstAttribute="trailing" secondItem="ynh-D6-jQQ" secondAttribute="trailing" id="SZt-bg-7TQ"/>
+                            <constraint firstItem="ynh-D6-jQQ" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="del-Xh-bbW"/>
+                            <constraint firstItem="e5g-PL-2dg" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="gIT-Pi-90Y"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="e5g-PL-2dg" secondAttribute="bottom" id="nWn-K5-UlA"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="lob-s9-nJH" secondAttribute="bottom" id="v8I-uk-49r"/>
+                            <constraint firstItem="e5g-PL-2dg" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="zME-UA-u6S"/>
+                        </constraints>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <exclude reference="nWn-K5-UlA"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="SplashBottom" width="320" height="243"/>
+        <image name="SplashFull" width="768" height="1024"/>
+        <image name="SplashTitle" width="320" height="235"/>
+    </resources>
 </document>
