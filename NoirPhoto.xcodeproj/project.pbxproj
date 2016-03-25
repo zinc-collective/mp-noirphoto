@@ -175,6 +175,7 @@
 		783B0F1A1CA5A476002A77AB /* Info.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		783B0F1E1CA5A4DD002A77AB /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		783B0F281CA5EDED002A77AB /* NoirScaleHackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoirScaleHackViewController.swift; sourceTree = "<group>"; };
+		783B0F2A1CA5F72E002A77AB /* Todo.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Todo.md; sourceTree = "<group>"; };
 		787581391CA2E98400100514 /* NoirPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoirPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7875813C1CA2E98400100514 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		787581411CA2E98400100514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -385,6 +386,7 @@
 		787581301CA2E98400100514 = {
 			isa = PBXGroup;
 			children = (
+				783B0F2A1CA5F72E002A77AB /* Todo.md */,
 				7875813B1CA2E98400100514 /* NoirPhoto */,
 				787581481CA2E98400100514 /* Info.plist */,
 				787581B41CA2EBEF00100514 /* NoirPhoto-Bridging-Header.h */,

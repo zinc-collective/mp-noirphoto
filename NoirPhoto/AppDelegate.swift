@@ -27,7 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
         self.splashController = UIStoryboard(name: "Splash", bundle: nil)
                                     .instantiateViewControllerWithIdentifier("SplashViewController") as! SplashViewController
         self.splashController.delegate = self
-        self.viewController = NoirScaleHackViewController(nibName: "NoirViewController", bundle: nil)
+        
+        if (UI_USER_INTERFACE_IDIOM() == .Pad) {
+            self.viewController = NoirScaleHackViewController(nibName: "NoirViewController-iPad", bundle: nil)
+        }
+        else {
+            self.viewController = NoirScaleHackViewController(nibName: "NoirViewController", bundle: nil)
+        }
         
         // load last used photo
 //        if self.checkPhotoExistFromPath(SaveOriginPhotoPath) {

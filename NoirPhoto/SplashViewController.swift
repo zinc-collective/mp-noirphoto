@@ -52,10 +52,6 @@ class SplashViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.imagePicker = picker
     }
     
-    @IBAction func unwindToSplash() {
-        print("SPLASH")
-    }
-    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         print("PICKED IMAGE")
         
