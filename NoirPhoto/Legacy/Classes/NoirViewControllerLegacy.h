@@ -143,8 +143,6 @@ typedef struct {
 @property (nonatomic, retain) VignetteView* _vignetteFullView;
 
 
-@property (nonatomic) BOOL				 _bPhotoRotated;
-
 @property (nonatomic) UIImageOrientation   _sourceOrientation;
 
 
@@ -171,8 +169,6 @@ typedef struct {
 -(UIImage*)imageCompiledForOriginImage:(UIImage*)originImage maskImage:(UIImage*)maskImage;
 - (CGRect)photoRenderRectForImageSize:(CGSize)imageSize withImageViewRect:(CGRect)viewRect;
 - (UIImage*)imageAddAlphaForImage:(UIImage*)image;
-- (UIImage*)rotatePhotoToFit:(UIImage*)image withOriatation:(UIImageOrientation)orientation;
-- (UIImage*)rotatePhotoToOriginal:(UIImage*)image originOriatation:(UIImageOrientation)orientation;
 
 
 // Images that are elements of the user interface should be rendered at the device's
@@ -195,7 +191,7 @@ typedef struct {
 -(UIImage*)limitedSourcePhoto:(UIImage*)source forLimitPixel:(float)limit; //限制原始图片的大小，并返回限制以后的图片
 
 -(BOOL)checkIfTallScreen;
--(void)fullBtn:(id)sender;
+//-(void)fullBtn:(id)sender;
 
 #pragma mark -
 #pragma mark in use functios @for Rendering

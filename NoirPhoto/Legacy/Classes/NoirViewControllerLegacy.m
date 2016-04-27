@@ -89,7 +89,6 @@
 @synthesize _vignetteView;
 
 @synthesize _vignetteFullView;
-@synthesize _bPhotoRotated;
 @synthesize _sourceOrientation;
 
 
@@ -185,7 +184,6 @@ void loadGaindLUT()
 	imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 	imagePicker.delegate = self;
 	
-	_bPhotoRotated = NO;
 	_bRendering = NO;
 	_bSavingOriginPhoto = NO;
 	
@@ -245,32 +243,16 @@ void loadGaindLUT()
 		//fullBtn
         fullBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 		fullBtn.frame = CGRectMake(725, 5-3, 40, 40);
-		//[self.view addSubview:fullBtn];
 		fullBtn.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
 		[fullBtn  setImage:[UIImage imageNamed:@"down_panel.png"] forState:UIControlStateNormal];
-		//[fullBtn addTarget:self action:@selector(fullBtn:) forControlEvents:UIControlEventTouchUpInside];
 	} else { //iphone
 		
 		//fullBtn
         fullBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 		fullBtn.frame = CGRectMake(286, -5, 40, 40);
-		//[self.view addSubview:fullBtn];
 		fullBtn.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
 		[fullBtn  setImage:[UIImage imageNamed:@"down_panel.png"] forState:UIControlStateNormal];
-		//[fullBtn addTarget:self action:@selector(fullBtn:) forControlEvents:UIControlEventTouchUpInside];
-		
 	}
-	
-	UISwipeGestureRecognizer *recognizerSwip;
-	recognizerSwip = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
-	recognizerSwip.direction = UISwipeGestureRecognizerDirectionUp;
-	[fullBtn addGestureRecognizer:recognizerSwip];
-	
-	recognizerSwip = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
-	recognizerSwip.direction = UISwipeGestureRecognizerDirectionDown;
-	[fullBtn addGestureRecognizer:recognizerSwip];
-	
-	[fullBtn addTarget:self action:@selector(fullBtn:) forControlEvents:UIControlEventTouchUpInside];
 	
 	blackBackground = [[UIView alloc]initWithFrame:CGRectMake(0.0, 0.0, 1024, 1024)];
 	blackBackground.backgroundColor = [UIColor blackColor];
@@ -406,23 +388,6 @@ void loadGaindLUT()
 	[self changeTintMaskForIndex:self.preset.tintIndex];
 	
 	[self initUsedPropertiesAndUIForOriginPhoto:image];
-	
-}
-
-- (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
-	
-	if (recognizer.direction == UISwipeGestureRecognizerDirectionDown) {
-		if (isFull == 0) {
-			[self fullBtn:nil];
-		}
-        
-    }
-    else if(recognizer.direction == UISwipeGestureRecognizerDirectionUp) {
-		if (isFull == 1) {
-			[self fullBtn:nil];
-		}
-        
-    }
 	
 }
 
@@ -676,8 +641,6 @@ void loadGaindLUT()
 	//NSLog(@"selected origation: %d", selected.imageOrientation);
 	
 	/*	
-	 _bPhotoRotated = NO;
-	 
 	 
 	 //save the source photo
 	 self.sourcePhoto = selected;
@@ -690,9 +653,6 @@ void loadGaindLUT()
 	 
 	 //got self.photo
 	 self.photo = [self imageWithImage:selected scaledToSize:CGSizeMake(photoPlaceRect.size.width, photoPlaceRect.size.height)];
-	 
-	 //rotate photo to fit
-	 self.photo = [self rotatePhotoToFit:self.photo withOriatation:_sourceOrientation];
 	 
 	 //add alpha
 	 self.photo = [self imageAddAlphaForImage:self.photo];
@@ -791,162 +751,162 @@ void loadGaindLUT()
 
 
 
-#pragma mark -
-#pragma mark in use functios @for UI
--(void)fullBtn:(id)sender
-{
-	
-	[UIView beginAnimations:@"rotate" context:nil]; 
-	[UIView setAnimationCurve:UIViewAnimationCurveLinear]; 
-	[UIView setAnimationDuration:0.3];
-	[UIView setAnimationDelegate:self];
-	//[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:photoFullView cache:YES];
-	
-	if (isFull == 0) {
-		
-		//[self.view addSubview:blackBackground];
-		
-		//photoFullView.backgroundColor = [UIColor blackColor];
-		//		photoFullView.image = renderedPhoto;
-		//[self.view addSubview:photoFullView];
-		
-		Parameter *param = [self parameterWithPreset:self.preset];
-		
-		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-			ctrl_pad_offset = 256 - ctrl_pad_head_ipad;
-			float photoImageViewH = 1024-ctrl_pad_head_ipad;
-			
-			//full photo view
-			//photoView.transform = CGAffineTransformMakeRotation(-M_PI/2.0);
-			photoView.frame = photo_full_view_rect_ipad2;
-			photoView.image = renderedPhoto;
-			
-			//full vignette view
-			//_vignetteView.transform = CGAffineTransformMakeRotation(-M_PI/2.0);
-			_vignetteView.frame = photo_full_view_rect_ipad2;
-			
-			if (renderedPhoto.size.width/renderedPhoto.size.height < 768/photoImageViewH) {
-				CGFloat w = photoImageViewH*renderedPhoto.size.width/renderedPhoto.size.height;
-				CGFloat h = photoImageViewH;
-				
-				_photoRenderRect2 = _photoRenderRect;
-				_photoRenderRect = CGRectMake((768-w)/2, 0, w, h);
-				
-				//[_vignetteFullView setVignetteForParam:param photoRect:CGRectMake((768-w)/2, 0, w, h)];
-			}
-				
-			[_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
-			
-			//[_vignetteFullView setVignetteForParam:param photoRect:photoFullView.frame];
-		} else { //iphone
-			ctrl_pad_offset = 240 - ctrl_pad_head;
-			//bret
-            //if (IS_IPHONE_5)
-            //    ctrl_pad_offset = (568/2) - ctrl_pad_head;
-
-			//full photo view
-			photoView.transform = CGAffineTransformMakeRotation(-M_PI/2.0);
-			photoView.frame = photo_full_view_rect2;
-            if (IS_IPHONE_5)
-                photoView.frame = photo_full_view_rect2_iphone5;
-			photoView.image = renderedPhoto;
-			
-			//full vignette view
-			_vignetteView.transform = CGAffineTransformMakeRotation(-M_PI/2.0);
-			_vignetteView.frame = photo_full_view_rect2;
-            if (IS_IPHONE_5)
-                _vignetteView.frame = photo_full_view_rect2_iphone5;
-			
-			//NSLog(@"w=%f, h = %f",renderedPhoto.size.width, renderedPhoto.size.height);
-			//			NSLog(@"bili=%f",renderedPhoto.size.width/renderedPhoto.size.height);
-			//			NSLog(@"bili2=%f",(480-ctrl_pad_head)/320);
-			
-			float photoImageViewH = 480-ctrl_pad_head;
-			//bret
-            if (IS_IPHONE_5)
-                photoImageViewH = 568-ctrl_pad_head;
-            
-			if ((renderedPhoto.size.width/renderedPhoto.size.height) > photoImageViewH/320) {
-				CGFloat w = photoImageViewH;
-				CGFloat h = photoImageViewH*renderedPhoto.size.height/renderedPhoto.size.width;
-				
-				_photoRenderRect2 = _photoRenderRect;
-				_photoRenderRect = CGRectMake(0, (320-h)/2, w, h);
-				
-				
-			} else {
-				CGFloat w = 320*renderedPhoto.size.width/renderedPhoto.size.height;
-				CGFloat h = 320;
-				
-				_photoRenderRect2 = _photoRenderRect;
-				_photoRenderRect = CGRectMake((photoImageViewH-w)/2, 0, w, h);
-				
-			}
-			
-			[_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
-			
-			
-		}
-		
-		[fullBtn  setImage:[UIImage imageNamed:@"up_panel.png"] forState:UIControlStateNormal];
-		
-		_ctrlPadView.center = CGPointMake(_ctrlPadView.center.x, _ctrlPadView.center.y+ctrl_pad_offset);
-		tintMaskView.center = CGPointMake(tintMaskView.center.x, tintMaskView.center.y+ctrl_pad_offset);
-		loadBtn.center = CGPointMake(loadBtn.center.x, loadBtn.center.y+ctrl_pad_offset);
-		saveBtn.center = CGPointMake(saveBtn.center.x, saveBtn.center.y+ctrl_pad_offset);
-		infoBtn.center = CGPointMake(infoBtn.center.x, infoBtn.center.y+ctrl_pad_offset);
-		
-		//[self.view addSubview:_vignetteFullView];
-		//[self.view addSubview:fullBtn];
-		
-		[_ctrlPadView addSubview:fullBtn];
-		
-		isFull = 1;
-	} else { //full
-		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-			photoView.frame = photo_view_rect_ipad;
-			photoView.image = renderedPhoto;
-			
-			_vignetteView.frame = photo_view_rect_ipad;
-		} else { //iphone
-			photoView.transform = CGAffineTransformMakeRotation(0);
-			photoView.frame = photo_view_rect;
-            if (IS_IPHONE_5)
-                photoView.frame = photo_view_rect_iphone5;
-            
-			photoView.image = renderedPhoto;
-			
-			_vignetteView.transform = CGAffineTransformMakeRotation(0);
-			_vignetteView.frame = photo_view_rect;
-            if (IS_IPHONE_5)
-                _vignetteView.frame = photo_view_rect_iphone5;
-		}
-		
-		[fullBtn  setImage:[UIImage imageNamed:@"down_panel.png"] forState:UIControlStateNormal];
-		
-		_ctrlPadView.center = CGPointMake(_ctrlPadView.center.x, _ctrlPadView.center.y-ctrl_pad_offset);
-		tintMaskView.center = CGPointMake(tintMaskView.center.x, tintMaskView.center.y-ctrl_pad_offset);
-		loadBtn.center = CGPointMake(loadBtn.center.x, loadBtn.center.y-ctrl_pad_offset);
-		saveBtn.center = CGPointMake(saveBtn.center.x, saveBtn.center.y-ctrl_pad_offset);
-		infoBtn.center = CGPointMake(infoBtn.center.x, infoBtn.center.y-ctrl_pad_offset);
-		
-		Parameter *param = [self parameterWithPreset:self.preset];
-		
-		_photoRenderRect = _photoRenderRect2;
-		[_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
-		
-		isFull = 0;
-		
-		//[blackBackground removeFromSuperview];
-		//		[photoFullView removeFromSuperview];
-		//		[_vignetteFullView removeFromSuperview];
-	}
-	
-	
-	[UIView commitAnimations];
-	
-	
-}
+//#pragma mark -
+//#pragma mark in use functios @for UI
+//-(void)fullBtn:(id)sender
+//{
+//	
+//	[UIView beginAnimations:@"rotate" context:nil]; 
+//	[UIView setAnimationCurve:UIViewAnimationCurveLinear]; 
+//	[UIView setAnimationDuration:0.3];
+//	[UIView setAnimationDelegate:self];
+//	//[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:photoFullView cache:YES];
+//	
+//	if (isFull == 0) {
+//		
+//		//[self.view addSubview:blackBackground];
+//		
+//		//photoFullView.backgroundColor = [UIColor blackColor];
+//		//		photoFullView.image = renderedPhoto;
+//		//[self.view addSubview:photoFullView];
+//		
+//		Parameter *param = [self parameterWithPreset:self.preset];
+//		
+//		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+//			ctrl_pad_offset = 256 - ctrl_pad_head_ipad;
+//			float photoImageViewH = 1024-ctrl_pad_head_ipad;
+//			
+//			//full photo view
+//			//photoView.transform = CGAffineTransformMakeRotation(-M_PI/2.0);
+//			photoView.frame = photo_full_view_rect_ipad2;
+//			photoView.image = renderedPhoto;
+//			
+//			//full vignette view
+//			//_vignetteView.transform = CGAffineTransformMakeRotation(-M_PI/2.0);
+//			_vignetteView.frame = photo_full_view_rect_ipad2;
+//			
+//			if (renderedPhoto.size.width/renderedPhoto.size.height < 768/photoImageViewH) {
+//				CGFloat w = photoImageViewH*renderedPhoto.size.width/renderedPhoto.size.height;
+//				CGFloat h = photoImageViewH;
+//				
+//				_photoRenderRect2 = _photoRenderRect;
+//				_photoRenderRect = CGRectMake((768-w)/2, 0, w, h);
+//				
+//				//[_vignetteFullView setVignetteForParam:param photoRect:CGRectMake((768-w)/2, 0, w, h)];
+//			}
+//				
+//			[_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
+//			
+//			//[_vignetteFullView setVignetteForParam:param photoRect:photoFullView.frame];
+//		} else { //iphone
+//			ctrl_pad_offset = 240 - ctrl_pad_head;
+//			//bret
+//            //if (IS_IPHONE_5)
+//            //    ctrl_pad_offset = (568/2) - ctrl_pad_head;
+//
+//			//full photo view
+//			photoView.transform = CGAffineTransformMakeRotation(-M_PI/2.0);
+//			photoView.frame = photo_full_view_rect2;
+//            if (IS_IPHONE_5)
+//                photoView.frame = photo_full_view_rect2_iphone5;
+//			photoView.image = renderedPhoto;
+//			
+//			//full vignette view
+//			_vignetteView.transform = CGAffineTransformMakeRotation(-M_PI/2.0);
+//			_vignetteView.frame = photo_full_view_rect2;
+//            if (IS_IPHONE_5)
+//                _vignetteView.frame = photo_full_view_rect2_iphone5;
+//			
+//			//NSLog(@"w=%f, h = %f",renderedPhoto.size.width, renderedPhoto.size.height);
+//			//			NSLog(@"bili=%f",renderedPhoto.size.width/renderedPhoto.size.height);
+//			//			NSLog(@"bili2=%f",(480-ctrl_pad_head)/320);
+//			
+//			float photoImageViewH = 480-ctrl_pad_head;
+//			//bret
+//            if (IS_IPHONE_5)
+//                photoImageViewH = 568-ctrl_pad_head;
+//            
+//			if ((renderedPhoto.size.width/renderedPhoto.size.height) > photoImageViewH/320) {
+//				CGFloat w = photoImageViewH;
+//				CGFloat h = photoImageViewH*renderedPhoto.size.height/renderedPhoto.size.width;
+//				
+//				_photoRenderRect2 = _photoRenderRect;
+//				_photoRenderRect = CGRectMake(0, (320-h)/2, w, h);
+//				
+//				
+//			} else {
+//				CGFloat w = 320*renderedPhoto.size.width/renderedPhoto.size.height;
+//				CGFloat h = 320;
+//				
+//				_photoRenderRect2 = _photoRenderRect;
+//				_photoRenderRect = CGRectMake((photoImageViewH-w)/2, 0, w, h);
+//				
+//			}
+//			
+//			[_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
+//			
+//			
+//		}
+//		
+//		[fullBtn  setImage:[UIImage imageNamed:@"up_panel.png"] forState:UIControlStateNormal];
+//		
+//		_ctrlPadView.center = CGPointMake(_ctrlPadView.center.x, _ctrlPadView.center.y+ctrl_pad_offset);
+//		tintMaskView.center = CGPointMake(tintMaskView.center.x, tintMaskView.center.y+ctrl_pad_offset);
+//		loadBtn.center = CGPointMake(loadBtn.center.x, loadBtn.center.y+ctrl_pad_offset);
+//		saveBtn.center = CGPointMake(saveBtn.center.x, saveBtn.center.y+ctrl_pad_offset);
+//		infoBtn.center = CGPointMake(infoBtn.center.x, infoBtn.center.y+ctrl_pad_offset);
+//		
+//		//[self.view addSubview:_vignetteFullView];
+//		//[self.view addSubview:fullBtn];
+//		
+//		[_ctrlPadView addSubview:fullBtn];
+//		
+//		isFull = 1;
+//	} else { //full
+//		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+//			photoView.frame = photo_view_rect_ipad;
+//			photoView.image = renderedPhoto;
+//			
+//			_vignetteView.frame = photo_view_rect_ipad;
+//		} else { //iphone
+//			photoView.transform = CGAffineTransformMakeRotation(0);
+//			photoView.frame = photo_view_rect;
+//            if (IS_IPHONE_5)
+//                photoView.frame = photo_view_rect_iphone5;
+//            
+//			photoView.image = renderedPhoto;
+//			
+//			_vignetteView.transform = CGAffineTransformMakeRotation(0);
+//			_vignetteView.frame = photo_view_rect;
+//            if (IS_IPHONE_5)
+//                _vignetteView.frame = photo_view_rect_iphone5;
+//		}
+//		
+//		[fullBtn  setImage:[UIImage imageNamed:@"down_panel.png"] forState:UIControlStateNormal];
+//		
+//		_ctrlPadView.center = CGPointMake(_ctrlPadView.center.x, _ctrlPadView.center.y-ctrl_pad_offset);
+//		tintMaskView.center = CGPointMake(tintMaskView.center.x, tintMaskView.center.y-ctrl_pad_offset);
+//		loadBtn.center = CGPointMake(loadBtn.center.x, loadBtn.center.y-ctrl_pad_offset);
+//		saveBtn.center = CGPointMake(saveBtn.center.x, saveBtn.center.y-ctrl_pad_offset);
+//		infoBtn.center = CGPointMake(infoBtn.center.x, infoBtn.center.y-ctrl_pad_offset);
+//		
+//		Parameter *param = [self parameterWithPreset:self.preset];
+//		
+//		_photoRenderRect = _photoRenderRect2;
+//		[_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
+//		
+//		isFull = 0;
+//		
+//		//[blackBackground removeFromSuperview];
+//		//		[photoFullView removeFromSuperview];
+//		//		[_vignetteFullView removeFromSuperview];
+//	}
+//	
+//	
+//	[UIView commitAnimations];
+//	
+//	
+//}
 
 -(IBAction)loadAction:(id)sender
 {
@@ -1458,140 +1418,7 @@ void loadGaindLUT()
 	
 	return resultImage;
 }
-- (UIImage*)rotatePhotoToFit:(UIImage*)image withOriatation:(UIImageOrientation)orientation
-{
-	UIImage *upImage = image;
-	
-	CGAffineTransform transfm;
-	CGSize upSize;
-	CGSize imageSize = image.size;
-	
-	CGAffineTransform combine;
-	
-	
-	if(orientation == UIImageOrientationLeft && imageSize.width<imageSize.height)
-	{
-		transfm = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI/2);
-		upSize = CGSizeMake(image.size.height, image.size.width);
-		combine = CGAffineTransformConcat(transfm,CGAffineTransformMakeTranslation(upSize.width,0));
-		
-		_bPhotoRotated = YES;
-	}
-	else if(orientation == UIImageOrientationRight && imageSize.width<imageSize.height)
-	{
-		transfm = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI/2);
-		upSize = CGSizeMake(image.size.height, image.size.width);
-		combine = CGAffineTransformConcat(transfm,CGAffineTransformMakeTranslation(upSize.width,0));
-		
-		_bPhotoRotated = YES;
-	}
-	else if(orientation == UIImageOrientationUp && imageSize.width<imageSize.height)
-	{
-		transfm = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI/2);
-		upSize = CGSizeMake(image.size.height, image.size.width);
-		combine = CGAffineTransformConcat(transfm,CGAffineTransformMakeTranslation(upSize.width,0));
-		
-		_bPhotoRotated = YES;
-	}
-	else
-	{
-		_bPhotoRotated = NO;
-		return upImage;
-	}
-	
-	//compile the photo
-	UIGraphicsBeginImageContext(upSize);
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-	
-    // full the color in the context
-    CGContextSetFillColorWithColor(ctx, [UIColor clearColor].CGColor);
-    CGContextFillRect(ctx, CGRectMake(0.0, 0.0, upSize.width, upSize.height));
-	
-	
-	//	CGPoint translateO = CGPointApplyAffineTransform(CGPointMake(0.0,0.0),CGAffineTransformInvert(transfm));
-	//	CGPoint translateC = CGPointApplyAffineTransform(CGPointMake(upSize.width/2,upSize.height/2),CGAffineTransformInvert(transfm));
-	
-	CGContextSaveGState(ctx);
-	CGContextConcatCTM(ctx, combine);
-	
-    
-    // draw source image on the context
-	[image drawInRect:CGRectMake(0, 0, imageSize.width, imageSize.height)];
-	
-	CGContextRestoreGState(ctx);
-	
-	
-    upImage = UIGraphicsGetImageFromCurrentImageContext();    
-    UIGraphicsEndImageContext();
-	
-	return upImage;
-}
-- (UIImage*)rotatePhotoToOriginal:(UIImage*)image originOriatation:(UIImageOrientation)orientation
-{
-	
-	UIImage *oriImage = image;
-	
-	CGAffineTransform transfm;
-	CGSize oriSize;
-	CGSize imageSize = image.size;
-	
-	CGAffineTransform combine;
-	
-	
-	if(orientation == UIImageOrientationLeft && _bPhotoRotated)
-	{
-		transfm = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI/2);
-		oriSize = CGSizeMake(image.size.height, image.size.width);
-		combine = CGAffineTransformConcat(transfm,CGAffineTransformMakeTranslation(0,oriSize.height));
-		
-	}
-	else if(orientation == UIImageOrientationRight && _bPhotoRotated)
-	{
-		transfm = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI/2);
-		oriSize = CGSizeMake(image.size.height, image.size.width);
-		combine = CGAffineTransformConcat(transfm,CGAffineTransformMakeTranslation(0,oriSize.height));
-	}
-	else if(orientation == UIImageOrientationUp && _bPhotoRotated)
-	{
-		transfm = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI/2);
-		oriSize = CGSizeMake(image.size.height, image.size.width);
-		combine = CGAffineTransformConcat(transfm,CGAffineTransformMakeTranslation(0,oriSize.height));
-	}
-	else if(orientation == UIImageOrientationDown) 
-	{
-		transfm = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI);
-		oriSize = image.size;
-		combine = CGAffineTransformConcat(transfm,CGAffineTransformMakeTranslation(oriSize.width,oriSize.height));
-	}
-	else
-	{
-		return oriImage;
-	}
-	
-	//compile the photo
-	UIGraphicsBeginImageContext(oriSize);
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-	
-    // full the color in the context
-    CGContextSetFillColorWithColor(ctx, [UIColor clearColor].CGColor);
-    CGContextFillRect(ctx, CGRectMake(0.0, 0.0, oriSize.width, oriSize.height));
-	
-	CGContextSaveGState(ctx);
-	CGContextConcatCTM(ctx, combine);
-	
-    
-    // draw source image on the context
-	[image drawInRect:CGRectMake(0, 0, imageSize.width, imageSize.height)];
-	
-	CGContextRestoreGState(ctx);
-	
-	
-    oriImage = UIGraphicsGetImageFromCurrentImageContext();    
-    UIGraphicsEndImageContext();
-	
-	return oriImage;
-	
-}
+
 
 // Images that are elements of the user interface should be rendered at the device's
 // native pixel density (non-retina vs retina). However, images selected by the user to be
@@ -1858,9 +1685,6 @@ void loadGaindLUT()
 	}
 	
 	
-	_bPhotoRotated = NO;
-	
-
 	//save the orientation
 	_sourceOrientation = originPhoto.imageOrientation;
 	
@@ -1941,11 +1765,7 @@ void loadGaindLUT()
     // And some landscape images to be mirrored on output!  Will delay this change until more investigation is done.
     //
 	//rotate photo to fit
-	if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)
-	{
-		self.photo = [self rotatePhotoToFit:self.photo withOriatation:_sourceOrientation];
-	}
-	
+    
 	//add alpha
 	self.photo = [self imageAddAlphaForImage:self.photo];
 	
