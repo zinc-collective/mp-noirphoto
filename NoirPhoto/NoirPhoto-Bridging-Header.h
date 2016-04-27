@@ -3,5 +3,5 @@
 //
 
 
-#import "NoirViewController.h"
+#import "NoirViewControllerLegacy.h"
 #import "SplashCtrlor.h"

@@ -12,22 +12,20 @@
 		783B0F191CA597D5002A77AB /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F181CA597D5002A77AB /* NavigationViewController.swift */; };
 		783B0F1B1CA5A476002A77AB /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 783B0F1A1CA5A476002A77AB /* Info.storyboard */; };
 		783B0F1F1CA5A4DD002A77AB /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 783B0F1E1CA5A4DD002A77AB /* Splash.storyboard */; };
-		783B0F291CA5EDED002A77AB /* NoirScaleHackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F281CA5EDED002A77AB /* NoirScaleHackViewController.swift */; };
+		783B0F291CA5EDED002A77AB /* NoirViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F281CA5EDED002A77AB /* NoirViewController.swift */; };
 		7875813D1CA2E98400100514 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7875813C1CA2E98400100514 /* AppDelegate.swift */; };
 		787581421CA2E98400100514 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 787581401CA2E98400100514 /* Main.storyboard */; };
 		787581441CA2E98400100514 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 787581431CA2E98400100514 /* Assets.xcassets */; };
 		787581471CA2E98400100514 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 787581451CA2E98400100514 /* LaunchScreen.storyboard */; };
-		787581E01CA2EBF000100514 /* NoirAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581B51CA2EBF000100514 /* NoirAppDelegate.m */; };
 		787581E11CA2EBF000100514 /* PresetsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581B61CA2EBF000100514 /* PresetsView.m */; };
 		787581E21CA2EBF000100514 /* TintsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581B71CA2EBF000100514 /* TintsView.m */; };
-		787581E41CA2EBF000100514 /* NoirViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581BB1CA2EBF000100514 /* NoirViewController.m */; };
+		787581E41CA2EBF000100514 /* NoirViewControllerLegacy.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581BB1CA2EBF000100514 /* NoirViewControllerLegacy.m */; };
 		787581E51CA2EBF000100514 /* SplashCtrlor.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581BD1CA2EBF000100514 /* SplashCtrlor.m */; };
 		787581E71CA2EBF000100514 /* AdjustView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581C11CA2EBF000100514 /* AdjustView.m */; };
 		787581E81CA2EBF000100514 /* ControlPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581C31CA2EBF000100514 /* ControlPadView.m */; };
 		787581E91CA2EBF000100514 /* CustomPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581C51CA2EBF000100514 /* CustomPickerView.m */; };
 		787581EA1CA2EBF000100514 /* EllipseVertex.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581C71CA2EBF000100514 /* EllipseVertex.m */; };
 		787581EB1CA2EBF000100514 /* EllipseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581C91CA2EBF000100514 /* EllipseView.m */; };
-		787581EC1CA2EBF000100514 /* MyScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581CC1CA2EBF000100514 /* MyScrollView.m */; };
 		787581ED1CA2EBF000100514 /* Parameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581CF1CA2EBF000100514 /* Parameter.m */; };
 		787581EE1CA2EBF000100514 /* Preset.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581D11CA2EBF000100514 /* Preset.m */; };
 		787581EF1CA2EBF000100514 /* QuartzView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581D41CA2EBF000100514 /* QuartzView.m */; };
@@ -174,7 +172,7 @@
 		783B0F181CA597D5002A77AB /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		783B0F1A1CA5A476002A77AB /* Info.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		783B0F1E1CA5A4DD002A77AB /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
-		783B0F281CA5EDED002A77AB /* NoirScaleHackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoirScaleHackViewController.swift; sourceTree = "<group>"; };
+		783B0F281CA5EDED002A77AB /* NoirViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoirViewController.swift; sourceTree = "<group>"; };
 		783B0F2A1CA5F72E002A77AB /* Todo.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Todo.md; sourceTree = "<group>"; };
 		787581391CA2E98400100514 /* NoirPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoirPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7875813C1CA2E98400100514 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -183,12 +181,11 @@
 		787581461CA2E98400100514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		787581481CA2E98400100514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = NoirPhoto/Info.plist; sourceTree = "<group>"; };
 		787581B41CA2EBEF00100514 /* NoirPhoto-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NoirPhoto-Bridging-Header.h"; path = "NoirPhoto/NoirPhoto-Bridging-Header.h"; sourceTree = "<group>"; };
-		787581B51CA2EBF000100514 /* NoirAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoirAppDelegate.m; path = Legacy/Classes/NoirAppDelegate.m; sourceTree = "<group>"; };
 		787581B61CA2EBF000100514 /* PresetsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PresetsView.m; path = Legacy/Classes/PresetsView.m; sourceTree = "<group>"; };
 		787581B71CA2EBF000100514 /* TintsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TintsView.m; path = Legacy/Classes/TintsView.m; sourceTree = "<group>"; };
 		787581B81CA2EBF000100514 /* DeviceDetect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceDetect.h; path = Legacy/Classes/DeviceDetect.h; sourceTree = "<group>"; };
-		787581BA1CA2EBF000100514 /* NoirViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoirViewController.h; path = Legacy/Classes/NoirViewController.h; sourceTree = "<group>"; };
-		787581BB1CA2EBF000100514 /* NoirViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoirViewController.m; path = Legacy/Classes/NoirViewController.m; sourceTree = "<group>"; };
+		787581BA1CA2EBF000100514 /* NoirViewControllerLegacy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoirViewControllerLegacy.h; path = Legacy/Classes/NoirViewControllerLegacy.h; sourceTree = "<group>"; };
+		787581BB1CA2EBF000100514 /* NoirViewControllerLegacy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoirViewControllerLegacy.m; path = Legacy/Classes/NoirViewControllerLegacy.m; sourceTree = "<group>"; };
 		787581BC1CA2EBF000100514 /* RConfigFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RConfigFile.h; path = Legacy/Classes/RConfigFile.h; sourceTree = "<group>"; };
 		787581BD1CA2EBF000100514 /* SplashCtrlor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplashCtrlor.m; path = Legacy/Classes/SplashCtrlor.m; sourceTree = "<group>"; };
 		787581C01CA2EBF000100514 /* AdjustView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdjustView.h; path = Legacy/Classes/AdjustView.h; sourceTree = "<group>"; };
@@ -201,9 +198,6 @@
 		787581C71CA2EBF000100514 /* EllipseVertex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EllipseVertex.m; path = Legacy/Classes/EllipseVertex.m; sourceTree = "<group>"; };
 		787581C81CA2EBF000100514 /* EllipseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EllipseView.h; path = Legacy/Classes/EllipseView.h; sourceTree = "<group>"; };
 		787581C91CA2EBF000100514 /* EllipseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EllipseView.m; path = Legacy/Classes/EllipseView.m; sourceTree = "<group>"; };
-		787581CB1CA2EBF000100514 /* MyScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyScrollView.h; path = Legacy/Classes/MyScrollView.h; sourceTree = "<group>"; };
-		787581CC1CA2EBF000100514 /* MyScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyScrollView.m; path = Legacy/Classes/MyScrollView.m; sourceTree = "<group>"; };
-		787581CD1CA2EBF000100514 /* NoirAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoirAppDelegate.h; path = Legacy/Classes/NoirAppDelegate.h; sourceTree = "<group>"; };
 		787581CE1CA2EBF000100514 /* Parameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Parameter.h; path = Legacy/Classes/Parameter.h; sourceTree = "<group>"; };
 		787581CF1CA2EBF000100514 /* Parameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Parameter.m; path = Legacy/Classes/Parameter.m; sourceTree = "<group>"; };
 		787581D01CA2EBF000100514 /* Preset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preset.h; path = Legacy/Classes/Preset.h; sourceTree = "<group>"; };
@@ -407,7 +401,7 @@
 			children = (
 				7875813C1CA2E98400100514 /* AppDelegate.swift */,
 				783B0F181CA597D5002A77AB /* NavigationViewController.swift */,
-				783B0F281CA5EDED002A77AB /* NoirScaleHackViewController.swift */,
+				783B0F281CA5EDED002A77AB /* NoirViewController.swift */,
 				787581451CA2E98400100514 /* LaunchScreen.storyboard */,
 				787581401CA2E98400100514 /* Main.storyboard */,
 				787581431CA2E98400100514 /* Assets.xcassets */,
@@ -431,13 +425,11 @@
 		787581B31CA2EBC500100514 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				787581CD1CA2EBF000100514 /* NoirAppDelegate.h */,
-				787581B51CA2EBF000100514 /* NoirAppDelegate.m */,
 				787581B61CA2EBF000100514 /* PresetsView.m */,
 				787581B71CA2EBF000100514 /* TintsView.m */,
 				787581B81CA2EBF000100514 /* DeviceDetect.h */,
-				787581BA1CA2EBF000100514 /* NoirViewController.h */,
-				787581BB1CA2EBF000100514 /* NoirViewController.m */,
+				787581BA1CA2EBF000100514 /* NoirViewControllerLegacy.h */,
+				787581BB1CA2EBF000100514 /* NoirViewControllerLegacy.m */,
 				787581BC1CA2EBF000100514 /* RConfigFile.h */,
 				787581C01CA2EBF000100514 /* AdjustView.h */,
 				787581C11CA2EBF000100514 /* AdjustView.m */,
@@ -449,8 +441,6 @@
 				787581C71CA2EBF000100514 /* EllipseVertex.m */,
 				787581C81CA2EBF000100514 /* EllipseView.h */,
 				787581C91CA2EBF000100514 /* EllipseView.m */,
-				787581CB1CA2EBF000100514 /* MyScrollView.h */,
-				787581CC1CA2EBF000100514 /* MyScrollView.m */,
 				787581CE1CA2EBF000100514 /* Parameter.h */,
 				787581CF1CA2EBF000100514 /* Parameter.m */,
 				787581D01CA2EBF000100514 /* Preset.h */,
@@ -871,23 +861,21 @@
 			files = (
 				787581F11CA2EBF000100514 /* RScrollView.m in Sources */,
 				787581E91CA2EBF000100514 /* CustomPickerView.m in Sources */,
-				787581E41CA2EBF000100514 /* NoirViewController.m in Sources */,
+				787581E41CA2EBF000100514 /* NoirViewControllerLegacy.m in Sources */,
 				783B0F191CA597D5002A77AB /* NavigationViewController.swift in Sources */,
 				787581E51CA2EBF000100514 /* SplashCtrlor.m in Sources */,
 				787581E71CA2EBF000100514 /* AdjustView.m in Sources */,
-				783B0F291CA5EDED002A77AB /* NoirScaleHackViewController.swift in Sources */,
+				783B0F291CA5EDED002A77AB /* NoirViewController.swift in Sources */,
 				78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */,
 				787581E21CA2EBF000100514 /* TintsView.m in Sources */,
 				787581E11CA2EBF000100514 /* PresetsView.m in Sources */,
 				787581ED1CA2EBF000100514 /* Parameter.m in Sources */,
 				787584271CA2EE9F00100514 /* VersionWatermark.m in Sources */,
 				787581F01CA2EBF000100514 /* RConfigFile.m in Sources */,
-				787581E01CA2EBF000100514 /* NoirAppDelegate.m in Sources */,
 				787581EF1CA2EBF000100514 /* QuartzView.m in Sources */,
 				787581F31CA2EBF000100514 /* Tint.m in Sources */,
 				787581EE1CA2EBF000100514 /* Preset.m in Sources */,
 				787581F41CA2EBF000100514 /* VignetteView.m in Sources */,
-				787581EC1CA2EBF000100514 /* MyScrollView.m in Sources */,
 				7875813D1CA2E98400100514 /* AppDelegate.swift in Sources */,
 				787581E81CA2EBF000100514 /* ControlPadView.m in Sources */,
 				787581EA1CA2EBF000100514 /* EllipseVertex.m in Sources */,

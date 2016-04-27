@@ -6,13 +6,12 @@
 //  Copyright __MyCompanyName__ 2010. All rights reserved.
 //
 
-#import "NoirViewController.h"
+#import "NoirViewControllerLegacy.h"
 //#import "QuartzView.h"
 #import "RConfigFile.h"
 #include <sys/types.h>
 #include <sys/sysctl.h>
 //#import "InfoCtrlor.h"
-#import "NoirAppDelegate.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "DeviceDetect.h"
 
@@ -21,8 +20,6 @@
 
 #define metadata_plist @"metadata_plist.pList"
 
-
-#define alert_message_if_save        @"After your image is saved, you'll be taken to your Photo Library to choose another image."
 
 #define ctrl_pad_head 35
 #define ctrl_pad_head_ipad 125
@@ -58,7 +55,7 @@
 #define photo_limit_iPad            2048.0
 
 
-@implementation NoirViewController
+@implementation NoirViewControllerLegacy
 @synthesize photoView;
 @synthesize photoFullView;
 @synthesize photo;
@@ -89,11 +86,11 @@
 @synthesize mCircleSave;
 @synthesize imagePickerPopover;
 
-@synthesize _alert;
-
 @synthesize _vignetteView;
 
 @synthesize _vignetteFullView;
+@synthesize _bPhotoRotated;
+@synthesize _sourceOrientation;
 
 
 #pragma mark -
@@ -746,20 +743,6 @@ void loadGaindLUT()
 
 
 
-//UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-	if(buttonIndex == 1) //save
-	{
-		[NSThread detachNewThreadSelector:@selector(startWait) toTarget:self withObject:nil];
-		
-		[self renderAndSavePhoto];
-		
-		[self stopWait];
-		
-		[self loadAction:self.loadBtn];
-    }
-}
 
 //VignetteDelegate
 -(void)vignetteViewDidChange:(Parameter*)parameter isFinal:(BOOL)isFinal bChangePresetState:(BOOL)bChange
@@ -1014,10 +997,6 @@ void loadGaindLUT()
 //		[picker release];
 		
 	}
-}
--(IBAction)saveAction:(id)sender
-{
-	[self alertWithSaveMessage:alert_message_if_save withTitle:@"Save Image"];
 }
 -(IBAction)infoAction:(id)sender
 {
@@ -1385,26 +1364,6 @@ void loadGaindLUT()
 	}
 	
     return compiledPhoto;
-}
-
-- (void)alertWithSaveMessage:(NSString*)message withTitle:(NSString*)aTitle
-{
-	if(self._alert == nil)
-	{
-		UIAlertView* alert = [[UIAlertView alloc] initWithTitle:aTitle
-														message:message 
-													   delegate:self
-											  cancelButtonTitle:@"Cancel" 
-											  otherButtonTitles:@"Save", nil];
-		self._alert = alert;
-	}
-	
-	self._alert.hidden = YES;
-	[self._alert show];
-}
-- (void)didPresentAlertView:(UIAlertView *)alertView
-{
-	self._alert.hidden = NO;
 }
 
 - (CGRect)photoRenderRectForImageSize:(CGSize)imageSize withImageViewRect:(CGRect)viewRect
@@ -1852,77 +1811,7 @@ void loadGaindLUT()
 	
 	return NO;
 }
--(void)renderAndSavePhoto
-{
-	NSLog(@"save time self.sourcePhoto: (%f, %f)", self.sourcePhoto.size.width, self.sourcePhoto.size.height);
-	
-	self.mCircleImageName = [self circleImageNameForState:0];//@"circle.png";
-	
-	
-//注释掉，保留，这个地方是在保存之前对图片做旋转处理一下
-//	//rotate source photo to fit
-//	UIImage *fitPhoto = [self rotatePhotoToFit:self.sourcePhoto withOriatation:_sourceOrientation];
-//	
-//	//render the photo
-//	UIImage *renderPhoto = [self imageForPreset:self.preset useImage:fitPhoto];
-//	
-//	//rotate render photo to original
-//	UIImage *savePhoto = [self rotatePhotoToOriginal:renderPhoto originOriatation:_sourceOrientation];
-	
-	
 
-	UIImage *savePhoto;
-	
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		//render the photo
-		savePhoto = [self imageForPreset:self.preset useImage:self.sourcePhoto];
-	}
-	else
-	{
-        // MJS 9/25/2012- moved the UIImageOrientationDown case to the render function
-        // so the matte would render correctly upside down as well
-        // no need to flip again on the way out
-
-        if (_bPhotoRotated == YES /*|| _sourceOrientation == UIImageOrientationDown*/ ) {
-            
-            //rotate source photo to fit
-            UIImage *fitPhoto = [self rotatePhotoToFit:self.sourcePhoto withOriatation:_sourceOrientation];
-            
-            //render the photo
-            UIImage *renderPhoto = [self imageForPreset:self.preset useImage:fitPhoto];
-            
-            //rotate render photo to original
-            savePhoto = [self rotatePhotoToOriginal:renderPhoto originOriatation:_sourceOrientation];
-        
-        } else {
-            
-            savePhoto = [self imageForPreset:self.preset useImage:self.sourcePhoto];
-        
-        }
-	}
-
-
-	//save the photo
-	//UIImageWriteToSavedPhotosAlbum(savePhoto, nil, nil, nil); 
-	
-	//save the photo
-	NSLog(@"saveImageMetadata=%@", imageMetadata);
-	if (imageMetadata == nil) {
-		UIImageWriteToSavedPhotosAlbum(savePhoto, nil, nil, nil); 
-	} else {
-		[imageMetadata setObject:[NSNumber numberWithInteger:savePhoto.imageOrientation] forKey:@"Orientation"];
-        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-		
-		CGImageRef imageMetadataRef=savePhoto.CGImage;
-		
-		[library writeImageToSavedPhotosAlbum:imageMetadataRef metadata:imageMetadata completionBlock:^(NSURL *newURL, NSError *error) {
-			if (error) {
-			} else {
-			}
-		}];
-	}
-}
 -(void)checkTheVersionAndMoveThePresetPlist
 {
 	NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];

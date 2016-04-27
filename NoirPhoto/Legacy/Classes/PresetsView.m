@@ -7,7 +7,6 @@
 //
 
 #import "PresetsView.h"
-#import "NoirAppDelegate.h"
 
 
 @implementation PresetsView

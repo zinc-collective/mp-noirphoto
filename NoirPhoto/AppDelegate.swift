@@ -29,10 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
         self.splashController.delegate = self
         
         if (UI_USER_INTERFACE_IDIOM() == .Pad) {
-            self.viewController = NoirScaleHackViewController(nibName: "NoirViewController-iPad", bundle: nil)
+            self.viewController = NoirViewController(nibName: "NoirViewController-iPad", bundle: nil)
         }
         else {
-            self.viewController = NoirScaleHackViewController(nibName: "NoirViewController", bundle: nil)
+            self.viewController = NoirViewController(nibName: "NoirViewController", bundle: nil)
         }
         
         // load last used photo

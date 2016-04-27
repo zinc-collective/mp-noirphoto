@@ -799,7 +799,7 @@
 		CGPoint leavePoint = [leaveTouch locationInView:self];
 
 		//got remain touch
-		CGPoint remainPoint;
+		CGPoint remainPoint = CGPointZero;
 		UITouch *remainTouch;
 		NSArray *eventTouchs = [[event allTouches] allObjects];
 		for(UITouch *touch in eventTouchs)

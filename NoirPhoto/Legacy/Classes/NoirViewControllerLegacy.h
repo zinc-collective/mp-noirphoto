@@ -41,7 +41,7 @@ typedef struct {
 
 
 //@class QuartzView;
-@interface NoirViewController : UIViewController <UIPopoverControllerDelegate, VignetteDelegate, UIAlertViewDelegate, ControlPadViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface NoirViewControllerLegacy : UIViewController <UIPopoverControllerDelegate, VignetteDelegate, ControlPadViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
 	
 	UIImageView			 *photoView;
 	UIImageView			 *photoFullView;
@@ -50,7 +50,6 @@ typedef struct {
 	UIImage				 *adjustPhoto; //photo for the adjust change only
 	UIImage				 *renderedPhoto; //the photo rendered
 	UIImage              *sourcePhoto;
-	UIImageOrientation   _sourceOrientation;
 	
 	//QuartzView           *_ellipseView;
 	VignetteView		 *_vignetteView;
@@ -73,7 +72,6 @@ typedef struct {
 	CGRect               _photoRenderRect;  //是一个相对值，相对于photo view的 rect值，原点也是相对于photoview的位置
 		CGRect               _photoRenderRect2;
 	
-	BOOL				 _bPhotoRotated;
 	
 	NSString             *mCircleImageName;
 	NSString			 *mPresetReviewImageName;
@@ -97,8 +95,6 @@ typedef struct {
 	UIPopoverController *imagePickerPopover;
 	UIImagePickerController *imagePicker;
     BOOL imagePickerOnScreen; //bret
-	
-	UIAlertView* _alert;
 	
 	UIButton *fullBtn;
 	
@@ -143,16 +139,18 @@ typedef struct {
 
 @property (nonatomic, retain) UIPopoverController *imagePickerPopover;
 
-@property (nonatomic, retain) UIAlertView* _alert;
-
 @property (nonatomic, retain) VignetteView* _vignetteView;
 @property (nonatomic, retain) VignetteView* _vignetteFullView;
+
+
+@property (nonatomic) BOOL				 _bPhotoRotated;
+
+@property (nonatomic) UIImageOrientation   _sourceOrientation;
 
 
 #pragma mark -
 #pragma mark in use functios @for UI
 -(IBAction)loadAction:(id)sender;
--(IBAction)saveAction:(id)sender;
 -(IBAction)infoAction:(id)sender;
 
 -(void)initElementsForControlPad; //only need to add presets and tints, the others will be add by controlpadview self
@@ -171,7 +169,6 @@ typedef struct {
 -(void)threadRenderForArguments:(NSDictionary*)params;
 -(UIImage*)imageForPreset:(Preset*)apreset useImage:(UIImage*)image;
 -(UIImage*)imageCompiledForOriginImage:(UIImage*)originImage maskImage:(UIImage*)maskImage;
-- (void)alertWithSaveMessage:(NSString*)message withTitle:(NSString*)aTitle;
 - (CGRect)photoRenderRectForImageSize:(CGSize)imageSize withImageViewRect:(CGRect)viewRect;
 - (UIImage*)imageAddAlphaForImage:(UIImage*)image;
 - (UIImage*)rotatePhotoToFit:(UIImage*)image withOriatation:(UIImageOrientation)orientation;
@@ -188,7 +185,6 @@ typedef struct {
 -(void)setPresetUseImageForDevice;
 -(BOOL)checkIfiPhone4;					  //包含iPod4，也算
 -(BOOL)checkIfPureiPhone4NotIncludeIPod4; //检查是否纯的iPhone4，不包括ipod4
--(void)renderAndSavePhoto;
 -(void)checkTheVersionAndMoveThePresetPlist;
 -(void)startWait;
 -(void)stopWait;
