@@ -22,7 +22,7 @@ class SplashViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     override func prefersStatusBarHidden() -> Bool {
-        return true
+        return false
     }
     
     @IBAction func handleInfo(sender: AnyObject) {

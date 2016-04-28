@@ -135,22 +135,6 @@ void loadGaindLUT()
 	CFRelease(darkLUTData);
 }
 
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
-
-//bret
--(void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:YES];
-    
-    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1)
-    {
-        [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    }
-    
-}
 
 //bret
 #if 0
@@ -176,7 +160,6 @@ void loadGaindLUT()
 
 - (void)viewDidLoad
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     //bret
     imagePickerOnScreen = NO;
     //init picker
@@ -295,37 +278,11 @@ void loadGaindLUT()
 	
 	self.presetsItems = [self presetsItemsFromPlist:presets_plist_current];
 	
-	NSNumber *lastPresetIndex = (NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"last_preset_index"];
-	if(lastPresetIndex == nil)
-	{
-		self.presetsChooseIndex = -1;
-	}
-	else
-	{
-		self.presetsChooseIndex = [lastPresetIndex intValue];//[self chooseIndexForPresets:self.presetsItems];
-	}
-
-	if(self.presetsChooseIndex != -1)
-	{
-		NSDictionary *itemDic = [self.presetsItems objectAtIndex:self.presetsChooseIndex];
-		self.preset = (Preset*)[itemDic objectForKey:@"data"];
-		_bPreseting = YES;
-	}
-	else
-	{
-		self.preset = [self presetFromUserDefault];
-		if(self.preset == nil)
-		{
-			self.presetsChooseIndex = 0;
-			NSDictionary *itemDic = [self.presetsItems objectAtIndex:self.presetsChooseIndex];
-			self.preset = (Preset*)[itemDic objectForKey:@"data"];
-			_bPreseting = YES;
-		}
-		else
-		{
-			_bPreseting = NO;
-		}
-	}
+    // Use the first present. Don't load the one from last time
+	self.presetsChooseIndex = 0;
+	NSDictionary *itemDic = [self.presetsItems objectAtIndex:self.presetsChooseIndex];
+	self.preset = (Preset*)[itemDic objectForKey:@"data"];
+	_bPreseting = YES;
 	
 	
 	//add control pad view
@@ -690,15 +647,6 @@ void loadGaindLUT()
     //bret
     imagePickerOnScreen = NO;
     [picker dismissViewControllerAnimated:YES completion:^{}];
-}
-
-//bret
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1)
-    {
-        [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    }
 }
 
 

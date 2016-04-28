@@ -30,4 +30,8 @@ class NoirViewController: NoirViewControllerLegacy {
         return self.imageForPreset(self.preset, useImage: self.sourcePhoto)
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
 }
