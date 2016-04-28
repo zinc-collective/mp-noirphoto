@@ -20,7 +20,6 @@
 		787581E11CA2EBF000100514 /* PresetsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581B61CA2EBF000100514 /* PresetsView.m */; };
 		787581E21CA2EBF000100514 /* TintsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581B71CA2EBF000100514 /* TintsView.m */; };
 		787581E41CA2EBF000100514 /* NoirViewControllerLegacy.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581BB1CA2EBF000100514 /* NoirViewControllerLegacy.m */; };
-		787581E51CA2EBF000100514 /* SplashCtrlor.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581BD1CA2EBF000100514 /* SplashCtrlor.m */; };
 		787581E71CA2EBF000100514 /* AdjustView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581C11CA2EBF000100514 /* AdjustView.m */; };
 		787581E81CA2EBF000100514 /* ControlPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581C31CA2EBF000100514 /* ControlPadView.m */; };
 		787581E91CA2EBF000100514 /* CustomPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581C51CA2EBF000100514 /* CustomPickerView.m */; };
@@ -187,7 +186,6 @@
 		787581BA1CA2EBF000100514 /* NoirViewControllerLegacy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoirViewControllerLegacy.h; path = Legacy/Classes/NoirViewControllerLegacy.h; sourceTree = "<group>"; };
 		787581BB1CA2EBF000100514 /* NoirViewControllerLegacy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoirViewControllerLegacy.m; path = Legacy/Classes/NoirViewControllerLegacy.m; sourceTree = "<group>"; };
 		787581BC1CA2EBF000100514 /* RConfigFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RConfigFile.h; path = Legacy/Classes/RConfigFile.h; sourceTree = "<group>"; };
-		787581BD1CA2EBF000100514 /* SplashCtrlor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplashCtrlor.m; path = Legacy/Classes/SplashCtrlor.m; sourceTree = "<group>"; };
 		787581C01CA2EBF000100514 /* AdjustView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdjustView.h; path = Legacy/Classes/AdjustView.h; sourceTree = "<group>"; };
 		787581C11CA2EBF000100514 /* AdjustView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdjustView.m; path = Legacy/Classes/AdjustView.m; sourceTree = "<group>"; };
 		787581C21CA2EBF000100514 /* ControlPadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControlPadView.h; path = Legacy/Classes/ControlPadView.h; sourceTree = "<group>"; };
@@ -208,7 +206,6 @@
 		787581D51CA2EBF000100514 /* RConfigFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RConfigFile.m; path = Legacy/Classes/RConfigFile.m; sourceTree = "<group>"; };
 		787581D61CA2EBF000100514 /* RScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RScrollView.h; path = Legacy/Classes/RScrollView.h; sourceTree = "<group>"; };
 		787581D71CA2EBF000100514 /* RScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RScrollView.m; path = Legacy/Classes/RScrollView.m; sourceTree = "<group>"; };
-		787581D81CA2EBF000100514 /* SplashCtrlor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashCtrlor.h; path = Legacy/Classes/SplashCtrlor.h; sourceTree = "<group>"; };
 		787581DB1CA2EBF000100514 /* Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tint.h; path = Legacy/Classes/Tint.h; sourceTree = "<group>"; };
 		787581DC1CA2EBF000100514 /* Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tint.m; path = Legacy/Classes/Tint.m; sourceTree = "<group>"; };
 		787581DD1CA2EBF000100514 /* TintsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TintsView.h; path = Legacy/Classes/TintsView.h; sourceTree = "<group>"; };
@@ -451,8 +448,6 @@
 				787581D51CA2EBF000100514 /* RConfigFile.m */,
 				787581D61CA2EBF000100514 /* RScrollView.h */,
 				787581D71CA2EBF000100514 /* RScrollView.m */,
-				787581D81CA2EBF000100514 /* SplashCtrlor.h */,
-				787581BD1CA2EBF000100514 /* SplashCtrlor.m */,
 				787581DB1CA2EBF000100514 /* Tint.h */,
 				787581DC1CA2EBF000100514 /* Tint.m */,
 				787581DD1CA2EBF000100514 /* TintsView.h */,
@@ -863,7 +858,6 @@
 				787581E91CA2EBF000100514 /* CustomPickerView.m in Sources */,
 				787581E41CA2EBF000100514 /* NoirViewControllerLegacy.m in Sources */,
 				783B0F191CA597D5002A77AB /* NavigationViewController.swift in Sources */,
-				787581E51CA2EBF000100514 /* SplashCtrlor.m in Sources */,
 				787581E71CA2EBF000100514 /* AdjustView.m in Sources */,
 				783B0F291CA5EDED002A77AB /* NoirViewController.swift in Sources */,
 				78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */,

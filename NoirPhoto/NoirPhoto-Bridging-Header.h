@@ -4,4 +4,3 @@
 
 
 #import "NoirViewControllerLegacy.h"
-#import "SplashCtrlor.h"
