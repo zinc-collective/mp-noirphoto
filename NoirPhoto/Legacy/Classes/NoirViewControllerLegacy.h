@@ -202,11 +202,6 @@ typedef struct {
 
 
 
-#pragma mark -
-#pragma mark out use functions
--(void)savePresetToUserDefault;
--(Preset*)presetFromUserDefault;
-
 #pragma mark Loading
 -(void)pickPhoto:(NSURL*)assetURL image:(UIImage*)image;
 -(void)loadWithSavedPhoto:(UIImage*)image;

@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        viewController.savePresetToUserDefault()
+        
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -77,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
     }
 
     func applicationWillTerminate(application: UIApplication) {
-        viewController.savePresetToUserDefault()
+        
     }
     
     

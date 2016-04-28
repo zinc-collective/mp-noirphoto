@@ -394,10 +394,6 @@ void loadGaindLUT()
 	
 	_bPreseting = YES;
 	
-	//save preset choose index to user default
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:index] forKey:@"last_preset_index"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-	
 }
 -(void)tintsChooseIndex:(NSInteger)index data:(id)data
 {
@@ -410,10 +406,6 @@ void loadGaindLUT()
 	[_ctrlPadView choosePresetsBtnForIndex:-1 bNeedReturn:NO];
 	_bPreseting = NO;
 	
-	//save preset choose index to user default
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:-1] forKey:@"last_preset_index"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-	
 	
 	//render
 	[self renderPhotoViewForPreset:self.preset useImage:self.photo changeType:typeTint actioning:NO];
@@ -425,10 +417,6 @@ void loadGaindLUT()
 		//remove select state of presets buttons
 		[_ctrlPadView choosePresetsBtnForIndex:-1 bNeedReturn:NO];
 		_bPreseting = NO;
-		
-		//save preset choose index to user default
-		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:-1] forKey:@"last_preset_index"];
-		[[NSUserDefaults standardUserDefaults] synchronize];
 	}
 	
 	
@@ -662,10 +650,6 @@ void loadGaindLUT()
 			//remove select state of presets buttons
 			[_ctrlPadView choosePresetsBtnForIndex:-1 bNeedReturn:NO];
 			_bPreseting = NO;
-			
-			//save preset choose index to user default
-			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:-1] forKey:@"last_preset_index"];
-			[[NSUserDefaults standardUserDefaults] synchronize];
 		}
 	}
 	
@@ -2147,58 +2131,6 @@ void loadGaindLUT()
 	return allTints;
 }
 
-
-
-
-#pragma mark -
-#pragma mark out use functions
--(void)savePresetToUserDefault
-{
-	if(self.preset == nil) return;
-	
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:self.preset.index] forKey:@"save_preset_index"];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:self.preset.expInside] forKey:@"save_preset_expInside"];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:self.preset.expOutside] forKey:@"save_preset_expOutside"];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:self.preset.contrast] forKey:@"save_preset_contrast"];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:self.preset.tintIndex] forKey:@"save_preset_tintIndex"];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:self.preset.ellipseCenterX] forKey:@"save_preset_ellipseCenterX"];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:self.preset.ellipseCenterY] forKey:@"save_preset_ellipseCenterY"];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:self.preset.ellipseA] forKey:@"save_preset_ellipseA"];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:self.preset.ellipseB] forKey:@"save_preset_ellipseB"];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:self.preset.ellipseAngle] forKey:@"save_preset_ellipseAngle"];
-	
-	[[NSUserDefaults standardUserDefaults] synchronize];
-}
--(Preset*)presetFromUserDefault
-{
-	NSNumber *save_preset_index = (NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"save_preset_index"];
-	NSNumber *save_preset_expInside = (NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"save_preset_expInside"];
-	NSNumber *save_preset_expOutside = (NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"save_preset_expOutside"];
-	NSNumber *save_preset_contrast = (NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"save_preset_contrast"];
-	NSNumber *save_preset_tintIndex = (NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"save_preset_tintIndex"];
-	NSNumber *save_preset_ellipseCenterX = (NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"save_preset_ellipseCenterX"];
-	NSNumber *save_preset_ellipseCenterY = (NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"save_preset_ellipseCenterY"];
-	NSNumber *save_preset_ellipseA = (NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"save_preset_ellipseA"];
-	NSNumber *save_preset_ellipseB = (NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"save_preset_ellipseB"];
-	NSNumber *save_preset_ellipseAngle = (NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"save_preset_ellipseAngle"];
-	
-	if(save_preset_index == nil) return nil;
-	
-	
-    Preset *apreset = [[Preset alloc] init];
-	apreset.index = [save_preset_index intValue];
-	apreset.expInside = [save_preset_expInside floatValue];
-	apreset.expOutside = [save_preset_expOutside floatValue];
-	apreset.contrast = [save_preset_contrast floatValue];
-	apreset.tintIndex = [save_preset_tintIndex intValue];
-	apreset.ellipseCenterX = [save_preset_ellipseCenterX floatValue];
-	apreset.ellipseCenterY = [save_preset_ellipseCenterY floatValue];
-	apreset.ellipseA = [save_preset_ellipseA floatValue];
-	apreset.ellipseB = [save_preset_ellipseB floatValue];
-	apreset.ellipseAngle = [save_preset_ellipseAngle floatValue];
-	
-	return apreset;
-}
 
 
 
