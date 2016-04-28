@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 protocol SplashDelegate : class {
     func splashDidPickImage(image: UIImage, url: NSURL)
@@ -34,6 +35,29 @@ class SplashViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @IBAction func handleLibrary(sender: AnyObject) {
         print("LIBRARY")
+        
+        // Request photo access earlier so the photos window isn't black
+        PHPhotoLibrary.requestAuthorization { status in
+            switch status {
+            case .Authorized:
+                print("AUTHORIZED")
+            case .Restricted:
+                print("RESTRICTED")
+            case .Denied:
+                print("DENIED")
+            default:
+                // place for .NotDetermined - in this callback status is already determined so should never get here
+                break
+            }
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.openPicker()
+            }
+        }
+    }
+    
+    func openPicker() {
+        print("OPEN PICKER")
         let picker = UIImagePickerController()
         picker.sourceType = .PhotoLibrary
         picker.delegate = self

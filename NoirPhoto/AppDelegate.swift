@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Photos
 
 let SaveOriginPhotoPath = "/Documents/origin_photo.jpg"
 
@@ -35,20 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
             self.viewController = NoirViewController(nibName: "NoirViewController", bundle: nil)
         }
         
-        // load last used photo
-//        if self.checkPhotoExistFromPath(SaveOriginPhotoPath) {
-//            let image = self.viewController.loadPhotoFromPath(SaveOriginPhotoPath)!
-//            self.navigationController.viewControllers = [self.viewController]
-//            // this must go last (refactor needed)
-//            self.viewController.loadWithSavedPhoto(image)
-//        }
-//        else {
-            self.navigationController.viewControllers = [self.splashController]
-//        }
+        self.navigationController.viewControllers = [self.splashController]
         
-        // HACK: scale view controller, until we have time to fix it
-//        print("WIDTH", self.viewController.view.frame.size)
-//        self.viewController.view.transform = CGAffineTransformMakeScale(1.2, 1.2)
         
         return true
     }
