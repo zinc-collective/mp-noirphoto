@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		782B55E21CD3D037003C313E /* UIImage+metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B55E11CD3D037003C313E /* UIImage+metadata.swift */; };
 		78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78330FA81CA43D6F00B04CFD /* SplashViewController.swift */; };
 		783B0F171CA5921E002A77AB /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F161CA5921E002A77AB /* InfoViewController.swift */; };
 		783B0F191CA597D5002A77AB /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F181CA597D5002A77AB /* NavigationViewController.swift */; };
@@ -166,6 +167,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		782B55E11CD3D037003C313E /* UIImage+metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+metadata.swift"; sourceTree = "<group>"; };
 		78330FA81CA43D6F00B04CFD /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		783B0F161CA5921E002A77AB /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		783B0F181CA597D5002A77AB /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 				783B0F281CA5EDED002A77AB /* NoirViewController.swift */,
 				787581451CA2E98400100514 /* LaunchScreen.storyboard */,
 				787581401CA2E98400100514 /* Main.storyboard */,
+				782B55E11CD3D037003C313E /* UIImage+metadata.swift */,
 				787581431CA2E98400100514 /* Assets.xcassets */,
 				783B0F221CA5E58A002A77AB /* Info */,
 				783B0F231CA5E58F002A77AB /* Splash */,
@@ -866,6 +869,7 @@
 				787581ED1CA2EBF000100514 /* Parameter.m in Sources */,
 				787584271CA2EE9F00100514 /* VersionWatermark.m in Sources */,
 				787581F01CA2EBF000100514 /* RConfigFile.m in Sources */,
+				782B55E21CD3D037003C313E /* UIImage+metadata.swift in Sources */,
 				787581EF1CA2EBF000100514 /* QuartzView.m in Sources */,
 				787581F31CA2EBF000100514 /* Tint.m in Sources */,
 				787581EE1CA2EBF000100514 /* Preset.m in Sources */,

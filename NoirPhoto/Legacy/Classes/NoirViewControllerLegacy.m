@@ -90,6 +90,7 @@
 
 @synthesize _vignetteFullView;
 @synthesize _sourceOrientation;
+@synthesize imageMetadata;
 
 
 #pragma mark -
@@ -246,9 +247,9 @@ void loadGaindLUT()
 	NSString *filename=[path stringByAppendingPathComponent:metadata_plist];  
 	BOOL success = [[NSFileManager defaultManager] fileExistsAtPath:filename];
 	if(success) {
-		imageMetadata=[[NSMutableDictionary alloc] initWithContentsOfFile:filename];
+		self.imageMetadata=[[NSMutableDictionary alloc] initWithContentsOfFile:filename];
 		
-		NSLog(@"loadImageMetadataFromDoc=%@", imageMetadata);
+		NSLog(@"loadImageMetadataFromDoc=%@", self.imageMetadata);
 	}
 	
 	//add ellipse view
@@ -559,10 +560,10 @@ void loadGaindLUT()
 					 //NSLog(@"metadata=, %@", metadata);
 					 
 					 //imageMetadata = nil;
-					 imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:metadata];
+					 self.imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:metadata];
 					 //[self addEntriesFromDictionary:metadata];
 					 
-					 NSLog(@"loadImageMetadataFromPic=%@", imageMetadata);
+					 NSLog(@"loadImageMetadataFromPic=%@", self.imageMetadata);
 					 
 					 NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
 					 NSString *path=[paths    objectAtIndex:0];

@@ -100,7 +100,6 @@ typedef struct {
 	
 	UIView *blackBackground;
 	
-	NSMutableDictionary *imageMetadata;
 	
 	int isFull;
 	float ctrl_pad_offset;
@@ -144,6 +143,8 @@ typedef struct {
 
 
 @property (nonatomic) UIImageOrientation   _sourceOrientation;
+
+@property (nonatomic, retain) NSMutableDictionary *imageMetadata;
 
 
 #pragma mark -

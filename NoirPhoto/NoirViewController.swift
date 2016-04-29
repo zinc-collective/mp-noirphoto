@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Photos
+import ImageIO
+import MobileCoreServices
 
 // scales up the whole view, just like if we weren't supporting iPhone 6 or 6+
 class NoirViewController: NoirViewControllerLegacy {
@@ -21,9 +24,11 @@ class NoirViewController: NoirViewControllerLegacy {
     }
     
     @IBAction func onTapShare() {
-        let photo = self.renderPhoto()
-        let activity = UIActivityViewController(activityItems: [photo], applicationActivities: nil)
-        self.presentViewController(activity, animated: true, completion: nil)
+        if let data = self.renderPhoto().imageWithMetadata(self.imageMetadata) {
+            let activity = UIActivityViewController(activityItems: [data], applicationActivities: nil)
+            self.presentViewController(activity, animated: true, completion: nil)
+        }
+        
     }
     
     func renderPhoto() -> UIImage {
