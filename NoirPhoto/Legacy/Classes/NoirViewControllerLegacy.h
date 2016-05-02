@@ -96,7 +96,6 @@ typedef struct {
 	UIImagePickerController *imagePicker;
     BOOL imagePickerOnScreen; //bret
 	
-	UIButton *fullBtn;
 	
 	UIView *blackBackground;
 	
@@ -145,6 +144,7 @@ typedef struct {
 @property (nonatomic) UIImageOrientation   _sourceOrientation;
 
 @property (nonatomic, retain) NSMutableDictionary *imageMetadata;
+@property (nonatomic, retain) UIButton *fullBtn;
 
 
 #pragma mark -

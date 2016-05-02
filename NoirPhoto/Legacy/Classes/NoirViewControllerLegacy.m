@@ -91,6 +91,7 @@
 @synthesize _vignetteFullView;
 @synthesize _sourceOrientation;
 @synthesize imageMetadata;
+@synthesize fullBtn;
 
 
 #pragma mark -
@@ -237,7 +238,11 @@ void loadGaindLUT()
 		fullBtn.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
 		[fullBtn  setImage:[UIImage imageNamed:@"down_panel.png"] forState:UIControlStateNormal];
 	}
-	
+    
+    
+    [fullBtn addTarget:self action:@selector(fullBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
 	blackBackground = [[UIView alloc]initWithFrame:CGRectMake(0.0, 0.0, 1024, 1024)];
 	blackBackground.backgroundColor = [UIColor blackColor];
 	
@@ -679,6 +684,90 @@ void loadGaindLUT()
 {
 	//[popoverController release];
 	self.loadBtn.enabled = YES;
+}
+
+
+    
+-(void)fullBtn:(id)sender
+{
+    [UIView beginAnimations:@"rotate" context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [UIView setAnimationDuration:0.3];
+    [UIView setAnimationDelegate:self];
+    //[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:photoFullView cache:YES];
+    
+    if (isFull == 0) {
+        
+        Parameter *param = [self parameterWithPreset:self.preset];
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            ctrl_pad_offset = 256 - ctrl_pad_head_ipad;
+            photoView.frame = photo_full_view_rect_ipad2;
+        } else { //iphone
+            ctrl_pad_offset = 240 - ctrl_pad_head;
+            photoView.frame = photo_full_view_rect2;
+            
+            if (IS_IPHONE_5) {
+                photoView.frame = photo_full_view_rect2_iphone5;
+            }
+        }
+        
+        photoView.image = renderedPhoto;
+        
+        //full vignette view
+        _vignetteView.frame = photoView.frame;
+        
+        _photoRenderRect2 = _photoRenderRect;
+        _photoRenderRect = [self photoRenderRectForImageSize:self.photo.size withImageViewRect:photoView.frame];
+        [_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
+        
+        [fullBtn  setImage:[UIImage imageNamed:@"up_panel.png"] forState:UIControlStateNormal];
+        
+        _ctrlPadView.center = CGPointMake(_ctrlPadView.center.x, _ctrlPadView.center.y+ctrl_pad_offset);
+        tintMaskView.center = CGPointMake(tintMaskView.center.x, tintMaskView.center.y+ctrl_pad_offset);
+        loadBtn.center = CGPointMake(loadBtn.center.x, loadBtn.center.y+ctrl_pad_offset);
+        saveBtn.center = CGPointMake(saveBtn.center.x, saveBtn.center.y+ctrl_pad_offset);
+        infoBtn.center = CGPointMake(infoBtn.center.x, infoBtn.center.y+ctrl_pad_offset);
+        
+        [_ctrlPadView addSubview:fullBtn];
+        
+        isFull = 1;
+    } else { //full
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            photoView.frame = photo_view_rect_ipad;
+            photoView.image = renderedPhoto;
+            
+            _vignetteView.frame = photo_view_rect_ipad;
+        } else { //iphone
+            photoView.frame = photo_view_rect;
+            if (IS_IPHONE_5)
+                photoView.frame = photo_view_rect_iphone5;
+            
+            photoView.image = renderedPhoto;
+            
+            _vignetteView.frame = photo_view_rect;
+            if (IS_IPHONE_5)
+                _vignetteView.frame = photo_view_rect_iphone5;
+        }
+        
+        [fullBtn  setImage:[UIImage imageNamed:@"down_panel.png"] forState:UIControlStateNormal];
+        
+        _ctrlPadView.center = CGPointMake(_ctrlPadView.center.x, _ctrlPadView.center.y-ctrl_pad_offset);
+        tintMaskView.center = CGPointMake(tintMaskView.center.x, tintMaskView.center.y-ctrl_pad_offset);
+        loadBtn.center = CGPointMake(loadBtn.center.x, loadBtn.center.y-ctrl_pad_offset);
+        saveBtn.center = CGPointMake(saveBtn.center.x, saveBtn.center.y-ctrl_pad_offset);
+        infoBtn.center = CGPointMake(infoBtn.center.x, infoBtn.center.y-ctrl_pad_offset);
+        
+        Parameter *param = [self parameterWithPreset:self.preset];
+        
+        _photoRenderRect = _photoRenderRect2;
+        [_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
+        
+        isFull = 0;
+    }
+    
+    
+    [UIView commitAnimations];
 }
 
 -(IBAction)loadAction:(id)sender
