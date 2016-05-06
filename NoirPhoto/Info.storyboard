@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Info View Controller-->
@@ -21,9 +20,13 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="InfoBackground" translatesAutoresizingMaskIntoConstraints="NO" id="K3a-7n-lFh">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYH-ca-T01">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                            </scrollView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="E7L-iD-QP5">
+                                <rect key="frame" x="25" y="0.0" width="270" height="568"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rCq-5Y-QXB">
                                 <rect key="frame" x="8" y="15" width="37" height="37"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -41,34 +44,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gYH-ca-T01" firstAttribute="leading" secondItem="tCA-w7-1lv" secondAttribute="leading" id="24H-Qh-z7e"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="gYH-ca-T01" secondAttribute="trailing" constant="-20" id="5e6-zY-4Dp"/>
+                            <constraint firstItem="KUc-Jq-c6y" firstAttribute="top" secondItem="E7L-iD-QP5" secondAttribute="bottom" id="9Z1-F8-f8g"/>
+                            <constraint firstItem="E7L-iD-QP5" firstAttribute="top" secondItem="l0R-P2-WJa" secondAttribute="bottom" id="Apd-fl-Omv"/>
                             <constraint firstItem="K3a-7n-lFh" firstAttribute="top" secondItem="l0R-P2-WJa" secondAttribute="bottom" id="GCk-DV-dvk"/>
-                            <constraint firstAttribute="trailing" secondItem="gYH-ca-T01" secondAttribute="trailing" id="GhR-gA-yHZ"/>
                             <constraint firstItem="K3a-7n-lFh" firstAttribute="leading" secondItem="tCA-w7-1lv" secondAttribute="leading" id="Iyq-KU-26F"/>
-                            <constraint firstItem="KUc-Jq-c6y" firstAttribute="top" secondItem="gYH-ca-T01" secondAttribute="bottom" id="ObZ-qj-XD8"/>
-                            <constraint firstItem="gYH-ca-T01" firstAttribute="top" secondItem="l0R-P2-WJa" secondAttribute="bottom" constant="-20" id="P36-4f-Xvm"/>
-                            <constraint firstItem="KUc-Jq-c6y" firstAttribute="top" secondItem="gYH-ca-T01" secondAttribute="bottom" id="Q2h-zt-avG"/>
                             <constraint firstItem="rCq-5Y-QXB" firstAttribute="top" secondItem="l0R-P2-WJa" secondAttribute="bottom" constant="15" id="VMp-xR-bb0"/>
-                            <constraint firstItem="gYH-ca-T01" firstAttribute="leading" secondItem="tCA-w7-1lv" secondAttribute="leadingMargin" constant="-20" id="dBP-vz-HSr"/>
+                            <constraint firstAttribute="trailing" secondItem="E7L-iD-QP5" secondAttribute="trailing" constant="25" id="awc-Bo-gbF"/>
                             <constraint firstItem="KUc-Jq-c6y" firstAttribute="top" secondItem="K3a-7n-lFh" secondAttribute="bottom" id="jlq-BF-vtT"/>
                             <constraint firstItem="rCq-5Y-QXB" firstAttribute="leading" secondItem="tCA-w7-1lv" secondAttribute="leading" constant="8" id="pIL-pd-lW1"/>
                             <constraint firstAttribute="trailing" secondItem="K3a-7n-lFh" secondAttribute="trailing" id="tQE-L0-DaE"/>
-                            <constraint firstItem="gYH-ca-T01" firstAttribute="top" secondItem="l0R-P2-WJa" secondAttribute="bottom" id="yQW-YD-RxJ"/>
+                            <constraint firstItem="E7L-iD-QP5" firstAttribute="leading" secondItem="tCA-w7-1lv" secondAttribute="leading" constant="25" id="z8q-9h-xgD"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="5e6-zY-4Dp"/>
-                                <exclude reference="dBP-vz-HSr"/>
-                                <exclude reference="P36-4f-Xvm"/>
-                                <exclude reference="Q2h-zt-avG"/>
-                            </mask>
-                        </variation>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="scrollView" destination="gYH-ca-T01" id="n3c-YJ-6Zr"/>
+                        <outlet property="textView" destination="E7L-iD-QP5" id="WFc-Oa-KPM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r3s-U6-8vb" userLabel="First Responder" sceneMemberID="firstResponder"/>
