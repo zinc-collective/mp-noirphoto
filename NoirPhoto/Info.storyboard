@@ -20,13 +20,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="InfoBackground" translatesAutoresizingMaskIntoConstraints="NO" id="K3a-7n-lFh">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="E7L-iD-QP5">
-                                <rect key="frame" x="25" y="0.0" width="270" height="568"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rCq-5Y-QXB">
                                 <rect key="frame" x="8" y="15" width="37" height="37"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -41,25 +34,29 @@
                                     <action selector="handleBack" destination="vg3-F6-hbn" eventType="touchUpInside" id="ddZ-0O-KnG"/>
                                 </connections>
                             </button>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CJU-nk-9Cn">
+                                <rect key="frame" x="40" y="0.0" width="240" height="568"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KUc-Jq-c6y" firstAttribute="top" secondItem="E7L-iD-QP5" secondAttribute="bottom" id="9Z1-F8-f8g"/>
-                            <constraint firstItem="E7L-iD-QP5" firstAttribute="top" secondItem="l0R-P2-WJa" secondAttribute="bottom" id="Apd-fl-Omv"/>
+                            <constraint firstAttribute="trailing" secondItem="CJU-nk-9Cn" secondAttribute="trailing" constant="40" id="2zC-FS-xjP"/>
+                            <constraint firstItem="CJU-nk-9Cn" firstAttribute="leading" secondItem="tCA-w7-1lv" secondAttribute="leading" constant="40" id="D9S-Lh-ueQ"/>
                             <constraint firstItem="K3a-7n-lFh" firstAttribute="top" secondItem="l0R-P2-WJa" secondAttribute="bottom" id="GCk-DV-dvk"/>
                             <constraint firstItem="K3a-7n-lFh" firstAttribute="leading" secondItem="tCA-w7-1lv" secondAttribute="leading" id="Iyq-KU-26F"/>
+                            <constraint firstItem="KUc-Jq-c6y" firstAttribute="top" secondItem="CJU-nk-9Cn" secondAttribute="bottom" id="L4z-q6-B3g"/>
+                            <constraint firstItem="CJU-nk-9Cn" firstAttribute="top" secondItem="l0R-P2-WJa" secondAttribute="bottom" id="ROz-hu-Ki8"/>
                             <constraint firstItem="rCq-5Y-QXB" firstAttribute="top" secondItem="l0R-P2-WJa" secondAttribute="bottom" constant="15" id="VMp-xR-bb0"/>
-                            <constraint firstAttribute="trailing" secondItem="E7L-iD-QP5" secondAttribute="trailing" constant="25" id="awc-Bo-gbF"/>
                             <constraint firstItem="KUc-Jq-c6y" firstAttribute="top" secondItem="K3a-7n-lFh" secondAttribute="bottom" id="jlq-BF-vtT"/>
                             <constraint firstItem="rCq-5Y-QXB" firstAttribute="leading" secondItem="tCA-w7-1lv" secondAttribute="leading" constant="8" id="pIL-pd-lW1"/>
                             <constraint firstAttribute="trailing" secondItem="K3a-7n-lFh" secondAttribute="trailing" id="tQE-L0-DaE"/>
-                            <constraint firstItem="E7L-iD-QP5" firstAttribute="leading" secondItem="tCA-w7-1lv" secondAttribute="leading" constant="25" id="z8q-9h-xgD"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="textView" destination="E7L-iD-QP5" id="WFc-Oa-KPM"/>
+                        <outlet property="webView" destination="CJU-nk-9Cn" id="RcE-8b-c0j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r3s-U6-8vb" userLabel="First Responder" sceneMemberID="firstResponder"/>

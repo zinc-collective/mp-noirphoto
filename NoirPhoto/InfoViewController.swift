@@ -9,48 +9,43 @@
 import UIKit
 import SwiftyMarkdown
 
-class InfoViewController: UIViewController, UITextViewDelegate {
+class InfoViewController: UIViewController, UIWebViewDelegate {
 
-    @IBOutlet weak var textView: UITextView!
     
-//    let linkColor = UIColor(red: 0.827, green: 0.392, blue: 0.2235, alpha: 1.0)
+    @IBOutlet weak var webView: UIWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let image = UIImage(named: "InfoText")!
-//        let imageView = UIImageView(image: image)
-//        let heightToWidth = image.size.height / image.size.width
-//        let width = view.frame.size.width
-//        imageView.frame = CGRect(x: 0, y: 0, width: width, height: width * heightToWidth)
-//        self.scrollView.contentSize = imageView.frame.size
-//        self.scrollView.addSubview(imageView)
+        webView.backgroundColor = UIColor.clearColor()
+        webView.opaque = false
+        webView.scrollView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0)
+        webView.scrollView.showsVerticalScrollIndicator = false
+        webView.scrollView.showsHorizontalScrollIndicator = false
+        webView.delegate = self
         
-        textView.dataDetectorTypes = .All
-        textView.delegate = self
-        textView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 20, right: 0)
-//        textView.linkTextAttributes = [NSForegroundColorAttributeName: redColor]
+        if let url = NSBundle.mainBundle().URLForResource("info", withExtension: "html"), path = url.path {
         
-        if let text = loadMD("info-text") {
-            text.body.color = UIColor.whiteColor()
-//            text.link.color = UIColor.greenColor() //
-            
-            textView.attributedText = text.attributedString()
+            do {
+                let string = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding) as String
+                webView.loadHTMLString(string, baseURL: nil)
+            }
+            catch let err as NSError {
+                print("Web View Error: ", err.description)
+            }
         }
     }
     
-    
-    func loadMD(name:String) -> SwiftyMarkdown? {
-        if let url = NSBundle.mainBundle().URLForResource(name, withExtension: "md") {
-            return SwiftyMarkdown(url: url)
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        
+        if let url = request.URL where navigationType == .LinkClicked {
+            UIApplication.sharedApplication().openURL(url)
+            return false
         }
-        return nil
-    }
-    
-    func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+        
         return true
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
     }

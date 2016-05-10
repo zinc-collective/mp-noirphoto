@@ -166,6 +166,7 @@
 		787584251CA2EE9F00100514 /* close_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 787584211CA2EE9F00100514 /* close_btn.png */; };
 		787584261CA2EE9F00100514 /* version_info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 787584221CA2EE9F00100514 /* version_info.plist */; };
 		787584271CA2EE9F00100514 /* VersionWatermark.m in Sources */ = {isa = PBXBuildFile; fileRef = 787584241CA2EE9F00100514 /* VersionWatermark.m */; };
+		78D75F921CE2319200895BA1 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = 78D75F911CE2319200895BA1 /* info.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -351,6 +352,7 @@
 		787584221CA2EE9F00100514 /* version_info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = version_info.plist; sourceTree = "<group>"; };
 		787584231CA2EE9F00100514 /* VersionWatermark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionWatermark.h; sourceTree = "<group>"; };
 		787584241CA2EE9F00100514 /* VersionWatermark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionWatermark.m; sourceTree = "<group>"; };
+		78D75F911CE2319200895BA1 /* info.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,6 +373,7 @@
 				783B0F1A1CA5A476002A77AB /* Info.storyboard */,
 				783B0F161CA5921E002A77AB /* InfoViewController.swift */,
 				7805EF011CDD4123007FCE11 /* info-text.md */,
+				78D75F911CE2319200895BA1 /* info.html */,
 			);
 			name = Info;
 			sourceTree = "<group>";
@@ -755,6 +758,7 @@
 				7875820C1CA2EC2400100514 /* circle_preset_4.png in Resources */,
 				787582B01CA2EC3800100514 /* adjust_contrast@2x.png in Resources */,
 				787583DF1CA2EC9600100514 /* adjust_in_out-iPad.png in Resources */,
+				78D75F921CE2319200895BA1 /* info.html in Resources */,
 				787584171CA2ECAC00100514 /* MainWindow.xib in Resources */,
 				787584001CA2EC9600100514 /* tint_btn_iPad_0.png in Resources */,
 				787582151CA2EC2400100514 /* preset_review_iPad.png in Resources */,
