@@ -8,6 +8,8 @@
 
 import UIKit
 import Photos
+import Fabric
+import Crashlytics
 
 let SaveOriginPhotoPath = "/Documents/origin_photo.jpg"
 
@@ -23,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.navigationController = self.window!.rootViewController as! NavigationViewController
+        
+        Fabric.with([Crashlytics.self])
         
         self.splashController = UIStoryboard(name: "Splash", bundle: nil)
                                     .instantiateViewControllerWithIdentifier("SplashViewController") as! SplashViewController

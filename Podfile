@@ -4,6 +4,6 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'NoirPhoto' do
-    pod 'SwiftyMarkdown', '~> 0.2'
+    pod 'Crashlytics', '~> 3.7.0'
 end
 
