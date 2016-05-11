@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3F0AB554DBBAF1080382FF81 /* Pods_NoirPhoto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608C8629802043B3DB729F97 /* Pods_NoirPhoto.framework */; };
-		7805EF031CDD41D4007FCE11 /* info-text.md in Resources */ = {isa = PBXBuildFile; fileRef = 7805EF011CDD4123007FCE11 /* info-text.md */; };
 		782B55E21CD3D037003C313E /* UIImage+metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B55E11CD3D037003C313E /* UIImage+metadata.swift */; };
 		78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78330FA81CA43D6F00B04CFD /* SplashViewController.swift */; };
 		783B0F171CA5921E002A77AB /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F161CA5921E002A77AB /* InfoViewController.swift */; };
@@ -173,7 +172,6 @@
 		419EC16A789658B4F4D433DF /* Pods-NoirPhoto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoirPhoto.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoirPhoto/Pods-NoirPhoto.debug.xcconfig"; sourceTree = "<group>"; };
 		608C8629802043B3DB729F97 /* Pods_NoirPhoto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoirPhoto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		671CC38C113DFCC7F37656F7 /* Pods-NoirPhoto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoirPhoto.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoirPhoto/Pods-NoirPhoto.release.xcconfig"; sourceTree = "<group>"; };
-		7805EF011CDD4123007FCE11 /* info-text.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "info-text.md"; sourceTree = "<group>"; };
 		782B55E11CD3D037003C313E /* UIImage+metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+metadata.swift"; sourceTree = "<group>"; };
 		78330FA81CA43D6F00B04CFD /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		783B0F161CA5921E002A77AB /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -372,7 +370,6 @@
 			children = (
 				783B0F1A1CA5A476002A77AB /* Info.storyboard */,
 				783B0F161CA5921E002A77AB /* InfoViewController.swift */,
-				7805EF011CDD4123007FCE11 /* info-text.md */,
 				78D75F911CE2319200895BA1 /* info.html */,
 			);
 			name = Info;
@@ -745,7 +742,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7805EF031CDD41D4007FCE11 /* info-text.md in Resources */,
 				787582AF1CA2EC3800100514 /* adjust_contrast4@2x.png in Resources */,
 				7875840B1CA2EC9600100514 /* tint_mask_iPad_3.png in Resources */,
 				787582AD1CA2EC3800100514 /* adjust_contrast2@2x.png in Resources */,

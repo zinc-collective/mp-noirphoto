@@ -71,11 +71,15 @@
                                     <action selector="handleLibrary:" destination="d3d-20-KLX" eventType="touchUpInside" id="heQ-bM-L9y"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UTF-52-x16">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ckS-hN-HwQ">
-                                <rect key="frame" x="243" y="8" width="69" height="69"/>
+                                <rect key="frame" x="235" y="0.0" width="85" height="85"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="69" id="gpv-9w-wU6"/>
-                                    <constraint firstAttribute="height" constant="69" id="oi2-W9-9fQ"/>
+                                    <constraint firstAttribute="width" constant="85" id="gpv-9w-wU6"/>
+                                    <constraint firstAttribute="height" constant="85" id="oi2-W9-9fQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                                 <state key="normal" backgroundImage="InfoButton">
@@ -96,17 +100,21 @@
                             <constraint firstAttribute="trailing" secondItem="Q2s-DE-Ck9" secondAttribute="trailing" id="3q4-Fr-tQ1"/>
                             <constraint firstItem="fGS-eK-eKd" firstAttribute="top" secondItem="VFO-3T-CsQ" secondAttribute="bottom" constant="-20" id="4IP-eu-kip"/>
                             <constraint firstAttribute="trailing" secondItem="7Q1-Ch-3Nx" secondAttribute="trailing" id="Al8-5g-o52"/>
+                            <constraint firstItem="aNG-nY-Xrp" firstAttribute="top" secondItem="UTF-52-x16" secondAttribute="bottom" constant="200" id="CLE-SS-5gd"/>
                             <constraint firstItem="Q2s-DE-Ck9" firstAttribute="leading" secondItem="r1r-4r-x2F" secondAttribute="leading" id="Fgf-rs-FA4"/>
                             <constraint firstItem="aNG-nY-Xrp" firstAttribute="top" secondItem="Q2s-DE-Ck9" secondAttribute="bottom" id="UWD-9e-8UT"/>
-                            <constraint firstAttribute="trailing" secondItem="ckS-hN-HwQ" secondAttribute="trailing" constant="8" id="adn-LZ-Tka"/>
+                            <constraint firstAttribute="trailing" secondItem="UTF-52-x16" secondAttribute="trailing" id="aJb-2Q-htz"/>
+                            <constraint firstAttribute="trailing" secondItem="ckS-hN-HwQ" secondAttribute="trailing" id="adn-LZ-Tka"/>
                             <constraint firstItem="aNG-nY-Xrp" firstAttribute="top" secondItem="7Q1-Ch-3Nx" secondAttribute="bottom" id="c0N-kU-ixq"/>
+                            <constraint firstItem="UTF-52-x16" firstAttribute="leading" secondItem="r1r-4r-x2F" secondAttribute="leading" id="d1t-Yp-yOa"/>
                             <constraint firstItem="SdQ-Yx-00g" firstAttribute="top" secondItem="VFO-3T-CsQ" secondAttribute="bottom" constant="88" id="dTV-e8-Akj">
                                 <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="7Q1-Ch-3Nx" firstAttribute="leading" secondItem="r1r-4r-x2F" secondAttribute="leading" id="hDp-Hx-9vw"/>
-                            <constraint firstItem="ckS-hN-HwQ" firstAttribute="top" secondItem="VFO-3T-CsQ" secondAttribute="bottom" constant="-12" id="jqk-hI-Zqj"/>
+                            <constraint firstItem="ckS-hN-HwQ" firstAttribute="top" secondItem="VFO-3T-CsQ" secondAttribute="bottom" constant="-20" id="jqk-hI-Zqj"/>
                             <constraint firstItem="fGS-eK-eKd" firstAttribute="leading" secondItem="r1r-4r-x2F" secondAttribute="leading" id="nHL-Wl-Dsy"/>
                             <constraint firstItem="aNG-nY-Xrp" firstAttribute="top" secondItem="SdQ-Yx-00g" secondAttribute="bottom" id="qFr-sh-RhM"/>
+                            <constraint firstItem="UTF-52-x16" firstAttribute="top" secondItem="r1r-4r-x2F" secondAttribute="top" id="wa1-k0-RvR"/>
                             <constraint firstAttribute="trailing" secondItem="fGS-eK-eKd" secondAttribute="trailing" id="waX-G8-tWG"/>
                             <constraint firstItem="SdQ-Yx-00g" firstAttribute="leading" secondItem="r1r-4r-x2F" secondAttribute="leading" id="xth-Rn-rmQ"/>
                             <constraint firstAttribute="trailing" secondItem="SdQ-Yx-00g" secondAttribute="trailing" id="zS1-cL-f1l"/>
@@ -128,6 +136,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="4PK-8O-lbP"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
