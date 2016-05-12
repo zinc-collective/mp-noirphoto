@@ -23,6 +23,36 @@ class NoirViewController: NoirViewControllerLegacy {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(NoirViewController.onSwipeGripDown))
+        downGesture.direction = .Down
+        
+        let upGesture = UISwipeGestureRecognizer(target: self, action: #selector(NoirViewController.onSwipeGripUp))
+        upGesture.direction = .Up
+        
+        self.fullBtn.addGestureRecognizer(downGesture)
+        self.fullBtn.addGestureRecognizer(upGesture)
+    }
+    
+    @IBAction func onSwipeGripDown() {
+        print("SWIPE DOWN")
+        
+        if (!isFull) {
+            self.toggleFull()
+        }
+        
+    }
+    
+    @IBAction func onSwipeGripUp() {
+        print("SWIPE UP")
+        
+        if (isFull) {
+            self.toggleFull()
+        }
+    }
+    
     @IBAction func onTapShare() {
         if let data = self.renderPhoto().imageWithMetadata(self.imageMetadata) {
             let activity = UIActivityViewController(activityItems: [data], applicationActivities: nil)

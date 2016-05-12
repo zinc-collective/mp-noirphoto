@@ -100,7 +100,6 @@ typedef struct {
 	UIView *blackBackground;
 	
 	
-	int isFull;
 	float ctrl_pad_offset;
 	
 	BOOL                 _bSavingOriginPhoto;
@@ -145,6 +144,8 @@ typedef struct {
 
 @property (nonatomic, retain) NSMutableDictionary *imageMetadata;
 @property (nonatomic, retain) UIButton *fullBtn;
+
+@property (nonatomic) BOOL isFull;
 
 
 #pragma mark -
@@ -192,7 +193,7 @@ typedef struct {
 -(UIImage*)limitedSourcePhoto:(UIImage*)source forLimitPixel:(float)limit; //限制原始图片的大小，并返回限制以后的图片
 
 -(BOOL)checkIfTallScreen;
-//-(void)fullBtn:(id)sender;
+-(void)toggleFull;
 
 #pragma mark -
 #pragma mark in use functios @for Rendering

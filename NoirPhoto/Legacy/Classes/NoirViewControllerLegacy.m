@@ -92,6 +92,7 @@
 @synthesize _sourceOrientation;
 @synthesize imageMetadata;
 @synthesize fullBtn;
+@synthesize isFull;
 
 
 #pragma mark -
@@ -240,7 +241,7 @@ void loadGaindLUT()
 	}
     
     
-    [fullBtn addTarget:self action:@selector(fullBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [fullBtn addTarget:self action:@selector(toggleFull) forControlEvents:UIControlEventTouchUpInside];
     
     
 	blackBackground = [[UIView alloc]initWithFrame:CGRectMake(0.0, 0.0, 1024, 1024)];
@@ -688,7 +689,7 @@ void loadGaindLUT()
 
 
     
--(void)fullBtn:(id)sender
+-(void)toggleFull
 {
     [UIView beginAnimations:@"rotate" context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
@@ -696,7 +697,7 @@ void loadGaindLUT()
     [UIView setAnimationDelegate:self];
     //[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:photoFullView cache:YES];
     
-    if (isFull == 0) {
+    if (isFull == NO) {
         
         Parameter *param = [self parameterWithPreset:self.preset];
         
@@ -731,7 +732,7 @@ void loadGaindLUT()
         
         [_ctrlPadView addSubview:fullBtn];
         
-        isFull = 1;
+        isFull = YES;
     } else { //full
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             photoView.frame = photo_view_rect_ipad;
@@ -763,7 +764,7 @@ void loadGaindLUT()
         _photoRenderRect = _photoRenderRect2;
         [_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
         
-        isFull = 0;
+        isFull = NO;
     }
     
     
