@@ -54,8 +54,13 @@ class NoirViewController: NoirViewControllerLegacy {
     }
     
     @IBAction func onTapShare() {
+        // TODO: render after share like in Plastic Bullet? Or in the background?
         if let data = self.renderPhoto().imageWithMetadata(self.imageMetadata) {
             let activity = UIActivityViewController(activityItems: [data], applicationActivities: nil)
+            
+            activity.popoverPresentationController?.sourceView = self.view
+            activity.popoverPresentationController?.sourceRect = self.saveBtn.frame
+        
             self.presentViewController(activity, animated: true, completion: nil)
         }
         
