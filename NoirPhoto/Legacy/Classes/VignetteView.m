@@ -775,6 +775,7 @@
 	[self setNeedsDisplay];
 	[self returnVignetteAction:NO bChangePresetState:YES];
 }
+
 - (void) touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event 
 {
 	NSInteger eventCount = [[event allTouches] count];
@@ -812,6 +813,12 @@
 				break;
 			}
 		}
+        
+        // it was causing a crash on arrayWithObject:remainTouch
+        // I can't reproduce it
+        if (!remainTouch) {
+            return;
+        }
 		
 		[self checkStateForPoint:remainPoint];
 		
