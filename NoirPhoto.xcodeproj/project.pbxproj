@@ -166,6 +166,7 @@
 		787584261CA2EE9F00100514 /* version_info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 787584221CA2EE9F00100514 /* version_info.plist */; };
 		787584271CA2EE9F00100514 /* VersionWatermark.m in Sources */ = {isa = PBXBuildFile; fileRef = 787584241CA2EE9F00100514 /* VersionWatermark.m */; };
 		78D75F921CE2319200895BA1 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = 78D75F911CE2319200895BA1 /* info.html */; };
+		78D9FD321CEA1A0200745DDE /* CrashlyticsBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D9FD311CEA1A0200745DDE /* CrashlyticsBridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -351,6 +352,8 @@
 		787584231CA2EE9F00100514 /* VersionWatermark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionWatermark.h; sourceTree = "<group>"; };
 		787584241CA2EE9F00100514 /* VersionWatermark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionWatermark.m; sourceTree = "<group>"; };
 		78D75F911CE2319200895BA1 /* info.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info.html; sourceTree = "<group>"; };
+		78D9FD301CEA1A0200745DDE /* CrashlyticsBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashlyticsBridge.h; path = NoirPhoto/CrashlyticsBridge.h; sourceTree = "<group>"; };
+		78D9FD311CEA1A0200745DDE /* CrashlyticsBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrashlyticsBridge.m; path = NoirPhoto/CrashlyticsBridge.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -390,7 +393,7 @@
 				783B0F2A1CA5F72E002A77AB /* Todo.md */,
 				7875813B1CA2E98400100514 /* NoirPhoto */,
 				787581481CA2E98400100514 /* Info.plist */,
-				787581B41CA2EBEF00100514 /* NoirPhoto-Bridging-Header.h */,
+				78D9FD2F1CEA19E000745DDE /* Bridge */,
 				7875813A1CA2E98400100514 /* Products */,
 				AC12024DA3E54819A491F40E /* Pods */,
 				E679D6CF653C1978FD4A822D /* Frameworks */,
@@ -660,6 +663,16 @@
 			);
 			name = Version;
 			path = Legacy/Version;
+			sourceTree = "<group>";
+		};
+		78D9FD2F1CEA19E000745DDE /* Bridge */ = {
+			isa = PBXGroup;
+			children = (
+				787581B41CA2EBEF00100514 /* NoirPhoto-Bridging-Header.h */,
+				78D9FD301CEA1A0200745DDE /* CrashlyticsBridge.h */,
+				78D9FD311CEA1A0200745DDE /* CrashlyticsBridge.m */,
+			);
+			name = Bridge;
 			sourceTree = "<group>";
 		};
 		AC12024DA3E54819A491F40E /* Pods */ = {
@@ -963,6 +976,7 @@
 				787584271CA2EE9F00100514 /* VersionWatermark.m in Sources */,
 				787581F01CA2EBF000100514 /* RConfigFile.m in Sources */,
 				782B55E21CD3D037003C313E /* UIImage+metadata.swift in Sources */,
+				78D9FD321CEA1A0200745DDE /* CrashlyticsBridge.m in Sources */,
 				787581EF1CA2EBF000100514 /* QuartzView.m in Sources */,
 				787581F31CA2EBF000100514 /* Tint.m in Sources */,
 				787581EE1CA2EBF000100514 /* Preset.m in Sources */,

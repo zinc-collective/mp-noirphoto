@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import Crashlytics
 
 protocol SplashDelegate : class {
     func splashDidPickImage(image: UIImage, url: NSURL)
@@ -79,7 +80,12 @@ class SplashViewController: UIViewController, UIImagePickerControllerDelegate, U
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         print("PICKED IMAGE")
         
+        CrashlyticsBridge.log("Picked Image \(info[UIImagePickerControllerReferenceURL])")
+        CrashlyticsBridge.log("  info = \(info)")
+        
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        // if it isn't there, then
         let assetURL = info[UIImagePickerControllerReferenceURL] as! NSURL
         // I can't display it myself, need to pass it back
         
