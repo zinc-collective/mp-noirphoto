@@ -165,6 +165,7 @@
 		787584251CA2EE9F00100514 /* close_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 787584211CA2EE9F00100514 /* close_btn.png */; };
 		787584261CA2EE9F00100514 /* version_info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 787584221CA2EE9F00100514 /* version_info.plist */; };
 		787584271CA2EE9F00100514 /* VersionWatermark.m in Sources */ = {isa = PBXBuildFile; fileRef = 787584241CA2EE9F00100514 /* VersionWatermark.m */; };
+		7896C8011CF4A56C00AE804F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7896C8001CF4A56C00AE804F /* Utils.swift */; };
 		78D75F921CE2319200895BA1 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = 78D75F911CE2319200895BA1 /* info.html */; };
 		78D9FD321CEA1A0200745DDE /* CrashlyticsBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D9FD311CEA1A0200745DDE /* CrashlyticsBridge.m */; };
 /* End PBXBuildFile section */
@@ -351,6 +352,7 @@
 		787584221CA2EE9F00100514 /* version_info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = version_info.plist; sourceTree = "<group>"; };
 		787584231CA2EE9F00100514 /* VersionWatermark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionWatermark.h; sourceTree = "<group>"; };
 		787584241CA2EE9F00100514 /* VersionWatermark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionWatermark.m; sourceTree = "<group>"; };
+		7896C8001CF4A56C00AE804F /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		78D75F911CE2319200895BA1 /* info.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info.html; sourceTree = "<group>"; };
 		78D9FD301CEA1A0200745DDE /* CrashlyticsBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashlyticsBridge.h; path = NoirPhoto/CrashlyticsBridge.h; sourceTree = "<group>"; };
 		78D9FD311CEA1A0200745DDE /* CrashlyticsBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrashlyticsBridge.m; path = NoirPhoto/CrashlyticsBridge.m; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 				787581401CA2E98400100514 /* Main.storyboard */,
 				782B55E11CD3D037003C313E /* UIImage+metadata.swift */,
 				787581431CA2E98400100514 /* Assets.xcassets */,
+				7896C8001CF4A56C00AE804F /* Utils.swift */,
 				783B0F221CA5E58A002A77AB /* Info */,
 				783B0F231CA5E58F002A77AB /* Splash */,
 				7875814E1CA2EA5C00100514 /* Legacy */,
@@ -986,6 +989,7 @@
 				787581EA1CA2EBF000100514 /* EllipseVertex.m in Sources */,
 				783B0F171CA5921E002A77AB /* InfoViewController.swift in Sources */,
 				787581EB1CA2EBF000100514 /* EllipseView.m in Sources */,
+				7896C8011CF4A56C00AE804F /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

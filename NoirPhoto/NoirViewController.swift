@@ -55,19 +55,36 @@ class NoirViewController: NoirViewControllerLegacy {
     
     @IBAction func onTapShare() {
         // TODO: render after share like in Plastic Bullet? Or in the background?
-        if let data = self.renderPhoto().imageWithMetadata(self.imageMetadata) {
+        
+        let meta = UIImage.stripOrientationMetadata(self.imageMetadata)
+        
+        if let data = self.renderPhoto().imageWithMetadata(meta) {
             let activity = UIActivityViewController(activityItems: [data], applicationActivities: nil)
             
             activity.popoverPresentationController?.sourceView = self.view
             activity.popoverPresentationController?.sourceRect = self.saveBtn.frame
-        
+            activity.completionWithItemsHandler = { activity, completed, returnedItems, error in
+                if activity == UIActivityTypeSaveToCameraRoll && completed {
+                    self.savePhotoFeedback()
+                }
+            }
             self.presentViewController(activity, animated: true, completion: nil)
         }
+    }
+    
+    func savePhotoFeedback() {
+        let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: .Alert)
+        self.presentViewController(alert, animated: true, completion: { _ in
+            delay(0.5) {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+        })
         
     }
     
     func renderPhoto() -> UIImage {
-        return self.imageForPreset(self.preset, useImage: self.sourcePhoto)
+        let source = self.sourcePhoto.rotateCameraImageToProperOrientation(CGFloat(MAXFLOAT))
+        return self.imageForPreset(self.preset, useImage: source)
     }
     
     override func prefersStatusBarHidden() -> Bool {
