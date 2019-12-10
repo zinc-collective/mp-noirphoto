@@ -3,7 +3,7 @@
 //  Noir
 //
 //  Created by mac on 10-7-12.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2019 Zinc Collective, LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

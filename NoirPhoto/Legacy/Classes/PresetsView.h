@@ -3,7 +3,7 @@
 //  Noir
 //
 //  Created by mac on 10-7-5.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2019 Zinc Collective, LLC. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -17,19 +17,19 @@
 @end
 
 
-@interface PresetsView : UIView <UIAlertViewDelegate> { 
+@interface PresetsView : UIView <UIAlertViewDelegate> {
 
 	NSArray *_buttons;
 	NSArray *_items;
 	float _btnWidth;
 	float _btnHeight;
-	
+
 	NSTimer *_timer;
 	NSInteger _touchDownIndex;
 	NSArray *_showViews;
-	
+
 	UIAlertView *mAlert;
-	
+
 }
 
 @property (nonatomic, weak) id<PresetsViewDelegate> delegate;
@@ -42,14 +42,14 @@
 #pragma mark out use function @overwrite system function
 //the item is NSDictionary type, the key-value pair include: "data"->data, "image"->image, "image_sel"->image selected
 //if set height=0 use default height as frame.height, if set width=0 use width=height
-- (id)initWithFrame:(CGRect)frame items:(NSArray*)items dele:(id)dele btnWidth:(float)width btnHeight:(float)height; 
+- (id)initWithFrame:(CGRect)frame items:(NSArray*)items dele:(id)dele btnWidth:(float)width btnHeight:(float)height;
 
 
 
 
 #pragma mark -
 #pragma mark in/out use functions
--(void)setButtonsForItems:(NSArray*)items; //additional using this function if there are no items when useing "initWithFrame" function, the paramater "items" is just like the "initWithFrame" 
+-(void)setButtonsForItems:(NSArray*)items; //additional using this function if there are no items when useing "initWithFrame" function, the paramater "items" is just like the "initWithFrame"
 -(void)chooseButtonForIndex:(NSInteger)index bReturnToDelegate:(BOOL)bReturnTodele; //each time only a button has disable state
 -(void)setBackGroundWithImage:(UIImage*)bgImage orColor:(UIColor*)bgColor; //first Priority is image, if image==nil use color, if color==nil use default clearColor
 -(void)rotateShowViewForTransform:(CGAffineTransform)transfm;

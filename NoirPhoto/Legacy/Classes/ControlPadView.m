@@ -3,7 +3,7 @@
 //  Noir
 //
 //  Created by mac on 10-7-6.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2019 Zinc Collective, LLC. All rights reserved.
 //
 
 #import "ControlPadView.h"
@@ -32,20 +32,20 @@
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
         // Initialization code
-		
+
 		self.backgroundColor = [UIColor clearColor];
-		
+
 		//add background view
 		NSString *imageName = @"ctrl_pad_bg.png";
 		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 		{
 			imageName = @"ctrl_pad_bg-iPad.png";
 		}
-		
+
 		UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, frame.size.height)];
 		bgView.image = [UIImage imageNamed:imageName];
-		[self addSubview:bgView]; 
-		
+		[self addSubview:bgView];
+
     }
     return self;
 }
@@ -65,9 +65,9 @@
 }
 -(void)resetAction:(id)sender
 {
-	[self alertYouAction:NSLocalizedString(@"control pad reset alert title", nil) 
-				 withMsg:NSLocalizedString(@"control pad reset alert message", nil) 
-				  withOK:NSLocalizedString(@"control pad reset alert OK", nil) 
+	[self alertYouAction:NSLocalizedString(@"control pad reset alert title", nil)
+				 withMsg:NSLocalizedString(@"control pad reset alert message", nil)
+				  withOK:NSLocalizedString(@"control pad reset alert OK", nil)
 			  withCancel:NSLocalizedString(@"control pad reset alert Cancel", nil)];
 }
 -(void)alertYouAction:(NSString*)title withMsg:(NSString*)alertMsg withOK:(NSString*)okMsg withCancel:(NSString*)cancelMsg
@@ -88,7 +88,7 @@
 -(void)setPresetsForItems:(NSArray*)items
 {
 	if(items == nil || [items count] == 0) return;
-	
+
 	if(_prestsView == nil)
 	{
 		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -99,17 +99,17 @@
 		{
 			_prestsView = [[PresetsView alloc] initWithFrame:presets_rect2 items:nil dele:self btnWidth:42.0 btnHeight:32.0];
 		}
-		
+
 		[self addSubview:_prestsView];
 	}
-	
+
 	[_prestsView setButtonsForItems:items];
 
 }
 -(void)setTintsForItems:(NSArray*)items
 {
 	if(items == nil || [items count] == 0) return;
-	
+
 	if(_tintsView == nil)
 	{
 		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -123,7 +123,7 @@
 
 		[self addSubview:_tintsView];
 	}
-	
+
 	[_tintsView setButtonsForItems:items];
 }
 -(void)setAdjustsForExpinside:(float)expInside expOutside:(float)expOutside contrast:(float)contrast
@@ -135,12 +135,12 @@
 		{
 			adjustFrame = adjusts_rect_iPad;
 		}
-		
+
 		_adjustView = [[AdjustView alloc] initWithFrame:adjustFrame];
 		[_adjustView setDelegate:self];
 		[self addSubview:_adjustView];
 	}
-	
+
 	[_adjustView setAdjustByExpinside:expInside expOutside:expOutside contrast:contrast];
 }
 -(void)rotatePresetShowViewForTransform:(CGAffineTransform)transfm

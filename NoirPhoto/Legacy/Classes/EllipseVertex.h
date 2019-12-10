@@ -3,14 +3,14 @@
 //  Quartz
 //
 //  Created by jack on 5/31/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2019 Zinc Collective, LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
 @interface EllipseVertex : NSObject {
-	
+
 	CGPoint left;
 	CGPoint right;
 	CGPoint top;

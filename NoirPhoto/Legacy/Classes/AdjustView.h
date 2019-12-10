@@ -3,7 +3,7 @@
 //  Noir
 //
 //  Created by mac on 10-7-14.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2019 Zinc Collective, LLC. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -24,15 +24,15 @@
 
 @interface AdjustView : UIView <CustomPickerDelegate> {
 
-	
+
 	CustomPickerView *_expInsidePicker;
 	CustomPickerView *_expOutsidePicker;
 	CustomPickerView *_expContrastPicker;
-	
+
 	float _expInside;
 	float _expOutside;
 	float _contrast;
-	
+
 	UIImageView *maskView;
 }
 

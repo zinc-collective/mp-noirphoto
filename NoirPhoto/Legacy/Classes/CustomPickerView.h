@@ -3,7 +3,7 @@
 //  Noir
 //
 //  Created by mac on 10-12-6.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2019 Zinc Collective, LLC. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -20,14 +20,14 @@
 @interface CustomPickerView : UIView <UIScrollViewDelegate, RScrollViewDelegate> {
 
 	RScrollView *_scrollView;
-	
+
 	float _minValue;
 	float _maxValue;
 	float _useHeight;
 	float _useOffset;
-	
+
 	BOOL _bOutSet;
-	
+
 	float defaultValue;
 }
 

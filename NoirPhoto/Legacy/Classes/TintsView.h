@@ -3,10 +3,10 @@
 //  Noir
 //
 //  Created by mac on 10-7-5.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2019 Zinc Collective, LLC. All rights reserved.
 //
 
-//PS:this module now only&should can support 4 tints item, can not less&more than 4 tints  
+//PS:this module now only&should can support 4 tints item, can not less&more than 4 tints
 
 
 #import <UIKit/UIKit.h>
@@ -35,10 +35,10 @@ typedef enum{
 
 	NSArray *_buttons;
 	NSArray *_items;
-	
+
 	float _btnWidth;  //in this module, the widht default frame.width/2 for pfMartix, frame.width/4 for pfLine, can not be changed by outside
 	float _btnHeight; //in this module, the height default frame.height/2 for pfMartix, frame.width for pfLine, can not be changed by outside
-	
+
 	PostionFormat _posformat;
 }
 
@@ -49,13 +49,13 @@ typedef enum{
 #pragma mark out use function @overwrite system function
 //the item is NSDictionary type, the key-value pair include: "data"->data, "image"->image
 //if set height=0 use default height and width
-- (id)initWithFrame:(CGRect)frame items:(NSArray*)items dele:(id)dele posformat:(PostionFormat)posformat btnWidth:(float)width btnHeight:(float)height; 
+- (id)initWithFrame:(CGRect)frame items:(NSArray*)items dele:(id)dele posformat:(PostionFormat)posformat btnWidth:(float)width btnHeight:(float)height;
 
 
 
 #pragma mark -
 #pragma mark in/out use functions
--(void)setButtonsForItems:(NSArray*)items; //additional using this function if there are no items when useing "initWithFrame" function, the paramater "items" is just like the "initWithFrame" 
+-(void)setButtonsForItems:(NSArray*)items; //additional using this function if there are no items when useing "initWithFrame" function, the paramater "items" is just like the "initWithFrame"
 -(void)chooseButtonForIndex:(NSInteger)index bReturnToDelegate:(BOOL)bReturnTodele; //each time only a button has disable state
 -(void)setBackGroundWithImage:(UIImage*)bgImage orColor:(UIColor*)bgColor; //first Priority is image, if image==nil use color, if color==nil use default clearColor
 

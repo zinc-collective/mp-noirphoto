@@ -3,7 +3,7 @@
 //  Noir
 //
 //  Created by jack on 6/4/10.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//  Copyright 2019 Zinc Collective, LLC. All rights reserved.
 //
 
 #import "NoirViewControllerLegacy.h"
@@ -100,9 +100,9 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         // Custom initialization
-		
-		
-		
+
+
+
     }
     return self;
 }
@@ -114,7 +114,7 @@ void loadGaindLUT()
 	//load LUTs
 	//
 	UIImage *briteImg = [UIImage imageNamed:@"NOIR_brite_LUT.png"];
-	CFDataRef briteLUTData = CGDataProviderCopyData(CGImageGetDataProvider(briteImg.CGImage));	
+	CFDataRef briteLUTData = CGDataProviderCopyData(CGImageGetDataProvider(briteImg.CGImage));
 	int *m_briteLUTdata = (int *)CFDataGetBytePtr(briteLUTData);
 	uint8_t *britePtr = (unsigned char *)&m_briteLUTdata[0];
 	for (int i = 0; i < 256; i++)
@@ -122,11 +122,11 @@ void loadGaindLUT()
 		briteLUT[i] = *britePtr;
 		britePtr += 4;
 		//NSLog(@"%d %d",i,briteLUT[i]);
-	}		
+	}
 	CFRelease(briteLUTData);
-	
+
 	UIImage *darkImg = [UIImage imageNamed:@"NOIR_dark_LUT.png"];
-	CFDataRef darkLUTData = CGDataProviderCopyData(CGImageGetDataProvider(darkImg.CGImage));	
+	CFDataRef darkLUTData = CGDataProviderCopyData(CGImageGetDataProvider(darkImg.CGImage));
 	int *m_darkLUTdata = (int *)CFDataGetBytePtr(darkLUTData);
 	uint8_t *darkPtr = (unsigned char *)&m_darkLUTdata[0];
 	for (int i = 0; i < 256; i++)
@@ -134,7 +134,7 @@ void loadGaindLUT()
 		darkLUT[i] = *darkPtr;
 		darkPtr += 4;
 		//NSLog(@"%d %d",i,darkLUT[i]);
-	}		
+	}
 	CFRelease(darkLUTData);
 }
 
@@ -169,32 +169,32 @@ void loadGaindLUT()
 	imagePicker = [[UIImagePickerController alloc] init];
 	imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 	imagePicker.delegate = self;
-	
+
 	_bRendering = NO;
 	_bSavingOriginPhoto = NO;
-	
+
 	[self setPresetUseImageForDevice];
-	
-	
+
+
 	//self.view.backgroundColor = [UIColor blackColor];
-	
+
 	[[RConfigFile sharedConfig] CheckAndCreateFileForName:presets_plist_current];
 	[[RConfigFile sharedConfig] CheckAndCreateFileForName:presets_plist_default];
-	
-	
+
+
 	//check the version
 	[self checkTheVersionAndMoveThePresetPlist];
-	
-	// Load LUTs from NOIR_brite_LUT.png and NOIR_dark_LUT.png	
+
+	// Load LUTs from NOIR_brite_LUT.png and NOIR_dark_LUT.png
 	//	for(int i=0; i<256; i++)
 	//	{
 	//		briteLUT[i] = pixel_brite;
 	//		darkLUT[i] = pixel_dark;
 	//	}
-	
-	
+
+
 	loadGaindLUT();
-	
+
 	//add photo view
 	CGRect photoViewRect = photo_view_rect;
     if (IS_IPHONE_5)
@@ -203,61 +203,61 @@ void loadGaindLUT()
 	{
 		photoViewRect = photo_view_rect_ipad;
 	}
-	
+
 	UIImageView *pView = [[UIImageView alloc] initWithFrame:photoViewRect];
 	self.photoView = pView;
 	self.photoView.contentMode = UIViewContentModeScaleAspectFit;
 	[self.view insertSubview:self.photoView atIndex:0];
-	
-	
+
+
 	// baiwei for full view
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
-		//init phont full view 
+		//init phont full view
 		CGRect photoFullViewRect = photo_full_view_rect_ipad;
 		UIImageView *pFullView = [[UIImageView alloc] initWithFrame:photoFullViewRect];
 		self.photoFullView = pFullView;
 		self.photoFullView.contentMode = UIViewContentModeScaleAspectFit;
-		
-		
+
+
 		//init full vignette view
 		CGRect ellipseFullViewRect = ellipse_full_view_rect_ipad;
 		_vignetteFullView = [[VignetteView alloc] initWithFrame:ellipseFullViewRect];
 		_vignetteFullView.delegate = self;
-		
-		
+
+
 		//fullBtn
         fullBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 		fullBtn.frame = CGRectMake(725, 5-3, 40, 40);
 		fullBtn.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
 		[fullBtn  setImage:[UIImage imageNamed:@"down_panel.png"] forState:UIControlStateNormal];
 	} else { //iphone
-		
+
 		//fullBtn
         fullBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 		fullBtn.frame = CGRectMake(286, -5, 40, 40);
 		fullBtn.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
 		[fullBtn  setImage:[UIImage imageNamed:@"down_panel.png"] forState:UIControlStateNormal];
 	}
-    
-    
+
+
     [fullBtn addTarget:self action:@selector(toggleFull) forControlEvents:UIControlEventTouchUpInside];
-    
-    
+
+
 	blackBackground = [[UIView alloc]initWithFrame:CGRectMake(0.0, 0.0, 1024, 1024)];
 	blackBackground.backgroundColor = [UIColor blackColor];
-	
+
 	//reload metadata
 	NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
 	NSString *path=[paths    objectAtIndex:0];
-	NSString *filename=[path stringByAppendingPathComponent:metadata_plist];  
+	NSString *filename=[path stringByAppendingPathComponent:metadata_plist];
 	BOOL success = [[NSFileManager defaultManager] fileExistsAtPath:filename];
 	if(success) {
 		self.imageMetadata=[[NSMutableDictionary alloc] initWithContentsOfFile:filename];
-		
+
 		NSLog(@"loadImageMetadataFromDoc=%@", self.imageMetadata);
 	}
-	
+
 	//add ellipse view
 	/*
 	 _ellipseView = [[QuartzView alloc] initWithFrame:ellipse_view_rect];
@@ -265,7 +265,7 @@ void loadGaindLUT()
 	 //[self.view addSubview:_ellipseView];
 	 [self.view insertSubview:_ellipseView atIndex:1];
 	 */
-	
+
 	//add vignette view
 	CGRect ellipseViewRect = ellipse_view_rect;
     if (IS_IPHONE_5)
@@ -274,24 +274,24 @@ void loadGaindLUT()
 	{
 		ellipseViewRect = ellipse_view_rect_ipad;
 	}
-	
+
 	_vignetteView = [[VignetteView alloc] initWithFrame:ellipseViewRect];
 	_vignetteView.delegate = self;
 	[self.view insertSubview:_vignetteView atIndex:1];
-	
+
 	//initialize data
 	self.tints = [self tintsInitialization];
 	self.tintsItems = [self tintsItemsWithTints:self.tints];
-	
+
 	self.presetsItems = [self presetsItemsFromPlist:presets_plist_current];
-	
+
     // Use the first present. Don't load the one from last time
 	self.presetsChooseIndex = 0;
 	NSDictionary *itemDic = [self.presetsItems objectAtIndex:self.presetsChooseIndex];
 	self.preset = (Preset*)[itemDic objectForKey:@"data"];
 	_bPreseting = YES;
-	
-	
+
+
 	//add control pad view
 	CGRect ctrlPadViewRect = ctrl_pad_view_rect;
     if (IS_IPHONE_5)
@@ -300,13 +300,13 @@ void loadGaindLUT()
 	{
 		ctrlPadViewRect = ctrl_pad_view_rect_ipad;
 	}
-	
+
 	_ctrlPadView = [[ControlPadView alloc] initWithFrame:ctrlPadViewRect];
 	[_ctrlPadView setDelegate:self];
 	[self initElementsForControlPad];
 	[self.view insertSubview:_ctrlPadView atIndex:2];
-	
-	
+
+
 	//add saving mask
 	UIView *smView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height)];
 	self.savingMaskView = smView;
@@ -314,7 +314,7 @@ void loadGaindLUT()
 	self.savingMaskView.alpha = 0.5;
 	self.savingMaskView.hidden = YES;
 	[self.view addSubview:self.savingMaskView];
-	
+
 	//add saving spinner
 	UIActivityIndicatorView *smSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 	smSpinner.frame = CGRectMake((self.view.frame.size.width-25.0)/2, (self.view.frame.size.height-25.0)/2, 25.0, 25.0);
@@ -322,8 +322,8 @@ void loadGaindLUT()
 	self.savingSpinner.hidden = YES;
 	[self.savingSpinner stopAnimating];
 	[self.view addSubview:self.savingSpinner];
-    
-    
+
+
     //bret button fix-up for the 4 inch display
     if (IS_IPHONE_5)
     {
@@ -334,11 +334,11 @@ void loadGaindLUT()
         frame = saveBtn.frame;
         frame.origin.y += IPHONE5_HEIGHT_DIFFERENCE;
         saveBtn.frame = frame;
-        
+
         frame = infoBtn.frame;
         frame.origin.y += IPHONE5_HEIGHT_DIFFERENCE;
         infoBtn.frame = frame;
-        
+
         frame = tintMaskView.frame;
         frame.origin.y += IPHONE5_HEIGHT_DIFFERENCE;
         tintMaskView.frame = frame;
@@ -350,15 +350,15 @@ void loadGaindLUT()
 	[_ctrlPadView chooseTintsBtnForIndex:self.preset.tintIndex bNeedReturn:NO];
 	[_ctrlPadView setAdjustsForExpinside:self.preset.expInside expOutside:self.preset.expOutside contrast:self.preset.contrast];
 	[self changeTintMaskForIndex:self.preset.tintIndex];
-	
+
 	[self initUsedPropertiesAndUIForOriginPhoto:image];
-	
+
 }
 
 - (void)didReceiveMemoryWarning
 {
 	NSLog(@"memory warnning, restore the renderedPhoto");
-	
+
 	if(self.photoView != nil && self.renderedPhoto != nil)
 	{
 		self.photoView.image = self.renderedPhoto;
@@ -377,43 +377,43 @@ void loadGaindLUT()
 {
 	self.preset = [self presetReadFromPlistByIndex:index];
 	if(self.preset == nil) return;
-	
+
 	self.presetsChooseIndex = index;
 	[self setPresetsItemsChooseStateForIndex:self.presetsChooseIndex];
-	
+
 	//save the presetsItems to pList
 	//[self saveToPlistForPresetItems:self.presetsItems];
-	
+
 	//set vignette position
 	Parameter *param = [self parameterWithPreset:self.preset];
 	[_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
-	
+
 	//set tint and adjust position
 	[_ctrlPadView chooseTintsBtnForIndex:self.preset.tintIndex bNeedReturn:NO];
 	[_ctrlPadView setAdjustsForExpinside:self.preset.expInside expOutside:self.preset.expOutside contrast:self.preset.contrast];
-	
+
 	//change mask
 	[self changeTintMaskForIndex:self.preset.tintIndex];
-	
+
 	//render
 	[self renderPhotoViewForPreset:self.preset useImage:self.photo changeType:typePreset actioning:NO];
-	
-	
+
+
 	_bPreseting = YES;
-	
+
 }
 -(void)tintsChooseIndex:(NSInteger)index data:(id)data
 {
 	self.preset.tintIndex = index;
-	
+
 	//change mask
 	[self changeTintMaskForIndex:index];
-	
+
 	//remove select state of presets buttons
 	[_ctrlPadView choosePresetsBtnForIndex:-1 bNeedReturn:NO];
 	_bPreseting = NO;
-	
-	
+
+
 	//render
 	[self renderPhotoViewForPreset:self.preset useImage:self.photo changeType:typeTint actioning:NO];
 }
@@ -425,12 +425,12 @@ void loadGaindLUT()
 		[_ctrlPadView choosePresetsBtnForIndex:-1 bNeedReturn:NO];
 		_bPreseting = NO;
 	}
-	
-	
+
+
 	self.preset.expInside = expInside;
 	self.preset.expOutside = expOutside;
 	self.preset.contrast = contrast;
-	
+
 	//render
 	if(isFinal)
 	{
@@ -443,29 +443,29 @@ void loadGaindLUT()
 		//use self.adjustPhoto
 		[self renderPhotoViewForPreset:self.preset useImage:self.adjustPhoto changeType:typeAdjust actioning:YES];
 	}
-	
+
 }
 -(void)presetsResetToDefault
 {
 	self.presetsItems = [self presetsItemsFromPlist:presets_plist_default];
 	self.presetsChooseIndex = [self chooseIndexForPresets:self.presetsItems];
-	
+
 	[_ctrlPadView setPresetsForItems:self.presetsItems];
 	[_ctrlPadView choosePresetsBtnForIndex:self.presetsChooseIndex bNeedReturn:YES];
-	
+
 	if(self.presetsChooseIndex == -1)
-	{	
+	{
 		[_ctrlPadView chooseTintsBtnForIndex:-1 bNeedReturn:NO];
 		[_ctrlPadView setAdjustsForExpinside:inside_slider_default_value expOutside:outside_slider_default_value contrast:contrast_slider_default_valut];
-		
+
 		self.preset = nil;
 		[self renderPhotoViewForPreset:self.preset useImage:self.photo changeType:typeNone actioning:NO];
 	}
-	
-	
+
+
 	//save the presetsItems to pList
 	[self saveToPlistForPresetItems:self.presetsItems];
-	
+
 }
 -(void)overWritePresetToIndex:(NSInteger)index
 {
@@ -482,16 +482,16 @@ void loadGaindLUT()
 	ovPreset.ellipseB = self.preset.ellipseB;
 	ovPreset.ellipseAngle = self.preset.ellipseAngle;
 	ovPreset.selected = YES;
-	
-	
+
+
 	//replace the data for current preset
 	NSMutableDictionary *item = [self.presetsItems objectAtIndex:index];
 	[item setObject:ovPreset forKey:@"data"];
-	
+
 	//根据preset获取相应的review图片，并设定到items里面
     // "Obtain the appropriate review under preset picture and set it to items inside" (via Google Translate)
 	self.mCircleImageName = [self circleImageNameForState:1];//@"circle_preset.png";
-	
+
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
 		UIImage *renImage = [self imageForPreset:self.preset useImage:[UIImage imageNamed:self.mPresetReviewImageName]];//@"preset_review.png"
@@ -510,18 +510,18 @@ void loadGaindLUT()
 		[item setObject:imageSel forKey:@"image_sel"];
 	}
 
-	
+
 	//select the overwrite presets buttons
 	self.presetsChooseIndex = index;
 	[_ctrlPadView setPresetsForItems:self.presetsItems];
 	[_ctrlPadView choosePresetsBtnForIndex:self.presetsChooseIndex bNeedReturn:NO];
-	
+
 	//set the choose state for all presets
 	[self setPresetsItemsChooseStateForIndex:self.presetsChooseIndex];
-	
+
 	//save the presetsItems to pList
 	[self saveToPlistForPresetItems:self.presetsItems];
-	
+
 	//reload the presetsItems
 	self.presetsItems = [self presetsItemsFromPlist:presets_plist_current];
 	self.preset = [self presetReadFromPlistByIndex:self.presetsChooseIndex];
@@ -529,15 +529,15 @@ void loadGaindLUT()
 
 //UIImagePickerController
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{	
+{
 	//if(_bSavingOriginPhoto) return;
     //bret
     imagePickerOnScreen = NO;
 	NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
     UIImage * selected = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
+
     [self pickPhoto:assetURL image:selected];
-	
+
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
 		[self.imagePickerPopover dismissPopoverAnimated:YES];
@@ -551,87 +551,87 @@ void loadGaindLUT()
 }
 
 -(void)pickPhoto:(NSURL*)assetURL image:(UIImage*)selected {
-	
+
 	if(selected == nil) return;
-    
+
 //	float version = [[[UIDevice currentDevice] systemVersion] floatValue];
-//	
+//
 //	if (version > 4.1) {
-		
+
 		ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
 		[library assetForURL:assetURL
 				 resultBlock:^(ALAsset *asset)  {
 					 NSDictionary *metadata = asset.defaultRepresentation.metadata;
-					 
+
 					 //NSLog(@"metadata=, %@", metadata);
-					 
+
 					 //imageMetadata = nil;
 					 self.imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:metadata];
 					 //[self addEntriesFromDictionary:metadata];
-					 
+
 					 NSLog(@"loadImageMetadataFromPic=%@", self.imageMetadata);
-					 
+
 					 NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
 					 NSString *path=[paths    objectAtIndex:0];
-					 NSString *filename=[path stringByAppendingPathComponent:metadata_plist];    
-					 
+					 NSString *filename=[path stringByAppendingPathComponent:metadata_plist];
+
 					 [imageMetadata writeToFile:filename  atomically:YES];
 				 }
 				failureBlock:^(NSError *error) {
 				}];
 //	} else {
 //		imageMetadata = nil;
-//		
+//
 //		NSFileManager *fileManage = [NSFileManager defaultManager];
 //		NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
 //		NSString *path=[paths    objectAtIndex:0];
 //		[fileManage removeItemAtPath:[path stringByAppendingPathComponent: metadata_plist] error:nil];
-//		
-//		
+//
+//
 //	}
-	
+
 	//NSLog(@"selected origation: %d", selected.imageOrientation);
-	
-	/*	
-	 
+
+	/*
+
 	 //save the source photo
 	 self.sourcePhoto = selected;
-	 
+
 	 //save the orientation
 	 _sourceOrientation = selected.imageOrientation;
-	 
+
 	 //calculate the render Rect
 	 CGRect photoPlaceRect = [self photoRenderRectForImageSize:selected.size withImageViewRect:photo_view_rect];
-	 
+
 	 //got self.photo
 	 self.photo = [self imageWithImage:selected scaledToSize:CGSizeMake(photoPlaceRect.size.width, photoPlaceRect.size.height)];
-	 
+
 	 //add alpha
 	 self.photo = [self imageAddAlphaForImage:self.photo];
-	 
-	 
+
+
 	 //got photo renderRect
 	 _photoRenderRect = [self photoRenderRectForImageSize:self.photo.size withImageViewRect:photo_view_rect];
-	 
-	 
+
+
 	 //render the photo
 	 [self renderPhotoViewForPreset:self.preset useImage:self.photo changeType:typeNone actioning:NO];
-	 
-	 
+
+
 	 //set vignette position
 	 Parameter *param = [self parameterWithPreset:self.preset];
 	 [_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
-	 
-	 
+
+
 	 //make out the adjustPhoto
 	 self.adjustPhoto = [self imageWithImage:self.photo scaledToSize:CGSizeMake(self.photo.size.width/2,self.photo.size.height/2)];
 	 self.adjustPhoto = [self imageAddAlphaForImage:self.adjustPhoto];
 	 */
-	
-	
+
+
 	//初始化使用限制过的的图片
 	[self initUsedPropertiesAndUIForOriginPhoto:selected];
-	
+
 	//save origin photo
 	_bSavingOriginPhoto = YES;
 	[NSThread detachNewThreadSelector:@selector(saveOriginPhoto:) toTarget:self withObject:self.sourcePhoto];
@@ -659,13 +659,13 @@ void loadGaindLUT()
 			_bPreseting = NO;
 		}
 	}
-	
+
 	self.preset.ellipseCenterX	= parameter.ellipseCenterX;
 	self.preset.ellipseCenterY	= parameter.ellipseCenterY;
 	self.preset.ellipseA		= parameter.ellipseA;
 	self.preset.ellipseB		= parameter.ellipseB;
 	self.preset.ellipseAngle	= parameter.ellipseAngle;
-	
+
 	//render
 	if(isFinal)
 	{
@@ -688,7 +688,7 @@ void loadGaindLUT()
 }
 
 
-    
+
 -(void)toggleFull
 {
     [UIView beginAnimations:@"rotate" context:nil];
@@ -696,78 +696,78 @@ void loadGaindLUT()
     [UIView setAnimationDuration:0.3];
     [UIView setAnimationDelegate:self];
     //[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:photoFullView cache:YES];
-    
+
     if (isFull == NO) {
-        
+
         Parameter *param = [self parameterWithPreset:self.preset];
-        
+
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             ctrl_pad_offset = 256 - ctrl_pad_head_ipad;
             photoView.frame = photo_full_view_rect_ipad2;
         } else { //iphone
             ctrl_pad_offset = 240 - ctrl_pad_head;
             photoView.frame = photo_full_view_rect2;
-            
+
             if (IS_IPHONE_5) {
                 photoView.frame = photo_full_view_rect2_iphone5;
             }
         }
-        
+
         photoView.image = renderedPhoto;
-        
+
         //full vignette view
         _vignetteView.frame = photoView.frame;
-        
+
         _photoRenderRect2 = _photoRenderRect;
         _photoRenderRect = [self photoRenderRectForImageSize:self.photo.size withImageViewRect:photoView.frame];
         [_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
-        
+
         [fullBtn  setImage:[UIImage imageNamed:@"up_panel.png"] forState:UIControlStateNormal];
-        
+
         _ctrlPadView.center = CGPointMake(_ctrlPadView.center.x, _ctrlPadView.center.y+ctrl_pad_offset);
         tintMaskView.center = CGPointMake(tintMaskView.center.x, tintMaskView.center.y+ctrl_pad_offset);
         loadBtn.center = CGPointMake(loadBtn.center.x, loadBtn.center.y+ctrl_pad_offset);
         saveBtn.center = CGPointMake(saveBtn.center.x, saveBtn.center.y+ctrl_pad_offset);
         infoBtn.center = CGPointMake(infoBtn.center.x, infoBtn.center.y+ctrl_pad_offset);
-        
+
         [_ctrlPadView addSubview:fullBtn];
-        
+
         isFull = YES;
     } else { //full
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             photoView.frame = photo_view_rect_ipad;
             photoView.image = renderedPhoto;
-            
+
             _vignetteView.frame = photo_view_rect_ipad;
         } else { //iphone
             photoView.frame = photo_view_rect;
             if (IS_IPHONE_5)
                 photoView.frame = photo_view_rect_iphone5;
-            
+
             photoView.image = renderedPhoto;
-            
+
             _vignetteView.frame = photo_view_rect;
             if (IS_IPHONE_5)
                 _vignetteView.frame = photo_view_rect_iphone5;
         }
-        
+
         [fullBtn  setImage:[UIImage imageNamed:@"down_panel.png"] forState:UIControlStateNormal];
-        
+
         _ctrlPadView.center = CGPointMake(_ctrlPadView.center.x, _ctrlPadView.center.y-ctrl_pad_offset);
         tintMaskView.center = CGPointMake(tintMaskView.center.x, tintMaskView.center.y-ctrl_pad_offset);
         loadBtn.center = CGPointMake(loadBtn.center.x, loadBtn.center.y-ctrl_pad_offset);
         saveBtn.center = CGPointMake(saveBtn.center.x, saveBtn.center.y-ctrl_pad_offset);
         infoBtn.center = CGPointMake(infoBtn.center.x, infoBtn.center.y-ctrl_pad_offset);
-        
+
         Parameter *param = [self parameterWithPreset:self.preset];
-        
+
         _photoRenderRect = _photoRenderRect2;
         [_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
-        
+
         isFull = NO;
     }
-    
-    
+
+
     [UIView commitAnimations];
 }
 
@@ -776,17 +776,17 @@ void loadGaindLUT()
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
 		if(imagePickerPopover==nil){
-			
+
 			UIPopoverController *ipPopover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
 			self.imagePickerPopover = ipPopover;
-			
+
 			self.imagePickerPopover.delegate = self;
 			self.imagePickerPopover.popoverContentSize = CGSizeMake(320, 480);
-            
+
             //self.imagePickerPopover.popoverArrowDirection = UIPopoverArrowDirectionAny;
 
 		}
-		
+
 		UIButton *btn = (UIButton*)sender;
 		CGRect popFrom;
 		if(btn == self.loadBtn)
@@ -797,15 +797,15 @@ void loadGaindLUT()
 		{
 			popFrom = CGRectMake(585, 795, 50, 50);
 		}
-        
+
 //        CGAffineTransform m = CGAffineTransformMakeRotation(M_PI/2.0);
 //        imagePickerPopover.transform = m;
-        
+
 		[self.imagePickerPopover presentPopoverFromRect:popFrom
 												 inView:btn
 							   permittedArrowDirections:UIPopoverArrowDirectionAny
 											   animated:YES];
-		
+
 		self.loadBtn.enabled = NO;
 	}
 	else
@@ -818,7 +818,7 @@ void loadGaindLUT()
 //		picker.delegate = self;
 //		[self presentModalViewController:picker animated:YES];
 //		[picker release];
-		
+
 	}
 }
 -(IBAction)infoAction:(id)sender
@@ -828,7 +828,7 @@ void loadGaindLUT()
 	{
 		infoNibName = @"Info-iPad";
 	}
-	
+
     UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Info" bundle:NULL];
     UIViewController * vc = [sb instantiateViewControllerWithIdentifier:@"InfoViewController"];
     [self.navigationController pushViewController:vc animated:true];
@@ -839,13 +839,13 @@ void loadGaindLUT()
 	//add presets
 	[_ctrlPadView setPresetsForItems:self.presetsItems];
 	[_ctrlPadView choosePresetsBtnForIndex:self.presetsChooseIndex bNeedReturn:NO];
-	
+
 	[_ctrlPadView addSubview:fullBtn];
-	
+
 	//add reset Reset button
 	//[_ctrlPadView setResetBtnForPresets];
-	
-	
+
+
 	//add tints
 	[_ctrlPadView setTintsForItems:self.tintsItems];
 	if(self.presetsChooseIndex != -1)
@@ -853,7 +853,7 @@ void loadGaindLUT()
 		[_ctrlPadView chooseTintsBtnForIndex:self.preset.tintIndex bNeedReturn:NO];
 		[self changeTintMaskForIndex:self.preset.tintIndex];
 	}
-	
+
 	//add Adjusts
 	if(self.presetsChooseIndex != -1)
 	{
@@ -863,7 +863,7 @@ void loadGaindLUT()
 	{
 		[_ctrlPadView setAdjustsForExpinside:inside_slider_default_value expOutside:outside_slider_default_value contrast:contrast_slider_default_valut];
 	}
-	
+
 }
 -(NSArray*)presetsItemsFromPlist:(NSString*)fileName
 {
@@ -871,17 +871,17 @@ void loadGaindLUT()
 	//read out all presets from plist
 	NSArray *allPresets = [self allPresetsReadFromPlist:fileName];
 	if(allPresets == nil || [allPresets count] == 0) return nil;
-	
+
 	//make up all presets items form all presets
     NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:6];
 	for(Preset *apreset in allPresets)
 	{
         NSMutableDictionary *item = [[NSMutableDictionary alloc] init];
 		[item setObject:apreset forKey:@"data"];
-		
+
 		//根据preset获取相应的review图片，并设定到items里面
 		self.mCircleImageName = [self circleImageNameForState:1];//@"circle_preset.png";
-		
+
 		if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 		{
 			UIImage *renImage = [self imageForPreset:apreset useImage:[UIImage imageNamed:self.mPresetReviewImageName]];//@"preset_review.png"
@@ -900,24 +900,24 @@ void loadGaindLUT()
 			[item setObject:imageSel forKey:@"image_sel"];
 		}
 
-		
+
 		[items addObject:item];
 	}
-	
+
 	return items;
 }
 -(void)saveToPlistForPresetItems:(NSArray*)presetItems
 {
 	if(presetItems == nil || [presetItems count] == 0) return;
-	
+
     NSMutableArray *allPresetDics = [[NSMutableArray alloc] initWithCapacity:6];
-	
+
 	//for(NSDictionary *itemDic in presetItems)
 	for(int i=0; i<[presetItems count]; i++)
 	{
 		NSDictionary *itemDic = [presetItems objectAtIndex:i];
 		Preset *apreset = (Preset*)[itemDic objectForKey:@"data"];
-		
+
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:11];
 		[dic setObject:[NSNumber numberWithInt:i] forKey:@"index"];
 		[dic setObject:[NSNumber numberWithFloat:apreset.expInside] forKey:@"expInside"];
@@ -930,28 +930,28 @@ void loadGaindLUT()
 		[dic setObject:[NSNumber numberWithFloat:apreset.ellipseB] forKey:@"ellipseB"];
 		[dic setObject:[NSNumber numberWithFloat:apreset.ellipseAngle] forKey:@"ellipseAngle"];
 		[dic setObject:[NSNumber numberWithBool:apreset.selected] forKey:@"selected"];
-		
+
 		[allPresetDics addObject:dic];
 	}
-	
+
 	[[RConfigFile sharedConfig] DeleteConfigFileForName:presets_plist_current];
 	[[RConfigFile sharedConfig] WriteConfigArrayToFile:presets_plist_current withData:allPresetDics];
-	
+
 }
 -(Preset*)presetReadFromPlistByIndex:(NSInteger)index
 {
 	NSArray *allPresets = [self allPresetsReadFromPlist:presets_plist_current];
 	if(allPresets == nil || [allPresets count] == 0) return nil;
-	
+
 	return [allPresets objectAtIndex:index];
 }
 -(NSArray*)allPresetsReadFromPlist:(NSString*)fileName
 {
 	NSArray *allPresetDics = [[RConfigFile sharedConfig] ReadConfigArrayFromFile:fileName];
 	if(allPresetDics == nil || [allPresetDics count] == 0) return nil;
-	
+
     NSMutableArray *allPresets = [[NSMutableArray alloc] initWithCapacity:6];
-	
+
 	for(NSDictionary *dic in allPresetDics)
 	{
         Preset *apreset = [[Preset alloc] init];
@@ -966,46 +966,46 @@ void loadGaindLUT()
 		apreset.ellipseB = [(NSNumber*)[dic objectForKey:@"ellipseB"] floatValue];
 		apreset.ellipseAngle = [(NSNumber*)[dic objectForKey:@"ellipseAngle"] floatValue];
 		apreset.selected = [(NSNumber*)[dic objectForKey:@"selected"] boolValue];
-		
+
 		[allPresets addObject:apreset];
 	}
-	
+
 	return allPresets;
 }
 -(NSArray*)tintsItemsWithTints:(NSArray*)theTints
 {
 	if(theTints == nil || [theTints count] == 0) return nil;
-	
-	
+
+
     NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:4];
-	
+
 	for(int i=0; i<4; i++)
 	{
 		Tint *tint = (Tint*)[theTints objectAtIndex:i];
 		NSString *imageName    = [NSString stringWithFormat:@"tint_btn_%d.png", i];
 		NSString *imageNameSel = [NSString stringWithFormat:@"tint_btn_sel_%d.png", i];
-		
+
 		if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 		{
 			imageName    = [NSString stringWithFormat:@"tint_btn_iPad_%d.png", i];
 			imageNameSel = [NSString stringWithFormat:@"tint_btn_sel_iPad_%d.png", i];
 		}
-		
+
         NSMutableDictionary *item = [[NSMutableDictionary alloc] init];
 		[item setObject:[UIImage imageNamed:imageName] forKey:@"image"];
 		[item setObject:[UIImage imageNamed:imageNameSel] forKey:@"image_sel"];
 		[item setObject:tint forKey:@"data"];
-		
+
 		[items addObject:item];
 	}
-	
+
 	return items;
 }
 -(NSInteger)chooseIndexForPresets:(NSArray*)presets
 {
 	NSInteger index = 0; //-1
 	if(self.presetsItems == nil || [self.presetsItems count] == 0) return index;
-	
+
 	for(NSDictionary *itemDic in self.presetsItems)
 	{
 		Preset *apre = (Preset*)[itemDic objectForKey:@"data"];
@@ -1015,13 +1015,13 @@ void loadGaindLUT()
 			break;
 		}
 	}
-	
+
 	return index;
 }
 -(void)setPresetsItemsChooseStateForIndex:(NSInteger)chooseIndex
 {
 	if(self.presetsItems == nil || [self.presetsItems count] == 0) return;
-	
+
 	for(NSDictionary *itemDic in self.presetsItems)
 	{
 		Preset *apre = (Preset*)[itemDic objectForKey:@"data"];
@@ -1034,7 +1034,7 @@ void loadGaindLUT()
 			apre.selected = NO;
 		}
 	}
-	
+
 }
 
 
@@ -1050,8 +1050,8 @@ void loadGaindLUT()
 	renderArgs.ellipse_b		= apreset.ellipseB;
 	renderArgs.ellipse_angle	= apreset.ellipseAngle;
 	renderArgs.tint				= (int) apreset.tintIndex;
-	
-	
+
+
 	//-----for test
 	//	renderArgs.inExp			= 4.0;
 	//	renderArgs.outExp			= -3.0;
@@ -1062,8 +1062,8 @@ void loadGaindLUT()
 	//	renderArgs.ellipse_angle	= 0.0;
 	//	renderArgs.tint				= 3;
 	//-----
-	
-	
+
+
 	return renderArgs;
 }
 -(Parameter*)parameterWithPreset:(Preset*)aPreset
@@ -1074,15 +1074,15 @@ void loadGaindLUT()
 	param.ellipseA       = aPreset.ellipseA;
 	param.ellipseB		 = aPreset.ellipseB;
 	param.ellipseAngle   = aPreset.ellipseAngle;
-	
-	
+
+
 	return param;
 }
 -(void)renderPhotoViewForPreset:(Preset*)apreset useImage:(UIImage*)image changeType:(ChangeType)changeType actioning:(BOOL)bActioning
 {
 	if(apreset == nil) return;
 	if(image == nil) return;
-	
+
 	@synchronized(self)
 	{
 		if(bActioning)
@@ -1093,51 +1093,51 @@ void loadGaindLUT()
 		{
 			self.mCircleImageName = [self circleImageNameForState:2];//@"circle_show.png";
 		}
-		
-		
+
+
 		/*
 		 ffRenderArguments renderArgs = [self argumentsWithPreset:apreset];
 		 //self.photoView.image = [self renderForArguments:renderArgs useImage:image changeType:changeType];
 		 self.renderedPhoto = [self renderForArguments:renderArgs useImage:image changeType:changeType];
 		 self.photoView.image = self.renderedPhoto;
 		 */
-		
+
 		//use thread to render
 		if(_bRendering) return;
 		_bRendering = YES;
-		
+
         NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:3];
 		[params setObject:apreset forKey:@"render_preset"];
 		[params setObject:image forKey:@"render_image"];
 		[params setObject:[NSNumber numberWithInt:changeType] forKey:@"render_changeType"];
-		
+
 		[NSThread detachNewThreadSelector:@selector(threadRenderForArguments:) toTarget:self withObject:params];
 	}
 }
 -(void)threadRenderForArguments:(NSDictionary*)params
 {
 	if(params == nil) return;
-	
+
 	Preset *apreset = (Preset*)[params objectForKey:@"render_preset"];
 	UIImage *image = (UIImage*)[params objectForKey:@"render_image"];
 	ChangeType changeType = [(NSNumber*)[params objectForKey:@"render_changeType"] intValue];
-	
+
 	ffRenderArguments renderArgs = [self argumentsWithPreset:apreset];
 	self.renderedPhoto = [self renderForArguments:renderArgs useImage:image changeType:changeType];
 	self.photoView.image = self.renderedPhoto;
-	
+
 	self.photoFullView.image = self.renderedPhoto;
-	
+
 	_bRendering = NO;
 }
 
 -(UIImage*)imageForPreset:(Preset*)apreset useImage:(UIImage*)image
 {
 	if(image == nil) return nil;
-	
+
 	//add alpha
 	UIImage *alphaPhoto = [self imageAddAlphaForImage:image];
-	
+
 	ffRenderArguments renderArgs = [self argumentsWithPreset:apreset];
 	UIImage *newImage = [self renderForArguments:renderArgs useImage:alphaPhoto changeType:typeNone];
 	return newImage;
@@ -1146,22 +1146,22 @@ void loadGaindLUT()
 {
 	if(originImage == nil) return nil;
 	if(maskImage == nil) return nil;
-	
+
 	float oriX = (maskImage.size.width-originImage.size.width)/2;
 	float oriY = (maskImage.size.height-originImage.size.height)/2;
-	
+
 	CGSize coverSize = maskImage.size;
-	
+
 	UIGraphicsBeginImageContext(coverSize);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-	
+
     // full the color in the context
     CGContextSetFillColorWithColor(ctx, [UIColor clearColor].CGColor);
     CGContextFillRect(ctx, CGRectMake(0.0, 0.0, coverSize.width, coverSize.height));
-    
+
     // draw source image on the context
 	[maskImage drawInRect:CGRectMake(0.0, 0.0, maskImage.size.width, maskImage.size.height)];
-	
+
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
 		[originImage drawInRect:CGRectMake(oriX+2, oriY-2, originImage.size.width, originImage.size.height)];
@@ -1170,11 +1170,11 @@ void loadGaindLUT()
 	{
 		[originImage drawInRect:CGRectMake(oriX+3, oriY-3, originImage.size.width, originImage.size.height)];
 	}
-	
-	
-    UIImage* compiledPhoto = UIGraphicsGetImageFromCurrentImageContext();    
+
+
+    UIImage* compiledPhoto = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-	
+
 	//这个地方是把preset的图片缩小一半，用在本来都用大图的时候，暂时可以注释掉
     // "This place is reduced to half of the preset picture, could have been used in a large image, it can temporarily comment" (via Google Translate)
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
@@ -1185,7 +1185,7 @@ void loadGaindLUT()
 			compiledPhoto = [self imageWithImage:compiledPhoto scaledToSize:CGSizeMake(46.0, 40.0) renderedForUI:YES];
 		}
 	}
-	
+
     return compiledPhoto;
 }
 
@@ -1195,15 +1195,15 @@ void loadGaindLUT()
 	float y = 0; //viewRect.origin.y;
 	float w = viewRect.size.width;
 	float h = viewRect.size.height;
-	
+
 	float iw = imageSize.width;
 	float ih = imageSize.height;
-	
+
 	float px;
 	float py;
 	float pw;
 	float ph;
-	
+
 	if(iw/w >= ih/h)
 	{
 		pw = w;
@@ -1214,11 +1214,11 @@ void loadGaindLUT()
 		ph = h;
 		pw = (ph*iw)/ih;
 	}
-	
+
 	px = x + (w-pw)/2;
 	py = y + (h-ph)/2;
-	
-	
+
+
 	return CGRectMake(px, py, pw, ph);
 }
 
@@ -1229,21 +1229,21 @@ void loadGaindLUT()
 	CGImageRef CGImage = image.CGImage;
 	if (!CGImage)
 		return nil;
-	
+
 	// Parse CGImage info
 	//	size_t bpc		= CGImageGetBitsPerComponent(CGImage);
 	//	size_t bpp		= CGImageGetBitsPerPixel(CGImage);
 	//  if(bpp/bpc == 4) return image;
-	
-	
+
+
 	size_t imgWidth	= CGImageGetWidth(CGImage);
 	size_t imgHeight  = CGImageGetHeight(CGImage);
 	UInt8* buffer = (UInt8*)malloc(imgWidth * imgHeight * 4);
-	
-	
+
+
 	//	CFDataRef matteData = CGDataProviderCopyData(CGImageGetDataProvider(image.CGImage));
-	//	const UInt8* pixelPtr = CFDataGetBytePtr(matteData);	
-	
+	//	const UInt8* pixelPtr = CFDataGetBytePtr(matteData);
+
 	//	for(int i=0; i<imgWidth*imgHeight; ++i)
 	//	{
 	//		buffer[i*4+0] = pixelPtr[i*bpp/bpc+0];
@@ -1251,7 +1251,7 @@ void loadGaindLUT()
 	//		buffer[i*4+2] = pixelPtr[i*bpp/bpc+2];
 	//		buffer[i*4+3] = 255;
 	//	}
-	
+
 	CGColorSpaceRef	desColorSpace = CGColorSpaceCreateDeviceRGB();
 	CGContextRef bitmapContext = CGBitmapContextCreate(buffer,
 													   imgWidth,imgHeight,
@@ -1264,21 +1264,21 @@ void loadGaindLUT()
         // flip it- the image is upside down and all matte generation is right side up
         // we'll just work with it upright and not do the final flip at the end
         // This is mainly because UIImage's orientation property is read only
-        
+
         CGContextTranslateCTM(bitmapContext, 0, image.size.height);
         CGContextScaleCTM(bitmapContext, 1.0, -1.0);
     }
-    
+
     CGContextDrawImage(bitmapContext, CGRectMake(0.0, 0.0, (CGFloat)imgWidth, (CGFloat)imgHeight), image.CGImage);
-	
+
 	CGImageRef cgImage = CGBitmapContextCreateImage(bitmapContext);
 	UIImage* resultImage = [UIImage imageWithCGImage:cgImage];
-	
+
 	CFRelease(desColorSpace);
 	CFRelease(bitmapContext);
 	CFRelease(cgImage);
 	free(buffer);
-	
+
 	return resultImage;
 }
 
@@ -1299,32 +1299,32 @@ void loadGaindLUT()
         coregraphics_scaling = 0.0;
         isOpaque = NO;
     }
-    UIGraphicsBeginImageContextWithOptions(newSize, isOpaque, coregraphics_scaling);  
+    UIGraphicsBeginImageContextWithOptions(newSize, isOpaque, coregraphics_scaling);
 	//UIGraphicsBeginImageContext(newSize); // IMPORTANT Prior to iOS 4, this method was the only option available in the SDK.  It would always uses opaque = NO,  CoreGraphics pixel density scale = 1.0
-	
+
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	CGContextSetFillColorWithColor(ctx, [UIColor clearColor].CGColor);
     CGContextFillRect(ctx, CGRectMake(0.0, 0.0, newSize.width, newSize.height));
-	
+
 	// Tell the old image to draw in this new context, with the desired
 	// new size
 	[image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-	
+
 	// Get the new image from the context
 	UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-	
+
 	// End the context
 	UIGraphicsEndImageContext();
-    	
+
 	// Return the new image.
 	return newImage;
 }
 -(NSString*)circleImageNameForState:(NSInteger)state
 {
 	NSString *imageName;
-	
+
 	BOOL isIphone4 = [self checkIfiPhone4];
-	
+
 	if(state == 1)        //circle for preset
 	{
 		if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -1353,7 +1353,7 @@ void loadGaindLUT()
 		//		{
 		//			imageName = @"circle_show.png";
 		//		}
-		
+
 		//不管是不是iphone4都使用241x241的circle进行渲染
 		imageName = @"circle_show.png";
 	}
@@ -1365,14 +1365,14 @@ void loadGaindLUT()
 	{
 		imageName = @"circle.png";
 	}
-	
+
 	return imageName;
-	
+
 }
 -(UIImage*)circleImageForName:(NSString*)imageName
 {
 	if(imageName == nil || [imageName compare:@""] == NSOrderedSame) return nil;
-	
+
 	UIImage *circleImage = nil;
 	if([imageName compare:@"circle_preset_4.png"] == NSOrderedSame)
 	{
@@ -1422,7 +1422,7 @@ void loadGaindLUT()
 		}
 		circleImage = self.mCircleSave;
 	}
-	
+
 	return circleImage;
 }
 
@@ -1454,13 +1454,13 @@ void loadGaindLUT()
 -(BOOL)checkIfiPhone4
 {
 	size_t size;
-	sysctlbyname("hw.machine", NULL, &size, NULL, 0); 
+	sysctlbyname("hw.machine", NULL, &size, NULL, 0);
 	char *name = (char*) malloc(size);
 	sysctlbyname("hw.machine", name, &size, NULL, 0);
 	NSString *machine = [NSString stringWithCString:name encoding:NSUTF8StringEncoding];
 	//NSLog(@"%@", machine);
 	free(name);
-	
+
 	NSRange range  = [machine rangeOfString:@"iPhone3"];
 	if(range.length != 0)
 	{
@@ -1471,7 +1471,7 @@ void loadGaindLUT()
 	{
 		return YES;
 	}
-	
+
 	return NO;
 }
 
@@ -1479,26 +1479,26 @@ void loadGaindLUT()
 {
     int height = [[ UIScreen mainScreen ] bounds ].size.height;
 //    int width  = [[ UIScreen mainScreen ] bounds ].size.width;
-    
+
     return  ( fabs( ( double ) height - ( double )568 ) < DBL_EPSILON );
 }
 
 -(BOOL)checkIfPureiPhone4NotIncludeIPod4
 {
 	size_t size;
-	sysctlbyname("hw.machine", NULL, &size, NULL, 0); 
+	sysctlbyname("hw.machine", NULL, &size, NULL, 0);
 	char *name = (char*) malloc(size);
 	sysctlbyname("hw.machine", name, &size, NULL, 0);
 	NSString *machine = [NSString stringWithCString:name encoding:NSUTF8StringEncoding];
 	//NSLog(@"%@", machine);
 	free(name);
-	
+
 	NSRange range  = [machine rangeOfString:@"iPhone3"];
 	if(range.length != 0)
 	{
 		return YES;
 	}
-	
+
 	return NO;
 }
 
@@ -1506,17 +1506,17 @@ void loadGaindLUT()
 {
 	NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 	NSString *lastVersion = (NSString*)[[NSUserDefaults standardUserDefaults] objectForKey:@"version"];
-	
+
 	if(lastVersion != nil && [lastVersion compare:version] == NSOrderedSame) return;
-	
+
 	//remove the old plist
 	[[RConfigFile sharedConfig] DeleteConfigFileForName:presets_plist_current];
 	[[RConfigFile sharedConfig] DeleteConfigFileForName:presets_plist_default];
-	
+
 	//move plist to document
 	[[RConfigFile sharedConfig] MoveBundleFileToDocument:presets_plist_current];
 	[[RConfigFile sharedConfig] MoveBundleFileToDocument:presets_plist_default];
-	
+
 }
 -(void)startWait
 {
@@ -1533,25 +1533,25 @@ void loadGaindLUT()
 -(void)initUsedPropertiesAndUIForOriginPhoto:(UIImage*)originPhoto
 {
 	[NSThread detachNewThreadSelector:@selector(startWait) toTarget:self withObject:nil];
-	
-	
+
+
 	//注意：调用这个函数之前，必须保证self.preset已经初始化过了
 	//选取photo view rect
     // "Note: Before calling this function, you must ensure that self.preset already initialized the selected photo view rect"  (via Google Translate)
 	CGRect photoViewRect = photo_view_rect;
     if (IS_IPHONE_5)
         photoViewRect = photo_view_rect_iphone5;
-    
+
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
 		photoViewRect = photo_view_rect_ipad;
 	}
-	
-	
+
+
 	//save the orientation
 	_sourceOrientation = originPhoto.imageOrientation;
-	
-	
+
+
 	//限制一下图片的大小，如果过大，就裁剪到合适的尺寸
     // "Click image size restrictions, if too large, cut to the appropriate size"  (via Google Translate)
 	float limitPixel;
@@ -1590,15 +1590,15 @@ void loadGaindLUT()
     //
     //originPhoto = [self limitedSourcePhoto:originPhoto forLimitPixel:limitPixel];
     //
-	
-	
+
+
 	//save the source photo
 	self.sourcePhoto = originPhoto;
 
-	
+
 	//calculate the render Rect
     CGRect photoPlaceRect = [self photoRenderRectForImageSize:originPhoto.size withImageViewRect:photoViewRect];
-	
+
 	//got self.photo
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
@@ -1606,13 +1606,13 @@ void loadGaindLUT()
 		self.photo = [self imageWithImage:originPhoto scaledToSize:CGSizeMake(photoPlaceRect.size.width*1.2, photoPlaceRect.size.height*1.2) renderedForUI:NO];
 
 	}
-	else 
+	else
 	{
 		//self.photo = [self imageWithImage:originPhoto scaledToSize:CGSizeMake(photoPlaceRect.size.width, photoPlaceRect.size.height)];
 		if ([self checkIfiPhone4] == YES) {
-//            CGSize photoSize = CGSizeMake(photoPlaceRect.size.width*2, photoPlaceRect.size.height*2);            
+//            CGSize photoSize = CGSizeMake(photoPlaceRect.size.width*2, photoPlaceRect.size.height*2);
 			self.photo = [self imageWithImage:originPhoto scaledToSize:CGSizeMake(photoPlaceRect.size.width*2, photoPlaceRect.size.height*2) renderedForUI:NO];
- 
+
 		} else {
 			self.photo = [self imageWithImage:originPhoto scaledToSize:CGSizeMake(photoPlaceRect.size.width*1.2, photoPlaceRect.size.height*1.2) renderedForUI:NO];
 		}
@@ -1620,7 +1620,7 @@ void loadGaindLUT()
 	//self.photo = [self imageWithImage:originPhoto scaledToSize:CGSizeMake(photoPlaceRect.size.width, photoPlaceRect.size.height)];
 
 //    CGSize imageSize = self.photo.size;
-	
+
 	// NOTE: Why are we rotating the source image depending on runtime device?
     // 6/2013 - Charles Ruggiero, Red Conductor
     //
@@ -1628,41 +1628,41 @@ void loadGaindLUT()
     // And some landscape images to be mirrored on output!  Will delay this change until more investigation is done.
     //
 	//rotate photo to fit
-    
+
 	//add alpha
 	self.photo = [self imageAddAlphaForImage:self.photo];
-	
-	
+
+
 	//got photo renderRect
 	_photoRenderRect = [self photoRenderRectForImageSize:self.photo.size withImageViewRect:photoViewRect];
-	
-	
+
+
 	//render the photo
 	//	[self renderPhotoViewForPreset:self.preset useImage:self.photo changeType:typeNone actioning:NO];
-	
-	
+
+
 	//set vignette position
 	//	Parameter *param = [self parameterWithPreset:self.preset];
 	//	[_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
-	
-	
+
+
 	//make out the adjustPhoto
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
 		self.adjustPhoto = [self imageWithImage:self.photo scaledToSize:CGSizeMake(self.photo.size.width/2,self.photo.size.height/2) renderedForUI:YES];
 	}
-	else 
+	else
 	{
 		self.adjustPhoto = [self imageWithImage:self.photo scaledToSize:CGSizeMake(self.photo.size.width/2,self.photo.size.height/2) renderedForUI:YES];
 	}
 	self.adjustPhoto = [self imageAddAlphaForImage:self.adjustPhoto];
-	
-	
+
+
 	//set vignette position
 	Parameter *param = [self parameterWithPreset:self.preset];
 	[_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
-	
-	
+
+
 	[self stopWait];
 }
 -(void)saveOriginPhoto:(UIImage*)image
@@ -1670,14 +1670,14 @@ void loadGaindLUT()
 	NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
 	NSString *filePath = [NSHomeDirectory() stringByAppendingString:save_origin_photo_path];
 	[imageData writeToFile:filePath atomically:YES];
-	
+
 	_bSavingOriginPhoto = NO;
 }
 -(UIImage*)loadPhotoFromPath:(NSString*)path
 {
 	NSString *filePath = [NSHomeDirectory() stringByAppendingString:path];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) return nil;
-	
+
 	UIImage* orinPhoto = [UIImage imageWithContentsOfFile:filePath];
 	return orinPhoto;
 }
@@ -1688,7 +1688,7 @@ void loadGaindLUT()
 	{
 		tintMaskName = [NSString stringWithFormat:@"tint_mask_iPad_%zd.png", index];
 	}
-	
+
 	self.tintMaskView.image = [UIImage imageNamed:tintMaskName];
 }
 -(UIImage*)limitedSourcePhoto:(UIImage*)source forLimitPixel:(float)limit
@@ -1708,7 +1708,7 @@ void loadGaindLUT()
 //			return source;
 //		}
 //	}
-	
+
 	//baiwei add for small image keeping original size
 	if(sourceSize.width >= sourceSize.height)
 	{
@@ -1724,17 +1724,17 @@ void loadGaindLUT()
 			return source;
 		}
 	}
-	
+
 	//找到限制以后可以缩放到的rect
     // "Find stint can be scaled to the rect" (via Google Translate)
 	CGRect limitedRect = [self photoRenderRectForImageSize:sourceSize withImageViewRect:CGRectMake(0.0, 0.0, limit, limit)];
-	
+
 	//把图片缩放到限制以后的大小
     // "After the picture zoom to limit the size of" (via Google Translate)
 	UIImage *limitedImage = [self imageWithImage:source scaledToSize:limitedRect.size renderedForUI:NO]; //autorelease
-	
+
 	//给缩放以后的图片增加alpha
-    // "After scaling the picture to increase alpha" (via Google Translate) 
+    // "After scaling the picture to increase alpha" (via Google Translate)
 	UIImage *alphaLimitedImage = [self imageAddAlphaForImage:limitedImage]; //autorelease
 
 	return alphaLimitedImage;
@@ -1746,52 +1746,52 @@ void loadGaindLUT()
 #pragma mark -
 #pragma mark in use functios @for Rendering
 - (UIImage*)genVignetteImg:(UIImage*)_sourceImg renderArgs:(ffRenderArguments)renderArgs
-{	
+{
 	if(_sourceImg == nil) return nil;
-	
+
 	CGFloat width = CGImageGetWidth(_sourceImg.CGImage);
 	CGFloat height = CGImageGetHeight(_sourceImg.CGImage);
-	
+
 	CGPoint point = renderArgs.ellipse_center;
 	CGPoint centre = point;
-	
+
 	centre.x = width/2.0 * (1.0 + point.x);
 	centre.y = height/2.0 * (1.0 + point.y);
-	
+
 	// Find absolute translation
 	//
 	point.x *= width/2.0;
 	point.y *= height/2.0;
-	
-	int rowbytes = width*4;	
+
+	int rowbytes = width*4;
 	unsigned char *buffer = (unsigned char*)malloc( height * rowbytes );
-	if(buffer == nil) 
+	if(buffer == nil)
 		return nil;
-	
+
 	//CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(_sourceImg.CGImage);
-	CGContextRef context = CGBitmapContextCreate(buffer, 
-												 width, 
-												 height, 
-												 8, 
-												 rowbytes, 
-												 CGColorSpaceCreateDeviceRGB(), 
+	CGContextRef context = CGBitmapContextCreate(buffer,
+												 width,
+												 height,
+												 8,
+												 rowbytes,
+												 CGColorSpaceCreateDeviceRGB(),
 												 1
 												 );
-	
+
 	CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextFillRect(context, CGRectMake(0.0, 0.0, width, height));
 	CGContextSetInterpolationQuality(context,kCGInterpolationHigh);
-	
+
 	CGAffineTransform transform = CGAffineTransformIdentity;
 	transform = CGAffineTransformTranslate(transform, centre.x, centre.y);
 	transform = CGAffineTransformRotate(transform, renderArgs.ellipse_angle);
 	transform = CGAffineTransformScale(transform,1.0*renderArgs.ellipse_a,1.0*renderArgs.ellipse_b);
 	transform = CGAffineTransformTranslate(transform, -centre.x, -centre.y);
-	
+
 	UIImage *art = [self circleImageForName:self.mCircleImageName];//[UIImage imageNamed:self.mCircleImageName]; //@"circle.png
-	
+
 	CGContextConcatCTM(context, transform);
-	
+
 	//	CGColorRef colors[2];
 	//	CGFloat white[4] = {255, 255, 255, 255};
 	//	CGFloat black[4] = {0, 0, 0, 255};
@@ -1803,10 +1803,10 @@ void loadGaindLUT()
 	//	CGContextDrawRadialGradient(context, grad, CGPointMake(width/2,height/2), 0.0, CGPointMake(width/2,height/2), 0.5*height, kCGGradientDrawsAfterEndLocation);
     CGContextDrawImage(context, CGRectMake(point.x, point.y, width, height), art.CGImage);
 	CGImageRef newImageRef = CGBitmapContextCreateImage(context);
-	
-	// get the UIImage back	
+
+	// get the UIImage back
 	UIImage* newImage = [[UIImage alloc] initWithCGImage:newImageRef];
-	CGImageRelease(newImageRef);	
+	CGImageRelease(newImageRef);
 	CGContextRelease(context);
 	free(buffer);
 	return newImage;
@@ -1832,13 +1832,13 @@ void loadGaindLUT()
 - (UIImage *)noirSourceImg:(UIImage *)_sourceImg renderArgs:(ffRenderArguments)renderArgs
 {
 	if(_sourceImg == nil) return nil;
-	
+
 	CGFloat _width = CGImageGetWidth(_sourceImg.CGImage);
 	CGFloat _height = CGImageGetHeight(_sourceImg.CGImage);
 	CFDataRef sourceData = CGDataProviderCopyData(CGImageGetDataProvider(_sourceImg.CGImage));
 	int *m_sourcedata = (int *)CFDataGetBytePtr(sourceData);
 	uint8_t *sourceb = (unsigned char *)&m_sourcedata[0];
-	
+
 	// Prepare inGain LUT
 	//
 	int inGain_i = (int) fabs(255 * (renderArgs.inExp * 0.25));
@@ -1857,7 +1857,7 @@ void loadGaindLUT()
 			inGain[r] = (darkLUT[r] * inGain_i + (255 - inGain_i) * r)/255;
 		}
 	}
-	
+
 	// Prepare outGain LUT
 	//
 	int outGain_i = (int) fabs(255 * (renderArgs.outExp  * 0.25));
@@ -1875,8 +1875,8 @@ void loadGaindLUT()
 		{
 			outGain[r] = (darkLUT[r] * outGain_i + (255 - outGain_i) * r)/255;
 		}
-	}					 
-	
+	}
+
 	//	double inGain = pow(pow(2.0, renderArgs.inExp), 1/2.2);
 	//	double outGain = pow(pow(2.0, renderArgs.outExp), 1/2.2);
 	//	double gain[256];
@@ -1884,7 +1884,7 @@ void loadGaindLUT()
 	//	{
 	//		gain[r] = (inGain * r + outGain * (255-r)) / 255.0;
 	//	}
-	
+
 	// Prepare contrast s-curve LUT
 	//
 	int clamp[256];
@@ -1903,8 +1903,8 @@ void loadGaindLUT()
 		if (tempInt<0) clamp[i]=0;
 		else if (tempInt>255) clamp[i] = 255;
 		else clamp[i] = tempInt;
-	}	
-	
+	}
+
 	// Prepare the 2-D LUT for blending source and vignette  (source=p; vigette=q)
 	//
 	int c, m;
@@ -1917,14 +1917,14 @@ void loadGaindLUT()
 //			c = (inGain[p] * q + outGain[p] * (255 - q)) / 255;
 //			if ( c<0 ) c=0;
 //			if ( c>255 ) c=255;
-//			
+//
 //			// Contrast
 //			//
 //			c = clamp[c];
 //			noir[p][q] = (unsigned char) c;
 //		}
 //	}
-	
+
 	// Prepare for output buffer
 	uint8_t *pout, *poutb;
 	pout = poutb = (uint8_t *)malloc(_width * _height * 4);
@@ -1933,19 +1933,19 @@ void loadGaindLUT()
 		CFRelease(sourceData);
 		return nil;
 	}
-	
+
 	UIImage *matte = [self genVignetteImg:_sourceImg renderArgs:renderArgs ];
-	
+
 	CFDataRef matteData = CGDataProviderCopyData(CGImageGetDataProvider(matte.CGImage));
 	int *m_mattedata = (int *)CFDataGetBytePtr(matteData);
 	uint8_t *matteb = (unsigned char *)&m_mattedata[0];
-    for (int y = 0; y < _height; y++) 
-	{  
-		for (int x = 0; x < _width; x++) 
-		{  
+    for (int y = 0; y < _height; y++)
+	{
+		for (int x = 0; x < _width; x++)
+		{
 			c = (*sourceb * sat_coef_r + *(sourceb+1) * sat_coef_g + *(sourceb+2) * sat_coef_b) / 65535;
 			if (c > 255) c = 255;
-			
+
 			m = ((*matteb << 16) + (*(matteb+1) << 8) + *(matteb+2))>>1;
 			c = (inGain[c] * m + outGain[c] * (8388607 - m)) / 8388607;
 			if ( c<0 ) c=0;
@@ -1953,50 +1953,50 @@ void loadGaindLUT()
 			c = clamp[c];
 
 			//c = noir[c][*matteb];
-			
+
 			*pout++ = (unsigned char) c;
 			*pout++ = (unsigned char) c;
 			*pout++ = (unsigned char) c;
 			*pout++ = (unsigned char) 255;
-			
+
 			sourceb += 4;
 			matteb += 4;
 		}
 	}
-	
-	
+
+
 	CFRelease(sourceData);
 	CFRelease(matteData);
-	
+
 	CGColorSpaceRef colorSpace=CGColorSpaceCreateDeviceRGB();
 	//CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(_sourceImg.CGImage);
-	CGContextRef context=CGBitmapContextCreate(poutb, _width, _height, 8, _width*4, colorSpace, 1);	
+	CGContextRef context=CGBitmapContextCreate(poutb, _width, _height, 8, _width*4, colorSpace, 1);
 	CGImageRef imageRef=CGBitmapContextCreateImage(context);
-	free(poutb);  
-	
+	free(poutb);
+
 	UIImage* newImage2 = [[UIImage alloc] initWithCGImage:imageRef];
 	CGImageRelease(imageRef);
 	CGContextRelease(context);
 	CGColorSpaceRelease(colorSpace);
-	
+
 	// Tinting
 	//
 //@Radar + -----
-	
+
 //	UIGraphicsBeginImageContext(CGSizeMake(_width,_height));
 //	context = UIGraphicsGetCurrentContext();
-	
+
 //	CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
 //    CGContextFillRect(context, CGRectMake(0.0, 0.0, _width, _height));
-	
-	
+
+
 	//[newImage2 drawAtPoint:CGPointMake(0,0)];
-	//[newImage2 release];		
+	//[newImage2 release];
 //@Radar - -----
 
-	
+
 	//@Radar + -----
-	UInt8* buffer = (UInt8*)malloc(_width * _height * 4);	
+	UInt8* buffer = (UInt8*)malloc(_width * _height * 4);
 	CGColorSpaceRef	desColorSpace = CGColorSpaceCreateDeviceRGB();
 	context = CGBitmapContextCreate(buffer,
 									_width,_height,
@@ -2005,10 +2005,10 @@ void loadGaindLUT()
 									1);
 	CGContextDrawImage(context, CGRectMake(0.0, 0.0, (CGFloat)_width, (CGFloat)_height), newImage2.CGImage);
 	//@Radar - -----
-	
-	
+
+
 	CGContextSetBlendMode(context,kCGBlendModeColor);
-	
+
 	switch (renderArgs.tint)
 	{
 		case 2:
@@ -2028,20 +2028,20 @@ void loadGaindLUT()
 	}
 	CGImageRef imageRef2=CGBitmapContextCreateImage(context);
 	UIGraphicsEndImageContext();
-	
+
 	UIImage* newImage = [[UIImage alloc] initWithCGImage:imageRef2];
 	CGImageRelease(imageRef2);
-	
-	
+
+
 	CGContextRelease(context);
 	CGColorSpaceRelease(desColorSpace);
-	
+
 	free(buffer);
-	
+
     return newImage;
 }
 -(UIImage*)renderForArguments:(ffRenderArguments)renderArgs useImage:(UIImage*)image changeType:(ChangeType)changeType
-{	
+{
 	//TO DO: Rendering for preset
 	UIImage *renImage = [self noirSourceImg:image renderArgs:renderArgs];
 	return renImage;
@@ -2056,7 +2056,7 @@ void loadGaindLUT()
         Tint *tint = [[Tint alloc] init];
 		tint.index = i;
 		//tint.color = [UIColor blueColor];
-		
+
 		[allTints addObject:tint];
 	}
 	return allTints;

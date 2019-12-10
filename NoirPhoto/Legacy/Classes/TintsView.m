@@ -3,7 +3,7 @@
 //  Noir
 //
 //  Created by mac on 10-7-5.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2019 Zinc Collective, LLC. All rights reserved.
 //
 
 #import "TintsView.h"
@@ -21,15 +21,15 @@
 {
     if ((self = [super initWithFrame:frame])) {
         // Initialization code
-		
+
 		self.delegate = dele;
 		_posformat = posformat;
-		
+
 		if(_posformat == pfMartix)
 		{
 //			_btnWidth = frame.size.width/2;
 //			_btnHeight = frame.size.height/2;
-			
+
 			if(width == 0)
 			{
 				_btnWidth = frame.size.width/2;
@@ -38,7 +38,7 @@
 			{
 				_btnWidth = width;
 			}
-			
+
 			if(height == 0)
 			{
 				_btnHeight = frame.size.height/2;
@@ -53,7 +53,7 @@
 		{
 //			_btnWidth = frame.size.width/4;
 //			_btnHeight = frame.size.height;
-			
+
 			if(width == 0)
 			{
 				_btnWidth = frame.size.width/4;
@@ -62,7 +62,7 @@
 			{
 				_btnWidth = width;
 			}
-			
+
 			if(height == 0)
 			{
 				_btnHeight = frame.size.height;
@@ -72,10 +72,10 @@
 				_btnHeight = height;
 			}
 		}
-		
+
 		//background
 		[self setBackGroundWithImage:nil orColor:nil];
-		
+
 		//add buttons
 		[self setButtonsForItems:items];
     }
@@ -88,12 +88,12 @@
 
 #pragma mark -
 #pragma mark in/out use functions
--(void)setButtonsForItems:(NSArray*)items 
+-(void)setButtonsForItems:(NSArray*)items
 {
 	//got the new items
     _items = items;
-	
-	
+
+
 	//remove old buttons
 	if(_buttons != nil && [_buttons count] != 0)
 	{
@@ -104,26 +104,26 @@
 				[button removeFromSuperview];
 			}
 		}
-		
+
 		_buttons = nil;
 	}
-	
-	
+
+
 	//add buttons
 	if(items == nil || [items count] == 0) return;
-	
-	
+
+
     NSMutableArray *buttons = [[NSMutableArray alloc] init];
-	
+
 	float posX = 0.0;
 	float posY = 0.0;
-	
+
 	for(int i=0; i<[items count]; i++)
 	{
 		NSDictionary *itemDic = [items objectAtIndex:i];
 		UIImage *btnImage    = [itemDic valueForKey:@"image"];
 		UIImage *btnImageSel = [itemDic valueForKey:@"image_sel"];
-		
+
 		UIButton *itemBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 		itemBtn.frame = CGRectMake(posX, posY, _btnWidth, _btnHeight);
 		[itemBtn setBackgroundImage:btnImage forState:UIControlStateNormal];
@@ -134,10 +134,10 @@
 		[itemBtn addTarget:self action:@selector(itemAction:) forControlEvents:UIControlEventTouchUpInside];
         itemBtn.exclusiveTouch = YES;
 		[self addSubview:itemBtn];
-			
+
 		//add btns into array
 		[buttons addObject:itemBtn];
-		
+
 		//init next button's x,y position
 		if(_posformat == pfMartix)
 		{
@@ -160,20 +160,20 @@
 		else if(_posformat == pfLine)
 		{
 			float blank = (self.frame.size.width - _btnWidth*4)/3;
-			
+
 			posX = (_btnWidth+blank)*(i+1);
 			posY = 0.0;
 		}
-		
+
 	}
-	
+
     _buttons = buttons;
-	
+
 }
 -(void)chooseButtonForIndex:(NSInteger)index bReturnToDelegate:(BOOL)bReturnTodele
 {
 	if(_buttons == nil || [_buttons count] ==0) return;
-	
+
 	/* //这里是要disable选中的按钮，也可以做成换一下图片的
 	for(UIButton *btn in _buttons)
 	{
@@ -181,38 +181,38 @@
 		{
 			btn.enabled = YES;
 		}
-		
+
 		if(btn.tag == index)
 		{
 			btn.enabled = NO;
 		}
 	}
 	*/
-	
+
 	//用图片来标志选中状态
 	for(UIButton *btn in _buttons)
 	{
 		NSDictionary *itemDic = [_items objectAtIndex:btn.tag];
 		UIImage *btnImage = [itemDic valueForKey:@"image"];
-		
+
 		if(btn.tag == index)
 		{
 			btnImage = [itemDic valueForKey:@"image_sel"];
 		}
-		
+
 		[btn setBackgroundImage:btnImage forState:UIControlStateNormal];
 	}
-	
+
 	if(bReturnTodele)
 	{
 		if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(tintsButtonChooseIndex:data:)])
 		{
 			NSDictionary *itemDic = [_items objectAtIndex:index];
 			if(itemDic == nil) return;
-			
+
 			id data = (id)[itemDic valueForKey:@"data"];
 			[self.delegate tintsButtonChooseIndex:index data:data];
-			
+
 //			NSLog(@"selected tint: %d", index);
 		}
 	}
@@ -221,7 +221,7 @@
 {
 	if(bgImage != nil)
 	{
-		[self.layer setContents:(id)[bgImage CGImage]];	
+		[self.layer setContents:(id)[bgImage CGImage]];
 	}
 	else if(bgColor != nil)
 	{

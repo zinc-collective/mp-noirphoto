@@ -3,7 +3,7 @@
 //  NoirPhoto
 //
 //  Created by Sean Hess on 3/25/16.
-//  Copyright © 2016 Moment Park. All rights reserved.
+//  Copyright © 2019 Zinc Collective, LLC. All rights reserved.
 //
 
 import UIKit
@@ -20,7 +20,7 @@ class NavigationViewController: UINavigationController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 
     /*
     // MARK: - Navigation
@@ -31,7 +31,7 @@ class NavigationViewController: UINavigationController {
         // Pass the selected object to the new view controller.
     }
     */
-    
+
     @IBAction func unwindHome() {
         print("HOME")
     }

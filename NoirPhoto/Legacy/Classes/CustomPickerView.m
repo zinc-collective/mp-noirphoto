@@ -3,7 +3,7 @@
 //  Noir
 //
 //  Created by mac on 10-12-6.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2019 Zinc Collective, LLC. All rights reserved.
 //
 
 #import "CustomPickerView.h"
@@ -21,9 +21,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code.
-		
+
 		_bOutSet = NO;
-		
+
 		//init _scrollView
 		_scrollView = [[RScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, frame.size.height)];
 		_scrollView.backgroundColor = [UIColor clearColor];
@@ -32,15 +32,15 @@
 		_scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
 		_scrollView.delegate = self;
 		_scrollView.rdelegate = self;
-		
+
 		//add image
 		UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((frame.size.width-image.size.width)/2, topOffset, image.size.width, image.size.height)];
 		imageView.image = image;
 		[_scrollView addSubview:imageView];
-		
+
 		_scrollView.contentSize = CGSizeMake(frame.size.width, image.size.height + topOffset + btmOffset);
 		[self addSubview:_scrollView];
-		
+
     }
     return self;
 }
@@ -61,55 +61,55 @@
 -(void)setTheCurrentValue:(float)value
 {
 	_bOutSet = YES;
-	
+
 	float visibleHeight = _scrollView.frame.size.height;
 	CGPoint contentOffset = _scrollView.contentOffset;
 	float totalHeight = _useHeight;
-	
+
 	float curUseValue = value - _minValue;
 	float curPresent = curUseValue/(_maxValue - _minValue);
 	float perUseHeight = totalHeight * curPresent;
-	
+
 	float offsetY = perUseHeight + _useOffset - visibleHeight/2;
-	
-	
+
+
 	//move to new offset Y
-	[UIView beginAnimations:@"movement" context:nil]; 
-	[UIView setAnimationCurve:UIViewAnimationCurveLinear]; 
+	[UIView beginAnimations:@"movement" context:nil];
+	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
 	[UIView setAnimationDuration:0.3f];
-	
+
 	contentOffset.y = offsetY;
 	_scrollView.contentOffset = contentOffset;
-	
+
 	[UIView commitAnimations];
-	
+
 }
 
 -(void)setTheCurrentValue2:(float)value
 {
 	_bOutSet = YES;
-	
+
 	float visibleHeight = _scrollView.frame.size.height;
 	CGPoint contentOffset = _scrollView.contentOffset;
 	float totalHeight = _useHeight;
-	
+
 	float curUseValue = value - _minValue;
 	float curPresent = curUseValue/(_maxValue - _minValue);
 	float perUseHeight = totalHeight * curPresent;
-	
+
 	float offsetY = perUseHeight + _useOffset - visibleHeight/2;
-	
-	
+
+
 	//move to new offset Y
-	[UIView beginAnimations:@"movement" context:nil]; 
-	[UIView setAnimationCurve:UIViewAnimationCurveLinear]; 
+	[UIView beginAnimations:@"movement" context:nil];
+	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
 	[UIView setAnimationDuration:0];
-	
+
 	contentOffset.y = offsetY;
 	_scrollView.contentOffset = contentOffset;
-	
+
 	[UIView commitAnimations];
-	
+
 }
 
 
@@ -121,14 +121,14 @@
 	float visibleHeight = _scrollView.frame.size.height;
 	CGPoint contentOffset = _scrollView.contentOffset;
 	float totalHeight = _useHeight;
-	
+
 	float perUseHeight = visibleHeight/2 + contentOffset.y - _useOffset;
 	float curPersent = perUseHeight/totalHeight;
-	
-	
+
+
 	float curValue;
-	
-	if(curPersent >= 1.0) 
+
+	if(curPersent >= 1.0)
 	{
 		curValue = _maxValue;
 	}
@@ -143,7 +143,7 @@
 	}
 
 	NSLog(@"curValue : %f", curValue);
-	
+
 	//return to delegate
 	if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(currentValueFromCustomPicker:value:isFinal:)])
 	{
@@ -165,7 +165,7 @@
 		_bOutSet = NO;
 		return;
 	}
-	
+
 	[self pickTheCurrentValue:NO];
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView

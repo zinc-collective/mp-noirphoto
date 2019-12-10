@@ -3,7 +3,7 @@
 //  Noir
 //
 //  Created by jack on 6/4/10.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//  Copyright 2019 Zinc Collective, LLC. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -42,66 +42,66 @@ typedef struct {
 
 //@class QuartzView;
 @interface NoirViewControllerLegacy : UIViewController <UIPopoverControllerDelegate, VignetteDelegate, ControlPadViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
-	
+
 	UIImageView			 *photoView;
 	UIImageView			 *photoFullView;
-	
+
 	UIImage              *photo;       //the photo used to render
 	UIImage				 *adjustPhoto; //photo for the adjust change only
 	UIImage				 *renderedPhoto; //the photo rendered
 	UIImage              *sourcePhoto;
-	
+
 	//QuartzView           *_ellipseView;
 	VignetteView		 *_vignetteView;
 	VignetteView		 *_vignetteFullView;
 	ControlPadView       *_ctrlPadView;
-	
+
 	Preset				 *preset;      //current preset
-	
+
 	NSArray              *presetsItems; //not the NSArray of Preset but of Dictionary
 	NSInteger            presetsChooseIndex;
-	
+
 	NSArray              *tints;
 	NSArray              *tintsItems;   //not the NSArray of Tint but of Dictionary
-	
+
 	IBOutlet UIButton			 *loadBtn;
 	IBOutlet UIButton			 *saveBtn;
 	IBOutlet UIButton			 *infoBtn;
 	IBOutlet UIImageView		 *tintMaskView;
-	
+
 	CGRect               _photoRenderRect;  //是一个相对值，相对于photo view的 rect值，原点也是相对于photoview的位置
 		CGRect               _photoRenderRect2;
-	
-	
+
+
 	NSString             *mCircleImageName;
 	NSString			 *mPresetReviewImageName;
 	NSString			 *mPresetReviewMaskImageName;
 	NSString			 *mPresetReviewMaskSelImageName;
-	
+
 	UIView						*savingMaskView;
 	UIActivityIndicatorView		*savingSpinner;
-	
+
 	BOOL				 _bRendering;
-	
+
 	UIImage				 *mCirclePreset;
 	UIImage				 *mCirclePreset4;
 	UIImage				 *mCircleShow;
 	UIImage				 *mCircleShow4;
 	UIImage				 *mCircleRender;
 	UIImage				 *mCircleSave;
-	
+
 	BOOL				 _bPreseting;  //是否正处于preset状态下，只要任何一个操作更改，都不再处于preset状态
-	
+
 	UIPopoverController *imagePickerPopover;
 	UIImagePickerController *imagePicker;
     BOOL imagePickerOnScreen; //bret
-	
-	
+
+
 	UIView *blackBackground;
-	
-	
+
+
 	float ctrl_pad_offset;
-	
+
 	BOOL                 _bSavingOriginPhoto;
 }
 

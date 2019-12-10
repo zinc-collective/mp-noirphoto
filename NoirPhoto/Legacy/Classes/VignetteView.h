@@ -3,7 +3,7 @@
 //  OrzQuarz
 //
 //  Created by mac on 10-11-30.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2019 Zinc Collective, LLC. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -32,58 +32,58 @@ typedef enum{
 
 @interface VignetteView : UIView {
 
-	
+
 	CGMutablePathRef	_ellipsePath;
 	CGMutablePathRef	_pointPath0;
 	CGMutablePathRef	_pointPath1;
 	CGMutablePathRef	_pointPath2;
 	CGMutablePathRef	_pointPath3;
-	
+
 	CGRect				_ellipseRect;
-	
-	
+
+
 	double				_ellipseA;
 	double				_ellipseB;
 	double				_ellipseAngle;
 	CGPoint				_ellipseCenter;
-	
+
 	double				_ellipseA_default;
 	double				_ellipseB_default;
 	double				_ellipseAngle_default;
 	CGPoint				_ellipseCenter_default;
-	
+
 	CGRect				_photoRect;
-	
+
 	CGPoint				_point0; //the 0,1,2,3 -> left, top, right, bottom
 	CGPoint				_point1;
 	CGPoint				_point2;
 	CGPoint				_point3;
-	
+
 	CGRect				_ptCheckBox0;
 	CGRect				_ptCheckBox1;
 	CGRect				_ptCheckBox2;
 	CGRect				_ptCheckBox3;
-	
+
 	BOOL				_bInPtBox0;
 	BOOL				_bInPtBox1;
 	BOOL				_bInPtBox2;
 	BOOL				_bInPtBox3;
-	
-	
+
+
 	ActionType			_actionType;
 	CGPoint             _panTouchBeginPoint;
-	
+
 	CGPoint				_scallAnyBeginPoint1;
 	CGPoint				_scallAnyBeginPoint2;
 	//double				_scallAnyBeginAngle;
-	
+
 	float				_offsetX;
 	float				_offsetY;
 
 	NSTimer				*_timer;
 	UIColor				*_vignetteColor;
-	
-	
+
+
 	double				_scallAnyAngleTemp;
 	float				_scallAnyKLenthTemp;
 }

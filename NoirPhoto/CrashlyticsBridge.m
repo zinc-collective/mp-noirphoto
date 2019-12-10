@@ -3,7 +3,7 @@
 //  NoirPhoto
 //
 //  Created by Sean Hess on 5/16/16.
-//  Copyright © 2016 Moment Park. All rights reserved.
+//  Copyright © 2019 Zinc Collective, LLC. All rights reserved.
 //
 
 #import "CrashlyticsBridge.h"

@@ -3,7 +3,7 @@
 //  FlickrPlug
 //
 //  Created by jack on 10-4-20.
-//  Copyright 2009 RED/SAFI. All rights reserved.
+//  Copyright 2019 Zinc Collective, LLC. All rights reserved.
 //
 
 #import "VersionWatermark.h"
@@ -25,7 +25,7 @@
 
 - (id) initWithFrame:(CGRect)frame{
 	if(self = [super initWithFrame:frame]){
-		
+
 		self.backgroundColor = [UIColor clearColor];
 
 		float w = frame.size.width;
@@ -41,17 +41,17 @@
 		_version.backgroundColor = [UIColor clearColor];
 		_version.font = [UIFont systemFontOfSize:13];
 		[self addSubview:_version];
-		
-		
+
+
         UIButton *close = [UIButton buttonWithType:UIButtonTypeCustom];
 		close.alpha = 0.65;
 		close.frame = CGRectMake(w-30, 0.0, 30.0, 30.0);
 		[close setBackgroundImage:[UIImage imageNamed:@"close_btn.png"] forState:UIControlStateNormal];
 		[close addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
 		[self addSubview:close];
-		
+
 		[self loadingVersion];
-		
+
 	}
     return self;
 }
@@ -66,25 +66,25 @@
 	// iPad... = iPad
 	// i386 = simulator
 	//
-	
+
 	size_t size;
-	
+
 	// Set 'oldp' parameter to NULL to get the size of the data
 	// returned so we can allocate appropriate amount of space
-	sysctlbyname("hw.machine", NULL, &size, NULL, 0); 
-	
+	sysctlbyname("hw.machine", NULL, &size, NULL, 0);
+
 	// Allocate the space to store name
 	char *name = (char*) malloc(size);
-	
+
 	// Get the platform name
 	sysctlbyname("hw.machine", name, &size, NULL, 0);
-	
+
 	// Place name into a string
 	NSString *machine = [NSString stringWithCString:name encoding:NSUTF8StringEncoding];
-	
+
 	// Done with this
 	free(name);
-	
+
 	return machine;
 }
 
@@ -92,32 +92,32 @@
 - (void) loadingVersion{
 	NSString * path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:INFO_PLIST];
 	NSFileManager *fileSys = [NSFileManager defaultManager];
-	
+
 	NSString * version_path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:VERSION_PLIST];
-	
+
 	NSString *v = @"";
-	
+
 	if([fileSys fileExistsAtPath:path]){
 
 		NSDictionary *settingsDict = [NSDictionary dictionaryWithContentsOfFile:path];
 		NSString *version = [settingsDict objectForKey:@"CFBundleVersion"];
-		
-		
+
+
 		NSDictionary *buildInfoDict = [NSDictionary dictionaryWithContentsOfFile:version_path];
 		NSString *build_version = [buildInfoDict objectForKey:@"build version"];
-		
+
 		 v = [NSString stringWithFormat:@"%@ - %@", version, build_version];
-		
-	
+
+
 	}
 	else{
 		v = @"unknow version!";
 	}
-	
+
 	NSString *text = [NSString stringWithFormat:@"%@, type: %@", v, [self getDeviceName]];
-	 
+
 	_version.text = text;
-	
+
 }
 
 - (void) showInView:(UIView*)view{
@@ -125,13 +125,13 @@
 		[view addSubview:self];
 	}
 	self.alpha = 0;
-	
-	[UIView beginAnimations:@"show watermark view" context:nil]; 
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut]; 
+
+	[UIView beginAnimations:@"show watermark view" context:nil];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:0.25];
-	
+
 	self.alpha = 1.0;
-	
+
 	[UIView commitAnimations];
 }
 
@@ -153,15 +153,15 @@
 }
 
 - (void) removeMySelf{
-	
-	[UIView beginAnimations:@"hide watermark view" context:nil]; 
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut]; 
+
+	[UIView beginAnimations:@"hide watermark view" context:nil];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:0.35];
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
-	
+
 	self.alpha = 0;
-	
+
 	[UIView commitAnimations];
 }
 

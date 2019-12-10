@@ -3,7 +3,7 @@
 //  NoirPhoto
 //
 //  Created by Sean Hess on 3/23/16.
-//  Copyright © 2016 Moment Park. All rights reserved.
+//  Copyright © 2019 Zinc Collective, LLC. All rights reserved.
 //
 
 import UIKit
@@ -17,34 +17,34 @@ let SaveOriginPhotoPath = "/Documents/origin_photo.jpg"
 class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
 
     var window: UIWindow?
-    
+
     var splashController : SplashViewController!
     var viewController : NoirViewController!
     var navigationController : NavigationViewController!
-    
+
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.navigationController = self.window!.rootViewController as! NavigationViewController
-        
+
         Fabric.with([Crashlytics.self])
-        
+
         self.splashController = UIStoryboard(name: "Splash", bundle: nil)
                                     .instantiateViewControllerWithIdentifier("SplashViewController") as! SplashViewController
         self.splashController.delegate = self
-        
+
         if (UI_USER_INTERFACE_IDIOM() == .Pad) {
             self.viewController = NoirViewController(nibName: "NoirViewController-iPad", bundle: nil)
         }
         else {
             self.viewController = NoirViewController(nibName: "NoirViewController", bundle: nil)
         }
-        
+
         self.navigationController.viewControllers = [self.splashController]
-        
-        
+
+
         return true
     }
-    
+
     func splashDidPickImage(image: UIImage, url: NSURL) {
         self.navigationController.viewControllers = [self.viewController]
         // this must go last (refactor needed)
@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        
+
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -69,10 +69,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
     }
 
     func applicationWillTerminate(application: UIApplication) {
-        
+
     }
-    
-    
+
+
     func checkPhotoExistFromPath(path: String) -> Bool
     {
     	let filePath = NSHomeDirectory().stringByAppendingString(path)
