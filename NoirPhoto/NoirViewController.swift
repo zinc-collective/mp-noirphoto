@@ -64,7 +64,7 @@ class NoirViewController: NoirViewControllerLegacy {
             activity.popoverPresentationController?.sourceView = self.view
             activity.popoverPresentationController?.sourceRect = self.saveBtn.frame
             activity.completionWithItemsHandler = { activity, completed, returnedItems, error in
-                if activity == UIActivityType.saveToCameraRoll && completed {
+                if activity == UIActivity.ActivityType.saveToCameraRoll && completed {
                     self.savePhotoFeedback()
                 }
             }
@@ -74,7 +74,7 @@ class NoirViewController: NoirViewControllerLegacy {
 
     func savePhotoFeedback() {
         let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: .alert)
-        self.present(alert, animated: true, completion: { _ in
+        self.present(alert, animated: true, completion: {
             delay(0.5) {
                 self.dismiss(animated: true, completion: nil)
             }

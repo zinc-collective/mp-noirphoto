@@ -77,19 +77,32 @@ class SplashViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.imagePicker = picker
     }
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         print("PICKED IMAGE")
 
-        CrashlyticsBridge.log("Picked Image \(info[UIImagePickerControllerReferenceURL])")
+        CrashlyticsBridge.log("Picked Image \(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.referenceURL)])")
         CrashlyticsBridge.log("  info = \(info)")
 
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as! UIImage
 
         // if it isn't there, then
-        let assetURL = info[UIImagePickerControllerReferenceURL] as! URL
+        let assetURL = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.referenceURL)] as! URL
         // I can't display it myself, need to pass it back
 
         self.imagePicker?.dismiss(animated: true, completion: nil)
         self.delegate?.splashDidPickImage(image, url: assetURL)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

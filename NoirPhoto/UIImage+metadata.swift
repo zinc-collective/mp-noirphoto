@@ -20,7 +20,7 @@ extension UIImage {
     func imageWithMetadata(_ metadata:NSDictionary) -> Data? {
         let destData = NSMutableData()
 
-        if let photoData = UIImageJPEGRepresentation(self, 1.0), let source = CGImageSourceCreateWithData(photoData as CFData, nil), let uti = CGImageSourceGetType(source), let destination = CGImageDestinationCreateWithData(destData, uti, 1, nil) {
+        if let photoData = self.jpegData(compressionQuality: 1.0), let source = CGImageSourceCreateWithData(photoData as CFData, nil), let uti = CGImageSourceGetType(source), let destination = CGImageDestinationCreateWithData(destData, uti, 1, nil) {
             CGImageDestinationAddImageFromSource(destination, source, 0, metadata)
 
             if CGImageDestinationFinalize(destination) {

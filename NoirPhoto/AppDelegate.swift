@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
     var navigationController : NavigationViewController!
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.navigationController = self.window!.rootViewController as! NavigationViewController
 
         Fabric.with([Crashlytics.self])

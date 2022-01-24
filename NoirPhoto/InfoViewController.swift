@@ -37,7 +37,7 @@ class InfoViewController: UIViewController, UIWebViewDelegate {
         }
     }
 
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
 
         if let url = request.url, navigationType == .linkClicked {
             UIApplication.shared.openURL(url)
