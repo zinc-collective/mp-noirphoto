@@ -15,10 +15,10 @@ import MobileCoreServices
 class NoirViewController: NoirViewControllerLegacy {
 
     // SCALE HACK: remove me once we change the UI
-    override func viewWillAppear(animated: Bool) {
-        if (UI_USER_INTERFACE_IDIOM() == .Phone) {
+    override func viewWillAppear(_ animated: Bool) {
+        if (UI_USER_INTERFACE_IDIOM() == .phone) {
             let scale = self.view.frame.size.width / CGFloat(320)
-            self.view.transform = CGAffineTransformMakeScale(scale, scale)
+            self.view.transform = CGAffineTransform(scaleX: scale, y: scale)
             super.viewWillAppear(animated)
         }
     }
@@ -27,10 +27,10 @@ class NoirViewController: NoirViewControllerLegacy {
         super.viewDidLoad()
 
         let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(NoirViewController.onSwipeGripDown))
-        downGesture.direction = .Down
+        downGesture.direction = .down
 
         let upGesture = UISwipeGestureRecognizer(target: self, action: #selector(NoirViewController.onSwipeGripUp))
-        upGesture.direction = .Up
+        upGesture.direction = .up
 
         self.fullBtn.addGestureRecognizer(downGesture)
         self.fullBtn.addGestureRecognizer(upGesture)
@@ -64,19 +64,19 @@ class NoirViewController: NoirViewControllerLegacy {
             activity.popoverPresentationController?.sourceView = self.view
             activity.popoverPresentationController?.sourceRect = self.saveBtn.frame
             activity.completionWithItemsHandler = { activity, completed, returnedItems, error in
-                if activity == UIActivityTypeSaveToCameraRoll && completed {
+                if activity == UIActivityType.saveToCameraRoll && completed {
                     self.savePhotoFeedback()
                 }
             }
-            self.presentViewController(activity, animated: true, completion: nil)
+            self.present(activity, animated: true, completion: nil)
         }
     }
 
     func savePhotoFeedback() {
-        let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: .Alert)
-        self.presentViewController(alert, animated: true, completion: { _ in
+        let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: .alert)
+        self.present(alert, animated: true, completion: { _ in
             delay(0.5) {
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             }
         })
 
@@ -84,10 +84,10 @@ class NoirViewController: NoirViewControllerLegacy {
 
     func renderPhoto() -> UIImage {
         let source = self.sourcePhoto.rotateCameraImageToProperOrientation(CGFloat(MAXFLOAT))
-        return self.imageForPreset(self.preset, useImage: source)
+        return self.image(for: self.preset, use: source)
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 

@@ -16,17 +16,19 @@ class InfoViewController: UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        webView.backgroundColor = UIColor.clearColor()
-        webView.opaque = false
+        webView.backgroundColor = UIColor.clear
+        webView.isOpaque = false
         webView.scrollView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0)
         webView.scrollView.showsVerticalScrollIndicator = false
         webView.scrollView.showsHorizontalScrollIndicator = false
         webView.delegate = self
 
-        if let url = NSBundle.mainBundle().URLForResource("info", withExtension: "html"), path = url.path {
-
+        if let url = Bundle.main.url(forResource: "info", withExtension: "html"){
+            
             do {
-                let string = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding) as String
+                // let path = url.path was formerly part of the if/let logic check above
+                let path = url.path
+                let string = try NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue) as String
                 webView.loadHTMLString(string, baseURL: nil)
             }
             catch let err as NSError {
@@ -35,25 +37,25 @@ class InfoViewController: UIViewController, UIWebViewDelegate {
         }
     }
 
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
 
-        if let url = request.URL where navigationType == .LinkClicked {
-            UIApplication.sharedApplication().openURL(url)
+        if let url = request.url, navigationType == .linkClicked {
+            UIApplication.shared.openURL(url)
             return false
         }
 
         return true
     }
 
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBarHidden = true
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 
     @IBAction func handleBack() {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
 }
