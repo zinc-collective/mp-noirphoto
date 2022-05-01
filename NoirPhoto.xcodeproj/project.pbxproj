@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -735,7 +735,7 @@
 				};
 			};
 			buildConfigurationList = 787581341CA2E98400100514 /* Build configuration list for PBXProject "NoirPhoto" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
