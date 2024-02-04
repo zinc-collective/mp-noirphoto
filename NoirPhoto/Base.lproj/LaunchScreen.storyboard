@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -15,22 +16,22 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SplashBottom" translatesAutoresizingMaskIntoConstraints="NO" id="lob-s9-nJH">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" image="SplashBottom" translatesAutoresizingMaskIntoConstraints="NO" id="lob-s9-nJH">
                                 <rect key="frame" x="0.0" y="324.5" width="320" height="243.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lob-s9-nJH" secondAttribute="height" multiplier="320:243" id="LHr-7a-cY0"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SplashTitle" translatesAutoresizingMaskIntoConstraints="NO" id="ynh-D6-jQQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" image="SplashTitle" translatesAutoresizingMaskIntoConstraints="NO" id="ynh-D6-jQQ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="235"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ynh-D6-jQQ" secondAttribute="height" multiplier="64:47" id="eO6-vV-IZS"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashFull" translatesAutoresizingMaskIntoConstraints="NO" id="e5g-PL-2dg">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="SplashFull" translatesAutoresizingMaskIntoConstraints="NO" id="e5g-PL-2dg">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="Wn4-0k-I3N"/>
@@ -40,15 +41,14 @@
                                         <exclude reference="Wn4-0k-I3N"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="Wn4-0k-I3N"/>
                                     </mask>
                                 </variation>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.015686274510000001" green="0.015686274510000001" blue="0.015686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.015686274510000001" green="0.015686274510000001" blue="0.015686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lob-s9-nJH" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="7gA-12-cuD"/>
                             <constraint firstAttribute="trailing" secondItem="lob-s9-nJH" secondAttribute="trailing" id="Ame-Yv-PcK"/>
@@ -67,7 +67,6 @@
                             </mask>
                         </variation>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -75,7 +74,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SplashBottom" width="320" height="243"/>
+        <image name="SplashBottom" width="320" height="243.5"/>
         <image name="SplashFull" width="768" height="1024"/>
         <image name="SplashTitle" width="320" height="235"/>
     </resources>

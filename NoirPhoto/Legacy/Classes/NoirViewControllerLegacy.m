@@ -1521,11 +1521,9 @@ void loadGaindLUT()
 }
 -(void)startWait
 {
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        self.savingMaskView.hidden = NO;
-        self.savingSpinner.hidden = NO;
-        [self.savingSpinner startAnimating];
-    });
+    self.savingMaskView.hidden = NO;
+    self.savingSpinner.hidden = NO;
+    [self.savingSpinner startAnimating];
 }
 -(void)stopWait
 {
@@ -1535,7 +1533,9 @@ void loadGaindLUT()
 }
 -(void)initUsedPropertiesAndUIForOriginPhoto:(UIImage*)originPhoto
 {
-	[NSThread detachNewThreadSelector:@selector(startWait) toTarget:self withObject:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self startWait];
+    });
 
 
 	//注意：调用这个函数之前，必须保证self.preset已经初始化过了
@@ -1665,8 +1665,9 @@ void loadGaindLUT()
 	Parameter *param = [self parameterWithPreset:self.preset];
 	[_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
 
-
-	[self stopWait];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self stopWait];
+    });
 }
 -(void)saveOriginPhoto:(UIImage*)image
 {
