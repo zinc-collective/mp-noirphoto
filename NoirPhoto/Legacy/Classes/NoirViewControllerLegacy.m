@@ -1124,9 +1124,10 @@ void loadGaindLUT()
 
 	ffRenderArguments renderArgs = [self argumentsWithPreset:apreset];
 	self.renderedPhoto = [self renderForArguments:renderArgs useImage:image changeType:changeType];
-	self.photoView.image = self.renderedPhoto;
-
-	self.photoFullView.image = self.renderedPhoto;
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        self.photoView.image = self.renderedPhoto;
+        self.photoFullView.image = self.renderedPhoto;
+    });
 
 	_bRendering = NO;
 }
@@ -1520,9 +1521,11 @@ void loadGaindLUT()
 }
 -(void)startWait
 {
-	self.savingMaskView.hidden = NO;
-	self.savingSpinner.hidden = NO;
-	[self.savingSpinner startAnimating];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        self.savingMaskView.hidden = NO;
+        self.savingSpinner.hidden = NO;
+        [self.savingSpinner startAnimating];
+    });
 }
 -(void)stopWait
 {

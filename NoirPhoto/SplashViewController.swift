@@ -8,7 +8,7 @@
 
 import UIKit
 import Photos
-import Crashlytics
+import Sentry
 
 protocol SplashDelegate : class {
     func splashDidPickImage(_ image: UIImage, url: URL)
@@ -16,6 +16,7 @@ protocol SplashDelegate : class {
 
 class SplashViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    var logger: AppLogger?
     var imagePicker : UIImagePickerController?
     weak var delegate : SplashDelegate?
 
@@ -81,10 +82,12 @@ class SplashViewController: UIViewController, UIImagePickerControllerDelegate, U
 // Local variable inserted by Swift 4.2 migrator.
 let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
-        print("PICKED IMAGE")
-
-        CrashlyticsBridge.log("Picked Image \(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.referenceURL)])")
-        CrashlyticsBridge.log("  info = \(info)")
+        //logging
+        let msg0 = "Picked Image \(info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.referenceURL)])"
+        let msg1 = "  info = \(info)"
+        logger?.logToConsole("PICKED IMAGE", .debug, .splashVC)
+        logger?.logToConsole(msg0, .debug, .splashVC)
+        logger?.logToConsole(msg1, .info, .splashVC)
 
         let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as! UIImage
 

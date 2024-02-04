@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F0AB554DBBAF1080382FF81 /* Pods_NoirPhoto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608C8629802043B3DB729F97 /* Pods_NoirPhoto.framework */; };
+		6D2DAA3E2B6EA41C0018EEB8 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 6D2DAA3D2B6EA41C0018EEB8 /* Sentry */; };
+		6D94877A2B6FC4550096D29D /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9487792B6FC4550096D29D /* LogManager.swift */; };
 		782B55E21CD3D037003C313E /* UIImage+metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B55E11CD3D037003C313E /* UIImage+metadata.swift */; };
 		78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78330FA81CA43D6F00B04CFD /* SplashViewController.swift */; };
 		783B0F171CA5921E002A77AB /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F161CA5921E002A77AB /* InfoViewController.swift */; };
@@ -167,13 +168,10 @@
 		787584271CA2EE9F00100514 /* VersionWatermark.m in Sources */ = {isa = PBXBuildFile; fileRef = 787584241CA2EE9F00100514 /* VersionWatermark.m */; };
 		7896C8011CF4A56C00AE804F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7896C8001CF4A56C00AE804F /* Utils.swift */; };
 		78D75F921CE2319200895BA1 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = 78D75F911CE2319200895BA1 /* info.html */; };
-		78D9FD321CEA1A0200745DDE /* CrashlyticsBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D9FD311CEA1A0200745DDE /* CrashlyticsBridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		419EC16A789658B4F4D433DF /* Pods-NoirPhoto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoirPhoto.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoirPhoto/Pods-NoirPhoto.debug.xcconfig"; sourceTree = "<group>"; };
-		608C8629802043B3DB729F97 /* Pods_NoirPhoto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoirPhoto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		671CC38C113DFCC7F37656F7 /* Pods-NoirPhoto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoirPhoto.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoirPhoto/Pods-NoirPhoto.release.xcconfig"; sourceTree = "<group>"; };
+		6D9487792B6FC4550096D29D /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		782B55E11CD3D037003C313E /* UIImage+metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+metadata.swift"; sourceTree = "<group>"; };
 		78330FA81CA43D6F00B04CFD /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		783B0F161CA5921E002A77AB /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -181,7 +179,6 @@
 		783B0F1A1CA5A476002A77AB /* Info.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		783B0F1E1CA5A4DD002A77AB /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		783B0F281CA5EDED002A77AB /* NoirViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoirViewController.swift; sourceTree = "<group>"; };
-		783B0F2A1CA5F72E002A77AB /* Todo.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Todo.md; sourceTree = "<group>"; };
 		787581391CA2E98400100514 /* NoirPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoirPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7875813C1CA2E98400100514 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		787581411CA2E98400100514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -354,8 +351,6 @@
 		787584241CA2EE9F00100514 /* VersionWatermark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionWatermark.m; sourceTree = "<group>"; };
 		7896C8001CF4A56C00AE804F /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		78D75F911CE2319200895BA1 /* info.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info.html; sourceTree = "<group>"; };
-		78D9FD301CEA1A0200745DDE /* CrashlyticsBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashlyticsBridge.h; path = NoirPhoto/CrashlyticsBridge.h; sourceTree = "<group>"; };
-		78D9FD311CEA1A0200745DDE /* CrashlyticsBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrashlyticsBridge.m; path = NoirPhoto/CrashlyticsBridge.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -363,7 +358,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F0AB554DBBAF1080382FF81 /* Pods_NoirPhoto.framework in Frameworks */,
+				6D2DAA3E2B6EA41C0018EEB8 /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,13 +387,10 @@
 		787581301CA2E98400100514 = {
 			isa = PBXGroup;
 			children = (
-				783B0F2A1CA5F72E002A77AB /* Todo.md */,
 				7875813B1CA2E98400100514 /* NoirPhoto */,
 				787581481CA2E98400100514 /* Info.plist */,
 				78D9FD2F1CEA19E000745DDE /* Bridge */,
 				7875813A1CA2E98400100514 /* Products */,
-				AC12024DA3E54819A491F40E /* Pods */,
-				E679D6CF653C1978FD4A822D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -421,6 +413,7 @@
 				782B55E11CD3D037003C313E /* UIImage+metadata.swift */,
 				787581431CA2E98400100514 /* Assets.xcassets */,
 				7896C8001CF4A56C00AE804F /* Utils.swift */,
+				6D9487792B6FC4550096D29D /* LogManager.swift */,
 				783B0F221CA5E58A002A77AB /* Info */,
 				783B0F231CA5E58F002A77AB /* Splash */,
 				7875814E1CA2EA5C00100514 /* Legacy */,
@@ -672,27 +665,8 @@
 			isa = PBXGroup;
 			children = (
 				787581B41CA2EBEF00100514 /* NoirPhoto-Bridging-Header.h */,
-				78D9FD301CEA1A0200745DDE /* CrashlyticsBridge.h */,
-				78D9FD311CEA1A0200745DDE /* CrashlyticsBridge.m */,
 			);
 			name = Bridge;
-			sourceTree = "<group>";
-		};
-		AC12024DA3E54819A491F40E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				419EC16A789658B4F4D433DF /* Pods-NoirPhoto.debug.xcconfig */,
-				671CC38C113DFCC7F37656F7 /* Pods-NoirPhoto.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		E679D6CF653C1978FD4A822D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				608C8629802043B3DB729F97 /* Pods_NoirPhoto.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -702,8 +676,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7875814B1CA2E98400100514 /* Build configuration list for PBXNativeTarget "NoirPhoto" */;
 			buildPhases = (
-				A5378E5D1A76E457390ED681 /* [CP] Check Pods Manifest.lock */,
-				0D10A95A93F343A70C596497 /* Check Pods Manifest.lock */,
 				787581351CA2E98400100514 /* Sources */,
 				787581361CA2E98400100514 /* Frameworks */,
 				787581371CA2E98400100514 /* Resources */,
@@ -714,6 +686,9 @@
 			dependencies = (
 			);
 			name = NoirPhoto;
+			packageProductDependencies = (
+				6D2DAA3D2B6EA41C0018EEB8 /* Sentry */,
+			);
 			productName = NoirPhoto;
 			productReference = 787581391CA2E98400100514 /* NoirPhoto.app */;
 			productType = "com.apple.product-type.application";
@@ -744,6 +719,9 @@
 				English,
 			);
 			mainGroup = 787581301CA2E98400100514;
+			packageReferences = (
+				6D2DAA3C2B6EA41C0018EEB8 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
+			);
 			productRefGroup = 7875813A1CA2E98400100514 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -900,21 +878,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0D10A95A93F343A70C596497 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		781C46211CE3B5DE0041DE34 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -926,25 +889,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 6a09c19815c2f7f42d12f74f97f8f87c0f139e62 d29b37ba3305e7a136158c7684175a69995c401705890454f260b5b758d91816";
-		};
-		A5378E5D1A76E457390ED681 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NoirPhoto-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -959,6 +905,7 @@
 				783B0F191CA597D5002A77AB /* NavigationViewController.swift in Sources */,
 				787581E71CA2EBF000100514 /* AdjustView.m in Sources */,
 				783B0F291CA5EDED002A77AB /* NoirViewController.swift in Sources */,
+				6D94877A2B6FC4550096D29D /* LogManager.swift in Sources */,
 				78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */,
 				787581E21CA2EBF000100514 /* TintsView.m in Sources */,
 				787581E11CA2EBF000100514 /* PresetsView.m in Sources */,
@@ -966,7 +913,6 @@
 				787584271CA2EE9F00100514 /* VersionWatermark.m in Sources */,
 				787581F01CA2EBF000100514 /* RConfigFile.m in Sources */,
 				782B55E21CD3D037003C313E /* UIImage+metadata.swift in Sources */,
-				78D9FD321CEA1A0200745DDE /* CrashlyticsBridge.m in Sources */,
 				787581EF1CA2EBF000100514 /* QuartzView.m in Sources */,
 				787581F31CA2EBF000100514 /* Tint.m in Sources */,
 				787581EE1CA2EBF000100514 /* Preset.m in Sources */,
@@ -1046,7 +992,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1085,7 +1031,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1095,20 +1041,22 @@
 		};
 		7875814C1CA2E98400100514 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 419EC16A789658B4F4D433DF /* Pods-NoirPhoto.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5GGD34ZNFU;
 				INFOPLIST_FILE = NoirPhoto/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.redgiantsoftware.noir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "NoirPhoto/NoirPhoto-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
@@ -1118,20 +1066,22 @@
 		};
 		7875814D1CA2E98400100514 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 671CC38C113DFCC7F37656F7 /* Pods-NoirPhoto.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5GGD34ZNFU;
 				INFOPLIST_FILE = NoirPhoto/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.redgiantsoftware.noir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "NoirPhoto/NoirPhoto-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.2;
@@ -1160,6 +1110,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6D2DAA3C2B6EA41C0018EEB8 /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/getsentry/sentry-cocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.14.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6D2DAA3D2B6EA41C0018EEB8 /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D2DAA3C2B6EA41C0018EEB8 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 787581311CA2E98400100514 /* Project object */;
 }

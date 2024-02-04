@@ -8,8 +8,7 @@
 
 import UIKit
 import Photos
-import Fabric
-import Crashlytics
+import Sentry
 
 let SaveOriginPhotoPath = "/Documents/origin_photo.jpg"
 
@@ -26,11 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.navigationController = self.window!.rootViewController as! NavigationViewController
 
-        Fabric.with([Crashlytics.self])
-
         self.splashController = UIStoryboard(name: "Splash", bundle: nil)
                                     .instantiateViewController(withIdentifier: "SplashViewController") as! SplashViewController
         self.splashController.delegate = self
+        self.splashController.logger = LogManager()
 
         if (UI_USER_INTERFACE_IDIOM() == .pad) {
             self.viewController = NoirViewController(nibName: "NoirViewController-iPad", bundle: nil)
