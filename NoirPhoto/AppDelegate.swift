@@ -13,40 +13,26 @@ import Sentry
 let SaveOriginPhotoPath = "/Documents/origin_photo.jpg"
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var splashController : SplashViewController!
-    var viewController : NoirViewController!
-    var navigationController : NavigationViewController!
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        self.navigationController = self.window!.rootViewController as! NavigationViewController
 
-        self.splashController = UIStoryboard(name: "Splash", bundle: nil)
+        let splashController: SplashViewController = UIStoryboard(name: "Splash", bundle: nil)
                                     .instantiateViewController(withIdentifier: "SplashViewController") as! SplashViewController
-        self.splashController.delegate = self
-        self.splashController.logger = LogManager()
+        splashController.logger = LogManager()
+        splashController.imageProvider = PhotoLibraryCoordinator(parent: splashController)
 
         if (UI_USER_INTERFACE_IDIOM() == .pad) {
-            self.viewController = NoirViewController(nibName: "NoirViewController-iPad", bundle: nil)
+            splashController.viewController = NoirViewController(nibName: "NoirViewController-iPad", bundle: nil)
+        } else {
+            splashController.viewController = NoirViewController(nibName: "NoirViewController", bundle: nil)
         }
-        else {
-            self.viewController = NoirViewController(nibName: "NoirViewController", bundle: nil)
-        }
-
-        self.navigationController.viewControllers = [self.splashController]
-
-
+        
+        let navigationController: UINavigationController = UINavigationController(rootViewController: splashController)
+        self.window!.rootViewController = navigationController
         return true
-    }
-
-    func splashDidPickImage(_ image: UIImage, url: URL) {
-        self.navigationController.viewControllers = [self.viewController]
-        // this must go last (refactor needed)
-        self.viewController.pickPhoto(url, image: image)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
