@@ -1058,7 +1058,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5GGD34ZNFU;
+				DEVELOPMENT_TEAM = 7G5K7Y23NM;
 				INFOPLIST_FILE = NoirPhoto/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1083,7 +1083,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5GGD34ZNFU;
+				DEVELOPMENT_TEAM = 7G5K7Y23NM;
 				INFOPLIST_FILE = NoirPhoto/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
