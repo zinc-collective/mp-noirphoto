@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D0F4C902B9C7644003616BA /* PhotoLibraryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0F4C8F2B9C7644003616BA /* PhotoLibraryCoordinator.swift */; };
 		6D2DAA3E2B6EA41C0018EEB8 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 6D2DAA3D2B6EA41C0018EEB8 /* Sentry */; };
 		6D94877A2B6FC4550096D29D /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9487792B6FC4550096D29D /* LogManager.swift */; };
 		782B55E21CD3D037003C313E /* UIImage+metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B55E11CD3D037003C313E /* UIImage+metadata.swift */; };
@@ -169,6 +170,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D0F4C8F2B9C7644003616BA /* PhotoLibraryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryCoordinator.swift; sourceTree = "<group>"; };
 		6D9487792B6FC4550096D29D /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		6D94877B2B6FDAA40096D29D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		782B55E11CD3D037003C313E /* UIImage+metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+metadata.swift"; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 				783B0F221CA5E58A002A77AB /* Info */,
 				783B0F231CA5E58F002A77AB /* Splash */,
 				7875814E1CA2EA5C00100514 /* Legacy */,
+				6D0F4C8F2B9C7644003616BA /* PhotoLibraryCoordinator.swift */,
 			);
 			path = NoirPhoto;
 			sourceTree = "<group>";

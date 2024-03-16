@@ -550,6 +550,29 @@ void loadGaindLUT()
 
 }
 
++ (nullable NSMutableDictionary *)dictionaryWithImageMetadata:(NSURL *)imageUrl error:(NSError **)error {
+    CGImageSourceRef imageSource = CGImageSourceCreateWithData((CFDataRef)[NSData dataWithContentsOfURL:imageUrl], NULL);
+    if (!imageSource) {
+        if (error) {
+            *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorCannotOpenFile userInfo:@{NSLocalizedDescriptionKey: @"Failed to create image source"}];
+        }
+        return nil;
+    }
+
+    CFDictionaryRef metadata = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, NULL);
+    if (!metadata) {
+        CFRelease(imageSource);
+        if (error) {
+            *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorCannotOpenFile userInfo:@{NSLocalizedDescriptionKey: @"Failed to get image metadata"}];
+        }
+        return nil;
+    }
+
+    NSMutableDictionary *metadataDict = CFBridgingRelease(metadata);
+    CFRelease(imageSource);
+    return metadataDict;
+}
+
 -(void)pickPhoto:(NSURL*)assetURL image:(UIImage*)selected {
 
 	if(selected == nil) return;
@@ -557,6 +580,8 @@ void loadGaindLUT()
 //	float version = [[[UIDevice currentDevice] systemVersion] floatValue];
 //
 //	if (version > 4.1) {
+        NSLog(@"##-> loadImageMetadataFromPicTEST=%@", [[self class] dictionaryWithImageMetadata: assetURL error:nil]);
+
 
 		ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
 		[library assetForURL:assetURL
@@ -569,8 +594,7 @@ void loadGaindLUT()
 					 self.imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:metadata];
 					 //[self addEntriesFromDictionary:metadata];
 
-					 NSLog(@"loadImageMetadataFromPic=%@", self.imageMetadata);
-
+                    NSLog(@"##-> loadImageMetadataFromPic=%@", self.imageMetadata);
 					 NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
 					 NSString *path=[paths    objectAtIndex:0];
 					 NSString *filename=[path stringByAppendingPathComponent:metadata_plist];
