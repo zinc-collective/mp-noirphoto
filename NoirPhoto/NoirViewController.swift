@@ -21,7 +21,7 @@ class NoirViewController: NoirViewControllerLegacy {
 
     // SCALE HACK: remove me once we change the UI
     override func viewWillAppear(_ animated: Bool) {
-        if (UI_USER_INTERFACE_IDIOM() == .phone) {
+        if (UIDevice.current.userInterfaceIdiom == .phone) {
             let scale = self.view.frame.size.width / CGFloat(320)
             self.view.transform = CGAffineTransform(scaleX: scale, y: scale)
             super.viewWillAppear(animated)

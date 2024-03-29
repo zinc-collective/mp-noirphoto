@@ -94,7 +94,7 @@
 		NSDictionary *itemDic = [items objectAtIndex:i];
 
 
-		if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 		{
 			//add show view to self
 			UIImage *showImage = [itemDic valueForKey:@"image_show"];
