@@ -14,7 +14,9 @@ let SaveOriginPhotoPath = "/Documents/origin_photo.jpg"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    static let iPadXib = "NoirViewController-iPad"
+    static let iPhoneXib = "NoirViewController"
+        
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -24,10 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         splashController.logger = LogManager()
         splashController.imageProvider = PhotoLibraryCoordinator(parent: splashController)
 
-        if (UI_USER_INTERFACE_IDIOM() == .pad) {
-            splashController.viewController = NoirViewController(nibName: "NoirViewController-iPad", bundle: nil)
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            splashController.viewController = NoirViewController(nibName: AppDelegate.iPadXib, bundle: nil)
         } else {
-            splashController.viewController = NoirViewController(nibName: "NoirViewController", bundle: nil)
+            splashController.viewController = NoirViewController(nibName: AppDelegate.iPhoneXib, bundle: nil)
         }
         
         let navigationController: UINavigationController = UINavigationController(rootViewController: splashController)
