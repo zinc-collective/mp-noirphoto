@@ -1582,21 +1582,21 @@ void loadGaindLUT()
 	//限制一下图片的大小，如果过大，就裁剪到合适的尺寸
     // "Click image size restrictions, if too large, cut to the appropriate size"  (via Google Translate)
 	float limitPixel;
-	if(UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)
-	{
-		if([self checkIfPureiPhone4NotIncludeIPod4])
-		{
-			limitPixel = photo_limit_iPhone4;
-		}
-		else
-		{
-			limitPixel = photo_limit_iPhone3_3GS;
-		}
-	}
-	else
-	{
-		limitPixel = photo_limit_iPad;
-	}
+    if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
+    {
+        limitPixel = photo_limit_iPad;
+    }
+    else
+    {
+        if([self checkIfPureiPhone4NotIncludeIPod4])
+        {
+            limitPixel = photo_limit_iPhone4;
+        }
+        else
+        {
+            limitPixel = photo_limit_iPhone3_3GS;
+        }
+    }
 	// NOTE: Why are we limiting the render to a fixed pixel dimension depending on runtime device?
     // 6/2013 - Charles Ruggiero, Red Conductor
     //
