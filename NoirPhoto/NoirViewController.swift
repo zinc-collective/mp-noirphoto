@@ -18,6 +18,7 @@ protocol ImageEditorInterfaceProvider: UIViewController {
 
 // scales up the whole view, just like if we weren't supporting iPhone 6 or 6+
 class NoirViewController: NoirViewControllerLegacy {
+    var infoVC: UIViewController?
 
     // SCALE HACK: remove me once we change the UI
     override func viewWillAppear(_ animated: Bool) {
@@ -75,6 +76,12 @@ class NoirViewController: NoirViewControllerLegacy {
                 }
             }
             self.present(activity, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func infoAction(_ sender: AnyObject) {
+        if let vc = self.infoVC {
+            self.navigationController?.pushViewController(vc, animated:true)
         }
     }
 

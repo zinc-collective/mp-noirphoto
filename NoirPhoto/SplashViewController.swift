@@ -20,6 +20,7 @@ class SplashViewController: UIViewController {
     var logger: AppLogger?
     var imageProvider: PhotoProvider?
     var viewController : ImageEditorInterfaceProvider?
+    var infoVC: UIViewController?
     weak var delegate : SplashDelegate?
     
     override func viewDidLoad() {
@@ -36,8 +37,7 @@ class SplashViewController: UIViewController {
 
     @IBAction func handleInfo(_ sender: AnyObject) {
         print("INFO")
-        let sb = UIStoryboard(name: "Info", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "InfoViewController")
+        guard let vc = self.infoVC else {return }
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

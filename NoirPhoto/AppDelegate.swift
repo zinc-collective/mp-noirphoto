@@ -14,24 +14,34 @@ let SaveOriginPhotoPath = "/Documents/origin_photo.jpg"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    static let iPadXib = "NoirViewController-iPad"
-    static let iPhoneXib = "NoirViewController"
-        
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        var config: InfoConfiguration
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            config = InfoConfiguration(buttonLeftMarginValue: 16.0,
+                                       buttonTopMarginValue: 24.0,
+                                       buttonSideValue: 37.0,
+                                       scrollViewInsetSize: 56.0,
+                                       defaultFontSize: 28.0)
+        } else {
+            config = InfoConfiguration(buttonLeftMarginValue: 8.0,
+                                       buttonTopMarginValue: 16.0,
+                                       buttonSideValue: 37.0,
+                                       scrollViewInsetSize: 32.0,
+                                       defaultFontSize: 50.0)
+        }
+        
+        let vc = NoirViewController()
+        vc.infoVC = InfoViewController(configuration: config)
         let splashController: SplashViewController = UIStoryboard(name: "Splash", bundle: nil)
                                     .instantiateViewController(withIdentifier: "SplashViewController") as! SplashViewController
         splashController.logger = LogManager()
         splashController.imageProvider = PhotoLibraryCoordinator(parent: splashController)
-
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
-            splashController.viewController = NoirViewController(nibName: AppDelegate.iPadXib, bundle: nil)
-        } else {
-            splashController.viewController = NoirViewController(nibName: AppDelegate.iPhoneXib, bundle: nil)
-        }
-        
+        splashController.infoVC = InfoViewController(configuration: config)
+        splashController.viewController = vc as? ImageEditorInterfaceProvider
+           
         let navigationController: UINavigationController = UINavigationController(rootViewController: splashController)
         self.window!.rootViewController = navigationController
         return true

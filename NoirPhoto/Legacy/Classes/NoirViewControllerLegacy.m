@@ -6,6 +6,7 @@
 //  Copyright 2019 Zinc Collective, LLC. All rights reserved.
 //
 
+#import "NoirPhoto-Swift.h"
 #import "NoirViewControllerLegacy.h"
 //#import "QuartzView.h"
 #import "RConfigFile.h"
@@ -844,18 +845,6 @@ void loadGaindLUT()
 //		[picker release];
 
 	}
-}
--(IBAction)infoAction:(id)sender
-{
-	NSString *infoNibName = @"Info";
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		infoNibName = @"Info-iPad";
-	}
-
-    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Info" bundle:NULL];
-    UIViewController * vc = [sb instantiateViewControllerWithIdentifier:@"InfoViewController"];
-    [self.navigationController pushViewController:vc animated:true];
 }
 
 -(void)initElementsForControlPad
