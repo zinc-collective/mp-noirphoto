@@ -37,11 +37,11 @@ class InfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.loadContent()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
-        self.loadContent()
     }
 
     override var prefersStatusBarHidden : Bool {
@@ -49,6 +49,7 @@ class InfoViewController: UIViewController {
     }
 
     @objc func handleBack() {
+        self.wkWebView?.reload()
         self.navigationController?.popViewController(animated: true)
     }
 }
@@ -184,6 +185,8 @@ private extension InfoViewController {
             self.view.addSubview(wrapper)
             wrapper.addSubview(webView)
             self.view.addSubview(button)
+            
+            webView.navigationDelegate = self
         }
         
         setupConstraints()
@@ -195,5 +198,15 @@ private extension InfoViewController {
         setupConstraintForWrapperView()
         setupConstraintForWebView()
         setupConstraintForButton()
+    }
+}
+
+
+extension InfoViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.navigationType == WKNavigationType.linkActivated {
+            webView.configuration.userContentController.removeAllUserScripts()
+        }
+        decisionHandler(WKNavigationActionPolicy.allow)
     }
 }
