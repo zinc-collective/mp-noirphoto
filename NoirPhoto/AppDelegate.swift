@@ -34,12 +34,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let vc = NoirViewController()
-        vc.infoVC = InfoViewController(configuration: config)
+        vc.infoVC = createFactoryInfoViewController(configuration: config)
         let splashController: SplashViewController = UIStoryboard(name: "Splash", bundle: nil)
                                     .instantiateViewController(withIdentifier: "SplashViewController") as! SplashViewController
         splashController.logger = LogManager()
         splashController.imageProvider = PhotoLibraryCoordinator(parent: splashController)
-        splashController.infoVC = InfoViewController(configuration: config)
+        splashController.infoVC = createFactoryInfoViewController(configuration: config)
         splashController.viewController = vc as? ImageEditorInterfaceProvider
            
         let navigationController: UINavigationController = UINavigationController(rootViewController: splashController)
@@ -75,6 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     	return FileManager.default.fileExists(atPath: filePath)
     }
 
-
+    private func createFactoryInfoViewController(configuration: InfoConfiguration) -> () -> InfoViewController {
+        return { return InfoViewController(configuration: configuration) }
+    }
 }
 
