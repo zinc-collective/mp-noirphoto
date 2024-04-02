@@ -54,7 +54,7 @@ class InfoViewController: UIViewController {
     }
 }
 
-
+//MARK: - Private Methods
 private extension InfoViewController {
     func loadContent() {
         if let url = Bundle.main.url(forResource: "info", withExtension: "html"),
@@ -90,6 +90,7 @@ private extension InfoViewController {
         webView.isOpaque = false
         webView.scrollView.contentInset = .zero
         webView.scrollView.clipsToBounds = false
+        webView.scrollView.delegate = self
         webView.scrollView.showsVerticalScrollIndicator = false
         webView.scrollView.showsHorizontalScrollIndicator = false
         webView.scrollView.insetsLayoutMarginsFromSafeArea = true
@@ -202,11 +203,20 @@ private extension InfoViewController {
 }
 
 
+//MARK: - WKNavigationDelegate
 extension InfoViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             webView.configuration.userContentController.removeAllUserScripts()
         }
         decisionHandler(WKNavigationActionPolicy.allow)
+    }
+}
+
+
+//MARK: - UIScrollViewDelegate
+extension InfoViewController: UIScrollViewDelegate {
+    func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        scrollView.pinchGestureRecognizer?.isEnabled = false
     }
 }

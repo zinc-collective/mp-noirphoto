@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                        buttonTopMarginValue: 16.0,
                                        buttonSideValue: 37.0,
                                        scrollViewInsetSize: 32.0,
-                                       defaultFontSize: 50.0)
+                                       defaultFontSize: 60.0)
         }
         
         let vc = NoirViewController()
