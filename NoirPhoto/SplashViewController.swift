@@ -65,9 +65,6 @@ class SplashViewController: UIViewController {
     }
 
     func openPicker() {
-        // hand picked origin to line up with ipad. This is ignored for iphone
-        // the splash screen uses full-screen button sizes
-        let buttonSize = CGSize(width: 40, height: 40) // size of the image
         self.imageProvider?.getPhoto({ [weak self] image, assetIdentifier in
             guard let self = self,
                   let image = image,
