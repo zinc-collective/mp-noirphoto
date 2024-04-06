@@ -63,7 +63,7 @@
 	_bOutSet = YES;
 
 	float visibleHeight = _scrollView.frame.size.height;
-	CGPoint contentOffset = _scrollView.contentOffset;
+    CGFloat duration = 0.3f;
 	float totalHeight = _useHeight;
 
 	float curUseValue = value - _minValue;
@@ -74,15 +74,11 @@
 
 
 	//move to new offset Y
-	[UIView beginAnimations:@"movement" context:nil];
-	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
-	[UIView setAnimationDuration:0.3f];
-
-	contentOffset.y = offsetY;
-	_scrollView.contentOffset = contentOffset;
-
-	[UIView commitAnimations];
-
+    [[UIView class] animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        CGPoint contentOffset = self->_scrollView.contentOffset;
+        contentOffset.y = offsetY;
+        self->_scrollView.contentOffset = contentOffset;
+    } completion:nil];
 }
 
 -(void)setTheCurrentValue2:(float)value
@@ -90,7 +86,7 @@
 	_bOutSet = YES;
 
 	float visibleHeight = _scrollView.frame.size.height;
-	CGPoint contentOffset = _scrollView.contentOffset;
+    CGFloat duration = 0.0f;
 	float totalHeight = _useHeight;
 
 	float curUseValue = value - _minValue;
@@ -101,15 +97,11 @@
 
 
 	//move to new offset Y
-	[UIView beginAnimations:@"movement" context:nil];
-	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
-	[UIView setAnimationDuration:0];
-
-	contentOffset.y = offsetY;
-	_scrollView.contentOffset = contentOffset;
-
-	[UIView commitAnimations];
-
+    [[UIView class] animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        CGPoint contentOffset = self->_scrollView.contentOffset;
+        contentOffset.y = offsetY;
+        self->_scrollView.contentOffset = contentOffset;
+    } completion:nil];
 }
 
 
