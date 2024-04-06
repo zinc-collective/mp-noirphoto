@@ -69,7 +69,7 @@ extension UIImage {
 
         case .down :
             transform = CGAffineTransform(translationX: imageSize.width, y: imageSize.height);
-            transform = transform.rotated(by: CGFloat(M_PI));
+            transform = transform.rotated(by: .pi);
 
         case .downMirrored :
             transform = CGAffineTransform(translationX: 0.0, y: imageSize.height);
@@ -80,7 +80,7 @@ extension UIImage {
             bounds.size.height = bounds.size.width;
             bounds.size.width = storedHeight;
             transform = CGAffineTransform(translationX: 0.0, y: imageSize.width);
-            transform = transform.rotated(by: 3.0 * CGFloat(M_PI) / 2.0);
+            transform = transform.rotated(by: 3.0 * .pi / 2.0);
 
         case .leftMirrored :
             let storedHeight = bounds.size.height
@@ -88,21 +88,21 @@ extension UIImage {
             bounds.size.width = storedHeight;
             transform = CGAffineTransform(translationX: imageSize.height, y: imageSize.width);
             transform = transform.scaledBy(x: -1.0, y: 1.0);
-            transform = transform.rotated(by: 3.0 * CGFloat(M_PI) / 2.0);
+            transform = transform.rotated(by: 3.0 * .pi / 2.0);
 
         case .right :
             let storedHeight = bounds.size.height
             bounds.size.height = bounds.size.width;
             bounds.size.width = storedHeight;
             transform = CGAffineTransform(translationX: imageSize.height, y: 0.0);
-            transform = transform.rotated(by: CGFloat(M_PI) / 2.0);
+            transform = transform.rotated(by: .pi / 2.0);
 
         case .rightMirrored :
             let storedHeight = bounds.size.height
             bounds.size.height = bounds.size.width;
             bounds.size.width = storedHeight;
             transform = CGAffineTransform(scaleX: -1.0, y: 1.0);
-            transform = transform.rotated(by: CGFloat(M_PI) / 2.0);
+            transform = transform.rotated(by: .pi / 2.0);
 
         @unknown default:
             // same as .up case
