@@ -104,6 +104,11 @@ extension UIImage {
             transform = CGAffineTransform(scaleX: -1.0, y: 1.0);
             transform = transform.rotated(by: CGFloat(M_PI) / 2.0);
 
+        @unknown default:
+            // same as .up case
+            transform = CGAffineTransform.identity
+            let error = NSError(domain: "UIImage+Ext", code: 0, userInfo: ["imageOrientation":String(describing: imageSource.imageOrientation)])
+            AppDelegate().getAppLogger().logError(error)
         }
 
         UIGraphicsBeginImageContext(bounds.size)

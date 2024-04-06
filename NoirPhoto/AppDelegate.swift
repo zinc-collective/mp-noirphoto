@@ -74,6 +74,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     	let filePath = NSHomeDirectory() + path
     	return FileManager.default.fileExists(atPath: filePath)
     }
+    
+    func getAppLogger() -> AppLogger {
+        return LogManager()
+    }
 
     private func createFactoryInfoViewController(configuration: InfoConfiguration) -> () -> InfoViewController {
         return { return InfoViewController(configuration: configuration) }
