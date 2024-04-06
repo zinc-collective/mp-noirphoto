@@ -867,34 +867,20 @@
 {
 	if(bShow)
 	{
-		//if(self.alpha == 1.0) return;
 		self._vignetteColor = vignette_color;
 		[self setNeedsDisplay];
-
-		[UIView beginAnimations:@"show animation" context:nil];
-		[UIView setAnimationCurve:UIViewAnimationCurveLinear];
-		[UIView setAnimationDuration:0.2f];
-
-		self.alpha = 1.0;
-
-		[UIView commitAnimations];
-
+        [[UIView class] animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.alpha = 1.0;
+        } completion:nil];
 	}
 	else
 	{
-		//if(self.alpha == 0.02) return;
-		[UIView beginAnimations:@"hide animation" context:nil];
-
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDidStopSelector:@selector(vignetteViewDidHide)];
-
-		[UIView setAnimationCurve:UIViewAnimationCurveLinear];
-		[UIView setAnimationDuration:0.2f];
-
-		self.alpha = 0.02;
-
-		[UIView commitAnimations];
-
+        [[UIView class] animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.alpha = 0.02;
+        } completion:^(BOOL finished){
+            self._vignetteColor = vignette_color_fade;
+            [self setNeedsDisplay];
+        }];
 	}
 }
 
