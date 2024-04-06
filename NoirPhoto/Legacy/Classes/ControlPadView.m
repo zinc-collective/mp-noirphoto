@@ -57,25 +57,36 @@
 #pragma mark in use functions
 -(void)setResetBtnForPresets
 {
-	UIButton *resetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-	resetBtn.frame = reset_btn_rect;
-	[resetBtn setImage:[UIImage imageNamed:@"reset_btn.png"] forState:UIControlStateNormal];
-	[resetBtn addTarget:self action:@selector(resetAction:) forControlEvents:UIControlEventTouchUpInside];
-	[self addSubview:resetBtn];
+    // this is never called.  It's here for posterity when the app gets rebuilt (next year?)
+    UIButton *resetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    resetBtn.frame = reset_btn_rect;
+    [resetBtn setImage:[UIImage imageNamed:@"reset_btn.png"] forState:UIControlStateNormal];
+    [resetBtn addTarget:self action:@selector(resetAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:resetBtn];
 }
 -(void)resetAction:(id)sender
 {
-	[self alertYouAction:NSLocalizedString(@"control pad reset alert title", nil)
-				 withMsg:NSLocalizedString(@"control pad reset alert message", nil)
-				  withOK:NSLocalizedString(@"control pad reset alert OK", nil)
-			  withCancel:NSLocalizedString(@"control pad reset alert Cancel", nil)];
+    [self alertYouAction:NSLocalizedString(@"control pad reset alert title", nil)
+                 withMsg:NSLocalizedString(@"control pad reset alert message", nil)
+                  withOK:NSLocalizedString(@"control pad reset alert OK", nil)
+              withCancel:NSLocalizedString(@"control pad reset alert Cancel", nil)];
 }
 -(void)alertYouAction:(NSString*)title withMsg:(NSString*)alertMsg withOK:(NSString*)okMsg withCancel:(NSString*)cancelMsg
 {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:alertMsg delegate:self cancelButtonTitle:okMsg otherButtonTitles:cancelMsg, nil];
-	[alert setDelegate:self];
-	alert.message = alertMsg;
-	[alert show];
+    __weak ControlPadView *weakSelf = self;
+    UIAlertAction* okAction = [[UIAlertAction class] actionWithTitle:okMsg style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action){
+        if (weakSelf != nil && weakSelf.delegate != nil) {
+            [weakSelf.delegate presetsResetToDefault];
+        }
+    }];
+    UIAlertAction* cancelAction = [[UIAlertAction class] actionWithTitle:cancelMsg style:UIAlertActionStyleCancel handler:nil];
+    UIAlertController *alert = [[UIAlertController class] alertControllerWithTitle:title message:alertMsg preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:cancelAction];
+    [alert addAction:okAction];
+    
+    if(self.delegate) {
+        [self.delegate presentPresetsViewAlert:alert];
+    }
 }
 
 
@@ -87,77 +98,77 @@
 #pragma mark in use functions
 -(void)setPresetsForItems:(NSArray*)items
 {
-	if(items == nil || [items count] == 0) return;
-
-	if(_prestsView == nil)
-	{
-		if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
-		{
-			_prestsView = [[PresetsView alloc] initWithFrame:presets_rect_iPad items:nil dele:self btnWidth:80.0 btnHeight:80.0];
-		}
-		else
-		{
-			_prestsView = [[PresetsView alloc] initWithFrame:presets_rect2 items:nil dele:self btnWidth:42.0 btnHeight:32.0];
-		}
-
-		[self addSubview:_prestsView];
-	}
-
-	[_prestsView setButtonsForItems:items];
-
+    if(items == nil || [items count] == 0) return;
+    
+    if(_prestsView == nil)
+    {
+        if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
+        {
+            _prestsView = [[PresetsView alloc] initWithFrame:presets_rect_iPad items:nil dele:self btnWidth:80.0 btnHeight:80.0];
+        }
+        else
+        {
+            _prestsView = [[PresetsView alloc] initWithFrame:presets_rect2 items:nil dele:self btnWidth:42.0 btnHeight:32.0];
+        }
+        
+        [self addSubview:_prestsView];
+    }
+    
+    [_prestsView setButtonsForItems:items];
+    
 }
 -(void)setTintsForItems:(NSArray*)items
 {
-	if(items == nil || [items count] == 0) return;
-
-	if(_tintsView == nil)
-	{
-		if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
-		{
-			_tintsView = [[TintsView alloc] initWithFrame:tints_rect_iPad items:nil dele:self posformat:pfLine btnWidth:85 btnHeight:85];
-		}
-		else
-		{
-			_tintsView = [[TintsView alloc] initWithFrame:tints_rect items:nil dele:self posformat:pfMartix btnWidth:50.0 btnHeight:50.0];
-		}
-
-		[self addSubview:_tintsView];
-	}
-
-	[_tintsView setButtonsForItems:items];
+    if(items == nil || [items count] == 0) return;
+    
+    if(_tintsView == nil)
+    {
+        if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
+        {
+            _tintsView = [[TintsView alloc] initWithFrame:tints_rect_iPad items:nil dele:self posformat:pfLine btnWidth:85 btnHeight:85];
+        }
+        else
+        {
+            _tintsView = [[TintsView alloc] initWithFrame:tints_rect items:nil dele:self posformat:pfMartix btnWidth:50.0 btnHeight:50.0];
+        }
+        
+        [self addSubview:_tintsView];
+    }
+    
+    [_tintsView setButtonsForItems:items];
 }
 -(void)setAdjustsForExpinside:(float)expInside expOutside:(float)expOutside contrast:(float)contrast
 {
-	if(_adjustView == nil)
-	{
-		CGRect adjustFrame = adjusts_rect;
-		if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
-		{
-			adjustFrame = adjusts_rect_iPad;
-		}
-
-		_adjustView = [[AdjustView alloc] initWithFrame:adjustFrame];
-		[_adjustView setDelegate:self];
-		[self addSubview:_adjustView];
-	}
-
-	[_adjustView setAdjustByExpinside:expInside expOutside:expOutside contrast:contrast];
+    if(_adjustView == nil)
+    {
+        CGRect adjustFrame = adjusts_rect;
+        if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
+        {
+            adjustFrame = adjusts_rect_iPad;
+        }
+        
+        _adjustView = [[AdjustView alloc] initWithFrame:adjustFrame];
+        [_adjustView setDelegate:self];
+        [self addSubview:_adjustView];
+    }
+    
+    [_adjustView setAdjustByExpinside:expInside expOutside:expOutside contrast:contrast];
 }
 -(void)rotatePresetShowViewForTransform:(CGAffineTransform)transfm
 {
-	if(_prestsView == nil) return;
-	[_prestsView rotateShowViewForTransform:transfm];
+    if(_prestsView == nil) return;
+    [_prestsView rotateShowViewForTransform:transfm];
 }
 
 -(void)choosePresetsBtnForIndex:(NSInteger)index bNeedReturn:(BOOL)bReturn
 {
-	if(_prestsView == nil) return;
-	[_prestsView chooseButtonForIndex:index bReturnToDelegate:bReturn];
+    if(_prestsView == nil) return;
+    [_prestsView chooseButtonForIndex:index bReturnToDelegate:bReturn];
 }
 -(void)chooseTintsBtnForIndex:(NSInteger)index bNeedReturn:(BOOL)bReturn
 {
-	if(_tintsView == nil) return;
-	[_tintsView chooseButtonForIndex:index bReturnToDelegate:bReturn];
+    if(_tintsView == nil) return;
+    [_tintsView chooseButtonForIndex:index bReturnToDelegate:bReturn];
 }
 
 
@@ -167,10 +178,10 @@
 //PresetsViewDelegate
 -(void)presetsButtonChooseIndex:(NSInteger)index data:(id)data
 {
-	if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(presetsChooseIndex:data:)])
-	{
-		[self.delegate presetsChooseIndex:index data:data];
-	}
+    if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(presetsChooseIndex:data:)])
+    {
+        [self.delegate presetsChooseIndex:index data:data];
+    }
 }
 -(void)overWritePresetByIndex:(NSInteger)index
 {
@@ -189,31 +200,19 @@
 //TintsViewDelegate
 -(void)tintsButtonChooseIndex:(NSInteger)index data:(id)data
 {
-	if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(tintsChooseIndex:data:)])
-	{
-		[self.delegate tintsChooseIndex:index data:data];
-	}
+    if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(tintsChooseIndex:data:)])
+    {
+        [self.delegate tintsChooseIndex:index data:data];
+    }
 }
 
 //AdjustViewDelegate
 -(void)adjustViewReturnExpinside:(float)expInside expOutside:(float)expOutside contrast:(float)contrast isFinal:(BOOL)isFinal
 {
-	if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(adjustExpinside:expOutside:contrast:isFinal:)])
-	{
-		[self.delegate adjustExpinside:expInside expOutside:expOutside contrast:contrast isFinal:isFinal];
-	}
-}
-
-//UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-	if(buttonIndex == 0)
-	{
-		if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(presetsResetToDefault)])
-		{
-			[self.delegate presetsResetToDefault];
-		}
-	}
+    if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(adjustExpinside:expOutside:contrast:isFinal:)])
+    {
+        [self.delegate adjustExpinside:expInside expOutside:expOutside contrast:contrast isFinal:isFinal];
+    }
 }
 
 
