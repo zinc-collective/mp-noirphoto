@@ -374,6 +374,10 @@ void loadGaindLUT()
 #pragma mark -
 #pragma mark delegate functios
 //ControlPadViewDelegate
+-(void)presentPresetsViewAlert:(UIAlertController *)alert
+{
+    [self presentViewController:alert animated:true completion:nil];
+}
 -(void)presetsChooseIndex:(NSInteger)index data:(id)data
 {
 	self.preset = [self presetReadFromPlistByIndex:index];

@@ -174,10 +174,16 @@
 }
 -(void)overWritePresetByIndex:(NSInteger)index
 {
-	if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(overWritePresetToIndex:)])
-	{
-		[self.delegate overWritePresetToIndex:index];
-	}
+    if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(overWritePresetToIndex:)])
+    {
+        [self.delegate overWritePresetToIndex:index];
+    }
+}
+-(void)presentPresetsViewAlert:(UIAlertController *)alert
+{
+    if(self.delegate) {
+        [self.delegate presentPresetsViewAlert:alert];
+    }
 }
 
 //TintsViewDelegate

@@ -14,10 +14,11 @@
 @optional
 -(void)presetsButtonChooseIndex:(NSInteger)index data:(id)data; //return index & data for choose
 -(void)overWritePresetByIndex:(NSInteger)index;
+-(void)presentPresetsViewAlert:(UIAlertController *)alert;
 @end
 
 
-@interface PresetsView : UIView <UIAlertViewDelegate> {
+@interface PresetsView : UIView {
 
 	NSArray *_buttons;
 	NSArray *_items;
@@ -27,14 +28,10 @@
 	NSTimer *_timer;
 	NSInteger _touchDownIndex;
 	NSArray *_showViews;
-
-	UIAlertView *mAlert;
-
 }
 
 @property (nonatomic, weak) id<PresetsViewDelegate> delegate;
 @property (nonatomic, retain) NSTimer *_timer;
-@property (nonatomic, retain) UIAlertView *mAlert;
 
 
 
