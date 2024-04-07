@@ -110,7 +110,7 @@
 
 int briteLUT[256];
 int darkLUT[256];
-void loadGaindLUT()
+- (void)loadGaindLUT
 {
 	//load LUTs
 	//
@@ -194,7 +194,7 @@ void loadGaindLUT()
 	//	}
 
 
-	loadGaindLUT();
+	[self loadGaindLUT];
 
 	//add photo view
 	CGRect photoViewRect = photo_view_rect;
