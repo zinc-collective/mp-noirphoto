@@ -36,15 +36,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let vc = NoirViewController()
         vc.infoVC = createFactoryInfoViewController(configuration: config)
         vc.logger = LogManager()
-        vc.imageProvider = PhotoLibraryCoordinator(parent: vc)
-        
-        
+        vc.imageProvider = PhotoLibraryCoordinator(parent: vc as! UIViewController)
         let splashController: SplashViewController = UIStoryboard(name: "Splash", bundle: nil)
                                     .instantiateViewController(withIdentifier: "SplashViewController") as! SplashViewController
         splashController.logger = LogManager()
         splashController.imageProvider = PhotoLibraryCoordinator(parent: splashController)
         splashController.infoVC = createFactoryInfoViewController(configuration: config)
-        splashController.viewController = vc
+        splashController.viewController = vc as? ImageEditorInterfaceProvider
            
         let navigationController: UINavigationController = UINavigationController(rootViewController: splashController)
         self.window!.rootViewController = navigationController
