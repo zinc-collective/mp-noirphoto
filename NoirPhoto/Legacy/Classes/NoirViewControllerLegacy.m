@@ -726,7 +726,7 @@ int darkLUT[256];
             self->_vignetteView.frame = self->photoView.frame;
 
             self->_photoRenderRect2 = self->_photoRenderRect;
-            self->_photoRenderRect = [self photoRenderRectForImageSize:self.photo.size withImageViewRect:photoView.frame];
+            self->_photoRenderRect = [self photoRenderRectForImageSize:self.photo.size withImageViewRect:self->photoView.frame];
             [self->_vignetteView setVignetteForParam:param photoRect:self->_photoRenderRect];
 
             [self->fullBtn  setImage:[UIImage imageNamed:@"up_panel.png"] forState:UIControlStateNormal];
