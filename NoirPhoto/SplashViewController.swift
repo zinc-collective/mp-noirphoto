@@ -21,7 +21,7 @@ class SplashViewController: UIViewController {
     var imageProvider: PhotoProvider?
     var viewController : ImageEditorInterfaceProvider?
     var infoVC: (() -> UIViewController)?
-    weak var delegate : SplashDelegate?
+    weak var delegate : PhotoProviderDelegate?
     
     override func viewDidLoad() {
         self.delegate = self
@@ -69,15 +69,15 @@ class SplashViewController: UIViewController {
             guard let self = self,
                   let image = image,
                   let assetIdentifier = assetIdentifier else { return }
-            self.delegate?.splashDidPickImage(UIImage(cgImage: image), assetIdentifier: assetIdentifier)
+            self.delegate?.providerDidPickImage(UIImage(cgImage: image), assetIdentifier: assetIdentifier)
         })
     }
 }
 
 
 // MARK: - delegate SplashDelegate
-extension SplashViewController: SplashDelegate {
-    func splashDidPickImage(_ image: UIImage, assetIdentifier: String) {
+extension SplashViewController: PhotoProviderDelegate {
+    func providerDidPickImage(_ image: UIImage, assetIdentifier: String) {
         // this must go last (refactor needed)
         guard let vc = self.viewController else { return }
         self.navigationController?.setViewControllers([vc], animated: true)

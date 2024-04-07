@@ -16,6 +16,10 @@ protocol PhotoProvider {
     func getPhoto(_ completion: @escaping (CGImage?, String?) -> Void)
 }
 
+protocol PhotoProviderDelegate : AnyObject {
+    func providerDidPickImage(_ image: UIImage, assetIdentifier: String)
+}
+
 
 class PhotoLibraryCoordinator {
     var picker: PHPickerViewController?

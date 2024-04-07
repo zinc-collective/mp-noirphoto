@@ -19,6 +19,9 @@ protocol ImageEditorInterfaceProvider: UIViewController {
 // scales up the whole view, just like if we weren't supporting iPhone 6 or 6+
 class NoirViewController: NoirViewControllerLegacy {
     var infoVC: (() -> UIViewController)?
+    var logger: AppLogger?
+    var imageProvider: PhotoProvider?
+    weak var delegate : PhotoProviderDelegate?
 
     // SCALE HACK: remove me once we change the UI
     override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +43,7 @@ class NoirViewController: NoirViewControllerLegacy {
 
         self.fullBtn.addGestureRecognizer(downGesture)
         self.fullBtn.addGestureRecognizer(upGesture)
+        self.delegate = self
     }
 
     @IBAction func onSwipeGripDown() {
@@ -103,6 +107,44 @@ class NoirViewController: NoirViewControllerLegacy {
     override var prefersStatusBarHidden : Bool {
         return true
     }
+    
+    @IBAction func handleInfo(_ sender: AnyObject) {
+        print("INFO NOIR")
+        guard let vc = self.infoVC?() else { return }
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
+    @IBAction func handleLibrary(_ sender: AnyObject) {
+        print("LIBRARY NOIR")
+
+        // Request photo access earlier so the photos window isn't black
+        PHPhotoLibrary.requestAuthorization { status in
+            switch status {
+            case .authorized:
+                print("AUTHORIZED NOIR")
+            case .restricted:
+                print("RESTRICTED NOIR")
+            case .denied:
+                print("DENIED NOIR")
+            default:
+                // place for .NotDetermined - in this callback status is already determined so should never get here
+                break
+            }
+
+            DispatchQueue.main.async {
+                self.openPicker()
+            }
+        }
+    }
+
+    func openPicker() {
+        self.imageProvider?.getPhoto({ [weak self] image, assetIdentifier in
+            guard let self = self,
+                  let image = image,
+                  let assetIdentifier = assetIdentifier else { return }
+            self.delegate?.providerDidPickImage(UIImage(cgImage: image), assetIdentifier: assetIdentifier)
+        })
+    }
 
 }
 
@@ -143,3 +185,12 @@ extension NoirViewController: ImageEditorInterfaceProvider {
 //                }];
     }
 }
+
+
+// MARK: - delegate SplashDelegate
+extension NoirViewController: PhotoProviderDelegate {
+    func providerDidPickImage(_ image: UIImage, assetIdentifier: String) {
+        self.pickPhoto(assetIdentifier, image: image)
+    }
+}
+
