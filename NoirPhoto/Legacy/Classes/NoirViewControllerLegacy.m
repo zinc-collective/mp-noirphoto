@@ -85,7 +85,6 @@
 @synthesize mCircleShow4;
 @synthesize mCircleRender;
 @synthesize mCircleSave;
-@synthesize imagePickerPopover;
 
 @synthesize _vignetteView;
 
@@ -543,15 +542,8 @@ int darkLUT[256];
 
     [self pickPhoto:assetURL image:selected];
 
-	if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
-	{
-		[self.imagePickerPopover dismissPopoverAnimated:YES];
-		self.loadBtn.enabled = YES;
-	}
-	else
-	{
-        [picker dismissViewControllerAnimated:YES completion:^{}];
-	}
+    self.loadBtn.enabled = YES;
+    [picker dismissViewControllerAnimated:YES completion:^{}];
 
 }
 
@@ -708,16 +700,6 @@ int darkLUT[256];
 		[self renderPhotoViewForPreset:self.preset useImage:self.adjustPhoto changeType:typeVignette actioning:YES];
 	}
 }
-
-//UIPopoverControllerDelegate
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-	//[popoverController release];
-	self.loadBtn.enabled = YES;
-}
-
-
-
 -(void)toggleFull
 {
     CGFloat duration = 0.3f;
@@ -792,57 +774,6 @@ int darkLUT[256];
             self->isFull = NO;
         }
     } completion:nil];
-}
-
--(IBAction)loadAction:(id)sender
-{
-	if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
-	{
-		if(imagePickerPopover==nil){
-
-			UIPopoverController *ipPopover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
-			self.imagePickerPopover = ipPopover;
-
-			self.imagePickerPopover.delegate = self;
-			self.imagePickerPopover.popoverContentSize = CGSizeMake(320, 480);
-
-            //self.imagePickerPopover.popoverArrowDirection = UIPopoverArrowDirectionAny;
-
-		}
-
-		UIButton *btn = (UIButton*)sender;
-		CGRect popFrom;
-		if(btn == self.loadBtn)
-		{
-			popFrom = btn.bounds;
-		}
-		else
-		{
-			popFrom = CGRectMake(585, 795, 50, 50);
-		}
-
-//        CGAffineTransform m = CGAffineTransformMakeRotation(M_PI/2.0);
-//        imagePickerPopover.transform = m;
-
-		[self.imagePickerPopover presentPopoverFromRect:popFrom
-												 inView:btn
-							   permittedArrowDirections:UIPopoverArrowDirectionAny
-											   animated:YES];
-
-		self.loadBtn.enabled = NO;
-	}
-	else
-	{
-        imagePickerOnScreen = YES;
-        [self presentViewController:imagePicker animated:TRUE completion:nil];
-        //[self.view.window.rootViewController presentViewController:imagePicker animated:YES completion:nil];
-//		UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//		picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//		picker.delegate = self;
-//		[self presentModalViewController:picker animated:YES];
-//		[picker release];
-
-	}
 }
 
 -(void)initElementsForControlPad

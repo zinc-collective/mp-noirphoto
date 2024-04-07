@@ -41,7 +41,7 @@ typedef struct {
 
 
 //@class QuartzView;
-@interface NoirViewControllerLegacy : UIViewController <UIPopoverControllerDelegate, VignetteDelegate, ControlPadViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface NoirViewControllerLegacy : UIViewController <VignetteDelegate, ControlPadViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
 
 	UIImageView			 *photoView;
 	UIImageView			 *photoFullView;
@@ -92,7 +92,6 @@ typedef struct {
 
 	BOOL				 _bPreseting;  //是否正处于preset状态下，只要任何一个操作更改，都不再处于preset状态
 
-	UIPopoverController *imagePickerPopover;
 	UIImagePickerController *imagePicker;
     BOOL imagePickerOnScreen; //bret
 
@@ -134,7 +133,6 @@ typedef struct {
 @property (nonatomic, retain) UIImage				 *mCircleRender;
 @property (nonatomic, retain) UIImage				 *mCircleSave;
 
-@property (nonatomic, retain) UIPopoverController *imagePickerPopover;
 
 @property (nonatomic, retain) VignetteView* _vignetteView;
 @property (nonatomic, retain) VignetteView* _vignetteFullView;
@@ -150,8 +148,6 @@ typedef struct {
 
 #pragma mark -
 #pragma mark in use functios @for UI
--(IBAction)loadAction:(id)sender;
-
 -(void)initElementsForControlPad; //only need to add presets and tints, the others will be add by controlpadview self
 
 -(NSArray*)presetsItemsFromPlist:(NSString*)fileName;
