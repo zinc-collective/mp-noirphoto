@@ -89,21 +89,6 @@ class NoirViewController: NoirViewControllerLegacy {
         }
     }
 
-    func savePhotoFeedback() {
-        let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: .alert)
-        self.present(alert, animated: true, completion: {
-            delay(0.5) {
-                self.dismiss(animated: true, completion: nil)
-            }
-        })
-
-    }
-
-    func renderPhoto() -> UIImage {
-        let source = self.sourcePhoto.rotateCameraImageToProperOrientation(CGFloat(MAXFLOAT))
-        return self.image(for: self.preset, use: source)
-    }
-
     override var prefersStatusBarHidden : Bool {
         return true
     }
@@ -136,7 +121,50 @@ class NoirViewController: NoirViewControllerLegacy {
             }
         }
     }
+}
 
+
+// MARK: Private Methods
+private extension NoirViewController {
+
+    func savePhotoFeedback() {
+        let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: .alert)
+        self.present(alert, animated: true, completion: {
+            delay(0.5) {
+                self.dismiss(animated: true, completion: nil)
+            }
+        })
+
+    }
+
+    func renderPhoto() -> UIImage {
+        let source = self.sourcePhoto.rotateCameraImageToProperOrientation(CGFloat(MAXFLOAT))
+        return self.image(for: self.preset, use: source)
+    }
+    
+    private func setUpImageViews() {
+        if let config = configuration {
+            self.newTintMaskView = UIImageView(image: UIImage(named: config.tintMaskImage))
+        }
+        if let tintView = self.newTintMaskView {
+            self.view.addSubview(tintView)
+            self.tintMaskView.isHidden = true
+            setImageViewConstraints()
+        }
+    }
+    
+    private func setImageViewConstraints() {
+        if let tintView = self.newTintMaskView {
+            tintView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                // Problem: iPad has different layout
+                // problem: _ctrlPadView is not accessible in the view heirachy
+                // problem: this will not work without a full re-do of the view's layout :(
+//                tintView.trailingAnchor.constraint(equalTo: , constant: <#T##CGFloat#>)
+            ])
+        }
+    }
+    
     func openPicker() {
         self.imageProvider?.getPhoto({ [weak self] image, assetIdentifier in
             guard let self = self,
