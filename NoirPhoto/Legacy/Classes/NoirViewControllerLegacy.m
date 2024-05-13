@@ -71,7 +71,6 @@
 @synthesize loadBtn;
 @synthesize saveBtn;
 @synthesize infoBtn;
-@synthesize tintMaskView;
 @synthesize mCircleImageName;
 @synthesize mPresetReviewImageName;
 @synthesize mPresetReviewMaskImageName;
@@ -338,10 +337,6 @@ int darkLUT[256];
         frame = infoBtn.frame;
         frame.origin.y += IPHONE5_HEIGHT_DIFFERENCE;
         infoBtn.frame = frame;
-
-        frame = tintMaskView.frame;
-        frame.origin.y += IPHONE5_HEIGHT_DIFFERENCE;
-        tintMaskView.frame = frame;
     }
 }
 
@@ -349,7 +344,6 @@ int darkLUT[256];
 	//set tint and adjust position
 	[_ctrlPadView chooseTintsBtnForIndex:self.preset.tintIndex bNeedReturn:NO];
 	[_ctrlPadView setAdjustsForExpinside:self.preset.expInside expOutside:self.preset.expOutside contrast:self.preset.contrast];
-	[self changeTintMaskForIndex:self.preset.tintIndex];
 
 	[self initUsedPropertiesAndUIForOriginPhoto:image];
 
@@ -395,10 +389,7 @@ int darkLUT[256];
 	//set tint and adjust position
 	[_ctrlPadView chooseTintsBtnForIndex:self.preset.tintIndex bNeedReturn:NO];
 	[_ctrlPadView setAdjustsForExpinside:self.preset.expInside expOutside:self.preset.expOutside contrast:self.preset.contrast];
-
-	//change mask
-	[self changeTintMaskForIndex:self.preset.tintIndex];
-
+	
 	//render
 	[self renderPhotoViewForPreset:self.preset useImage:self.photo changeType:typePreset actioning:NO];
 
@@ -409,9 +400,6 @@ int darkLUT[256];
 -(void)tintsChooseIndex:(NSInteger)index data:(id)data
 {
 	self.preset.tintIndex = index;
-
-	//change mask
-	[self changeTintMaskForIndex:index];
 
 	//remove select state of presets buttons
 	[_ctrlPadView choosePresetsBtnForIndex:-1 bNeedReturn:NO];
@@ -732,7 +720,6 @@ int darkLUT[256];
             [self->fullBtn  setImage:[UIImage imageNamed:@"up_panel.png"] forState:UIControlStateNormal];
 
             self->_ctrlPadView.center = CGPointMake(self->_ctrlPadView.center.x, self->_ctrlPadView.center.y+self->ctrl_pad_offset);
-            self->tintMaskView.center = CGPointMake(self->tintMaskView.center.x, self->tintMaskView.center.y+self->ctrl_pad_offset);
             self->loadBtn.center = CGPointMake(self->loadBtn.center.x, self->loadBtn.center.y+self->ctrl_pad_offset);
             self->saveBtn.center = CGPointMake(self->saveBtn.center.x, self->saveBtn.center.y+self->ctrl_pad_offset);
             self->infoBtn.center = CGPointMake(self->infoBtn.center.x, self->infoBtn.center.y+self->ctrl_pad_offset);
@@ -761,7 +748,6 @@ int darkLUT[256];
             [self->fullBtn  setImage:[UIImage imageNamed:@"down_panel.png"] forState:UIControlStateNormal];
 
             self->_ctrlPadView.center = CGPointMake(self->_ctrlPadView.center.x, self->_ctrlPadView.center.y-self->ctrl_pad_offset);
-            self->tintMaskView.center = CGPointMake(self->tintMaskView.center.x, self->tintMaskView.center.y-self->ctrl_pad_offset);
             self->loadBtn.center = CGPointMake(self->loadBtn.center.x, self->loadBtn.center.y-self->ctrl_pad_offset);
             self->saveBtn.center = CGPointMake(self->saveBtn.center.x, self->saveBtn.center.y-self->ctrl_pad_offset);
             self->infoBtn.center = CGPointMake(self->infoBtn.center.x, self->infoBtn.center.y-self->ctrl_pad_offset);
@@ -793,7 +779,6 @@ int darkLUT[256];
 	if(self.presetsChooseIndex != -1)
 	{
 		[_ctrlPadView chooseTintsBtnForIndex:self.preset.tintIndex bNeedReturn:NO];
-		[self changeTintMaskForIndex:self.preset.tintIndex];
 	}
 
 	//add Adjusts
@@ -1626,16 +1611,6 @@ int darkLUT[256];
 
 	UIImage* orinPhoto = [UIImage imageWithContentsOfFile:filePath];
 	return orinPhoto;
-}
--(void)changeTintMaskForIndex:(NSInteger)index
-{
-	NSString *tintMaskName = [NSString stringWithFormat:@"tint_mask_%zd.png", index];
-	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
-	{
-		tintMaskName = [NSString stringWithFormat:@"tint_mask_iPad_%zd.png", index];
-	}
-
-	self.tintMaskView.image = [UIImage imageNamed:tintMaskName];
 }
 -(UIImage*)limitedSourcePhoto:(UIImage*)source forLimitPixel:(float)limit
 {

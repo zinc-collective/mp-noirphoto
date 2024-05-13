@@ -16,12 +16,24 @@ protocol ImageEditorInterfaceProvider: UIViewController {
 }
 
 
+struct NoirConfiguration {
+    var tintMaskImage: String
+}
+
+
 // scales up the whole view, just like if we weren't supporting iPhone 6 or 6+
 class NoirViewController: NoirViewControllerLegacy {
+    var newTintMaskView: UIImageView?
     var infoVC: (() -> UIViewController)?
     var logger: AppLogger?
     var imageProvider: PhotoProvider?
     weak var delegate : PhotoProviderDelegate?
+    private var configuration: NoirConfiguration!
+    
+    convenience init(configuration: NoirConfiguration) {
+        self.init()
+        self.configuration = configuration
+    }
 
     // SCALE HACK: remove me once we change the UI
     override func viewWillAppear(_ animated: Bool) {
@@ -163,15 +175,15 @@ private extension NoirViewController {
     }
     
     func setUpImageViews() {
+        // TODO: - should move btn initialization from legcay controller to here
         if let config = configuration {
-            self.newTintMaskView = UIImageView(image: UIImage(named: config.tintMaskImage))
+//            self.newTintMaskView = UIImageView(image: UIImage(named: config.tintMaskImage))
         }
         if let tintView = self.newTintMaskView {
             self.view.addSubview(tintView)
-            self.tintMaskView.isHidden = true
             // default to Portrait layout
-            applyPortraitConstraints()
         }
+        applyPortraitConstraints()
     }
     
     func applyPortraitConstraints() {
@@ -221,7 +233,6 @@ private extension NoirViewController {
             self.delegate?.providerDidPickImage(UIImage(cgImage: image), assetIdentifier: assetIdentifier)
         })
     }
-
 }
 
 

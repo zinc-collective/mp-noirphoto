@@ -19,21 +19,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         var config: InfoConfiguration
+        var noirConfig: NoirConfiguration
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             config = InfoConfiguration(buttonLeftMarginValue: 16.0,
                                        buttonTopMarginValue: 24.0,
                                        buttonSideValue: 37.0,
                                        scrollViewInsetSize: 56.0,
                                        defaultFontSize: 28.0)
+//            noirConfig = NoirConfiguration(tintMaskImage: "tint_mask_iPad_0.png")
+            noirConfig = NoirConfiguration(tintMaskImage: "tint_mask_1.png")
         } else {
             config = InfoConfiguration(buttonLeftMarginValue: 8.0,
                                        buttonTopMarginValue: 16.0,
                                        buttonSideValue: 37.0,
                                        scrollViewInsetSize: 32.0,
                                        defaultFontSize: 60.0)
+            noirConfig = NoirConfiguration(tintMaskImage: "tint_mask_1.png")
         }
         
-        let vc = NoirViewController()
+        let vc = NoirViewController(configuration: noirConfig)
         vc.infoVC = createFactoryInfoViewController(configuration: config)
         vc.logger = LogManager()
         vc.imageProvider = PhotoLibraryCoordinator(parent: vc as! UIViewController)

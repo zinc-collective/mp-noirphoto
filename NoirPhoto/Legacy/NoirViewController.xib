@@ -12,7 +12,6 @@
                 <outlet property="infoBtn" destination="30" id="32"/>
                 <outlet property="loadBtn" destination="24" id="26"/>
                 <outlet property="saveBtn" destination="25" id="27"/>
-                <outlet property="tintMaskView" destination="33" id="34"/>
                 <outlet property="view" destination="6" id="7"/>
             </connections>
         </placeholder>
@@ -72,10 +71,6 @@
                         <action selector="handleInfo:" destination="-1" eventType="touchUpInside" id="Stc-wa-GFM"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="tint_mask_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="33">
-                    <rect key="frame" x="194" y="296" width="115" height="160"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
@@ -90,6 +85,5 @@
         <image name="btn_load_sel.png" width="39.5" height="39.5"/>
         <image name="btn_save.png" width="39.5" height="39.5"/>
         <image name="btn_save_sel.png" width="39.5" height="39.5"/>
-        <image name="tint_mask_1.png" width="114.5" height="159.5"/>
     </resources>
 </document>

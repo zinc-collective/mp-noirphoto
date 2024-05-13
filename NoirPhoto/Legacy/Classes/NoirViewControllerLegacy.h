@@ -66,7 +66,6 @@ typedef struct {
 	IBOutlet UIButton			 *loadBtn;
 	IBOutlet UIButton			 *saveBtn;
 	IBOutlet UIButton			 *infoBtn;
-	IBOutlet UIImageView		 *tintMaskView;
 
 	CGRect               _photoRenderRect;  //是一个相对值，相对于photo view的 rect值，原点也是相对于photoview的位置
 		CGRect               _photoRenderRect2;
@@ -117,7 +116,6 @@ typedef struct {
 @property (nonatomic, retain) UIButton		 *loadBtn;
 @property (nonatomic, retain) UIButton		 *saveBtn;
 @property (nonatomic, retain) UIButton	     *infoBtn;
-@property (nonatomic, retain) UIImageView	 *tintMaskView;
 @property (nonatomic, retain) ControlPadView *ctrlPadView;
 @property (nonatomic, retain) NSString       *mCircleImageName;
 @property (nonatomic, retain) NSString		 *mPresetReviewImageName;
@@ -184,7 +182,6 @@ typedef struct {
 -(void)initUsedPropertiesAndUIForOriginPhoto:(UIImage*)originPhoto;
 -(void)saveOriginPhoto:(UIImage*)image;
 -(UIImage*)loadPhotoFromPath:(NSString*)path;
--(void)changeTintMaskForIndex:(NSInteger)index;
 -(UIImage*)limitedSourcePhoto:(UIImage*)source forLimitPixel:(float)limit; //限制原始图片的大小，并返回限制以后的图片
 
 -(BOOL)checkIfTallScreen;
