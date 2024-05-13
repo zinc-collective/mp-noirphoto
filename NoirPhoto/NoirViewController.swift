@@ -191,6 +191,7 @@ private extension NoirViewController {
         let panelBottomOffsetRowBottom = -18.0
         let panelTrailingOffsetRowTop = -20.0
         let panelTrailingOffsetRowBottom = -28.0
+        let marginBetweenRows = -17.0
         self.infoBtn.translatesAutoresizingMaskIntoConstraints = false
         self.loadBtn.translatesAutoresizingMaskIntoConstraints = false
         self.saveBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -205,7 +206,7 @@ private extension NoirViewController {
             self.saveBtn.bottomAnchor.constraint(equalTo: self.ctrlPadView.bottomAnchor,
                                                  constant: panelBottomOffsetRowTop),
             self.loadBtn.trailingAnchor.constraint(equalTo: self.saveBtn.leadingAnchor,
-                                                   constant: -17.0),
+                                                   constant: marginBetweenRows),
             self.loadBtn.bottomAnchor.constraint(equalTo: self.ctrlPadView.bottomAnchor,
                                                  constant: panelBottomOffsetRowTop)
         ])
