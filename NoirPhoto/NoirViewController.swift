@@ -46,7 +46,27 @@ class NoirViewController: NoirViewControllerLegacy {
         self.fullBtn.addGestureRecognizer(upGesture)
         self.delegate = self
     }
-
+    
+    // MARK: - protocol UIContentContainer
+    // Currently disabled via the orientation settings in the project settings
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { (UIViewControllerTransitionCoordinatorContext) -> Void in
+            if (!UIScene.isLandscape) {
+                print("### Portrait")
+                self.applyPortraitConstraints()
+                // Do something
+            } else {
+                print("### LandScape")
+                // Do something else
+                self.applyLandscapeConstraints()
+            }
+        }, completion: { (UIViewControllerTransitionCoordinatorContext) -> Void in
+            print("### rotation completed")
+        })
+        
+        super.viewWillTransition(to: size, with: coordinator)
+    }
+    
     @IBAction func onSwipeGripDown() {
         print("SWIPE DOWN")
 
