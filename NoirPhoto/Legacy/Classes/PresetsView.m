@@ -256,7 +256,7 @@
             [weakSelf replacePreset];
         }
     }];
-    UIAlertAction* cancelAction = [[UIAlertAction class] actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction* cancelAction = [[UIAlertAction class] actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){}];
     UIAlertController *alert = [[UIAlertController class] alertControllerWithTitle:title message:alertMsg preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:cancelAction];
     [alert addAction:replaceAction];
