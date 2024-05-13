@@ -54,7 +54,6 @@ typedef struct {
 	//QuartzView           *_ellipseView;
 	VignetteView		 *_vignetteView;
 	VignetteView		 *_vignetteFullView;
-	ControlPadView       *_ctrlPadView;
 
 	Preset				 *preset;      //current preset
 
@@ -119,6 +118,7 @@ typedef struct {
 @property (nonatomic, retain) UIButton		 *saveBtn;
 @property (nonatomic, retain) UIButton	     *infoBtn;
 @property (nonatomic, retain) UIImageView	 *tintMaskView;
+@property (nonatomic, retain) ControlPadView *ctrlPadView;
 @property (nonatomic, retain) NSString       *mCircleImageName;
 @property (nonatomic, retain) NSString		 *mPresetReviewImageName;
 @property (nonatomic, retain) NSString		 *mPresetReviewMaskImageName;

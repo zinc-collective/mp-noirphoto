@@ -25,6 +25,7 @@ class NoirViewController: NoirViewControllerLegacy {
 
     // SCALE HACK: remove me once we change the UI
     override func viewWillAppear(_ animated: Bool) {
+        setUpImageViews()
         if (UIDevice.current.userInterfaceIdiom == .phone) {
             let scale = self.view.frame.size.width / CGFloat(320)
             self.view.transform = CGAffineTransform(scaleX: scale, y: scale)
@@ -126,7 +127,6 @@ class NoirViewController: NoirViewControllerLegacy {
 
 // MARK: Private Methods
 private extension NoirViewController {
-
     func savePhotoFeedback() {
         let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: .alert)
         self.present(alert, animated: true, completion: {
@@ -142,18 +142,42 @@ private extension NoirViewController {
         return self.image(for: self.preset, use: source)
     }
     
-    private func setUpImageViews() {
+    func setUpImageViews() {
         if let config = configuration {
             self.newTintMaskView = UIImageView(image: UIImage(named: config.tintMaskImage))
         }
         if let tintView = self.newTintMaskView {
             self.view.addSubview(tintView)
             self.tintMaskView.isHidden = true
-            setImageViewConstraints()
+            // default to Portrait layout
+            applyPortraitConstraints()
         }
     }
     
-    private func setImageViewConstraints() {
+    func applyPortraitConstraints() {
+        let panelBottomOffsetRowTop = -74.0
+        let panelBottomOffsetRowBottom = -18.0
+        let panelTrailingOffsetRowTop = -20.0
+        let panelTrailingOffsetRowBottom = -28.0
+        self.infoBtn.translatesAutoresizingMaskIntoConstraints = false
+        self.loadBtn.translatesAutoresizingMaskIntoConstraints = false
+        self.saveBtn.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            self.infoBtn.trailingAnchor.constraint(equalTo: self.ctrlPadView.trailingAnchor,
+                                                   constant: panelTrailingOffsetRowBottom),
+            self.infoBtn.bottomAnchor.constraint(equalTo: self.ctrlPadView.bottomAnchor,
+                                                 constant: panelBottomOffsetRowBottom),
+            self.saveBtn.trailingAnchor.constraint(equalTo: self.ctrlPadView.trailingAnchor,
+                                                   constant: panelTrailingOffsetRowTop),
+            self.saveBtn.bottomAnchor.constraint(equalTo: self.ctrlPadView.bottomAnchor,
+                                                 constant: panelBottomOffsetRowTop),
+            self.loadBtn.trailingAnchor.constraint(equalTo: self.saveBtn.leadingAnchor,
+                                                   constant: -17.0),
+            self.loadBtn.bottomAnchor.constraint(equalTo: self.ctrlPadView.bottomAnchor,
+                                                 constant: panelBottomOffsetRowTop)
+        ])
+        
         if let tintView = self.newTintMaskView {
             tintView.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
@@ -163,6 +187,10 @@ private extension NoirViewController {
 //                tintView.trailingAnchor.constraint(equalTo: , constant: <#T##CGFloat#>)
             ])
         }
+    }
+    
+    func applyLandscapeConstraints() {
+        assertionFailure("Not yet implemented")
     }
     
     func openPicker() {
