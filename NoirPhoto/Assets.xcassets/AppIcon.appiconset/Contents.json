@@ -1,11 +1,13 @@
 {
   "images" : [
     {
+      "filename" : "noir-40_40-onBlack 1.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
+      "filename" : "noir-60_60-onBlack.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "20x20"
@@ -47,11 +49,13 @@
       "size" : "60x60"
     },
     {
+      "filename" : "noir-20_20-onBlack.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "20x20"
     },
     {
+      "filename" : "noir-40_40-onBlack.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "20x20"
