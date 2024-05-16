@@ -10,6 +10,7 @@ import UIKit
 import Photos
 import ImageIO
 import MobileCoreServices
+import LinkPresentation
 
 protocol ImageEditorInterfaceProvider: UIViewController {
     func pickPhoto(_ assetIdentifier: String, image: UIImage)
@@ -95,25 +96,19 @@ class NoirViewController: NoirViewControllerLegacy {
             self.toggleFull()
         }
     }
-
+    
     @IBAction func onTapShare() {
-        // TODO: render after share like in Plastic Bullet? Or in the background?
-
-        let meta = UIImage.stripOrientationMetadata(self.imageMetadata)
-
-        if let data = self.renderPhoto().imageWithMetadata(meta) {
-            let activity = UIActivityViewController(activityItems: [data], applicationActivities: nil)
-            
-            // TODO: check for iPad compatability
-            activity.popoverPresentationController?.sourceView = self.view
-            activity.popoverPresentationController?.sourceRect = self.saveBtn.frame
-            activity.completionWithItemsHandler = { activity, completed, returnedItems, error in
-                if activity == UIActivity.ActivityType.saveToCameraRoll && completed {
-                    self.savePhotoFeedback()
-                }
+        let activity = UIActivityViewController(activityItems: [self], applicationActivities: nil)
+        
+        // TODO: check for iPad compatability
+        activity.popoverPresentationController?.sourceView = self.view
+        activity.popoverPresentationController?.sourceRect = self.saveBtn.frame
+        activity.completionWithItemsHandler = { activity, completed, returnedItems, error in
+            if activity == UIActivity.ActivityType.saveToCameraRoll && completed {
+                self.savePhotoFeedback()
             }
-            self.present(activity, animated: true, completion: nil)
         }
+        self.present(activity, animated: true, completion: nil)
     }
     
     @IBAction func infoAction(_ sender: AnyObject) {
@@ -156,6 +151,39 @@ class NoirViewController: NoirViewControllerLegacy {
     }
 }
 
+extension NoirViewController: UIActivityItemSource {
+    static let activityViewIconName = "activityViewIcon"
+    
+    private func getShareData() -> Data? {
+        let meta = UIImage.stripOrientationMetadata(self.imageMetadata)
+
+        if let data = self.renderPhoto().imageWithMetadata(meta) {
+            return data
+        } else { return nil }
+    }
+    
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return UIImage(named: Self.activityViewIconName)!
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        return self.getShareData()
+    }
+    
+    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
+        // set the icon on the Activity Sheet
+        // the imageProvider overrides the iconProvider
+        let metadata            = LPLinkMetadata()
+        metadata.title          = "Share your image from Noir Photo" // Preview Title
+        metadata.imageProvider  = NSItemProvider(object: UIImage(named: Self.activityViewIconName)!)
+//        metadata.iconProvider   = NSItemProvider(object: UIImage(systemName: "clock")!)
+//        metadata.originalURL    = urlOfImageToShare // determines the Preview Subtitle
+//        metadata.url            = urlOfImageToShare
+
+        return metadata
+    }
+    
+}
 
 // MARK: Private Methods
 private extension NoirViewController {
