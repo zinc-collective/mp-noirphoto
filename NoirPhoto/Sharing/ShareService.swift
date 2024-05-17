@@ -13,7 +13,7 @@ enum ShareableActivityType: String {
     case saveToCameraRoll
 }
 
-protocol SharableActivityProvider {
+protocol ShareableActivityProvider {
     typealias ActivityType = ShareableActivityType
     typealias ProviderCompletion = (ActivityType, Bool, [Any]?, Error?) -> Void
     func shareItem(sender parent: UIViewController,
@@ -25,7 +25,7 @@ protocol SharableActivityProvider {
 }
 
 
-final class ShareService: SharableActivityProvider {
+final class ShareService: ShareableActivityProvider {
     private(set) weak var parent: UIViewController?
     
     func shareItem(sender parent: UIViewController,
@@ -33,7 +33,7 @@ final class ShareService: SharableActivityProvider {
                    data: Data?,
                    title: String,
                    subtitle: String? = nil,
-                   completion: SharableActivityProvider.ProviderCompletion? = nil) {
+                   completion: ShareableActivityProvider.ProviderCompletion? = nil) {
         self.parent = parent
         if let data = data,
            let image = UIImage(data: data),
@@ -56,8 +56,8 @@ final class ShareService: SharableActivityProvider {
 
 
 extension UIActivity.ActivityType {
-    static let defaultResponse: SharableActivityProvider.ActivityType = .saveToCameraRoll
-    static func convert(_ deviceActivityType: UIActivity.ActivityType?) -> SharableActivityProvider.ActivityType {
+    static let defaultResponse: ShareableActivityProvider.ActivityType = .saveToCameraRoll
+    static func convert(_ deviceActivityType: UIActivity.ActivityType?) -> ShareableActivityProvider.ActivityType {
         if let type = deviceActivityType {
             switch type {
             case .saveToCameraRoll:

@@ -28,10 +28,10 @@ class NoirViewController: NoirViewControllerLegacy {
     var logger: AppLogger?
     var imageProvider: PhotoProvider?
     weak var delegate : PhotoProviderDelegate?
-    private var shareAgent: (any SharableActivityProvider)?
+    private var shareAgent: (any ShareableActivityProvider)?
     private var configuration: NoirConfiguration!
     
-    convenience init(configuration: NoirConfiguration, shareAgent: (any SharableActivityProvider)?) {
+    convenience init(configuration: NoirConfiguration, shareAgent: (any ShareableActivityProvider)?) {
         self.init()
         self.shareAgent     = shareAgent
         self.configuration  = configuration
@@ -99,7 +99,7 @@ class NoirViewController: NoirViewControllerLegacy {
     }
     
     @IBAction func onTapShare() {
-        let completion: SharableActivityProvider.ProviderCompletion = { [weak self] activity, completed, returnedItems, error in
+        let completion: ShareableActivityProvider.ProviderCompletion = { [weak self] activity, completed, returnedItems, error in
             if activity == .saveToCameraRoll && completed {
                 self?.savePhotoFeedback()
             }
