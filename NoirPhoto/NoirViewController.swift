@@ -10,7 +10,6 @@ import UIKit
 import Photos
 import ImageIO
 import MobileCoreServices
-import LinkPresentation
 
 protocol ImageEditorInterfaceProvider: UIViewController {
     func pickPhoto(_ assetIdentifier: String, image: UIImage)
@@ -29,11 +28,13 @@ class NoirViewController: NoirViewControllerLegacy {
     var logger: AppLogger?
     var imageProvider: PhotoProvider?
     weak var delegate : PhotoProviderDelegate?
+    private var shareAgent: SharableActivityProvider?
     private var configuration: NoirConfiguration!
     
-    convenience init(configuration: NoirConfiguration) {
+    convenience init(configuration: NoirConfiguration, shareAgent: SharableActivityProvider?) {
         self.init()
-        self.configuration = configuration
+        self.shareAgent     = shareAgent
+        self.configuration  = configuration
     }
 
     // SCALE HACK: remove me once we change the UI
@@ -98,17 +99,17 @@ class NoirViewController: NoirViewControllerLegacy {
     }
     
     @IBAction func onTapShare() {
-        let activity = UIActivityViewController(activityItems: [self], applicationActivities: nil)
-        
-        // TODO: check for iPad compatability
-        activity.popoverPresentationController?.sourceView = self.view
-        activity.popoverPresentationController?.sourceRect = self.saveBtn.frame
-        activity.completionWithItemsHandler = { activity, completed, returnedItems, error in
+        let completion: UIActivityViewController.CompletionWithItemsHandler = { [weak self] activity, completed, returnedItems, error in
             if activity == UIActivity.ActivityType.saveToCameraRoll && completed {
-                self.savePhotoFeedback()
+                self?.savePhotoFeedback()
             }
         }
-        self.present(activity, animated: true, completion: nil)
+        shareAgent?.shareItem(sender: self,
+                              sourceRect: self.saveBtn.frame,
+                              data: getShareData(),
+                              title: "Share your image from Noir Photo",
+                              subtitle: nil, 
+                              completion: completion)
     }
     
     @IBAction func infoAction(_ sender: AnyObject) {
@@ -151,42 +152,17 @@ class NoirViewController: NoirViewControllerLegacy {
     }
 }
 
-extension NoirViewController: UIActivityItemSource {
-    static let activityViewIconName = "activityViewIcon"
-    
-    private func getShareData() -> Data? {
-        let meta = UIImage.stripOrientationMetadata(self.imageMetadata)
+
+// MARK: Private Methods
+private extension NoirViewController {
+    func getShareData() -> Data? {
+        let meta = UIImage.stripOrientationMetadata(self.imageMetadata ?? [:])
 
         if let data = self.renderPhoto().imageWithMetadata(meta) {
             return data
         } else { return nil }
     }
     
-    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return UIImage(named: Self.activityViewIconName)!
-    }
-    
-    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-        return self.getShareData()
-    }
-    
-    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
-        // set the icon on the Activity Sheet
-        // the imageProvider overrides the iconProvider
-        let metadata            = LPLinkMetadata()
-        metadata.title          = "Share your image from Noir Photo" // Preview Title
-        metadata.imageProvider  = NSItemProvider(object: UIImage(named: Self.activityViewIconName)!)
-//        metadata.iconProvider   = NSItemProvider(object: UIImage(systemName: "clock")!)
-//        metadata.originalURL    = urlOfImageToShare // determines the Preview Subtitle
-//        metadata.url            = urlOfImageToShare
-
-        return metadata
-    }
-    
-}
-
-// MARK: Private Methods
-private extension NoirViewController {
     func savePhotoFeedback() {
         let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: .alert)
         self.present(alert, animated: true, completion: {
@@ -309,4 +285,3 @@ extension NoirViewController: PhotoProviderDelegate {
         self.pickPhoto(assetIdentifier, image: image)
     }
 }
-

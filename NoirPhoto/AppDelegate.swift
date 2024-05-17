@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             noirConfig = NoirConfiguration(tintMaskImage: "tint_mask_1.png")
         }
         
-        let vc = NoirViewController(configuration: noirConfig)
+        let vc = NoirViewController(configuration: noirConfig, shareAgent: ShareService())
         vc.infoVC = createFactoryInfoViewController(configuration: config)
         vc.logger = LogManager()
         vc.imageProvider = PhotoLibraryCoordinator(parent: vc as! UIViewController)

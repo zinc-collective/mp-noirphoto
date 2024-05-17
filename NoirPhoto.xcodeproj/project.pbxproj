@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6D0F4C902B9C7644003616BA /* PhotoLibraryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0F4C8F2B9C7644003616BA /* PhotoLibraryCoordinator.swift */; };
 		6D2DAA3E2B6EA41C0018EEB8 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 6D2DAA3D2B6EA41C0018EEB8 /* Sentry */; };
+		6D3CF4922BF7CD6500A78FC9 /* ShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3CF4912BF7CD6500A78FC9 /* ShareService.swift */; };
+		6D3CF4942BF7CDA700A78FC9 /* ShareableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3CF4932BF7CDA700A78FC9 /* ShareableItem.swift */; };
 		6D94877A2B6FC4550096D29D /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9487792B6FC4550096D29D /* LogManager.swift */; };
 		6DDB896C2BC4258800E5B73F /* UIScene+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDB896B2BC4258800E5B73F /* UIScene+Ext.swift */; };
 		782B55E21CD3D037003C313E /* UIImage+metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B55E11CD3D037003C313E /* UIImage+metadata.swift */; };
@@ -171,6 +173,8 @@
 
 /* Begin PBXFileReference section */
 		6D0F4C8F2B9C7644003616BA /* PhotoLibraryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryCoordinator.swift; sourceTree = "<group>"; };
+		6D3CF4912BF7CD6500A78FC9 /* ShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareService.swift; sourceTree = "<group>"; };
+		6D3CF4932BF7CDA700A78FC9 /* ShareableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareableItem.swift; sourceTree = "<group>"; };
 		6D9487792B6FC4550096D29D /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		6D94877B2B6FDAA40096D29D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DDB896B2BC4258800E5B73F /* UIScene+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScene+Ext.swift"; sourceTree = "<group>"; };
@@ -363,6 +367,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D3CF4902BF7CD1E00A78FC9 /* Sharing */ = {
+			isa = PBXGroup;
+			children = (
+				6D3CF4912BF7CD6500A78FC9 /* ShareService.swift */,
+				6D3CF4932BF7CDA700A78FC9 /* ShareableItem.swift */,
+			);
+			path = Sharing;
+			sourceTree = "<group>";
+		};
 		6DDB896A2BC4255B00E5B73F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -410,6 +423,7 @@
 		7875813B1CA2E98400100514 /* NoirPhoto */ = {
 			isa = PBXGroup;
 			children = (
+				6D3CF4902BF7CD1E00A78FC9 /* Sharing */,
 				7875813C1CA2E98400100514 /* AppDelegate.swift */,
 				783B0F281CA5EDED002A77AB /* NoirViewController.swift */,
 				787581401CA2E98400100514 /* Main.storyboard */,
@@ -913,6 +927,7 @@
 				78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */,
 				787581E21CA2EBF000100514 /* TintsView.m in Sources */,
 				787581E11CA2EBF000100514 /* PresetsView.m in Sources */,
+				6D3CF4942BF7CDA700A78FC9 /* ShareableItem.swift in Sources */,
 				787581ED1CA2EBF000100514 /* Parameter.m in Sources */,
 				787584271CA2EE9F00100514 /* VersionWatermark.m in Sources */,
 				787581F01CA2EBF000100514 /* RConfigFile.m in Sources */,
@@ -923,6 +938,7 @@
 				787581F41CA2EBF000100514 /* VignetteView.m in Sources */,
 				7875813D1CA2E98400100514 /* AppDelegate.swift in Sources */,
 				787581E81CA2EBF000100514 /* ControlPadView.m in Sources */,
+				6D3CF4922BF7CD6500A78FC9 /* ShareService.swift in Sources */,
 				787581EA1CA2EBF000100514 /* EllipseVertex.m in Sources */,
 				783B0F171CA5921E002A77AB /* InfoViewController.swift in Sources */,
 				787581EB1CA2EBF000100514 /* EllipseView.m in Sources */,
