@@ -8,8 +8,7 @@
 
 import UIKit
 import Photos
-import ImageIO
-import MobileCoreServices
+
 
 protocol ImageEditorInterfaceProvider: UIViewController {
     func pickPhoto(_ assetIdentifier: String, image: UIImage)
