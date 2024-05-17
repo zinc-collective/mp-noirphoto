@@ -23,6 +23,20 @@ struct NoirConfiguration {
 
 // scales up the whole view, just like if we weren't supporting iPhone 6 or 6+
 class NoirViewController: NoirViewControllerLegacy {
+    enum NoirError: LocalizedError {
+        case shareOperationFailed
+        
+        public var errorDescription: String? {
+            switch self {
+            case .shareOperationFailed:
+                return NSLocalizedString(
+                    "Unable to share item.",
+                    comment: "Share operation failed"
+                )
+            }
+        }
+    }
+    
     var newTintMaskView: UIImageView?
     var infoVC: (() -> UIViewController)?
     var logger: AppLogger?
@@ -100,10 +114,26 @@ class NoirViewController: NoirViewControllerLegacy {
     
     @IBAction func onTapShare() {
         let completion: ShareableActivityProvider.ProviderCompletion = { [weak self] activity, completed, returnedItems, error in
-            if activity == .saveToCameraRoll && completed {
-                self?.savePhotoFeedback()
+            guard let self = self else { return }
+            
+            if completed {
+                if activity == .saveToCameraRoll {
+                    self.savePhotoFeedback()
+                }
+            } else {
+                self.logger?.logError(NoirError.shareOperationFailed)
+                self.logger?.logToConsole("Share Operation Failed",
+                                          .debug,
+                                          .shareService)
+            }
+            if let error = error {
+                self.logger?.logError(error)
+                self.logger?.logToConsole("Share Operation Error",
+                                          .debug,
+                                          .shareService)
             }
         }
+        
         shareAgent?.shareItem(sender: self,
                               sourceRect: self.saveBtn.frame,
                               data: getShareData(),
