@@ -9,13 +9,19 @@
 import UIKit
 
 
+enum ShareableActivityType: String {
+    case saveToCameraRoll
+}
+
 protocol SharableActivityProvider {
+    typealias ActivityType = ShareableActivityType
+    typealias ProviderCompletion = (ActivityType, Bool, [Any]?, Error?) -> Void
     func shareItem(sender parent: UIViewController,
                    sourceRect: CGRect,
                    data: Data?,
                    title: String,
                    subtitle: String?,
-                   completion: UIActivityViewController.CompletionWithItemsHandler?)
+                   completion: ProviderCompletion?)
 }
 
 
@@ -27,7 +33,7 @@ final class ShareService: SharableActivityProvider {
                    data: Data?,
                    title: String,
                    subtitle: String? = nil,
-                   completion: UIActivityViewController.CompletionWithItemsHandler?) {
+                   completion: SharableActivityProvider.ProviderCompletion? = nil) {
         self.parent = parent
         if let data = data,
            let image = UIImage(data: data),
@@ -40,8 +46,27 @@ final class ShareService: SharableActivityProvider {
             // TODO: check for iPad compatability
             activity.popoverPresentationController?.sourceView = parent.view
             activity.popoverPresentationController?.sourceRect = sourceRect
-            activity.completionWithItemsHandler = completion
+            activity.completionWithItemsHandler = { activity, completed, returnedItems, error in
+                completion?(UIActivity.ActivityType.convert(activity), completed, returnedItems, error)
+            }
             parent.present(activity, animated: true, completion: nil)
+        }
+    }
+}
+
+
+extension UIActivity.ActivityType {
+    static let defaultResponse: SharableActivityProvider.ActivityType = .saveToCameraRoll
+    static func convert(_ deviceActivityType: UIActivity.ActivityType?) -> SharableActivityProvider.ActivityType {
+        if let type = deviceActivityType {
+            switch type {
+            case .saveToCameraRoll:
+                return .saveToCameraRoll
+            default:
+                return Self.defaultResponse
+            }
+        } else {
+            return Self.defaultResponse
         }
     }
 }
