@@ -17,7 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+        
+        setupAnalytics()
+        
         var config: InfoConfiguration
         var noirConfig: NoirConfiguration
         if (UIDevice.current.userInterfaceIdiom == .pad) {
@@ -89,4 +91,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return { return InfoViewController(configuration: configuration) }
     }
 }
+
+
+private extension AppDelegate {
+    func setupAnalytics() {
+        //Add Sentry
+        SentrySDK.start { options in
+            options.dsn = "https://560a0707df8045059ed6873673cb5c0a@o268108.ingest.us.sentry.io/4503926177726464"
+            options.debug = false; // Enabled debug when first installing is always helpful
+            // Example uniform sample rate: capture 100% of transactions for performance monitoring
+            options.tracesSampleRate = 1.0
+            
+            // Features turned off by default, but worth checking out
+            options.enableAppHangTracking = true
+            options.enableFileIOTracing = true
+            options.enableCoreDataTracing = true
+            
+            // Enable all experimental features
+            options.enableUserInteractionTracing = true
+            options.attachScreenshot = true
+            options.attachViewHierarchy = true
+        }
+    }
+}
+
 
