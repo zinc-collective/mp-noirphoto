@@ -185,7 +185,6 @@ typedef struct {
 -(UIImage*)limitedSourcePhoto:(UIImage*)source forLimitPixel:(float)limit; //限制原始图片的大小，并返回限制以后的图片
 
 -(BOOL)checkIfTallScreen;
--(void)toggleFull;
 
 #pragma mark -
 #pragma mark in use functios @for Rendering

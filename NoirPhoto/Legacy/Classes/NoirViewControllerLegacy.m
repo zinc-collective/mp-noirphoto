@@ -238,11 +238,7 @@ int darkLUT[256];
 		fullBtn.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
 		[fullBtn  setImage:[UIImage imageNamed:@"down_panel.png"] forState:UIControlStateNormal];
 	}
-
-
-    [fullBtn addTarget:self action:@selector(toggleFull) forControlEvents:UIControlEventTouchUpInside];
-
-
+    
 	blackBackground = [[UIView alloc]initWithFrame:CGRectMake(0.0, 0.0, 1024, 1024)];
 	blackBackground.backgroundColor = [UIColor blackColor];
 
@@ -687,79 +683,6 @@ int darkLUT[256];
 		//use self.adjustPhoto
 		[self renderPhotoViewForPreset:self.preset useImage:self.adjustPhoto changeType:typeVignette actioning:YES];
 	}
-}
--(void)toggleFull
-{
-    CGFloat duration = 0.3f;
-    [[UIView class] animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-        if (self->isFull == NO) {
-
-            Parameter *param = [self parameterWithPreset:self.preset];
-
-            if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-                self->ctrl_pad_offset = 256 - ctrl_pad_head_ipad;
-                self->photoView.frame = photo_full_view_rect_ipad2;
-            } else { //iphone
-                self->ctrl_pad_offset = 240 - ctrl_pad_head;
-                self->photoView.frame = photo_full_view_rect2;
-
-                if (IS_IPHONE_5) {
-                    self->photoView.frame = photo_full_view_rect2_iphone5;
-                }
-            }
-
-            self->photoView.image = self->renderedPhoto;
-
-            //full vignette view
-            self->_vignetteView.frame = self->photoView.frame;
-
-            self->_photoRenderRect2 = self->_photoRenderRect;
-            self->_photoRenderRect = [self photoRenderRectForImageSize:self.photo.size withImageViewRect:self->photoView.frame];
-            [self->_vignetteView setVignetteForParam:param photoRect:self->_photoRenderRect];
-
-            [self->fullBtn  setImage:[UIImage imageNamed:@"up_panel.png"] forState:UIControlStateNormal];
-
-            self->_ctrlPadView.center = CGPointMake(self->_ctrlPadView.center.x, self->_ctrlPadView.center.y+self->ctrl_pad_offset);
-            self->loadBtn.center = CGPointMake(self->loadBtn.center.x, self->loadBtn.center.y+self->ctrl_pad_offset);
-            self->saveBtn.center = CGPointMake(self->saveBtn.center.x, self->saveBtn.center.y+self->ctrl_pad_offset);
-            self->infoBtn.center = CGPointMake(self->infoBtn.center.x, self->infoBtn.center.y+self->ctrl_pad_offset);
-
-            [self->_ctrlPadView addSubview:self->fullBtn];
-
-            self->isFull = YES;
-        } else { //full
-            if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-                self->photoView.frame = photo_view_rect_ipad;
-                self->photoView.image = self->renderedPhoto;
-
-                self->_vignetteView.frame = photo_view_rect_ipad;
-            } else { //iphone
-                self->photoView.frame = photo_view_rect;
-                if (IS_IPHONE_5)
-                    self->photoView.frame = photo_view_rect_iphone5;
-
-                self->photoView.image = self->renderedPhoto;
-
-                self->_vignetteView.frame = photo_view_rect;
-                if (IS_IPHONE_5)
-                    self->_vignetteView.frame = photo_view_rect_iphone5;
-            }
-
-            [self->fullBtn  setImage:[UIImage imageNamed:@"down_panel.png"] forState:UIControlStateNormal];
-
-            self->_ctrlPadView.center = CGPointMake(self->_ctrlPadView.center.x, self->_ctrlPadView.center.y-self->ctrl_pad_offset);
-            self->loadBtn.center = CGPointMake(self->loadBtn.center.x, self->loadBtn.center.y-self->ctrl_pad_offset);
-            self->saveBtn.center = CGPointMake(self->saveBtn.center.x, self->saveBtn.center.y-self->ctrl_pad_offset);
-            self->infoBtn.center = CGPointMake(self->infoBtn.center.x, self->infoBtn.center.y-self->ctrl_pad_offset);
-
-            Parameter *param = [self parameterWithPreset:self.preset];
-
-            self->_photoRenderRect = self->_photoRenderRect2;
-            [self->_vignetteView setVignetteForParam:param photoRect:self->_photoRenderRect];
-
-            self->isFull = NO;
-        }
-    } completion:nil];
 }
 
 -(void)initElementsForControlPad
