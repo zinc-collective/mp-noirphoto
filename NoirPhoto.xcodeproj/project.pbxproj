@@ -11,7 +11,9 @@
 		6D2DAA3E2B6EA41C0018EEB8 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 6D2DAA3D2B6EA41C0018EEB8 /* Sentry */; };
 		6D3CF4922BF7CD6500A78FC9 /* ShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3CF4912BF7CD6500A78FC9 /* ShareService.swift */; };
 		6D3CF4942BF7CDA700A78FC9 /* ShareableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3CF4932BF7CDA700A78FC9 /* ShareableItem.swift */; };
+		6D5F71232C1DE9A300519D21 /* AdjustView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5F71222C1DE9A300519D21 /* AdjustView+Ext.swift */; };
 		6D94877A2B6FC4550096D29D /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9487792B6FC4550096D29D /* LogManager.swift */; };
+		6DA01C762C1712DB0042B590 /* ControlPadView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA01C752C1712DB0042B590 /* ControlPadView+Ext.swift */; };
 		6DDB896C2BC4258800E5B73F /* UIScene+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDB896B2BC4258800E5B73F /* UIScene+Ext.swift */; };
 		782B55E21CD3D037003C313E /* UIImage+metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B55E11CD3D037003C313E /* UIImage+metadata.swift */; };
 		78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78330FA81CA43D6F00B04CFD /* SplashViewController.swift */; };
@@ -175,8 +177,10 @@
 		6D0F4C8F2B9C7644003616BA /* PhotoLibraryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryCoordinator.swift; sourceTree = "<group>"; };
 		6D3CF4912BF7CD6500A78FC9 /* ShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareService.swift; sourceTree = "<group>"; };
 		6D3CF4932BF7CDA700A78FC9 /* ShareableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareableItem.swift; sourceTree = "<group>"; };
+		6D5F71222C1DE9A300519D21 /* AdjustView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdjustView+Ext.swift"; sourceTree = "<group>"; };
 		6D9487792B6FC4550096D29D /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		6D94877B2B6FDAA40096D29D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6DA01C752C1712DB0042B590 /* ControlPadView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlPadView+Ext.swift"; sourceTree = "<group>"; };
 		6DDB896B2BC4258800E5B73F /* UIScene+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScene+Ext.swift"; sourceTree = "<group>"; };
 		782B55E11CD3D037003C313E /* UIImage+metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+metadata.swift"; sourceTree = "<group>"; };
 		78330FA81CA43D6F00B04CFD /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -380,6 +384,8 @@
 			isa = PBXGroup;
 			children = (
 				6DDB896B2BC4258800E5B73F /* UIScene+Ext.swift */,
+				6DA01C752C1712DB0042B590 /* ControlPadView+Ext.swift */,
+				6D5F71222C1DE9A300519D21 /* AdjustView+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -431,11 +437,11 @@
 				787581431CA2E98400100514 /* Assets.xcassets */,
 				7896C8001CF4A56C00AE804F /* Utils.swift */,
 				6D9487792B6FC4550096D29D /* LogManager.swift */,
+				6D0F4C8F2B9C7644003616BA /* PhotoLibraryCoordinator.swift */,
 				6DDB896A2BC4255B00E5B73F /* Extensions */,
 				783B0F221CA5E58A002A77AB /* Info */,
 				783B0F231CA5E58F002A77AB /* Splash */,
 				7875814E1CA2EA5C00100514 /* Legacy */,
-				6D0F4C8F2B9C7644003616BA /* PhotoLibraryCoordinator.swift */,
 			);
 			path = NoirPhoto;
 			sourceTree = "<group>";
@@ -916,12 +922,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DA01C762C1712DB0042B590 /* ControlPadView+Ext.swift in Sources */,
 				787581F11CA2EBF000100514 /* RScrollView.m in Sources */,
 				787581E91CA2EBF000100514 /* CustomPickerView.m in Sources */,
 				787581E41CA2EBF000100514 /* NoirViewControllerLegacy.m in Sources */,
 				6D0F4C902B9C7644003616BA /* PhotoLibraryCoordinator.swift in Sources */,
 				787581E71CA2EBF000100514 /* AdjustView.m in Sources */,
 				783B0F291CA5EDED002A77AB /* NoirViewController.swift in Sources */,
+				6D5F71232C1DE9A300519D21 /* AdjustView+Ext.swift in Sources */,
 				6DDB896C2BC4258800E5B73F /* UIScene+Ext.swift in Sources */,
 				6D94877A2B6FC4550096D29D /* LogManager.swift in Sources */,
 				78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */,

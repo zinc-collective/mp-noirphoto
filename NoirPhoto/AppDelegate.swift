@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var config: InfoConfiguration
         var noirConfig: NoirConfiguration
+        var ctrlPadConfig: ControlPadConfiguration
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             config = InfoConfiguration(buttonLeftMarginValue: 16.0,
                                        buttonTopMarginValue: 24.0,
@@ -30,6 +31,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                        defaultFontSize: 28.0)
 //            noirConfig = NoirConfiguration(tintMaskImage: "tint_mask_iPad_0.png")
             noirConfig = NoirConfiguration(tintMaskImage: "tint_mask_1.png")
+            
+            ctrlPadConfig = ControlPadConfiguration(frame:                  CGRectMake(0.0, 768.0, 768.0, 256.0),
+                                                    resetButtonRect:        CGRectMake(280.0, 20.0, 30.0, 30.0),
+                                                    presetsConfig:          PresetsConfiguration(frame: ControlPadView.Frames.presetsRectIPad,
+                                                                                                 buttonSize: CGSize(width: 80.0, height: 80.0)),
+                                                    tintsConfig:            TintsConfiguration(frame: ControlPadView.Frames.tintsRectIPad,
+                                                                                               buttonSize: CGSize(width: 85.0, height: 85.0)),
+                                                    adjustsConfig:          AdjustConfiguration(frame: ControlPadView.Frames.adjustsRectIPad),
+                                                    primaryBtnConfig:       ButtonConfiguration(frame: CGRectMake(0.0, 0.0, 47.0, 47.0),
+                                                                                                imageName: "btn_load-iPad.png"),
+                                                    secondaryBtnConfig:     ButtonConfiguration(frame: CGRectMake(0.0, 0.0, 47.0, 47.0),
+                                                                                                imageName: "btn_save-iPad.png"),
+                                                    auxBtnConfig:           ButtonConfiguration(frame: CGRectMake(0.0, 0.0, 39.0, 39.0),
+                                                                                                imageName: "btn_home_info-iPad.png"),
+                                                    imageName:              "ctrl_pad_bg-iPad.png",
+                                                    btnPosition:            ButtonPositionConfiguration(panelBottomOffsetRowTop: 76.4317,
+                                                                                                        panelBottomOffsetRowBottom: 18.4173,
+                                                                                                        panelTrailingOffsetRowTop: 20.2590,
+                                                                                                        panelTrailingOffsetRowBottom: 28.5468,
+                                                                                                        marginBetweenRows: 21.1799))
         } else {
             config = InfoConfiguration(buttonLeftMarginValue: 8.0,
                                        buttonTopMarginValue: 16.0,
@@ -37,6 +58,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                        scrollViewInsetSize: 32.0,
                                        defaultFontSize: 60.0)
             noirConfig = NoirConfiguration(tintMaskImage: "tint_mask_1.png")
+            
+            ctrlPadConfig = ControlPadConfiguration(frame:                  CGRectMake(0.0, 0.0, 320.0, 480),
+                                                    resetButtonRect:        CGRectMake(280.0, 20.0, 30.0, 30.0),
+                                                    presetsConfig:          PresetsConfiguration(frame: ControlPadView.Frames.presetsRect2,
+                                                                                                 buttonSize: CGSize(width: 42.0, height: 32.0)),
+                                                    tintsConfig:            TintsConfiguration(frame: ControlPadView.Frames.tintsRect,
+                                                                                               buttonSize: CGSize(width: 50.0, height: 50.0)),
+                                                    adjustsConfig:          AdjustConfiguration(frame: ControlPadView.Frames.adjustsRect),
+                                                    primaryBtnConfig:       ButtonConfiguration(frame: CGRectMake(0.0, 0.0, 40.0, 40.0),
+                                                                                                imageName: "btn_load.png"),
+                                                    secondaryBtnConfig:     ButtonConfiguration(frame: CGRectMake(0.0, 0.0, 40.0, 40.0),
+                                                                                                imageName: "btn_save.png"),
+                                                    auxBtnConfig:           ButtonConfiguration(frame: CGRectMake(0.0, 0.0, 24.0, 24.0),
+                                                                                                imageName: "btn_home_info.png"),
+                                                    imageName:              "ctrl_pad_bg.png",
+                                                    btnPosition:            ButtonPositionConfiguration(panelBottomOffsetRowTop: 0,
+                                                                                                        panelBottomOffsetRowBottom: 0,
+                                                                                                        panelTrailingOffsetRowTop: 0,
+                                                                                                        panelTrailingOffsetRowBottom: 0,
+                                                                                                        marginBetweenRows: 0))
         }
         
         let vc = NoirViewController(configuration: noirConfig,

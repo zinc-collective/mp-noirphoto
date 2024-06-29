@@ -4,3 +4,4 @@
 
 
 #import "NoirViewControllerLegacy.h"
+#import "ControlPadView.h"

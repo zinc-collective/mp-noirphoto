@@ -43,12 +43,17 @@ class NoirViewController: NoirViewControllerLegacy {
     weak var delegate : PhotoProviderDelegate?
     private var shareAgent: (any ShareableActivityProvider)?
     private var configuration: NoirConfiguration!
+    private var ctrlPadConfig: ControlPadConfiguration!
     
-    convenience init(configuration: NoirConfiguration, shareAgent: (any ShareableActivityProvider)?) {
+    convenience init(configuration: NoirConfiguration,
+                     shareAgent: (any ShareableActivityProvider)?,
+                     ctrlPadConfig: ControlPadConfiguration) {
         self.init()
         self.shareAgent     = shareAgent
         self.configuration  = configuration
+        self.ctrlPadConfig  = ctrlPadConfig
     }
+
 
     // SCALE HACK: remove me once we change the UI
     override func viewWillAppear(_ animated: Bool) {
@@ -194,32 +199,75 @@ private extension NoirViewController {
     }
     
     func applyPortraitConstraints() {
-        let panelBottomOffsetRowTop = -74.0
-        let panelBottomOffsetRowBottom = -18.0
-        let panelTrailingOffsetRowTop = -20.0
-        let panelTrailingOffsetRowBottom = -28.0
-        let marginBetweenRows = -17.0
+        applyPortraitConstraintsForControlPadView()
+        // MUST set constraints for ControlPadVIew BEFORE buttons
+        applyPortraitConstraintsForControlButtons()
+        applyPortraitConstraintsForTintMaskView()
+    }
+    
+    func applyLandscapeConstraints() {
+        assertionFailure("Not yet implemented")
+    }
+    
+    func applyPortraitConstraintsForControlPadView() {
+        self.view.layoutIfNeeded()
+        if let ctrlPadView = self.ctrlPadView {
+            let calculatedHeight        = Self.Constants.iPadLegacyRatio * self.view.bounds.width
+            ctrlPadView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                ctrlPadView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20.0),
+                ctrlPadView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                ctrlPadView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                ctrlPadView.heightAnchor.constraint(equalToConstant: calculatedHeight)
+            ])
+            ctrlPadView.setupConstraintsForBackgroundView()
+            ctrlPadView.setupConstraintsForTintsView()
+            ctrlPadView.setupConstraintsForAdjustView()
+            ctrlPadView.setupConstraintsForPresetsView()
+        }
+    }
+    
+    func applyPortraitConstraintsForControlButtons() {
+        // MUST set constraints for ControlPadVIew BEFORE buttons
+        self.view.layoutIfNeeded()
+        let newWidth: CGFloat                       = self.ctrlPadView.frame.size.width
+        let newHeight: CGFloat                      = self.ctrlPadView.frame.size.height
+        let calculatedPanelBottomOffsetRowTop       = (self.ctrlPadConfig.btnPosition.panelBottomOffsetRowTop / self.ctrlPadConfig.frame.height) * newHeight
+        let calculatedPanelBottomOffsetRowBottom    = (self.ctrlPadConfig.btnPosition.panelBottomOffsetRowBottom / self.ctrlPadConfig.frame.height) * newHeight
+        let calculatedPanelTrailingOffsetRowTop     = (self.ctrlPadConfig.btnPosition.panelTrailingOffsetRowTop / self.ctrlPadConfig.frame.width) * newWidth
+        let calculatedPanelTrailingOffsetRowBottom  = (self.ctrlPadConfig.btnPosition.panelTrailingOffsetRowBottom / self.ctrlPadConfig.frame.width) * newWidth
+        let calculatedMarginBetweenRows             = (self.ctrlPadConfig.btnPosition.marginBetweenRows / self.ctrlPadConfig.frame.width) * newWidth
+        let fullBtnOffset: CGFloat                   = 5.0
+        let fullBtnSide: CGFloat                     = ControlPadView.Frames.fullBtnRect.width
         self.infoBtn.translatesAutoresizingMaskIntoConstraints = false
         self.loadBtn.translatesAutoresizingMaskIntoConstraints = false
         self.saveBtn.translatesAutoresizingMaskIntoConstraints = false
+        self.fullBtn.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             self.infoBtn.trailingAnchor.constraint(equalTo: self.ctrlPadView.trailingAnchor,
-                                                   constant: panelTrailingOffsetRowBottom),
+                                                   constant: -calculatedPanelTrailingOffsetRowBottom),
             self.infoBtn.bottomAnchor.constraint(equalTo: self.ctrlPadView.bottomAnchor,
-                                                 constant: panelBottomOffsetRowBottom),
+                                                 constant: -calculatedPanelBottomOffsetRowBottom),
             self.saveBtn.trailingAnchor.constraint(equalTo: self.ctrlPadView.trailingAnchor,
-                                                   constant: panelTrailingOffsetRowTop),
+                                                   constant: -calculatedPanelTrailingOffsetRowTop),
             self.saveBtn.bottomAnchor.constraint(equalTo: self.ctrlPadView.bottomAnchor,
-                                                 constant: panelBottomOffsetRowTop),
+                                                 constant: -calculatedPanelBottomOffsetRowTop),
             self.loadBtn.trailingAnchor.constraint(equalTo: self.saveBtn.leadingAnchor,
-                                                   constant: marginBetweenRows),
+                                                   constant: -calculatedMarginBetweenRows),
             self.loadBtn.bottomAnchor.constraint(equalTo: self.ctrlPadView.bottomAnchor,
-                                                 constant: panelBottomOffsetRowTop)
+                                                 constant: -calculatedPanelBottomOffsetRowTop),
+            self.fullBtn.widthAnchor.constraint(equalToConstant: fullBtnSide),
+            self.fullBtn.heightAnchor.constraint(equalToConstant: fullBtnSide),
+            self.fullBtn.topAnchor.constraint(equalTo: self.ctrlPadView.topAnchor, constant: fullBtnOffset),
+            self.fullBtn.trailingAnchor.constraint(equalTo: self.ctrlPadView.trailingAnchor, constant: -fullBtnOffset)
         ])
-        
+    }
+    
+    func applyPortraitConstraintsForTintMaskView() {
+        self.view.layoutIfNeeded()
         if let tintView = self.newTintMaskView {
-            tintView.translatesAutoresizingMaskIntoConstraints = false
+//            tintView.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
                 // Problem: iPad has different layout
                 // problem: _ctrlPadView is not accessible in the view heirachy
@@ -227,10 +275,6 @@ private extension NoirViewController {
 //                tintView.trailingAnchor.constraint(equalTo: , constant: <#T##CGFloat#>)
             ])
         }
-    }
-    
-    func applyLandscapeConstraints() {
-        assertionFailure("Not yet implemented")
     }
     
     func openPicker() {
@@ -286,5 +330,24 @@ extension NoirViewController: ImageEditorInterfaceProvider {
 extension NoirViewController: PhotoProviderDelegate {
     func providerDidPickImage(_ image: UIImage, assetIdentifier: String) {
         self.pickPhoto(assetIdentifier, image: image)
+    }
+}
+
+
+extension NoirViewController {
+    enum Constants {
+        static let ctrlPadeViewBottomOffset         = 20.0
+        static let iPhoneLegacyHeight               = 480.0
+        static let iPhoneLegacyWidth                = 320.0
+        static let ctrlPadHead                      = 50.0
+        static let iPhoneLegacyRatio                = Self.iPhoneLegacyWidth/(Self.iPhoneLegacyHeight-Self.ctrlPadHead)
+        static let iPadLegacyHeight                 = 256.0
+        static let iPadLegacyWidth                  = 768.0
+        static let iPadLegacyRatio                  = Self.iPadLegacyHeight/Self.iPadLegacyWidth
+    }
+    
+    enum RConfigConstants {
+        static let presetsPlistCurrent         = "Presets_current.pList"
+        static let presetsPlistDefault         = "Presets_default.pList"
     }
 }
