@@ -96,6 +96,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 private extension AppDelegate {
     func setupAnalytics() {
         //Add Sentry
+        //TODO: - SentrySDK handle key better
+        #warning("SentrySDK\n 1. Need to replace this API ID Key and inject at buildtime.\n 2. Need a method to upate key remotely.")
         SentrySDK.start { options in
             options.dsn = "https://560a0707df8045059ed6873673cb5c0a@o268108.ingest.us.sentry.io/4503926177726464"
             options.debug = false; // Enabled debug when first installing is always helpful
