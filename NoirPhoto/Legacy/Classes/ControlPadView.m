@@ -42,9 +42,9 @@
 			imageName = @"ctrl_pad_bg-iPad.png";
 		}
 
-		UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, frame.size.height)];
-		bgView.image = [UIImage imageNamed:imageName];
-		[self addSubview:bgView];
+		self.bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, frame.size.height)];
+		self.bgView.image = [UIImage imageNamed:imageName];
+		[self addSubview:self.bgView];
 
     }
     return self;
@@ -100,46 +100,46 @@
 {
     if(items == nil || [items count] == 0) return;
     
-    if(_prestsView == nil)
+    if(self.prestsView == nil)
     {
         if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
         {
-            _prestsView = [[PresetsView alloc] initWithFrame:presets_rect_iPad items:nil dele:self btnWidth:80.0 btnHeight:80.0];
+            self.prestsView = [[PresetsView alloc] initWithFrame:presets_rect_iPad items:nil dele:self btnWidth:80.0 btnHeight:80.0];
         }
         else
         {
-            _prestsView = [[PresetsView alloc] initWithFrame:presets_rect2 items:nil dele:self btnWidth:42.0 btnHeight:32.0];
+            self.prestsView = [[PresetsView alloc] initWithFrame:presets_rect2 items:nil dele:self btnWidth:42.0 btnHeight:32.0];
         }
         
-        [self addSubview:_prestsView];
+        [self addSubview:self.prestsView];
     }
     
-    [_prestsView setButtonsForItems:items];
+    [self.prestsView setButtonsForItems:items];
     
 }
 -(void)setTintsForItems:(NSArray*)items
 {
     if(items == nil || [items count] == 0) return;
     
-    if(_tintsView == nil)
+    if(self.tintsView == nil)
     {
         if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
         {
-            _tintsView = [[TintsView alloc] initWithFrame:tints_rect_iPad items:nil dele:self posformat:pfLine btnWidth:85 btnHeight:85];
+            self.tintsView = [[TintsView alloc] initWithFrame:tints_rect_iPad items:nil dele:self posformat:pfLine btnWidth:85 btnHeight:85];
         }
         else
         {
-            _tintsView = [[TintsView alloc] initWithFrame:tints_rect items:nil dele:self posformat:pfMartix btnWidth:50.0 btnHeight:50.0];
+            self.tintsView = [[TintsView alloc] initWithFrame:tints_rect items:nil dele:self posformat:pfMartix btnWidth:50.0 btnHeight:50.0];
         }
         
-        [self addSubview:_tintsView];
+        [self addSubview:self.tintsView];
     }
     
-    [_tintsView setButtonsForItems:items];
+    [self.tintsView setButtonsForItems:items];
 }
 -(void)setAdjustsForExpinside:(float)expInside expOutside:(float)expOutside contrast:(float)contrast
 {
-    if(_adjustView == nil)
+    if(self.adjustView == nil)
     {
         CGRect adjustFrame = adjusts_rect;
         if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
@@ -147,28 +147,28 @@
             adjustFrame = adjusts_rect_iPad;
         }
         
-        _adjustView = [[AdjustView alloc] initWithFrame:adjustFrame];
-        [_adjustView setDelegate:self];
-        [self addSubview:_adjustView];
+        self.adjustView = [[AdjustView alloc] initWithFrame:adjustFrame];
+        [self.adjustView setDelegate:self];
+        [self addSubview:self.adjustView];
     }
     
-    [_adjustView setAdjustByExpinside:expInside expOutside:expOutside contrast:contrast];
+    [self.adjustView setAdjustByExpinside:expInside expOutside:expOutside contrast:contrast];
 }
 -(void)rotatePresetShowViewForTransform:(CGAffineTransform)transfm
 {
-    if(_prestsView == nil) return;
-    [_prestsView rotateShowViewForTransform:transfm];
+    if(self.prestsView == nil) return;
+    [self.prestsView rotateShowViewForTransform:transfm];
 }
 
 -(void)choosePresetsBtnForIndex:(NSInteger)index bNeedReturn:(BOOL)bReturn
 {
-    if(_prestsView == nil) return;
-    [_prestsView chooseButtonForIndex:index bReturnToDelegate:bReturn];
+    if(self.prestsView == nil) return;
+    [self.prestsView chooseButtonForIndex:index bReturnToDelegate:bReturn];
 }
 -(void)chooseTintsBtnForIndex:(NSInteger)index bNeedReturn:(BOOL)bReturn
 {
-    if(_tintsView == nil) return;
-    [_tintsView chooseButtonForIndex:index bReturnToDelegate:bReturn];
+    if(self.tintsView == nil) return;
+    [self.tintsView chooseButtonForIndex:index bReturnToDelegate:bReturn];
 }
 
 

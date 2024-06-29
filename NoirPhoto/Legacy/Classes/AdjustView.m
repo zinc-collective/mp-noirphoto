@@ -31,11 +31,10 @@
 			maskName = @"adjust_mask-iPad.png";
 		}
 
-		maskView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, frame.size.height)];
-		maskView.image = [UIImage imageNamed:maskName];
-		maskView.userInteractionEnabled = NO;
-		[self addSubview:maskView];
-		//[maskView release];
+        self.adjustMaskView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, frame.size.height)];
+        self.adjustMaskView.image = [UIImage imageNamed:maskName];
+        self.adjustMaskView.userInteractionEnabled = NO;
+		[self addSubview:self.adjustMaskView];
 
     }
     return self;
@@ -53,52 +52,52 @@
 	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) //ipad
 	{
 		//add outside picker
-		_expOutsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(1.0, 0.0, 66.0, 183.0) image:[UIImage imageNamed:@"adjust_in_out-iPad.png"] topOffset:44 btmOffset:38.0];
-		[_expOutsidePicker setParameters:-4.0 maxValue:4.0 useHeight:294.0 useOffset:91.5];
-		_expOutsidePicker.defaultValue = 0.0;
-		_expOutsidePicker.delegate = self;
-		[self addSubview:_expOutsidePicker];
+		self.expOutsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(1.0, 0.0, 66.0, 183.0) image:[UIImage imageNamed:@"adjust_in_out-iPad.png"] topOffset:44 btmOffset:38.0];
+		[self.expOutsidePicker setParameters:-4.0 maxValue:4.0 useHeight:294.0 useOffset:91.5];
+		self.expOutsidePicker.defaultValue = 0.0;
+		self.expOutsidePicker.delegate = self;
+		[self addSubview:self.expOutsidePicker];
 
 
 		//add inside picker
-		_expInsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(77.0, 0.0, 66.0, 183.0) image:[UIImage imageNamed:@"adjust_in_out-iPad.png"] topOffset:44 btmOffset:38.0];
-		[_expInsidePicker setParameters:-4.0 maxValue:4.0 useHeight:294.0 useOffset:91.5];
-		_expInsidePicker.defaultValue = 0.0;
-		_expInsidePicker.delegate = self;
-		[self addSubview:_expInsidePicker];
+		self.expInsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(77.0, 0.0, 66.0, 183.0) image:[UIImage imageNamed:@"adjust_in_out-iPad.png"] topOffset:44 btmOffset:38.0];
+		[self.expInsidePicker setParameters:-4.0 maxValue:4.0 useHeight:294.0 useOffset:91.5];
+		self.expInsidePicker.defaultValue = 0.0;
+		self.expInsidePicker.delegate = self;
+		[self addSubview:self.expInsidePicker];
 
 
 		//add contrast picker
-		_expContrastPicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(153.0, 0.0, 66.0, 183.0) image:[UIImage imageNamed:@"adjust_contrast-iPad.png"] topOffset:44 btmOffset:38.0];
-		[_expContrastPicker setParameters:1.0 maxValue:4.0 useHeight:294.0 useOffset:91.5];
-		_expContrastPicker.defaultValue = 2.0;
-		_expContrastPicker.delegate = self;
-		[self addSubview:_expContrastPicker];
+		self.expContrastPicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(153.0, 0.0, 66.0, 183.0) image:[UIImage imageNamed:@"adjust_contrast-iPad.png"] topOffset:44 btmOffset:38.0];
+		[self.expContrastPicker setParameters:1.0 maxValue:4.0 useHeight:294.0 useOffset:91.5];
+		self.expContrastPicker.defaultValue = 2.0;
+		self.expContrastPicker.delegate = self;
+		[self addSubview:self.expContrastPicker];
 	}
 	else //iphone
 	{
 		//add outside picker
-		_expOutsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(1.0, 0.0, 49.0, 152.0) image:[UIImage imageNamed:@"adjust_in_out.png"] topOffset:40.5 btmOffset:36.0];
-		[_expOutsidePicker setParameters:-4.0 maxValue:4.0 useHeight:219.0 useOffset:76.0];
-		_expOutsidePicker.defaultValue = 0.0;
-		_expOutsidePicker.delegate = self;
-		[self addSubview:_expOutsidePicker];
+		self.expOutsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(1.0, 0.0, 49.0, 152.0) image:[UIImage imageNamed:@"adjust_in_out.png"] topOffset:40.5 btmOffset:36.0];
+		[self.expOutsidePicker setParameters:-4.0 maxValue:4.0 useHeight:219.0 useOffset:76.0];
+		self.expOutsidePicker.defaultValue = 0.0;
+		self.expOutsidePicker.delegate = self;
+		[self addSubview:self.expOutsidePicker];
 
 
 		//add inside picker
-		_expInsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(57.0, 0.0, 49.0, 152.0) image:[UIImage imageNamed:@"adjust_in_out.png"] topOffset:40.5 btmOffset:36.0];
-		[_expInsidePicker setParameters:-4.0 maxValue:4.0 useHeight:219 useOffset:76.0];
-		_expInsidePicker.defaultValue = 0.0;
-		_expInsidePicker.delegate = self;
-		[self addSubview:_expInsidePicker];
+		self.expInsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(57.0, 0.0, 49.0, 152.0) image:[UIImage imageNamed:@"adjust_in_out.png"] topOffset:40.5 btmOffset:36.0];
+		[self.expInsidePicker setParameters:-4.0 maxValue:4.0 useHeight:219 useOffset:76.0];
+		self.expInsidePicker.defaultValue = 0.0;
+		self.expInsidePicker.delegate = self;
+		[self addSubview:self.expInsidePicker];
 
 
 		//add contrast picker
-		_expContrastPicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(113.0, 0.0, 49.0, 152.0) image:[UIImage imageNamed:@"adjust_contrast.png"] topOffset:40.5 btmOffset:36.0];
-		[_expContrastPicker setParameters:1.0 maxValue:4.0 useHeight:219.0 useOffset:76.0];
-		_expContrastPicker.defaultValue = 2.0;
-		_expContrastPicker.delegate = self;
-		[self addSubview:_expContrastPicker];
+		self.expContrastPicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(113.0, 0.0, 49.0, 152.0) image:[UIImage imageNamed:@"adjust_contrast.png"] topOffset:40.5 btmOffset:36.0];
+		[self.expContrastPicker setParameters:1.0 maxValue:4.0 useHeight:219.0 useOffset:76.0];
+		self.expContrastPicker.defaultValue = 2.0;
+		self.expContrastPicker.delegate = self;
+		[self addSubview:self.expContrastPicker];
 	}
 }
 
@@ -128,9 +127,9 @@
 
 
 	//init the slider bar position
-	[_expInsidePicker setTheCurrentValue:expInside];
-	[_expOutsidePicker setTheCurrentValue:expOutside];
-	[_expContrastPicker setTheCurrentValue:contrast];
+	[self.expInsidePicker setTheCurrentValue:expInside];
+	[self.expOutsidePicker setTheCurrentValue:expOutside];
+	[self.expContrastPicker setTheCurrentValue:contrast];
 
 }
 
@@ -153,15 +152,15 @@
 //CustomPickerDelegate
 -(void)currentValueFromCustomPicker:(CustomPickerView*)customPicker value:(float)value isFinal:(BOOL)bFinalValue
 {
-	if(customPicker == _expInsidePicker)
+	if(customPicker == self.expInsidePicker)
 	{
 		_expInside = value;
 	}
-	else if(customPicker == _expOutsidePicker)
+	else if(customPicker == self.expOutsidePicker)
 	{
 		_expOutside = value;
 	}
-	else if(customPicker == _expContrastPicker)
+	else if(customPicker == self.expContrastPicker)
 	{
 		_contrast = value;
 	}

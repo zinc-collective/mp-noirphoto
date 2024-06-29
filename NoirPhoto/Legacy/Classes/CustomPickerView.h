@@ -20,12 +20,16 @@
 @interface CustomPickerView : UIView <UIScrollViewDelegate, RScrollViewDelegate> {
 
 	RScrollView *_scrollView;
+    UIImageView *_imageView;
 
 	float _minValue;
 	float _maxValue;
 	float _useHeight;
 	float _useOffset;
 
+    
+    float _topOffset;
+    float _btmOffset;
 	BOOL _bOutSet;
 
 	float defaultValue;
@@ -45,11 +49,11 @@
 -(void)setTheCurrentValue:(float)value;
 
 -(void)setTheCurrentValue2:(float)value;
+-(void)setLayoutContraintsForScrollView;
 
 #pragma mark -
 #pragma mark in use functions
 -(void)pickTheCurrentValue:(BOOL)bFinalPick;
-
 
 
 @end

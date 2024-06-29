@@ -33,6 +33,10 @@
 }
 
 @property (nonatomic, weak) id<ControlPadViewDelegate> delegate;
+@property (nonatomic, retain) PresetsView* prestsView;
+@property (nonatomic, retain) TintsView* tintsView;
+@property (nonatomic, retain) AdjustView* adjustView;
+@property (nonatomic, retain) UIImageView* bgView;
 
 
 

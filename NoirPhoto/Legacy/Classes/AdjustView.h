@@ -33,10 +33,15 @@
 	float _expOutside;
 	float _contrast;
 
-	UIImageView *maskView;
+	UIImageView *adjustMaskView;
 }
 
 @property (nonatomic, weak) id<AdjustViewDelegate> delegate;
+@property (nonatomic, retain) CustomPickerView* expOutsidePicker;
+@property (nonatomic, retain) CustomPickerView* expInsidePicker;
+@property (nonatomic, retain) CustomPickerView* expContrastPicker;
+@property (nonatomic, retain) UIImageView* adjustMaskView;
+
 
 
 #pragma mark -

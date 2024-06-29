@@ -21,7 +21,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code.
-
+        
+        _topOffset = topOffset;
+        _btmOffset = btmOffset;
 		_bOutSet = NO;
 
 		//init _scrollView
@@ -34,9 +36,9 @@
 		_scrollView.rdelegate = self;
 
 		//add image
-		UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((frame.size.width-image.size.width)/2, topOffset, image.size.width, image.size.height)];
-		imageView.image = image;
-		[_scrollView addSubview:imageView];
+		_imageView = [[UIImageView alloc] initWithFrame:CGRectMake((frame.size.width-image.size.width)/2, topOffset, image.size.width, image.size.height)];
+        _imageView.image = image;
+		[_scrollView addSubview:_imageView];
 
 		_scrollView.contentSize = CGSizeMake(frame.size.width, image.size.height + topOffset + btmOffset);
 		[self addSubview:_scrollView];
@@ -44,7 +46,6 @@
     }
     return self;
 }
-
 
 
 
@@ -61,8 +62,9 @@
 -(void)setTheCurrentValue:(float)value
 {
 	_bOutSet = YES;
-
+// all of this needs to be dynamic.   need a function to pass in new frame after autolayout is complete.  Is there an onLayoutChange callback I can use instead of a public function?
 	float visibleHeight = _scrollView.frame.size.height;
+    NSLog(@"## - setTheCurrentValue: %.2f", visibleHeight);
     CGFloat duration = 0.3f;
 	float totalHeight = _useHeight;
 
@@ -102,6 +104,46 @@
         contentOffset.y = offsetY;
         self->_scrollView.contentOffset = contentOffset;
     } completion:nil];
+}
+
+-(void)setLayoutContraintsForScrollView
+{
+    if (_scrollView != nil && _imageView != nil) {
+        float _originaScrolllHeight = _scrollView.frame.size.height;
+        CGSize _originaImageFrame = _imageView.frame.size;
+        float _originalImaageRatio = _originaImageFrame.height / _originaImageFrame.width;
+        _scrollView.translatesAutoresizingMaskIntoConstraints = NO;
+        _imageView.translatesAutoresizingMaskIntoConstraints = NO;
+        
+
+      NSArray<NSLayoutConstraint *> *constraints = @[
+        [_scrollView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor],
+        [_scrollView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor],
+        [_scrollView.topAnchor constraintEqualToAnchor:self.topAnchor],
+        [_scrollView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor],
+        [_imageView.widthAnchor constraintEqualToAnchor:self.widthAnchor],
+        [_imageView.heightAnchor constraintEqualToAnchor:self.widthAnchor multiplier:_originalImaageRatio]
+      ];
+      // Need to scale the image proportionally and set the constraint above
+      [NSLayoutConstraint activateConstraints:constraints];
+      [self layoutIfNeeded];
+        float _scaledTopOffset = (_topOffset * _scrollView.frame.size.height) / _originaScrolllHeight;
+        float _scaledBtmOffset = (_btmOffset * _scrollView.frame.size.height) / _originaScrolllHeight;
+        // 47.8..., 41.3...
+        // from topOffset:44 btmOffset:38.0
+        NSLog(@"## - _scaledTopOffset: %.2f -- _scaledBtmOffset: %.2f", _scaledTopOffset, _scaledBtmOffset);
+      _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, (_imageView.frame.size.height + _scaledTopOffset + _scaledBtmOffset));
+    }
+    
+    //add image
+//    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake((frame.size.width-image.size.width)/2, topOffset, image.size.width, image.size.height)];
+    
+    
+        
+    // I need to do something with the contentView and ImageView to make sure the values match the scroll position as expected.
+    /*
+         this is a clue: _scrollView.contentSize = CGSizeMake(frame.size.width, image.size.height + topOffset + btmOffset);
+    */
 }
 
 
