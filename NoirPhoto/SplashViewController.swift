@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-protocol SplashDelegate : class {
+protocol SplashDelegate : AnyObject {
     func splashDidPickImage(image: UIImage, url: NSURL)
 }
 
@@ -18,39 +18,39 @@ class SplashViewController: UIViewController, UIImagePickerControllerDelegate, U
     var imagePicker : UIImagePickerController?
     weak var delegate : SplashDelegate?
 
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBarHidden = true
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden: Bool {
         return false
     }
 
     @IBAction func handleInfo(sender: AnyObject) {
         print("INFO")
         let sb = UIStoryboard(name: "Info", bundle: nil)
-        let vc = sb.instantiateViewControllerWithIdentifier("InfoViewController")
+        let vc = sb.instantiateViewController(withIdentifier: "InfoViewController")
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    @IBAction func handleLibrary(sender: AnyObject) {
+    @IBAction func handleLibrary(_ sender: AnyObject) {
         print("LIBRARY")
 
         // Request photo access earlier so the photos window isn't black
         PHPhotoLibrary.requestAuthorization { status in
             switch status {
-            case .Authorized:
+            case .authorized:
                 print("AUTHORIZED")
-            case .Restricted:
+            case .restricted:
                 print("RESTRICTED")
-            case .Denied:
+            case .denied:
                 print("DENIED")
             default:
                 // place for .NotDetermined - in this callback status is already determined so should never get here
                 break
             }
 
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 self.openPicker()
             }
         }
@@ -59,9 +59,9 @@ class SplashViewController: UIViewController, UIImagePickerControllerDelegate, U
     func openPicker() {
         print("OPEN PICKER")
         let picker = UIImagePickerController()
-        picker.sourceType = .PhotoLibrary
+        picker.sourceType = .photoLibrary
         picker.delegate = self
-        picker.modalPresentationStyle = .Popover
+        picker.modalPresentationStyle = .popover
 
         // hand picked origin to line up with ipad. This is ignored for iphone
         // the splash screen uses full-screen button sizes
@@ -71,21 +71,23 @@ class SplashViewController: UIViewController, UIImagePickerControllerDelegate, U
         picker.popoverPresentationController?.sourceView = self.view
         picker.popoverPresentationController?.sourceRect = CGRect(origin: buttonOrigin, size: buttonSize)
 
-        self.presentViewController(picker, animated: true, completion: nil)
+        self.present(picker, animated: true, completion: nil)
 
         self.imagePicker = picker
     }
 
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    private func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         print("PICKED IMAGE")
-
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+//        NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+//        UIImage * selected = [info objectForKey:UIImagePickerControllerOriginalImage];
+        let image = info["UIImagePickerControllerOriginalImage"] as! UIImage
 
         // if it isn't there, then
-        let assetURL = info[UIImagePickerControllerReferenceURL] as! NSURL
+        let assetURL = info["UIImagePickerControllerReferenceURL"] as! NSURL
         // I can't display it myself, need to pass it back
 
-        self.imagePicker?.dismissViewControllerAnimated(true, completion: nil)
-        self.delegate?.splashDidPickImage(image, url: assetURL)
+        self.imagePicker?.dismiss(animated: true, completion: nil)
+        self.delegate?.splashDidPickImage(image: image, url: assetURL)
     }
 }
