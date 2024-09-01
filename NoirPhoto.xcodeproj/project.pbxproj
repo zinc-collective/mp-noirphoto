@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F0AB554DBBAF1080382FF81 /* Pods_NoirPhoto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608C8629802043B3DB729F97 /* Pods_NoirPhoto.framework */; };
 		782B55E21CD3D037003C313E /* UIImage+metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B55E11CD3D037003C313E /* UIImage+metadata.swift */; };
 		78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78330FA81CA43D6F00B04CFD /* SplashViewController.swift */; };
 		783B0F171CA5921E002A77AB /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F161CA5921E002A77AB /* InfoViewController.swift */; };
@@ -167,13 +166,9 @@
 		787584271CA2EE9F00100514 /* VersionWatermark.m in Sources */ = {isa = PBXBuildFile; fileRef = 787584241CA2EE9F00100514 /* VersionWatermark.m */; };
 		7896C8011CF4A56C00AE804F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7896C8001CF4A56C00AE804F /* Utils.swift */; };
 		78D75F921CE2319200895BA1 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = 78D75F911CE2319200895BA1 /* info.html */; };
-		78D9FD321CEA1A0200745DDE /* CrashlyticsBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D9FD311CEA1A0200745DDE /* CrashlyticsBridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		419EC16A789658B4F4D433DF /* Pods-NoirPhoto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoirPhoto.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoirPhoto/Pods-NoirPhoto.debug.xcconfig"; sourceTree = "<group>"; };
-		608C8629802043B3DB729F97 /* Pods_NoirPhoto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoirPhoto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		671CC38C113DFCC7F37656F7 /* Pods-NoirPhoto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoirPhoto.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoirPhoto/Pods-NoirPhoto.release.xcconfig"; sourceTree = "<group>"; };
 		782B55E11CD3D037003C313E /* UIImage+metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+metadata.swift"; sourceTree = "<group>"; };
 		78330FA81CA43D6F00B04CFD /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		783B0F161CA5921E002A77AB /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -354,8 +349,6 @@
 		787584241CA2EE9F00100514 /* VersionWatermark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionWatermark.m; sourceTree = "<group>"; };
 		7896C8001CF4A56C00AE804F /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		78D75F911CE2319200895BA1 /* info.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info.html; sourceTree = "<group>"; };
-		78D9FD301CEA1A0200745DDE /* CrashlyticsBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashlyticsBridge.h; path = NoirPhoto/CrashlyticsBridge.h; sourceTree = "<group>"; };
-		78D9FD311CEA1A0200745DDE /* CrashlyticsBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrashlyticsBridge.m; path = NoirPhoto/CrashlyticsBridge.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -363,7 +356,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F0AB554DBBAF1080382FF81 /* Pods_NoirPhoto.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,8 +389,6 @@
 				787581481CA2E98400100514 /* Info.plist */,
 				78D9FD2F1CEA19E000745DDE /* Bridge */,
 				7875813A1CA2E98400100514 /* Products */,
-				AC12024DA3E54819A491F40E /* Pods */,
-				E679D6CF653C1978FD4A822D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -672,27 +662,8 @@
 			isa = PBXGroup;
 			children = (
 				787581B41CA2EBEF00100514 /* NoirPhoto-Bridging-Header.h */,
-				78D9FD301CEA1A0200745DDE /* CrashlyticsBridge.h */,
-				78D9FD311CEA1A0200745DDE /* CrashlyticsBridge.m */,
 			);
 			name = Bridge;
-			sourceTree = "<group>";
-		};
-		AC12024DA3E54819A491F40E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				419EC16A789658B4F4D433DF /* Pods-NoirPhoto.debug.xcconfig */,
-				671CC38C113DFCC7F37656F7 /* Pods-NoirPhoto.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		E679D6CF653C1978FD4A822D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				608C8629802043B3DB729F97 /* Pods_NoirPhoto.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -702,12 +673,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7875814B1CA2E98400100514 /* Build configuration list for PBXNativeTarget "NoirPhoto" */;
 			buildPhases = (
-				0D10A95A93F343A70C596497 /* Check Pods Manifest.lock */,
 				787581351CA2E98400100514 /* Sources */,
 				787581361CA2E98400100514 /* Frameworks */,
 				787581371CA2E98400100514 /* Resources */,
-				62A802C9994641B31C0AB894 /* Embed Pods Frameworks */,
-				EA0A0E9202BDAA1904288340 /* Copy Pods Resources */,
 				781C46211CE3B5DE0041DE34 /* ShellScript */,
 			);
 			buildRules = (
@@ -731,7 +699,7 @@
 				TargetAttributes = {
 					787581381CA2E98400100514 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = G8R2KJ59DE;
+						DevelopmentTeam = 7G5K7Y23NM;
 					};
 				};
 			};
@@ -901,36 +869,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0D10A95A93F343A70C596497 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		62A802C9994641B31C0AB894 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NoirPhoto/Pods-NoirPhoto-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		781C46211CE3B5DE0041DE34 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -943,21 +881,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 6a09c19815c2f7f42d12f74f97f8f87c0f139e62 d29b37ba3305e7a136158c7684175a69995c401705890454f260b5b758d91816";
-		};
-		EA0A0E9202BDAA1904288340 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NoirPhoto/Pods-NoirPhoto-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -979,7 +902,6 @@
 				787584271CA2EE9F00100514 /* VersionWatermark.m in Sources */,
 				787581F01CA2EBF000100514 /* RConfigFile.m in Sources */,
 				782B55E21CD3D037003C313E /* UIImage+metadata.swift in Sources */,
-				78D9FD321CEA1A0200745DDE /* CrashlyticsBridge.m in Sources */,
 				787581EF1CA2EBF000100514 /* QuartzView.m in Sources */,
 				787581F31CA2EBF000100514 /* Tint.m in Sources */,
 				787581EE1CA2EBF000100514 /* Preset.m in Sources */,
@@ -1059,7 +981,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1098,7 +1020,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1108,34 +1030,36 @@
 		};
 		7875814C1CA2E98400100514 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 419EC16A789658B4F4D433DF /* Pods-NoirPhoto.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 7G5K7Y23NM;
 				INFOPLIST_FILE = NoirPhoto/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.redgiantsoftware.noir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "NoirPhoto/NoirPhoto-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		7875814D1CA2E98400100514 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 671CC38C113DFCC7F37656F7 /* Pods-NoirPhoto.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 7G5K7Y23NM;
 				INFOPLIST_FILE = NoirPhoto/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.redgiantsoftware.noir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "NoirPhoto/NoirPhoto-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
