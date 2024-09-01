@@ -369,6 +369,7 @@
 		6DC38A462C84C0EC0025DE7A /* Uitls */ = {
 			isa = PBXGroup;
 			children = (
+				7896C8001CF4A56C00AE804F /* Utils.swift */,
 				6DC38A472C84C11B0025DE7A /* LogManager.swift */,
 				782B55E11CD3D037003C313E /* UIImage+metadata.swift */,
 			);
@@ -423,7 +424,6 @@
 				787581451CA2E98400100514 /* LaunchScreen.storyboard */,
 				787581401CA2E98400100514 /* Main.storyboard */,
 				787581431CA2E98400100514 /* Assets.xcassets */,
-				7896C8001CF4A56C00AE804F /* Utils.swift */,
 				783B0F221CA5E58A002A77AB /* Info */,
 				783B0F231CA5E58F002A77AB /* Splash */,
 				7875814E1CA2EA5C00100514 /* Legacy */,
