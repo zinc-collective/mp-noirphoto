@@ -13,6 +13,7 @@ import MobileCoreServices
 
 // scales up the whole view, just like if we weren't supporting iPhone 6 or 6+
 class NoirViewController: NoirViewControllerLegacy {
+    var logger: AppLogger?
 
     // SCALE HACK: remove me once we change the UI
     override func viewWillAppear(_ animated: Bool) {

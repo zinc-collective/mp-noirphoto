@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6DC38A482C84C11B0025DE7A /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC38A472C84C11B0025DE7A /* LogManager.swift */; };
+		6DC38A4B2C84C1AC0025DE7A /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 6DC38A4A2C84C1AC0025DE7A /* Sentry */; };
 		782B55E21CD3D037003C313E /* UIImage+metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B55E11CD3D037003C313E /* UIImage+metadata.swift */; };
 		78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78330FA81CA43D6F00B04CFD /* SplashViewController.swift */; };
 		783B0F171CA5921E002A77AB /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F161CA5921E002A77AB /* InfoViewController.swift */; };
@@ -170,6 +172,7 @@
 
 /* Begin PBXFileReference section */
 		6DC38A452C84BF810025DE7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6DC38A472C84C11B0025DE7A /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		782B55E11CD3D037003C313E /* UIImage+metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+metadata.swift"; sourceTree = "<group>"; };
 		78330FA81CA43D6F00B04CFD /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		783B0F161CA5921E002A77AB /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -356,12 +359,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DC38A4B2C84C1AC0025DE7A /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6DC38A462C84C0EC0025DE7A /* Uitls */ = {
+			isa = PBXGroup;
+			children = (
+				6DC38A472C84C11B0025DE7A /* LogManager.swift */,
+				782B55E11CD3D037003C313E /* UIImage+metadata.swift */,
+			);
+			path = Uitls;
+			sourceTree = "<group>";
+		};
 		783B0F221CA5E58A002A77AB /* Info */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,12 +416,12 @@
 		7875813B1CA2E98400100514 /* NoirPhoto */ = {
 			isa = PBXGroup;
 			children = (
+				6DC38A462C84C0EC0025DE7A /* Uitls */,
 				7875813C1CA2E98400100514 /* AppDelegate.swift */,
 				783B0F181CA597D5002A77AB /* NavigationViewController.swift */,
 				783B0F281CA5EDED002A77AB /* NoirViewController.swift */,
 				787581451CA2E98400100514 /* LaunchScreen.storyboard */,
 				787581401CA2E98400100514 /* Main.storyboard */,
-				782B55E11CD3D037003C313E /* UIImage+metadata.swift */,
 				787581431CA2E98400100514 /* Assets.xcassets */,
 				7896C8001CF4A56C00AE804F /* Utils.swift */,
 				783B0F221CA5E58A002A77AB /* Info */,
@@ -682,6 +695,9 @@
 			dependencies = (
 			);
 			name = NoirPhoto;
+			packageProductDependencies = (
+				6DC38A4A2C84C1AC0025DE7A /* Sentry */,
+			);
 			productName = NoirPhoto;
 			productReference = 787581391CA2E98400100514 /* NoirPhoto.app */;
 			productType = "com.apple.product-type.application";
@@ -712,6 +728,9 @@
 				Base,
 			);
 			mainGroup = 787581301CA2E98400100514;
+			packageReferences = (
+				6DC38A492C84C1AC0025DE7A /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
+			);
 			productRefGroup = 7875813A1CA2E98400100514 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -872,6 +891,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DC38A482C84C11B0025DE7A /* LogManager.swift in Sources */,
 				787581F11CA2EBF000100514 /* RScrollView.m in Sources */,
 				787581E91CA2EBF000100514 /* CustomPickerView.m in Sources */,
 				787581E41CA2EBF000100514 /* NoirViewControllerLegacy.m in Sources */,
@@ -1101,6 +1121,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6DC38A492C84C1AC0025DE7A /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/getsentry/sentry-cocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.14.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6DC38A4A2C84C1AC0025DE7A /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6DC38A492C84C1AC0025DE7A /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 787581311CA2E98400100514 /* Project object */;
 }

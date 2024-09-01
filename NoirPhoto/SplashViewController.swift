@@ -15,6 +15,7 @@ protocol SplashDelegate : AnyObject {
 
 class SplashViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    var logger: AppLogger?
     var imagePicker : UIImagePickerController?
     weak var delegate : SplashDelegate?
 

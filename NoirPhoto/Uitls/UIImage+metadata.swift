@@ -108,6 +108,7 @@ extension UIImage {
             // same as .up case
             transform = CGAffineTransform.identity
             let error = NSError(domain: "UIImage+Ext", code: 0, userInfo: ["imageOrientation":String(describing: imageSource.imageOrientation)])
+            AppDelegate().getAppLogger().logError(error)
         }
 
         UIGraphicsBeginImageContext(bounds.size)
