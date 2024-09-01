@@ -149,7 +149,7 @@ void loadGaindLUT()
 - (NSUInteger)supportedInterfaceOrientations
 {
 	NSUInteger mask = 0;
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
     {
 		mask = UIInterfaceOrientationMaskPortrait;
 	} else
@@ -199,7 +199,7 @@ void loadGaindLUT()
 	CGRect photoViewRect = photo_view_rect;
     if (IS_IPHONE_5)
         photoViewRect = photo_view_rect_iphone5;
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		photoViewRect = photo_view_rect_ipad;
 	}
@@ -211,7 +211,7 @@ void loadGaindLUT()
 
 
 	// baiwei for full view
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		//init phont full view
 		CGRect photoFullViewRect = photo_full_view_rect_ipad;
@@ -270,7 +270,7 @@ void loadGaindLUT()
 	CGRect ellipseViewRect = ellipse_view_rect;
     if (IS_IPHONE_5)
         ellipseViewRect = ellipse_view_rect_iphone5;
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		ellipseViewRect = ellipse_view_rect_ipad;
 	}
@@ -296,7 +296,7 @@ void loadGaindLUT()
 	CGRect ctrlPadViewRect = ctrl_pad_view_rect;
     if (IS_IPHONE_5)
         ctrlPadViewRect = ctrl_pad_view_rect_iphone5;
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		ctrlPadViewRect = ctrl_pad_view_rect_ipad;
 	}
@@ -492,7 +492,7 @@ void loadGaindLUT()
     // "Obtain the appropriate review under preset picture and set it to items inside" (via Google Translate)
 	self.mCircleImageName = [self circleImageNameForState:1];//@"circle_preset.png";
 
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		UIImage *renImage = [self imageForPreset:self.preset useImage:[UIImage imageNamed:self.mPresetReviewImageName]];//@"preset_review.png"
 		UIImage *image    = [UIImage imageNamed:self.mPresetReviewMaskImageName];//[self imageCompiledForOriginImage:renImage maskImage:[UIImage imageNamed:self.mPresetReviewMaskImageName]];//@"preset_review_mask.png"
@@ -538,7 +538,7 @@ void loadGaindLUT()
 
     [self pickPhoto:assetURL image:selected];
 
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		[self.imagePickerPopover dismissPopoverAnimated:YES];
 		self.loadBtn.enabled = YES;
@@ -701,7 +701,7 @@ void loadGaindLUT()
 
         Parameter *param = [self parameterWithPreset:self.preset];
 
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
             ctrl_pad_offset = 256 - ctrl_pad_head_ipad;
             photoView.frame = photo_full_view_rect_ipad2;
         } else { //iphone
@@ -734,7 +734,7 @@ void loadGaindLUT()
 
         isFull = YES;
     } else { //full
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
             photoView.frame = photo_view_rect_ipad;
             photoView.image = renderedPhoto;
 
@@ -773,7 +773,7 @@ void loadGaindLUT()
 
 -(IBAction)loadAction:(id)sender
 {
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		if(imagePickerPopover==nil){
 
@@ -824,7 +824,7 @@ void loadGaindLUT()
 -(IBAction)infoAction:(id)sender
 {
 	NSString *infoNibName = @"Info";
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		infoNibName = @"Info-iPad";
 	}
@@ -882,7 +882,7 @@ void loadGaindLUT()
 		//根据preset获取相应的review图片，并设定到items里面
 		self.mCircleImageName = [self circleImageNameForState:1];//@"circle_preset.png";
 
-		if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+		if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 		{
 			UIImage *renImage = [self imageForPreset:apreset useImage:[UIImage imageNamed:self.mPresetReviewImageName]];//@"preset_review.png"
 			UIImage *image    = [UIImage imageNamed:self.mPresetReviewMaskImageName];//[self imageCompiledForOriginImage:renImage maskImage:[UIImage imageNamed:self.mPresetReviewMaskImageName]];//@"preset_review_mask.png"
@@ -985,7 +985,7 @@ void loadGaindLUT()
 		NSString *imageName    = [NSString stringWithFormat:@"tint_btn_%d.png", i];
 		NSString *imageNameSel = [NSString stringWithFormat:@"tint_btn_sel_%d.png", i];
 
-		if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+		if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 		{
 			imageName    = [NSString stringWithFormat:@"tint_btn_iPad_%d.png", i];
 			imageNameSel = [NSString stringWithFormat:@"tint_btn_sel_iPad_%d.png", i];
@@ -1162,7 +1162,7 @@ void loadGaindLUT()
     // draw source image on the context
 	[maskImage drawInRect:CGRectMake(0.0, 0.0, maskImage.size.width, maskImage.size.height)];
 
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		[originImage drawInRect:CGRectMake(oriX+2, oriY-2, originImage.size.width, originImage.size.height)];
 	}
@@ -1177,7 +1177,7 @@ void loadGaindLUT()
 
 	//这个地方是把preset的图片缩小一半，用在本来都用大图的时候，暂时可以注释掉
     // "This place is reduced to half of the preset picture, could have been used in a large image, it can temporarily comment" (via Google Translate)
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+	if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone)
 	{
 		BOOL bIphone4 = [self checkIfiPhone4];
 		if(!bIphone4)
@@ -1327,7 +1327,7 @@ void loadGaindLUT()
 
 	if(state == 1)        //circle for preset
 	{
-		if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+		if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 		{
 			imageName = @"circle_preset_4.png";
 		}
@@ -1428,7 +1428,7 @@ void loadGaindLUT()
 
 -(void)setPresetUseImageForDevice
 {
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		self.mPresetReviewImageName			= @"preset_review_iPad.png";
 		self.mPresetReviewMaskImageName		= @"preset_review_mask_iPad.png";
@@ -1542,7 +1542,7 @@ void loadGaindLUT()
     if (IS_IPHONE_5)
         photoViewRect = photo_view_rect_iphone5;
 
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		photoViewRect = photo_view_rect_ipad;
 	}
@@ -1555,7 +1555,7 @@ void loadGaindLUT()
 	//限制一下图片的大小，如果过大，就裁剪到合适的尺寸
     // "Click image size restrictions, if too large, cut to the appropriate size"  (via Google Translate)
 	float limitPixel;
-	if(UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)
+	if(UIDevice.currentDevice.userInterfaceIdiom != UIUserInterfaceIdiomPad)
 	{
 		if([self checkIfPureiPhone4NotIncludeIPod4])
 		{
@@ -1600,7 +1600,7 @@ void loadGaindLUT()
     CGRect photoPlaceRect = [self photoRenderRectForImageSize:originPhoto.size withImageViewRect:photoViewRect];
 
 	//got self.photo
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		//self.photo = [self imageWithImage:originPhoto scaledToSize:CGSizeMake(photoPlaceRect.size.width/2, photoPlaceRect.size.height/2)];
 		self.photo = [self imageWithImage:originPhoto scaledToSize:CGSizeMake(photoPlaceRect.size.width*1.2, photoPlaceRect.size.height*1.2) renderedForUI:NO];
@@ -1647,7 +1647,7 @@ void loadGaindLUT()
 
 
 	//make out the adjustPhoto
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		self.adjustPhoto = [self imageWithImage:self.photo scaledToSize:CGSizeMake(self.photo.size.width/2,self.photo.size.height/2) renderedForUI:YES];
 	}
@@ -1684,7 +1684,7 @@ void loadGaindLUT()
 -(void)changeTintMaskForIndex:(NSInteger)index
 {
 	NSString *tintMaskName = [NSString stringWithFormat:@"tint_mask_%zd.png", index];
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		tintMaskName = [NSString stringWithFormat:@"tint_mask_iPad_%zd.png", index];
 	}

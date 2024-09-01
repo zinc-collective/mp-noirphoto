@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
         self.splashController.delegate = self
         self.splashController.logger = LogManager()
         
-        if (UI_USER_INTERFACE_IDIOM() == .pad) {
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
             self.viewController = NoirViewController(nibName: "NoirViewController-iPad", bundle: nil)
         }
         else {
