@@ -25,10 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
         self.navigationController = self.window!.rootViewController as! NavigationViewController
 
         self.splashController = UIStoryboard(name: "Splash", bundle: nil)
-                                    .instantiateViewControllerWithIdentifier("SplashViewController") as! SplashViewController
+            .instantiateViewController(withIdentifier: "SplashViewController") as! SplashViewController
         self.splashController.delegate = self
 
-        if (UI_USER_INTERFACE_IDIOM() == .Pad) {
+        if (UI_USER_INTERFACE_IDIOM() == .pad) {
             self.viewController = NoirViewController(nibName: "NoirViewController-iPad", bundle: nil)
         }
         else {
@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
     func splashDidPickImage(image: UIImage, url: NSURL) {
         self.navigationController.viewControllers = [self.viewController]
         // this must go last (refactor needed)
-        self.viewController.pickPhoto(url, image: image)
+        self.viewController.pickPhoto(url as URL, image: image)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -67,12 +67,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
     func applicationWillTerminate(application: UIApplication) {
 
     }
-
-
-    func checkPhotoExistFromPath(path: String) -> Bool
+    
+    
+    func checkPhotoExistFromPath(_ path: String) -> Bool
     {
-    	let filePath = NSHomeDirectory().stringByAppendingString(path)
-    	return NSFileManager.defaultManager().fileExistsAtPath(filePath)
+        let filePath = NSHomeDirectory() + path
+        return FileManager.default.fileExists(atPath: filePath)
     }
 
 
