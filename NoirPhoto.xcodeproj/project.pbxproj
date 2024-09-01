@@ -169,6 +169,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6DC38A452C84BF810025DE7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		782B55E11CD3D037003C313E /* UIImage+metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+metadata.swift"; sourceTree = "<group>"; };
 		78330FA81CA43D6F00B04CFD /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		783B0F161CA5921E002A77AB /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -342,7 +343,6 @@
 		787583D91CA2EC9600100514 /* NoirViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "NoirViewController-iPad.xib"; path = "Legacy/Resources-iPad/NoirViewController-iPad.xib"; sourceTree = "<group>"; };
 		787584111CA2ECAC00100514 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = Legacy/MainWindow.xib; sourceTree = "<group>"; };
 		787584121CA2ECAC00100514 /* NoirViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NoirViewController.xib; path = Legacy/NoirViewController.xib; sourceTree = "<group>"; };
-		7875841E1CA2ECE700100514 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = Localizable.strings; sourceTree = "<group>"; };
 		787584211CA2EE9F00100514 /* close_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_btn.png; sourceTree = "<group>"; };
 		787584221CA2EE9F00100514 /* version_info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = version_info.plist; sourceTree = "<group>"; };
 		787584231CA2EE9F00100514 /* VersionWatermark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionWatermark.h; sourceTree = "<group>"; };
@@ -704,12 +704,11 @@
 			};
 			buildConfigurationList = 787581341CA2E98400100514 /* Build configuration list for PBXProject "NoirPhoto" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
-				English,
 			);
 			mainGroup = 787581301CA2E98400100514;
 			productRefGroup = 7875813A1CA2E98400100514 /* Products */;
@@ -920,7 +919,7 @@
 		7875841D1CA2ECE700100514 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7875841E1CA2ECE700100514 /* English */,
+				6DC38A452C84BF810025DE7A /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
