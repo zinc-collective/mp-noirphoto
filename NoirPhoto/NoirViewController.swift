@@ -75,7 +75,7 @@ class NoirViewController: NoirViewControllerLegacy {
     func savePhotoFeedback() {
         let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: .alert)
         self.present(alert, animated: true, completion: { 
-            delay(delay: 0.5) {
+            delay(0.5) {
                 self.dismiss(animated: true, completion: nil)
             }
         })
