@@ -12,14 +12,11 @@
 		782B55E21CD3D037003C313E /* UIImage+metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B55E11CD3D037003C313E /* UIImage+metadata.swift */; };
 		78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78330FA81CA43D6F00B04CFD /* SplashViewController.swift */; };
 		783B0F171CA5921E002A77AB /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F161CA5921E002A77AB /* InfoViewController.swift */; };
-		783B0F191CA597D5002A77AB /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F181CA597D5002A77AB /* NavigationViewController.swift */; };
 		783B0F1B1CA5A476002A77AB /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 783B0F1A1CA5A476002A77AB /* Info.storyboard */; };
 		783B0F1F1CA5A4DD002A77AB /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 783B0F1E1CA5A4DD002A77AB /* Splash.storyboard */; };
 		783B0F291CA5EDED002A77AB /* NoirViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783B0F281CA5EDED002A77AB /* NoirViewController.swift */; };
 		7875813D1CA2E98400100514 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7875813C1CA2E98400100514 /* AppDelegate.swift */; };
-		787581421CA2E98400100514 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 787581401CA2E98400100514 /* Main.storyboard */; };
 		787581441CA2E98400100514 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 787581431CA2E98400100514 /* Assets.xcassets */; };
-		787581471CA2E98400100514 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 787581451CA2E98400100514 /* LaunchScreen.storyboard */; };
 		787581E11CA2EBF000100514 /* PresetsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581B61CA2EBF000100514 /* PresetsView.m */; };
 		787581E21CA2EBF000100514 /* TintsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581B71CA2EBF000100514 /* TintsView.m */; };
 		787581E41CA2EBF000100514 /* NoirViewControllerLegacy.m in Sources */ = {isa = PBXBuildFile; fileRef = 787581BB1CA2EBF000100514 /* NoirViewControllerLegacy.m */; };
@@ -176,15 +173,12 @@
 		782B55E11CD3D037003C313E /* UIImage+metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+metadata.swift"; sourceTree = "<group>"; };
 		78330FA81CA43D6F00B04CFD /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		783B0F161CA5921E002A77AB /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
-		783B0F181CA597D5002A77AB /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		783B0F1A1CA5A476002A77AB /* Info.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		783B0F1E1CA5A4DD002A77AB /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		783B0F281CA5EDED002A77AB /* NoirViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoirViewController.swift; sourceTree = "<group>"; };
 		787581391CA2E98400100514 /* NoirPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoirPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7875813C1CA2E98400100514 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		787581411CA2E98400100514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		787581431CA2E98400100514 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		787581461CA2E98400100514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		787581481CA2E98400100514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = NoirPhoto/Info.plist; sourceTree = "<group>"; };
 		787581B41CA2EBEF00100514 /* NoirPhoto-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NoirPhoto-Bridging-Header.h"; path = "NoirPhoto/NoirPhoto-Bridging-Header.h"; sourceTree = "<group>"; };
 		787581B61CA2EBF000100514 /* PresetsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PresetsView.m; path = Legacy/Classes/PresetsView.m; sourceTree = "<group>"; };
@@ -417,7 +411,7 @@
 			children = (
 				6DC38A462C84C0EC0025DE7A /* Uitls */,
 				7875813C1CA2E98400100514 /* AppDelegate.swift */,
-				783B0F181CA597D5002A77AB /* NavigationViewController.swift */,
+				6DC5B2A62C86120500B9219D /* SceneDelegate.swift */,
 				783B0F281CA5EDED002A77AB /* NoirViewController.swift */,
 				787581451CA2E98400100514 /* LaunchScreen.storyboard */,
 				787581401CA2E98400100514 /* Main.storyboard */,
@@ -746,7 +740,6 @@
 				787582AF1CA2EC3800100514 /* adjust_contrast4@2x.png in Resources */,
 				7875840B1CA2EC9600100514 /* tint_mask_iPad_3.png in Resources */,
 				787582AD1CA2EC3800100514 /* adjust_contrast2@2x.png in Resources */,
-				787581471CA2E98400100514 /* LaunchScreen.storyboard in Resources */,
 				787583371CA2EC5900100514 /* tint_btn_sel_3.png in Resources */,
 				7875841F1CA2ECE700100514 /* Localizable.strings in Resources */,
 				787583F51CA2EC9600100514 /* Icon-Small-50.png in Resources */,
@@ -850,7 +843,6 @@
 				787583261CA2EC5900100514 /* Icon-58.png in Resources */,
 				7875833F1CA2EC6900100514 /* Presets_current.pList in Resources */,
 				7875832C1CA2EC5900100514 /* info_desc.png in Resources */,
-				787581421CA2E98400100514 /* Main.storyboard in Resources */,
 				787583231CA2EC5900100514 /* Icon-144.png in Resources */,
 				787584251CA2EE9F00100514 /* close_btn.png in Resources */,
 				787583131CA2EC5900100514 /* btn_home_info.png in Resources */,
@@ -893,7 +885,6 @@
 				787581F11CA2EBF000100514 /* RScrollView.m in Sources */,
 				787581E91CA2EBF000100514 /* CustomPickerView.m in Sources */,
 				787581E41CA2EBF000100514 /* NoirViewControllerLegacy.m in Sources */,
-				783B0F191CA597D5002A77AB /* NavigationViewController.swift in Sources */,
 				787581E71CA2EBF000100514 /* AdjustView.m in Sources */,
 				783B0F291CA5EDED002A77AB /* NoirViewController.swift in Sources */,
 				78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */,
@@ -909,6 +900,7 @@
 				787581F41CA2EBF000100514 /* VignetteView.m in Sources */,
 				7875813D1CA2E98400100514 /* AppDelegate.swift in Sources */,
 				787581E81CA2EBF000100514 /* ControlPadView.m in Sources */,
+				6DC5B2A72C86120500B9219D /* SceneDelegate.swift in Sources */,
 				787581EA1CA2EBF000100514 /* EllipseVertex.m in Sources */,
 				783B0F171CA5921E002A77AB /* InfoViewController.swift in Sources */,
 				787581EB1CA2EBF000100514 /* EllipseView.m in Sources */,
@@ -919,22 +911,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		787581401CA2E98400100514 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				787581411CA2E98400100514 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		787581451CA2E98400100514 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				787581461CA2E98400100514 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		7875841D1CA2ECE700100514 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
