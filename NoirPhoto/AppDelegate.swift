@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashDelegate {
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        setupAnalytics()
+        
         self.navigationController = self.window!.rootViewController as! NavigationViewController
         
         self.splashController = UIStoryboard(name: "Splash", bundle: nil)
