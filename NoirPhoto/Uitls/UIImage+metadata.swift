@@ -6,8 +6,7 @@
 //  Copyright © 2019 Zinc Collective, LLC. All rights reserved.
 //
 
-import Foundation
-import ImageIO
+import UIKit
 
 extension UIImage {
 
