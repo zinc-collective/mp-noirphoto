@@ -26,6 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             viewController.logger = LogManager()
             viewController.imageProvider = PhotoLibraryCoordinator(parent: viewController as UIViewController)
             viewController.delegate = viewController
+            viewController.infoVC = UIViewControllerFactory().createFactoryInfoViewController()
             
             
             let splashController: SplashViewController = UIStoryboard(name: "Splash", bundle: nil)
@@ -34,6 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             splashController.imageProvider = PhotoLibraryCoordinator(parent: splashController)
             splashController.viewController = viewController as ImageEditorInterfaceProvider
             splashController.delegate = splashController
+            splashController.infoVC = UIViewControllerFactory().createFactoryInfoViewController()
                         
             window = UIWindow(windowScene: windowScene)
             window!.rootViewController = UINavigationController(rootViewController: splashController)

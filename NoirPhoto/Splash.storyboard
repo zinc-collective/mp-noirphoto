@@ -86,7 +86,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="handleInfo:" destination="d3d-20-KLX" eventType="touchUpInside" id="L7T-Uh-n8B"/>
+                                    <action selector="handleInfoWithSender:" destination="d3d-20-KLX" eventType="touchUpInside" id="2nG-js-xQc"/>
                                 </connections>
                             </button>
                         </subviews>

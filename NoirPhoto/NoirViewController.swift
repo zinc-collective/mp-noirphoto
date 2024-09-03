@@ -18,6 +18,7 @@ protocol ImageEditorInterfaceProvider: UIViewController {
 // scales up the whole view, just like if we weren't supporting iPhone 6 or 6+
 class NoirViewController: NoirViewControllerLegacy {
     var logger: AppLogger?
+    var infoVC: (() -> UIViewController)?
     var imageProvider: PhotoProvider?
     weak var delegate : PhotoProviderDelegate?
     var viewController : ImageEditorInterfaceProvider?
@@ -80,6 +81,13 @@ class NoirViewController: NoirViewControllerLegacy {
             self.present(activity, animated: true, completion: nil)
         }
     }
+    
+    @IBAction func handleInfo(_ sender: AnyObject) {
+        print("INFO NOIR")
+        guard let vc = self.infoVC?() else { return }
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
 
     func savePhotoFeedback() {
         let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: .alert)
