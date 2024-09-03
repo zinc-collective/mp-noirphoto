@@ -9,15 +9,14 @@
 import UIKit
 import Photos
 
-protocol SplashDelegate : AnyObject {
-    func splashDidPickImage(image: UIImage, url: NSURL)
-}
 
-class SplashViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SplashViewController: UIViewController {
 
     var logger: AppLogger?
-    var imagePicker : UIImagePickerController?
-    weak var delegate : SplashDelegate?
+    var imageProvider: PhotoProvider?
+    weak var delegate : PhotoProviderDelegate?
+    var viewController : ImageEditorInterfaceProvider?
+    
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
@@ -56,39 +55,25 @@ class SplashViewController: UIViewController, UIImagePickerControllerDelegate, U
             }
         }
     }
-
+    
     func openPicker() {
-        print("OPEN PICKER")
-        let picker = UIImagePickerController()
-        picker.sourceType = .photoLibrary
-        picker.delegate = self
-        picker.modalPresentationStyle = .popover
-
-        // hand picked origin to line up with ipad. This is ignored for iphone
-        // the splash screen uses full-screen button sizes
-        let buttonSize = CGSize(width: 40, height: 40) // size of the image
-        let buttonOrigin = CGPoint(x: view.frame.size.width - buttonSize.width - 76, y: view.frame.size.height - buttonSize.height - 80)
-
-        picker.popoverPresentationController?.sourceView = self.view
-        picker.popoverPresentationController?.sourceRect = CGRect(origin: buttonOrigin, size: buttonSize)
-
-        self.present(picker, animated: true, completion: nil)
-
-        self.imagePicker = picker
-    }
-
-    private func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        print("PICKED IMAGE")
-        
-//        NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
-//        UIImage * selected = [info objectForKey:UIImagePickerControllerOriginalImage];
-        let image = info["UIImagePickerControllerOriginalImage"] as! UIImage
-
-        // if it isn't there, then
-        let assetURL = info["UIImagePickerControllerReferenceURL"] as! NSURL
-        // I can't display it myself, need to pass it back
-
-        self.imagePicker?.dismiss(animated: true, completion: nil)
-        self.delegate?.splashDidPickImage(image: image, url: assetURL)
+        self.imageProvider?.getPhoto({ [weak self] image, assetIdentifier in
+            guard let self = self,
+                  let image = image,
+                  let assetIdentifier = assetIdentifier else { return }
+            self.delegate?.providerDidPickImage(UIImage(cgImage: image), assetIdentifier: assetIdentifier)
+        })
     }
 }
+
+
+// MARK: - delegate PhotoProviderDelegate
+extension SplashViewController: PhotoProviderDelegate {
+    func providerDidPickImage(_ image: UIImage, assetIdentifier: String) {
+        // this must go last (refactor needed)
+        guard let vc = self.viewController else { return }
+        self.navigationController?.setViewControllers([vc], animated: true)
+        vc.pickPhoto(assetIdentifier, image: image)
+    }
+}
+

@@ -773,6 +773,9 @@ void loadGaindLUT()
 
 -(IBAction)loadAction:(id)sender
 {
+    //TODO: need to pull out popover setup logic from this action.
+    //TODO: need to pull out 'imagePickerOnScreen' toggle behavior to a more clear interface in the class.   This action is doing too much.
+    #warning("### - need to split this into single responsibilities and un link it from storyboards")
 	if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		if(imagePickerPopover==nil){
@@ -811,7 +814,7 @@ void loadGaindLUT()
 	else
 	{
         imagePickerOnScreen = YES;
-        [self presentViewController:imagePicker animated:TRUE completion:nil];
+//        [self presentViewController:imagePicker animated:TRUE completion:nil];
         //[self.view.window.rootViewController presentViewController:imagePicker animated:YES completion:nil];
 //		UIImagePickerController *picker = [[UIImagePickerController alloc] init];
 //		picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;

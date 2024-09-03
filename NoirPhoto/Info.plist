@@ -43,6 +43,8 @@
 			</dict>
 		</dict>
 	</dict>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Access to your photos is required to use this app</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

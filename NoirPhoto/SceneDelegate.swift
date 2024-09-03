@@ -25,6 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
             viewController.logger = LogManager()
             viewController.imageProvider = PhotoLibraryCoordinator(parent: viewController as UIViewController)
+            viewController.delegate = viewController
             
             
             let splashController: SplashViewController = UIStoryboard(name: "Splash", bundle: nil)
@@ -32,10 +33,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             splashController.logger = LogManager()
             splashController.imageProvider = PhotoLibraryCoordinator(parent: splashController)
             splashController.viewController = viewController as ImageEditorInterfaceProvider
+            splashController.delegate = splashController
                         
             window = UIWindow(windowScene: windowScene)
             window!.rootViewController = UINavigationController(rootViewController: splashController)
             window!.makeKeyAndVisible()
         }
+    }
+}
+
+
+// for iOS 13+
+enum SceneExtError: Error {
+    case windowSceneNotFound
+}
+
+extension UIScene {
+    static var interfaceOrientation: UIInterfaceOrientation? {
+        let scenes = UIApplication.shared.connectedScenes
+        if let windowScenes = scenes.first as? UIWindowScene {
+            return windowScenes.interfaceOrientation
+        } else {
+            AppDelegate().getAppLogger().logError(SceneExtError.windowSceneNotFound)
+            assertionFailure("Could not obtain UIInterfaceOrientation from a valid windowScene")
+            return nil
+        }
+    }
+    static var isLandscape: Bool {
+        return Self.interfaceOrientation?.isLandscape ?? false
     }
 }

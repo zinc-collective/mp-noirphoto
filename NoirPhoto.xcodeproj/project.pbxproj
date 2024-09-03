@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6DC38A482C84C11B0025DE7A /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC38A472C84C11B0025DE7A /* LogManager.swift */; };
 		6DC38A4B2C84C1AC0025DE7A /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 6DC38A4A2C84C1AC0025DE7A /* Sentry */; };
+		6DC5B2A52C85A92000B9219D /* PhotoLibraryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC5B2A42C85A92000B9219D /* PhotoLibraryCoordinator.swift */; };
+		6DC5B2A72C86120500B9219D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC5B2A62C86120500B9219D /* SceneDelegate.swift */; };
 		6DC5B2C92C87362C00B9219D /* NoirPhoto-Bridging-Header.h in Resources */ = {isa = PBXBuildFile; fileRef = 787581B41CA2EBEF00100514 /* NoirPhoto-Bridging-Header.h */; };
 		782B55E21CD3D037003C313E /* UIImage+metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B55E11CD3D037003C313E /* UIImage+metadata.swift */; };
 		78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78330FA81CA43D6F00B04CFD /* SplashViewController.swift */; };
@@ -171,6 +173,8 @@
 /* Begin PBXFileReference section */
 		6DC38A452C84BF810025DE7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DC38A472C84C11B0025DE7A /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
+		6DC5B2A42C85A92000B9219D /* PhotoLibraryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryCoordinator.swift; sourceTree = "<group>"; };
+		6DC5B2A62C86120500B9219D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		782B55E11CD3D037003C313E /* UIImage+metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+metadata.swift"; sourceTree = "<group>"; };
 		78330FA81CA43D6F00B04CFD /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		783B0F161CA5921E002A77AB /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -414,8 +418,7 @@
 				7875813C1CA2E98400100514 /* AppDelegate.swift */,
 				6DC5B2A62C86120500B9219D /* SceneDelegate.swift */,
 				783B0F281CA5EDED002A77AB /* NoirViewController.swift */,
-				787581451CA2E98400100514 /* LaunchScreen.storyboard */,
-				787581401CA2E98400100514 /* Main.storyboard */,
+				6DC5B2A42C85A92000B9219D /* PhotoLibraryCoordinator.swift */,
 				787581431CA2E98400100514 /* Assets.xcassets */,
 				783B0F221CA5E58A002A77AB /* Info */,
 				783B0F231CA5E58F002A77AB /* Splash */,
@@ -888,6 +891,7 @@
 				787581E91CA2EBF000100514 /* CustomPickerView.m in Sources */,
 				787581E41CA2EBF000100514 /* NoirViewControllerLegacy.m in Sources */,
 				787581E71CA2EBF000100514 /* AdjustView.m in Sources */,
+				6DC5B2A52C85A92000B9219D /* PhotoLibraryCoordinator.swift in Sources */,
 				783B0F291CA5EDED002A77AB /* NoirViewController.swift in Sources */,
 				78330FA91CA43D6F00B04CFD /* SplashViewController.swift in Sources */,
 				787581E21CA2EBF000100514 /* TintsView.m in Sources */,
