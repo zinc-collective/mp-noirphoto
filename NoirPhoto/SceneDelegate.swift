@@ -14,29 +14,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-
         if let windowScene = scene as? UIWindowScene {
+            let factory: UIViewControllerFactory = UIViewControllerFactory()
+            let viewController: NoirViewController = factory.createNoirViewController()
+            let splashController: SplashViewController = factory.createSplashViewController(viewController: viewController)
             
-            var viewController: NoirViewController
-            if (UIDevice.current.userInterfaceIdiom == .pad) {
-                viewController = NoirViewController(nibName: "NoirViewController-iPad", bundle: nil, shareAgent: ShareService())
-            } else {
-                viewController = NoirViewController(nibName: "NoirViewController", bundle: nil, shareAgent: ShareService())
-            }
-            viewController.logger = LogManager()
-            viewController.imageProvider = PhotoLibraryCoordinator(parent: viewController as UIViewController)
-            viewController.delegate = viewController
-            viewController.infoVC = UIViewControllerFactory().createFactoryInfoViewController()
-            
-            
-            let splashController: SplashViewController = UIStoryboard(name: "Splash", bundle: nil)
-                                        .instantiateViewController(withIdentifier: "SplashViewController") as! SplashViewController
-            splashController.logger = LogManager()
-            splashController.imageProvider = PhotoLibraryCoordinator(parent: splashController)
-            splashController.viewController = viewController as ImageEditorInterfaceProvider
-            splashController.delegate = splashController
-            splashController.infoVC = UIViewControllerFactory().createFactoryInfoViewController()
-                        
             window = UIWindow(windowScene: windowScene)
             window!.rootViewController = UINavigationController(rootViewController: splashController)
             window!.makeKeyAndVisible()
