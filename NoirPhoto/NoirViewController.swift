@@ -17,13 +17,32 @@ protocol ImageEditorInterfaceProvider: UIViewController {
 
 // scales up the whole view, just like if we weren't supporting iPhone 6 or 6+
 class NoirViewController: NoirViewControllerLegacy {
+    enum NoirError: LocalizedError {
+        case shareOperationFailed
+        
+        public var errorDescription: String? {
+            switch self {
+            case .shareOperationFailed:
+                return NSLocalizedString(
+                    "Unable to share item.",
+                    comment: "Share operation failed"
+                )
+            }
+        }
+    }
     var logger: AppLogger?
     var infoVC: (() -> UIViewController)?
     var imageProvider: PhotoProvider?
     weak var delegate : PhotoProviderDelegate?
     var viewController : ImageEditorInterfaceProvider?
-
-
+    private var shareAgent: (any ShareableActivityProvider)?
+    
+    convenience init(nibName: String?, bundle: Bundle?, shareAgent: (any ShareableActivityProvider)?) {
+        self.init(nibName: nibName, bundle: bundle)
+        self.shareAgent = shareAgent
+    }
+    
+    
     // SCALE HACK: remove me once we change the UI
     override func viewWillAppear(_ animated: Bool) {
         if (UIDevice.current.userInterfaceIdiom == .phone) {
@@ -32,45 +51,73 @@ class NoirViewController: NoirViewControllerLegacy {
             super.viewWillAppear(animated)
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(NoirViewController.onSwipeGripDown))
         downGesture.direction = .down
-
+        
         let upGesture = UISwipeGestureRecognizer(target: self, action: #selector(NoirViewController.onSwipeGripUp))
         upGesture.direction = .up
-
+        
         self.fullBtn.addGestureRecognizer(downGesture)
         self.fullBtn.addGestureRecognizer(upGesture)
     }
-
+    
     @IBAction func onSwipeGripDown() {
         print("SWIPE DOWN")
-
+        
         if (!isFull) {
             self.toggleFull()
         }
-
+        
     }
-
+    
     @IBAction func onSwipeGripUp() {
         print("SWIPE UP")
-
+        
         if (isFull) {
             self.toggleFull()
         }
     }
-
+    
     @IBAction func onTapShare() {
+        let completion: ShareableActivityProvider.ProviderCompletion = { [weak self] activity, completed, returnedItems, error in
+            guard let self = self else { return }
+            
+            if completed {
+                if activity == .saveToCameraRoll {
+                    self.savePhotoFeedback()
+                }
+            } else {
+                self.logger?.logError(NoirError.shareOperationFailed)
+                self.logger?.logToConsole("Share Operation Failed",
+                                          .debug,
+                                          .shareService)
+            }
+            if let error = error {
+                self.logger?.logError(error)
+                self.logger?.logToConsole("Share Operation Error",
+                                          .debug,
+                                          .shareService)
+            }
+        }
+        
+        shareAgent?.shareItem(sender: self,
+                              sourceRect: self.saveBtn.frame,
+                              data: getShareData(),
+                              title: "Share your image from Noir Photo",
+                              subtitle: nil,
+                              completion: completion)
+        
         // TODO: render after share like in Plastic Bullet? Or in the background?
-
+        
         let meta = UIImage.stripOrientationMetadata(self.imageMetadata)
-
+        
         if let data = self.renderPhoto().imageWithMetadata(meta) {
             let activity = UIActivityViewController(activityItems: [data], applicationActivities: nil)
-
+            
             activity.popoverPresentationController?.sourceView = self.view
             activity.popoverPresentationController?.sourceRect = self.saveBtn.frame
             activity.completionWithItemsHandler = { activity, completed, returnedItems, error in
@@ -87,32 +134,16 @@ class NoirViewController: NoirViewControllerLegacy {
         guard let vc = self.infoVC?() else { return }
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
-
-    func savePhotoFeedback() {
-        let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: .alert)
-        self.present(alert, animated: true, completion: { 
-            delay(0.5) {
-                self.dismiss(animated: true, completion: nil)
-            }
-        })
-
-    }
-
-    func renderPhoto() -> UIImage {
-        let source = self.sourcePhoto.rotateCameraImageToProperOrientation(CGFloat(MAXFLOAT))
-        return self.image(for: self.preset, use: source)
-    }
-
+    
     override var prefersStatusBarHidden : Bool {
         return true
     }
     
-    #warning("### - need to verify the entire photo selection flow from splash screen & NoirVC")
-    #warning("### - need to verify the iPad behavior")
+#warning("### - need to verify the entire photo selection flow from splash screen & NoirVC")
+#warning("### - need to verify the iPad behavior")
     @IBAction func handleLibrary(_ sender: AnyObject) {
         print("LIBRARY NOIR")
-
+        
         // Request photo access earlier so the photos window isn't black
         PHPhotoLibrary.requestAuthorization { status in
             switch status {
@@ -126,11 +157,38 @@ class NoirViewController: NoirViewControllerLegacy {
                 // place for .NotDetermined - in this callback status is already determined so should never get here
                 break
             }
-
+            
             DispatchQueue.main.async {
                 self.openPicker()
             }
         }
+    }
+}
+
+
+// MARK: Private Methods
+private extension NoirViewController {
+    func getShareData() -> Data? {
+        let meta = UIImage.stripOrientationMetadata(self.imageMetadata ?? [:])
+
+        if let data = self.renderPhoto().imageWithMetadata(meta) {
+            return data
+        } else { return nil }
+    }
+    
+    func savePhotoFeedback() {
+        let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: .alert)
+        self.present(alert, animated: true, completion: {
+            delay(0.5) {
+                self.dismiss(animated: true, completion: nil)
+            }
+        })
+
+    }
+
+    func renderPhoto() -> UIImage {
+        let source = self.sourcePhoto.rotateCameraImageToProperOrientation(CGFloat(MAXFLOAT))
+        return self.image(for: self.preset, use: source)
     }
     
     func openPicker() {

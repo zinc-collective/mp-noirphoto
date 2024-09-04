@@ -19,9 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             var viewController: NoirViewController
             if (UIDevice.current.userInterfaceIdiom == .pad) {
-                viewController = NoirViewController(nibName: "NoirViewController-iPad", bundle: nil)
+                viewController = NoirViewController(nibName: "NoirViewController-iPad", bundle: nil, shareAgent: ShareService())
             } else {
-                viewController = NoirViewController(nibName: "NoirViewController", bundle: nil)
+                viewController = NoirViewController(nibName: "NoirViewController", bundle: nil, shareAgent: ShareService())
             }
             viewController.logger = LogManager()
             viewController.imageProvider = PhotoLibraryCoordinator(parent: viewController as UIViewController)
