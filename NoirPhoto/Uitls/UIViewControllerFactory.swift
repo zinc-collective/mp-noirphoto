@@ -8,16 +8,33 @@
 
 import UIKit
 
-class UIViewControllerFactory {
+
+protocol ViewControllerFactory {
+    func createNoirViewController() -> NoirViewController
+    func createSplashViewController(viewController: ImageEditorInterfaceProvider) -> SplashViewController
+    func createFactoryInfoViewController() -> () -> InfoViewController
+}
+
+
+class UIViewControllerFactory: ViewControllerFactory {
+    private let createLogger: () -> AppLogger
+    private let createLibrary: (UIViewController) -> PhotoLibraryCoordinator
+    
     private var isIPad: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    init(createLogger: @escaping () -> AppLogger = { return LogManager() },
+         createLibrary: @escaping (UIViewController) -> PhotoLibraryCoordinator = { parent in return PhotoLibraryCoordinator(parent: parent) }) {
+        self.createLogger = createLogger
+        self.createLibrary = createLibrary
     }
     
     func createNoirViewController() -> NoirViewController {
         let nibName: String = self.isIPad ? "NoirViewController-iPad" : "NoirViewController"
         let viewController = NoirViewController(nibName: nibName, bundle: nil, shareAgent: ShareService())
-        viewController.logger = LogManager()
-        viewController.imageProvider = PhotoLibraryCoordinator(parent: viewController as UIViewController)
+        viewController.logger = createLogger()
+        viewController.imageProvider = self.createLibrary(viewController)
         viewController.delegate = viewController
         viewController.infoVC = self.createFactoryInfoViewController()
         return viewController
@@ -26,8 +43,8 @@ class UIViewControllerFactory {
     func createSplashViewController(viewController: ImageEditorInterfaceProvider) -> SplashViewController {
         let splashController: SplashViewController = UIStoryboard(name: "Splash", bundle: nil)
                                     .instantiateViewController(withIdentifier: "SplashViewController") as! SplashViewController
-        splashController.logger = LogManager()
-        splashController.imageProvider = PhotoLibraryCoordinator(parent: splashController)
+        splashController.logger = createLogger()
+        splashController.imageProvider = self.createLibrary(splashController)
         splashController.viewController = viewController as ImageEditorInterfaceProvider
         splashController.delegate = splashController
         splashController.infoVC = self.createFactoryInfoViewController()

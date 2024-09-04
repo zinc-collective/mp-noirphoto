@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {
-            let factory: UIViewControllerFactory = UIViewControllerFactory()
+            let factory: ViewControllerFactory = UIViewControllerFactory()
             let viewController: NoirViewController = factory.createNoirViewController()
             let splashController: SplashViewController = factory.createSplashViewController(viewController: viewController)
             
