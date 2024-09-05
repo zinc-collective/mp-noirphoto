@@ -36,10 +36,15 @@ class NoirViewController: NoirViewControllerLegacy {
     weak var delegate : PhotoProviderDelegate?
     var viewController : ImageEditorInterfaceProvider?
     private var shareAgent: (any ShareableActivityProvider)?
+    private var shareCompletion: ShareableActivityProvider.ProviderCompletion?
     
-    convenience init(nibName: String?, bundle: Bundle?, shareAgent: (any ShareableActivityProvider)?) {
+    convenience init(nibName: String?,
+                     bundle: Bundle?,
+                     shareAgent: (any ShareableActivityProvider)?,
+                     shareCompletion: ShareableActivityProvider.ProviderCompletion? = nil) {
         self.init(nibName: nibName, bundle: bundle)
         self.shareAgent = shareAgent
+        self.shareCompletion = shareCompletion
     }
     
     
@@ -83,7 +88,7 @@ class NoirViewController: NoirViewControllerLegacy {
     }
     
     @IBAction func onTapShare() {
-        let completion: ShareableActivityProvider.ProviderCompletion = { [weak self] activity, completed, returnedItems, error in
+        let completion: ShareableActivityProvider.ProviderCompletion = self.shareCompletion ?? { [weak self] activity, completed, returnedItems, error in
             guard let self = self else { return }
             
             if completed {
@@ -110,23 +115,6 @@ class NoirViewController: NoirViewControllerLegacy {
                               title: "Share your image from Noir Photo",
                               subtitle: nil,
                               completion: completion)
-        
-        // TODO: render after share like in Plastic Bullet? Or in the background?
-        
-        let meta = UIImage.stripOrientationMetadata(self.imageMetadata)
-        
-        if let data = self.renderPhoto().imageWithMetadata(meta) {
-            let activity = UIActivityViewController(activityItems: [data], applicationActivities: nil)
-            
-            activity.popoverPresentationController?.sourceView = self.view
-            activity.popoverPresentationController?.sourceRect = self.saveBtn.frame
-            activity.completionWithItemsHandler = { activity, completed, returnedItems, error in
-                if activity == UIActivity.ActivityType.saveToCameraRoll && completed {
-                    self.savePhotoFeedback()
-                }
-            }
-            self.present(activity, animated: true, completion: nil)
-        }
     }
     
     @IBAction func handleInfo(_ sender: AnyObject) {
@@ -186,6 +174,7 @@ private extension NoirViewController {
 
     }
 
+    // TODO: render after share like in Plastic Bullet? Or in the background?
     func renderPhoto() -> UIImage {
         let source = self.sourcePhoto.rotateCameraImageToProperOrientation(CGFloat(MAXFLOAT))
         return self.image(for: self.preset, use: source)

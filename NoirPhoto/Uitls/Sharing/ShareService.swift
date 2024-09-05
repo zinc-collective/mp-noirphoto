@@ -27,6 +27,7 @@ protocol ShareableActivityProvider {
 
 final class ShareService: ShareableActivityProvider {
     private(set) weak var parent: UIViewController?
+    var shareCompletion: ShareableActivityProvider.ProviderCompletion?
     
     func shareItem(sender parent: UIViewController,
                    sourceRect: CGRect,
