@@ -116,6 +116,7 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
     }
     
     // This is a terrible function name
+    // this is a terrible function.
     private func updateSelectionVars(_ results: [PHPickerResult]) -> String? {
         let existingSelection = self.selection
         var newSelection = [String: PHPickerResult]()
@@ -145,7 +146,6 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
                     assertionFailure("####-----> ERROR: FAILURE")
                 } else {
                     assert(object != nil, "####-----> OBJECT should not be nil")
-                    //                    NSAssert(object != nil, @"UIImage should not be nil");
                     if let image = object as? UIImage {
                         DispatchQueue.main.async {
                             completion(image.cgImage, identifier)
@@ -153,8 +153,40 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
                     }
                 }
             }
+        } else if itemProvider.canLoadObject(ofClass: PHLivePhoto.self) {
+            itemProvider.loadObject(ofClass: PHLivePhoto.self, completionHandler: { livePhoto, error in
+                
+                if let error = error {
+                    print("####-----> ERROR: \(error.localizedDescription)")
+                    assertionFailure("####-----> ERROR: FAILURE")
+                } else {
+                    assert(livePhoto != nil, "####-----> LIVEPHOTO should not be nil")
+                    let resources = PHAssetResource.assetResources(for: livePhoto as! PHLivePhoto)
+                    let photo = resources.first(where: { $0.type == .photo })!
+                    let imageData = NSMutableData()
+                    
+                    PHAssetResourceManager.default().requestData(for: photo,
+                                                                 options: nil,
+                                                                 dataReceivedHandler: {
+                                                                    [weak imageData] data in
+                                                                    guard let imageData = imageData else { return }
+                                                                    imageData.append(data)
+                                                                },
+                                                                 completionHandler: {
+                                                                    // TODO: handle error case -- log maybe?
+                                                                    [weak imageData] error in
+                                                                    guard let imageData = imageData else { return }
+                                                                    let uiimage = UIImage(data: imageData as Data)
+                                                                    let cgImage = uiimage?.cgImage
+                                                                    
+                                                                    DispatchQueue.main.async {
+                                                                        completion(cgImage, identifier)
+                                                                    }
+                                                                })
+                }
+            })
         } else {
-            assert(true, "###---> Not an UIImage")
+            assert(true, "###---> Unable to process resource")
         }
     }
     
