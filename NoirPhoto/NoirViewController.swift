@@ -188,6 +188,35 @@ private extension NoirViewController {
             self.delegate?.providerDidPickImage(UIImage(cgImage: image), assetIdentifier: assetIdentifier)
         })
     }
+    
+    // MARK: Metadata helpers
+    func metadataFilePath() -> String? {
+        let path: String? = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+        return path?.appending("metadata_plist")
+    }
+    
+    func writeMetadataToFile(_ metadata: NSDictionary) {
+        if let filename = metadataFilePath() {
+            // write to filename
+            do {
+               try metadata.write(to: URL(fileURLWithPath: filename))
+            } catch {
+                print("### -> METADATA WRITE TO FILE FAILED. this shoould be logged")
+            }
+        } else {
+            print("### -> metadata write failed. FILE PATH NOT FOUND.  this shoould be logged")
+        }
+    }
+    
+    func readMetadataFromFile() -> NSMutableDictionary? {
+        var metadata: NSMutableDictionary?
+        if let filename = metadataFilePath(),
+           FileManager.default.fileExists(atPath: filename) {
+            metadata = NSMutableDictionary.init(contentsOf: URL(fileURLWithPath: filename))
+            print("### --> helper --> loadImageMetadataFromDoc=%@\(metadata)")
+        }
+        return metadata
+    }
 }
 
 
@@ -203,31 +232,12 @@ extension NoirViewController: ImageEditorInterfaceProvider {
             self.saveOriginPhoto(image)
         }
         
-        //TODO: - bring back image metadata - API hunt/rewrite will be required
-        #warning("### - bring back image metadata")
-//        NSLog(@"##-> loadImageMetadataFromPicTEST=%@", [[self class] dictionaryWithImageMetadata: assetURL error:nil]);
-//
-//
-//        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-//        [library assetForURL:assetURL
-//                 resultBlock:^(ALAsset *asset)  {
-//                     NSDictionary *metadata = asset.defaultRepresentation.metadata;
-//
-//                     //NSLog(@"metadata=, %@", metadata);
-//
-//                     //imageMetadata = nil;
-//                     self.imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:metadata];
-//                     //[self addEntriesFromDictionary:metadata];
-//
-//                    NSLog(@"##-> loadImageMetadataFromPic=%@", self.imageMetadata);
-//                     NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-//                     NSString *path=[paths    objectAtIndex:0];
-//                     NSString *filename=[path stringByAppendingPathComponent:metadata_plist];
-//
-//                     [imageMetadata writeToFile:filename  atomically:YES];
-//                 }
-//                failureBlock:^(NSError *error) {
-//                }];
+        //TODO: - simplify image metadata - API hunt/rewrite will be required
+        #warning("### - simplify image metadata")
+        if let metadata = imageProvider?.getMetaData(assetIdentifier: assetIdentifier) {
+            self.imageMetadata = NSMutableDictionary(dictionary: metadata)
+            self.writeMetadataToFile(metadata)
+        }
     }
 }
 

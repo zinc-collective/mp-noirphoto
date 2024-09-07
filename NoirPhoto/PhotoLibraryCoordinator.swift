@@ -11,8 +11,8 @@ import PhotosUI
 
 
 protocol PhotoProvider {
-    func getMetaData(assetURL: NSURL) -> NSMutableDictionary
-    func getMetaData(assetIdentifier: String) -> NSMutableDictionary
+    func getMetaData(assetURL: NSURL) -> NSMutableDictionary?
+    func getMetaData(assetIdentifier: String) -> NSMutableDictionary?
     func getPhoto(_ completion: @escaping (CGImage?, String?) -> Void)
 }
 
@@ -62,12 +62,39 @@ private extension PhotoLibraryCoordinator {
 
 // MARK: - PhotoProvider
 extension PhotoLibraryCoordinator: PhotoProvider {
-    func getMetaData(assetURL: NSURL) -> NSMutableDictionary {
-        return [String: Any]() as! NSMutableDictionary
+    func getMetaData(assetURL: NSURL) -> NSMutableDictionary? {
+        return NSMutableDictionary(dictionary: [String: Any]())
     }
     
-    func getMetaData(assetIdentifier: String) -> NSMutableDictionary {
-        return [String: Any]() as! NSMutableDictionary
+    func getMetaData(assetIdentifier: String) -> NSMutableDictionary? {
+        print("### -> assetID: \(assetIdentifier)")
+        var metadata: NSMutableDictionary?
+        // from: https://codermite.com/t/extracting-image-meta-data-from-a-picture/
+        if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject {
+            PHImageManager.default().requestImageDataAndOrientation(for: asset, options: nil) { (data, _, orientation, info) in
+                print("### -> Orientation: \(orientation)")
+                guard let data = data else {
+                    print("### -> Cannot fetch data from PHAsset: \(String(describing: info))")
+                    return
+                }
+                
+                guard let imageSource = CGImageSourceCreateWithData(data as CFData, nil) else {
+                    print("### -> Cannot create image source")
+                    return
+                }
+                
+                let options: [NSString: Any] = [kCGImageSourceShouldCache: false]
+                guard let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, options as CFDictionary) as? [NSString: Any] else {
+                    print("### -> Cannot fetch image properties")
+                    return
+                }
+                print("### -> got it: -> \(imageProperties)")
+                metadata = NSMutableDictionary(dictionary: imageProperties)
+            }
+        }
+//        return NSMutableDictionary(dictionary: [String: Any]())
+        print("### -> getMetaData: -> \(metadata)")
+        return metadata
     }
     
     func getPhoto(_ completion: @escaping (CGImage?, String?) -> Void) {

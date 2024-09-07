@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ImageIO
 
 extension UIImage {
 
@@ -14,6 +15,16 @@ extension UIImage {
         let metaCopy = NSMutableDictionary(dictionary: meta)
         metaCopy.removeObject(forKey: "Orientation")
         return metaCopy
+    }
+    
+    func fetchMetadataForImage() -> CFDictionary? {
+        var metadata: CFDictionary?
+        if let data = self.cgImage?.dataProvider?.data,
+           let source: CGImageSource = CGImageSourceCreateWithData(data, nil) {
+            metadata = CGImageSourceCopyPropertiesAtIndex(source, 0, nil)
+            print("### -> got metatdata! \(metadata)")
+        }
+        return metadata
     }
 
     func imageWithMetadata(_ metadata:NSDictionary) -> Data? {
