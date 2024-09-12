@@ -73,6 +73,9 @@ extension SplashViewController: PhotoProviderDelegate {
         // this must go last (refactor needed)
         guard let vc = self.viewController else { return }
         self.navigationController?.setViewControllers([vc], animated: true)
+        // Ensure the legacy controller superclass initializes before calling delegate method.
+        // I would prefer to depend on a lifecycle callback but that will require a much larger refactor to do it cleanly.
+        _ = vc.view
         vc.pickPhoto(assetIdentifier, image: image)
     }
 }
