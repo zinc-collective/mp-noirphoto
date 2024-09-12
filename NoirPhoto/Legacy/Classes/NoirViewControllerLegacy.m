@@ -266,18 +266,8 @@ void loadGaindLUT()
 	 [self.view insertSubview:_ellipseView atIndex:1];
 	 */
 
-	//add vignette view
-	CGRect ellipseViewRect = ellipse_view_rect;
-    if (IS_IPHONE_5)
-        ellipseViewRect = ellipse_view_rect_iphone5;
-	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
-	{
-		ellipseViewRect = ellipse_view_rect_ipad;
-	}
-
-	_vignetteView = [[VignetteView alloc] initWithFrame:ellipseViewRect];
-	_vignetteView.delegate = self;
-	[self.view insertSubview:_vignetteView atIndex:1];
+    //add vignette view
+    [self buildVignetteView];
 
 	//initialize data
 	self.tints = [self tintsInitialization];
@@ -343,6 +333,20 @@ void loadGaindLUT()
         frame.origin.y += IPHONE5_HEIGHT_DIFFERENCE;
         tintMaskView.frame = frame;
     }
+}
+
+-(void)buildVignetteView {
+    CGRect ellipseViewRect = ellipse_view_rect;
+    if (IS_IPHONE_5)
+        ellipseViewRect = ellipse_view_rect_iphone5;
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
+    {
+        ellipseViewRect = ellipse_view_rect_ipad;
+    }
+
+    _vignetteView = [[VignetteView alloc] initWithFrame:ellipseViewRect];
+    _vignetteView.delegate = self;
+    [self.view insertSubview:_vignetteView atIndex:1];
 }
 
 -(void)loadWithSavedPhoto:(UIImage *)image {
