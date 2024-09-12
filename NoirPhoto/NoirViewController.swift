@@ -223,6 +223,9 @@ private extension NoirViewController {
 // MARK: - delegate ImageEditor
 extension NoirViewController: ImageEditorInterfaceProvider {
     func pickPhoto(_ assetIdentifier: String, image: UIImage) {
+        // stop timers
+        _vignetteFullView?.stopTimer()
+        _vignetteView?.stopTimer()
         
         print("##-> loadImageMetadataFromPicTEST=\(image)")
         DispatchQueue.main.async { [weak self] in
