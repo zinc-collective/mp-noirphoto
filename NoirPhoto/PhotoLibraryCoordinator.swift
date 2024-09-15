@@ -28,6 +28,40 @@ class PhotoLibraryCoordinator {
     
     private var selection = [String: PHPickerResult]()
     private var currentAssetIdentifier: String?
+    private lazy var imageRequestOptions: PHImageRequestOptions = {
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .highQualityFormat
+        options.isNetworkAccessAllowed = true
+        options.progressHandler = { progress, error, _, info in
+            if let error = error {
+                print("###! -> iCLoud Image Error: \(String(describing: error)) ==> \(String(describing: info))")
+            } else {
+                print("###! -> Donwload Progress: \(progress) ==> \(String(describing: info))")
+            }
+        }
+        return options
+    }()
+    private lazy var livePhotoRequestOptions: PHLivePhotoRequestOptions = {
+        let options = PHLivePhotoRequestOptions()
+        options.deliveryMode = .highQualityFormat
+        options.isNetworkAccessAllowed = true
+        options.progressHandler = { progress, error, _, info in
+            if let error = error {
+                print("###! -> iCLoud LiveImage Error: \(String(describing: error)) ==> \(String(describing: info))")
+            } else {
+                print("###! -> Donwload Progress: \(progress) ==> \(String(describing: info))")
+            }
+        }
+        return options
+    }()
+    private lazy var requestOptions: PHAssetResourceRequestOptions = {
+        let options = PHAssetResourceRequestOptions()
+        options.isNetworkAccessAllowed = true
+        options.progressHandler = { progress in
+            print("###! -> Request Donwload Progress: \(progress)")
+        }
+        return options
+    }()
     
     init(parent: UIViewController) {
         self.parent = parent
@@ -138,55 +172,73 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
               let itemProvider = self.selection[identifier]?.itemProvider else { return }
         
         if itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
-                guard let self = self else { return }
-                
-                if let error = error {
-                    print("####-----> ERROR: \(error.localizedDescription)")
-                    assertionFailure("####-----> ERROR: FAILURE")
-                } else {
-                    assert(object != nil, "####-----> OBJECT should not be nil")
-                    if let image = object as? UIImage {
+            if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [identifier],
+                                               options: nil).firstObject {
+                PHImageManager.default().requestImage(for: asset,
+                                                      targetSize: PHImageManagerMaximumSize,
+                                                      contentMode: .aspectFit,
+                                                      options: imageRequestOptions,
+                                                      resultHandler: { [weak self] photo, info in
+                    guard let img = photo else {
+                        print("###! -> PHOTO NOT FOUND -> \(String(describing: info))")
+                        // should display user error message here
+                        // this is not an appropriate error message -- too technical, not localized, needs public safe error code
                         DispatchQueue.main.async {
-                            completion(image.cgImage, identifier)
+                            if let vc = self?.picker?.presentingViewController {
+                                Alert.showAlert(on: vc, title: "Loading Error", message: "The full version of the selected LiveImage is not on device and this app is unable to download selected image from iCloud")
+                            }
                         }
+                        return
                     }
-                }
+                    DispatchQueue.main.async {
+                        completion(img.cgImage, identifier)
+                    }
+                })
             }
         } else if itemProvider.canLoadObject(ofClass: PHLivePhoto.self) {
-            itemProvider.loadObject(ofClass: PHLivePhoto.self, completionHandler: { livePhoto, error in
-                
-                if let error = error {
-                    print("####-----> ERROR: \(error.localizedDescription)")
-                    assertionFailure("####-----> ERROR: FAILURE")
-                } else {
-                    assert(livePhoto != nil, "####-----> LIVEPHOTO should not be nil")
-                    let resources = PHAssetResource.assetResources(for: livePhoto as! PHLivePhoto)
+            if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [identifier],
+                                               options: nil).firstObject {
+                PHImageManager.default().requestLivePhoto(for: asset,
+                                                          targetSize: PHImageManagerMaximumSize,
+                                                          contentMode: .aspectFit,
+                                                          options: livePhotoRequestOptions,
+                                                          resultHandler: { [weak self] livePhoto, info in
+                    guard let img = livePhoto else {
+                        print("###! -> LivePhoto NOT FOUND -> \(String(describing: info))")
+                        return
+                    }
+                    
+                    let resources = PHAssetResource.assetResources(for: img)
                     let photo = resources.first(where: { $0.type == .photo })!
                     let imageData = NSMutableData()
-                    
                     PHAssetResourceManager.default().requestData(for: photo,
-                                                                 options: nil,
-                                                                 dataReceivedHandler: {
-                                                                    [weak imageData] data in
-                                                                    guard let imageData = imageData else { return }
-                                                                    imageData.append(data)
-                                                                },
-                                                                 completionHandler: {
-                                                                    // TODO: handle error case -- log maybe?
-                                                                    [weak imageData] error in
-                                                                    guard let imageData = imageData else { return }
-                                                                    let uiimage = UIImage(data: imageData as Data)
-                                                                    let cgImage = uiimage?.cgImage
-                                                                    
-                                                                    DispatchQueue.main.async {
-                                                                        completion(cgImage, identifier)
-                                                                    }
-                                                                })
-                }
-            })
+                                                                 options: self?.requestOptions,
+                                                                 dataReceivedHandler: { data in
+                        imageData.append(data)
+                    }, completionHandler: { [weak self] error in
+                        guard error == nil else {
+                            print("###! -> error: \(String(describing: error))")
+                            // should display user error message here
+                            // this is not an appropriate error message -- too technical, not localized, needs public safe error code
+                            DispatchQueue.main.async {
+                                if let vc = self?.picker?.presentingViewController {
+                                    Alert.showAlert(on: vc, title: "Loading Error", message: "The full version of the selected LiveImage is not on device and this app is unable to download selected image from iCloud")
+                                }
+                            }
+                            return
+                        }
+                        
+                        if let tempImg = UIImage(data: imageData as Data) {
+                            DispatchQueue.main.async {
+                                completion(tempImg.cgImage, identifier)
+                            }
+                        }
+                    })
+                })
+            }
         } else {
-            assert(true, "###---> Unable to process resource")
+            // should eventually log the type that that couldn't be processed
+            assert(false, "###---> Unable to process resource")
         }
     }
     
