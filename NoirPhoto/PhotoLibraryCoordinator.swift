@@ -23,6 +23,7 @@ protocol PhotoProviderDelegate : AnyObject {
 
 class PhotoLibraryCoordinator {
     var picker: PHPickerViewController?
+    var logger: AppLogger?
     weak var parent: UIViewController?
     private var imageCompletion: ((CGImage?, String?) -> Void)?
     
