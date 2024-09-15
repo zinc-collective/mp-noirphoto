@@ -13,3 +13,17 @@ func delay(_ delay:Double, closure:@escaping ()->()) {
         deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC),
         execute: closure)
 }
+
+enum Alert {
+    static func showAlert(on viewController: UIViewController,
+                   title: String,
+                   message: String,
+                   action handler: ((UIAlertAction) -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: handler)
+        alert.addAction(action)
+        DispatchQueue.main.async {
+            viewController.present(alert, animated: true)
+        }
+    }
+}
