@@ -1,0 +1,65 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "control pad reset alert Cancel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "control pad reset alert message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want reset to default preset?"
+          }
+        }
+      }
+    },
+    "control pad reset alert OK" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "control pad reset alert title" : {
+      "comment" : "alert messages",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noir"
+          }
+        }
+      }
+    },
+    "PH_0000" : {
+      "comment" : "Image load operation failed.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to load image.  (PH_0000)"
+          }
+        }
+      }
+    },
+    "Unable to load image asset." : {
+      "comment" : "Image load operation failed"
+    },
+    "Unable to share item." : {
+      "comment" : "Share operation failed"
+    }
+  },
+  "version" : "1.0"
+}

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D12E29F2C8C2DF800A529E1 /* UIScene+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D12E29E2C8C2DF800A529E1 /* UIScene+Ext.swift */; };
+		6D3374D12C973C23004FC2D3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 6D3374D02C973C23004FC2D3 /* Localizable.xcstrings */; };
 		6DC38A482C84C11B0025DE7A /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC38A472C84C11B0025DE7A /* LogManager.swift */; };
 		6DC38A4B2C84C1AC0025DE7A /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 6DC38A4A2C84C1AC0025DE7A /* Sentry */; };
 		6DC5B2A52C85A92000B9219D /* PhotoLibraryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC5B2A42C85A92000B9219D /* PhotoLibraryCoordinator.swift */; };
@@ -165,7 +166,6 @@
 		7875840E1CA2EC9600100514 /* NoirViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787583D91CA2EC9600100514 /* NoirViewController-iPad.xib */; };
 		787584171CA2ECAC00100514 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787584111CA2ECAC00100514 /* MainWindow.xib */; };
 		787584181CA2ECAC00100514 /* NoirViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787584121CA2ECAC00100514 /* NoirViewController.xib */; };
-		7875841F1CA2ECE700100514 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7875841D1CA2ECE700100514 /* Localizable.strings */; };
 		787584251CA2EE9F00100514 /* close_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 787584211CA2EE9F00100514 /* close_btn.png */; };
 		787584261CA2EE9F00100514 /* version_info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 787584221CA2EE9F00100514 /* version_info.plist */; };
 		787584271CA2EE9F00100514 /* VersionWatermark.m in Sources */ = {isa = PBXBuildFile; fileRef = 787584241CA2EE9F00100514 /* VersionWatermark.m */; };
@@ -175,7 +175,7 @@
 
 /* Begin PBXFileReference section */
 		6D12E29E2C8C2DF800A529E1 /* UIScene+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScene+Ext.swift"; sourceTree = "<group>"; };
-		6DC38A452C84BF810025DE7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6D3374D02C973C23004FC2D3 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		6DC38A472C84C11B0025DE7A /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		6DC5B2A42C85A92000B9219D /* PhotoLibraryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryCoordinator.swift; sourceTree = "<group>"; };
 		6DC5B2A62C86120500B9219D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -370,6 +370,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D3374CD2C9736FF004FC2D3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6D3374D02C973C23004FC2D3 /* Localizable.xcstrings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		6DC38A462C84C0EC0025DE7A /* Uitls */ = {
 			isa = PBXGroup;
 			children = (
@@ -439,6 +447,7 @@
 				787581431CA2E98400100514 /* Assets.xcassets */,
 				783B0F221CA5E58A002A77AB /* Info */,
 				783B0F231CA5E58F002A77AB /* Splash */,
+				6D3374CD2C9736FF004FC2D3 /* Resources */,
 				7875814E1CA2EA5C00100514 /* Legacy */,
 			);
 			path = NoirPhoto;
@@ -500,7 +509,6 @@
 				787583D91CA2EC9600100514 /* NoirViewController-iPad.xib */,
 				7875833D1CA2EC6900100514 /* Presets_current.pList */,
 				7875833E1CA2EC6900100514 /* Presets_default.pList */,
-				7875841C1CA2ECE700100514 /* English.lproj */,
 				787583A51CA2EC9600100514 /* image-iPad */,
 				787582D61CA2EC5900100514 /* image */,
 				787582831CA2EC3800100514 /* image@2x */,
@@ -663,15 +671,6 @@
 			path = "Legacy/Resources-iPad/image-iPad";
 			sourceTree = "<group>";
 		};
-		7875841C1CA2ECE700100514 /* English.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				7875841D1CA2ECE700100514 /* Localizable.strings */,
-			);
-			name = English.lproj;
-			path = Legacy/English.lproj;
-			sourceTree = "<group>";
-		};
 		787584201CA2EE9F00100514 /* Version */ = {
 			isa = PBXGroup;
 			children = (
@@ -763,7 +762,6 @@
 				7875840B1CA2EC9600100514 /* tint_mask_iPad_3.png in Resources */,
 				787582AD1CA2EC3800100514 /* adjust_contrast2@2x.png in Resources */,
 				787583371CA2EC5900100514 /* tint_btn_sel_3.png in Resources */,
-				7875841F1CA2ECE700100514 /* Localizable.strings in Resources */,
 				787583F51CA2EC9600100514 /* Icon-Small-50.png in Resources */,
 				787583281CA2EC5900100514 /* Icon-80.png in Resources */,
 				787582111CA2EC2400100514 /* NOIR_dark_LUT.png in Resources */,
@@ -776,6 +774,7 @@
 				787582151CA2EC2400100514 /* preset_review_iPad.png in Resources */,
 				787583321CA2EC5900100514 /* tint_btn_2.png in Resources */,
 				7875821B1CA2EC2400100514 /* preset_review_mask_sel_iPad.png in Resources */,
+				6D3374D12C973C23004FC2D3 /* Localizable.xcstrings in Resources */,
 				787582B71CA2EC3800100514 /* btn_home_info_sel@2x.png in Resources */,
 				787582171CA2EC2400100514 /* preset_review_mask_4.png in Resources */,
 				7875820B1CA2EC2400100514 /* circle_preset.png in Resources */,
@@ -936,17 +935,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		7875841D1CA2ECE700100514 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6DC38A452C84BF810025DE7A /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		787581491CA2E98400100514 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -998,6 +986,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1050,6 +1039,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1073,6 +1063,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.redgiantsoftware.noir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "NoirPhoto/NoirPhoto-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1094,6 +1085,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.redgiantsoftware.noir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "NoirPhoto/NoirPhoto-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
