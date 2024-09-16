@@ -54,6 +54,30 @@
         }
       }
     },
+    "N_0002" : {
+      "comment" : "metadata write failed. Unknown reason.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Write Error (N_0002)"
+          }
+        }
+      }
+    },
+    "N_0003" : {
+      "comment" : "metadata write failed. File path not found",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Write Error (N_0003)"
+          }
+        }
+      }
+    },
     "PH_0000" : {
       "comment" : "General Error for unspecified error case in the PhotoProvider",
       "extractionState" : "manual",

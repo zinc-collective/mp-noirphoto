@@ -19,11 +19,17 @@ protocol ImageEditorInterfaceProvider: UIViewController {
 class NoirViewController: NoirViewControllerLegacy {
     enum NoirError: LocalizedError {
         case shareOperationFailed
+        case metaDataWriteFailed
+        case metaDataWritePathNotFound
         
         public var errorDescription: String? {
             switch self {
             case .shareOperationFailed:
                 String(localized: "N_0001")
+            case .metaDataWriteFailed:
+                String(localized: "N_0002")
+            case .metaDataWritePathNotFound:
+                String(localized: "N_0003")
             }
         }
     }
@@ -68,17 +74,12 @@ class NoirViewController: NoirViewControllerLegacy {
     }
     
     @IBAction func onSwipeGripDown() {
-        print("SWIPE DOWN")
-        
         if (!isFull) {
             self.toggleFull()
         }
-        
     }
     
     @IBAction func onSwipeGripUp() {
-        print("SWIPE UP")
-        
         if (isFull) {
             self.toggleFull()
         }
@@ -115,7 +116,6 @@ class NoirViewController: NoirViewControllerLegacy {
     }
     
     @IBAction func handleInfo(_ sender: AnyObject) {
-        print("INFO NOIR")
         guard let vc = self.infoVC?() else { return }
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -127,8 +127,6 @@ class NoirViewController: NoirViewControllerLegacy {
 #warning("### - need to verify the entire photo selection flow from splash screen & NoirVC")
 #warning("### - need to verify the iPad behavior")
     @IBAction func handleLibrary(_ sender: AnyObject) {
-        print("LIBRARY NOIR")
-        
         // Request photo access earlier so the photos window isn't black
         PHPhotoLibrary.requestAuthorization { status in
             switch status {
@@ -198,10 +196,10 @@ private extension NoirViewController {
             do {
                try metadata.write(to: URL(fileURLWithPath: filename))
             } catch {
-                print("### -> METADATA WRITE TO FILE FAILED. this shoould be logged")
+                self.logger?.logError(NoirError.metaDataWriteFailed)
             }
         } else {
-            print("### -> metadata write failed. FILE PATH NOT FOUND.  this shoould be logged")
+            self.logger?.logError(NoirError.metaDataWritePathNotFound)
         }
     }
     
@@ -210,7 +208,6 @@ private extension NoirViewController {
         if let filename = metadataFilePath(),
            FileManager.default.fileExists(atPath: filename) {
             metadata = NSMutableDictionary.init(contentsOf: URL(fileURLWithPath: filename))
-            print("### --> helper --> loadImageMetadataFromDoc=%@\(metadata)")
         }
         return metadata
     }
@@ -224,7 +221,6 @@ extension NoirViewController: ImageEditorInterfaceProvider {
         _vignetteFullView?.stopTimer()
         _vignetteView?.stopTimer()
         
-        print("##-> loadImageMetadataFromPicTEST=\(image)")
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
