@@ -43,7 +43,7 @@
       }
     },
     "PH_0000" : {
-      "comment" : "Image load operation failed.",
+      "comment" : "General Error for unspecified error case in the PhotoProvider",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -54,11 +54,118 @@
         }
       }
     },
-    "Unable to load image asset." : {
-      "comment" : "Image load operation failed"
+    "PH_0001" : {
+      "comment" : "The full version of the selected LiveImage is not on device and this app is unable to download selected image from iCloud",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image download failed (PH_0001)"
+          }
+        }
+      }
     },
-    "Unable to share item." : {
-      "comment" : "Share operation failed"
+    "PH_0002" : {
+      "comment" : "The full version of the selected UImage is not on device and this app is unable to download selected image from iCloud",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image download failed (PH_0002)"
+          }
+        }
+      }
+    },
+    "PH_0003" : {
+      "comment" : "The asset  identifier is for an unsupported file type - unable to process resource",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to load image.  (PH_0003)"
+          }
+        }
+      }
+    },
+    "PH_0004" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to load image.  (PH_0004)"
+          }
+        }
+      }
+    },
+    "PH_0005" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to load image.  (PH_0005)"
+          }
+        }
+      }
+    },
+    "PH_0006" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to load image.  (PH_0006)"
+          }
+        }
+      }
+    },
+    "PH_0007" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot fetch data from PHAsset (PH_0007)"
+          }
+        }
+      }
+    },
+    "PH_0008" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot create image source (PH_0008)"
+          }
+        }
+      }
+    },
+    "PH_0009" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot fetch image properties (PH_0009)"
+          }
+        }
+      }
+    },
+    "PH_Title_LoadingError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading Error"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

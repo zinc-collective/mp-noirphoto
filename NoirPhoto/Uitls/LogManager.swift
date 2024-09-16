@@ -17,8 +17,9 @@ protocol AppLogger {
 }
 
 enum LogManagerCategory: String {
-    case splashVC       = "SplashViewController"
-    case shareService   = "ShareService"
+    case splashVC                   = "SplashViewController"
+    case shareService               = "ShareService"
+    case photoLibraryCoordinator    = "PhotoLibraryCoordinator"
 }
 
 

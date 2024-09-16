@@ -22,6 +22,51 @@ protocol PhotoProviderDelegate : AnyObject {
 
 
 class PhotoLibraryCoordinator {
+    enum PhotoProviderError: LocalizedError {
+        case UnknownAssetLoadFailed
+        case ImageRequestDownloadFailed(info: Dictionary<AnyHashable, Any>? = nil, error: Error? = nil)
+        case LivePhotoRequestDownloadFailed(info: Dictionary<AnyHashable, Any>? = nil, error: Error? = nil)
+        case RequestDownloadFailed(error: Error?)
+        case MetaDataFetchRequestFailed(info: Dictionary<AnyHashable, Any>? = nil)
+        case MetaDataImageFetchFailed(info: Dictionary<AnyHashable, Any>? = nil)
+        case MetaDataImageCopyFailed(info: Dictionary<AnyHashable, Any>? = nil)
+        
+        public var errorDescription: String? {
+            switch self {
+            case .UnknownAssetLoadFailed:
+                return String(localized: "PH_0003")
+            case .ImageRequestDownloadFailed(let info, let error):
+                return formatErrorMsg(errorCode: "PH_0004", info: info, error: error)
+            case .LivePhotoRequestDownloadFailed(let info, let error):
+                return formatErrorMsg(errorCode: "PH_0005", info: info, error: error)
+            case .RequestDownloadFailed(let error):
+                return formatErrorMsg(errorCode: "PH_0006", error: error)
+            case .MetaDataFetchRequestFailed(let info):
+                return formatErrorMsg(errorCode: "PH_0007", info: info)
+            case .MetaDataImageFetchFailed(let info):
+                return formatErrorMsg(errorCode: "PH_0008", info: info)
+            case .MetaDataImageCopyFailed(let info):
+                return formatErrorMsg(errorCode: "PH_0009", info: info)
+            
+            // A good default error msg if I need one later
+            // String(localized: "PH_0000")
+            }
+        }
+        
+        private func formatErrorMsg(errorCode: String.LocalizationValue,
+                                 info: Dictionary<AnyHashable, Any>? = nil,
+                                 error: Error? = nil) -> String {
+            var response: String = String(localized: errorCode)
+            if let info = info {
+                response += " | Info: \(String(describing: info))"
+            }
+            if let error = error {
+                response += " | Error: \(String(describing: error))"
+            }
+            return response
+        }
+    }
+
     var picker: PHPickerViewController?
     var logger: AppLogger?
     weak var parent: UIViewController?
@@ -35,9 +80,13 @@ class PhotoLibraryCoordinator {
         options.isNetworkAccessAllowed = true
         options.progressHandler = { progress, error, _, info in
             if let error = error {
-                print("###! -> iCLoud Image Error: \(String(describing: error)) ==> \(String(describing: info))")
+                self.logger?.logToConsole("###! -> iCLoud Image Error: \(String(describing: error)) ==> \(String(describing: info))",
+                                          .info,
+                                          .photoLibraryCoordinator)
             } else {
-                print("###! -> Donwload Progress: \(progress) ==> \(String(describing: info))")
+                self.logger?.logToConsole("###! -> Donwload Progress: \(progress) ==> \(String(describing: info))",
+                                          .info,
+                                          .photoLibraryCoordinator)
             }
         }
         return options
@@ -48,9 +97,13 @@ class PhotoLibraryCoordinator {
         options.isNetworkAccessAllowed = true
         options.progressHandler = { progress, error, _, info in
             if let error = error {
-                print("###! -> iCLoud LiveImage Error: \(String(describing: error)) ==> \(String(describing: info))")
+                self.logger?.logToConsole("###! -> iCLoud LiveImage Error: \(String(describing: error)) ==> \(String(describing: info))",
+                                          .info,
+                                          .photoLibraryCoordinator)
             } else {
-                print("###! -> Donwload Progress: \(progress) ==> \(String(describing: info))")
+                self.logger?.logToConsole("###! -> Donwload Progress: \(progress) ==> \(String(describing: info))",
+                                          .info,
+                                          .photoLibraryCoordinator)
             }
         }
         return options
@@ -59,7 +112,9 @@ class PhotoLibraryCoordinator {
         let options = PHAssetResourceRequestOptions()
         options.isNetworkAccessAllowed = true
         options.progressHandler = { progress in
-            print("###! -> Request Donwload Progress: \(progress)")
+            self.logger?.logToConsole("###! -> Request Donwload Progress: \(progress)",
+                                      .info,
+                                      .photoLibraryCoordinator)
         }
         return options
     }()
@@ -102,33 +157,36 @@ extension PhotoLibraryCoordinator: PhotoProvider {
     }
     
     func getMetaData(assetIdentifier: String) -> NSMutableDictionary? {
-        print("### -> assetID: \(assetIdentifier)")
         var metadata: NSMutableDictionary?
         // from: https://codermite.com/t/extracting-image-meta-data-from-a-picture/
         if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject {
             PHImageManager.default().requestImageDataAndOrientation(for: asset, options: nil) { (data, _, orientation, info) in
-                print("### -> Orientation: \(orientation)")
+                self.logger?.logToConsole("### -> Meta Data Orientation: \(orientation)",
+                                          .info,
+                                          .photoLibraryCoordinator)
+                
                 guard let data = data else {
-                    print("### -> Cannot fetch data from PHAsset: \(String(describing: info))")
+                    self.logger?.logError(PhotoProviderError.MetaDataFetchRequestFailed(info: info))
                     return
                 }
                 
                 guard let imageSource = CGImageSourceCreateWithData(data as CFData, nil) else {
-                    print("### -> Cannot create image source")
+                    self.logger?.logError(PhotoProviderError.MetaDataImageFetchFailed(info: info))
                     return
                 }
                 
                 let options: [NSString: Any] = [kCGImageSourceShouldCache: false]
                 guard let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, options as CFDictionary) as? [NSString: Any] else {
-                    print("### -> Cannot fetch image properties")
+                    self.logger?.logError(PhotoProviderError.MetaDataImageCopyFailed(info: info))
                     return
                 }
-                print("### -> got it: -> \(imageProperties)")
                 metadata = NSMutableDictionary(dictionary: imageProperties)
             }
         }
-//        return NSMutableDictionary(dictionary: [String: Any]())
-        print("### -> getMetaData: -> \(metadata)")
+        
+        self.logger?.logToConsole("### -> getMetaData: -> \(String(describing: metadata))",
+                                  .default,
+                                  .photoLibraryCoordinator)
         return metadata
     }
     
@@ -181,12 +239,12 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
                                                       options: imageRequestOptions,
                                                       resultHandler: { [weak self] photo, info in
                     guard let img = photo else {
-                        print("###! -> PHOTO NOT FOUND -> \(String(describing: info))")
-                        // should display user error message here
-                        // this is not an appropriate error message -- too technical, not localized, needs public safe error code
+                        self?.logger?.logError(PhotoProviderError.ImageRequestDownloadFailed(info: info))
                         DispatchQueue.main.async {
                             if let vc = self?.picker?.presentingViewController {
-                                Alert.showAlert(on: vc, title: "Loading Error", message: "The full version of the selected LiveImage is not on device and this app is unable to download selected image from iCloud")
+                                Alert.showAlert(on: vc,
+                                                title: String(localized: "PH_Title_LoadingError"),
+                                                message: String(localized: "PH_0002"))
                             }
                         }
                         return
@@ -205,7 +263,7 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
                                                           options: livePhotoRequestOptions,
                                                           resultHandler: { [weak self] livePhoto, info in
                     guard let img = livePhoto else {
-                        print("###! -> LivePhoto NOT FOUND -> \(String(describing: info))")
+                        self?.logger?.logError(PhotoProviderError.LivePhotoRequestDownloadFailed(info: info))
                         return
                     }
                     
@@ -218,12 +276,12 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
                         imageData.append(data)
                     }, completionHandler: { [weak self] error in
                         guard error == nil else {
-                            print("###! -> error: \(String(describing: error))")
-                            // should display user error message here
-                            // this is not an appropriate error message -- too technical, not localized, needs public safe error code
+                            self?.logger?.logError(PhotoProviderError.RequestDownloadFailed(error: error))
                             DispatchQueue.main.async {
                                 if let vc = self?.picker?.presentingViewController {
-                                    Alert.showAlert(on: vc, title: "Loading Error", message: "The full version of the selected LiveImage is not on device and this app is unable to download selected image from iCloud")
+                                    Alert.showAlert(on: vc,
+                                                    title: String(localized: "PH_Title_LoadingError"),
+                                                    message: String(localized: "PH_0001"))
                                 }
                             }
                             return
@@ -238,25 +296,8 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
                 })
             }
         } else {
-            // should eventually log the type that that couldn't be processed
+            logger?.logError(PhotoProviderError.UnknownAssetLoadFailed)
             assert(false, "###---> Unable to process resource")
-        }
-    }
-    
-    private func handleCompletion(assetIdentifier: String, object: Any?, error: Error? = nil) {
-        guard self.currentAssetIdentifier == assetIdentifier else { return }
-        
-        if let livePhoto = object as? PHLivePhoto {
-//            displayLivePhoto(livePhoto)
-        } else if let image = object as? UIImage {
-//            displayImage(image)
-        } else if let url = object as? URL {
-//            displayVideoPlayButton(forURL: url)
-        } else if let error = error {
-            print("Couldn't display \(assetIdentifier) with error: \(error)")
-//            displayErrorImage()
-        } else {
-//            displayUnknownImage()
         }
     }
 }
