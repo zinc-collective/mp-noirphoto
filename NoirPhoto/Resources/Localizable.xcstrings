@@ -42,6 +42,18 @@
         }
       }
     },
+    "N_0001" : {
+      "comment" : "Share operation failed",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to share item. (N_0001)"
+          }
+        }
+      }
+    },
     "PH_0000" : {
       "comment" : "General Error for unspecified error case in the PhotoProvider",
       "extractionState" : "manual",

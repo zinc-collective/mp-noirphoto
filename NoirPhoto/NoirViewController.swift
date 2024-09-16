@@ -23,10 +23,7 @@ class NoirViewController: NoirViewControllerLegacy {
         public var errorDescription: String? {
             switch self {
             case .shareOperationFailed:
-                return NSLocalizedString(
-                    "Unable to share item.",
-                    comment: "Share operation failed"
-                )
+                String(localized: "N_0001")
             }
         }
     }
