@@ -138,11 +138,9 @@ private extension PhotoLibraryCoordinator {
         // Set the selection limit to enable multiselection.
         configuration.selectionLimit = 1
         // Set the preselected asset identifiers with the identifiers that the app tracks.
-        configuration.preselectedAssetIdentifiers = self.selection.map({ $0.key })
+        configuration.preselectedAssetIdentifiers = []
         
-        if self.picker == nil {
-            self.picker = PHPickerViewController(configuration: configuration)
-        }
+        self.picker = PHPickerViewController(configuration: configuration)
         guard let picker = self.picker else { return }
         picker.delegate = self
         parent?.present(picker, animated: true)
