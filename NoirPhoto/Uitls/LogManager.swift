@@ -27,7 +27,10 @@ class LogManager: AppLogger {
     func logError(_ error: Error) {
         let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "error")
         logger.log(level: .error, "###--> \(error.localizedDescription)")
+        
+        #if !(DEBUG)
         SentrySDK.capture(error: error)
+        #endif
     }
     
     func logToConsole(_ message: String, _ level: OSLogType = .debug, _ category: LogManagerCategory = .splashVC) {
