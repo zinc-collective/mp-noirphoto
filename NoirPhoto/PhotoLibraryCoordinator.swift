@@ -23,7 +23,7 @@ protocol PhotoProviderDelegate : AnyObject {
 
 class PhotoLibraryCoordinator {
     enum PhotoProviderError: LocalizedError {
-        case UnknownAssetLoadFailed
+        case UnknownAssetLoadFailed(info: Dictionary<AnyHashable, Any>? = nil)
         case ImageRequestDownloadFailed(info: Dictionary<AnyHashable, Any>? = nil, error: Error? = nil)
         case LivePhotoRequestDownloadFailed(info: Dictionary<AnyHashable, Any>? = nil, error: Error? = nil)
         case RequestDownloadFailed(error: Error?)
@@ -33,8 +33,8 @@ class PhotoLibraryCoordinator {
         
         public var errorDescription: String? {
             switch self {
-            case .UnknownAssetLoadFailed:
-                return String(localized: "PH_0003")
+            case .UnknownAssetLoadFailed(let info):
+                return formatErrorMsg(errorCode: "PH_0003", info: info)
             case .ImageRequestDownloadFailed(let info, let error):
                 return formatErrorMsg(errorCode: "PH_0004", info: info, error: error)
             case .LivePhotoRequestDownloadFailed(let info, let error):
@@ -294,8 +294,12 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
                 })
             }
         } else {
-            logger?.logError(PhotoProviderError.UnknownAssetLoadFailed)
-            assert(false, "###---> Unable to process resource")
+            logger?.logError(PhotoProviderError.UnknownAssetLoadFailed(info: ["failedType": itemProvider.registeredTypeIdentifiers]))
+            if let vc = self.picker?.presentingViewController {
+                Alert.showAlert(on: vc,
+                                title: String(localized: "PH_Title_LoadingError"),
+                                message: String(localized: "PH_0003"))
+            }
         }
     }
 }
