@@ -228,11 +228,17 @@ extension NoirViewController: ImageEditorInterfaceProvider {
             self.saveOriginPhoto(image)
         }
         
-        //TODO: - simplify image metadata - API hunt/rewrite will be required
-        #warning("### - simplify image metadata")
-        if let metadata = imageProvider?.getMetaData(assetIdentifier: assetIdentifier) {
-            self.imageMetadata = NSMutableDictionary(dictionary: metadata)
-            self.writeMetadataToFile(metadata)
+        imageProvider?.getMetaData(assetIdentifier: assetIdentifier) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let metadata):
+                if let metadata = metadata {
+                    self.imageMetadata = NSMutableDictionary(dictionary: metadata)
+                    self.writeMetadataToFile(metadata)
+                }
+            case .failure(let error):
+                self.logger?.logToConsole("error: \(error)", .info, .photoLibraryCoordinator)
+            }
         }
     }
 }

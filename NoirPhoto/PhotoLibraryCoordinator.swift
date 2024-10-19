@@ -12,7 +12,7 @@ import PhotosUI
 
 protocol PhotoProvider {
     func getMetaData(assetURL: NSURL) -> NSMutableDictionary?
-    func getMetaData(assetIdentifier: String) -> NSMutableDictionary?
+    func getMetaData(assetIdentifier: String, completion: @escaping (Result<NSMutableDictionary?, Error>) -> Void)
     func getPhoto(_ completion: @escaping (CGImage?, String?) -> Void)
 }
 
@@ -154,38 +154,40 @@ extension PhotoLibraryCoordinator: PhotoProvider {
         return NSMutableDictionary(dictionary: [String: Any]())
     }
     
-    func getMetaData(assetIdentifier: String) -> NSMutableDictionary? {
-        var metadata: NSMutableDictionary?
+    func getMetaData(assetIdentifier: String, completion: @escaping (Result<NSMutableDictionary?, Error>) -> Void) {
         // from: https://codermite.com/t/extracting-image-meta-data-from-a-picture/
         if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject {
             PHImageManager.default().requestImageDataAndOrientation(for: asset, options: nil) { (data, _, orientation, info) in
+                var filteredInfo = info ?? [AnyHashable: Any]()
+                filteredInfo.updateValue("[redacted]", forKey: "PHImageFileDataKey") // do not send photo data to logger/bug tracker
+                
                 self.logger?.logToConsole("### -> Meta Data Orientation: \(orientation)",
                                           .info,
                                           .photoLibraryCoordinator)
                 
                 guard let data = data else {
-                    self.logger?.logError(PhotoProviderError.MetaDataFetchRequestFailed(info: info))
+                    completion(.failure(PhotoProviderError.MetaDataFetchRequestFailed(info: filteredInfo)))
                     return
                 }
                 
                 guard let imageSource = CGImageSourceCreateWithData(data as CFData, nil) else {
-                    self.logger?.logError(PhotoProviderError.MetaDataImageFetchFailed(info: info))
+                    completion(.failure(PhotoProviderError.MetaDataImageFetchFailed(info: filteredInfo)))
                     return
                 }
                 
                 let options: [NSString: Any] = [kCGImageSourceShouldCache: false]
                 guard let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, options as CFDictionary) as? [NSString: Any] else {
-                    self.logger?.logError(PhotoProviderError.MetaDataImageCopyFailed(info: info))
+                    completion(.failure(PhotoProviderError.MetaDataImageCopyFailed(info: filteredInfo)))
                     return
                 }
-                metadata = NSMutableDictionary(dictionary: imageProperties)
+                
+                let metadata: NSMutableDictionary? = NSMutableDictionary(dictionary: imageProperties)
+                self.logger?.logToConsole("### -> getMetaData: -> \(String(describing: metadata))",
+                                           .default,
+                                           .photoLibraryCoordinator)
+                completion(.success(metadata))
             }
         }
-        
-        self.logger?.logToConsole("### -> getMetaData: -> \(String(describing: metadata))",
-                                  .default,
-                                  .photoLibraryCoordinator)
-        return metadata
     }
     
     func getPhoto(_ completion: @escaping (CGImage?, String?) -> Void) {
