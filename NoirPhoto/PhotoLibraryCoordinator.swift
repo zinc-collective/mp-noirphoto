@@ -286,8 +286,9 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
                         }
                         
                         if let tempImg = UIImage(data: imageData as Data) {
+                            var imageWithCorrectedOrientation = tempImg.rotateCameraImageToProperOrientation(CGFloat(MAXFLOAT))
                             DispatchQueue.main.async {
-                                completion(tempImg.cgImage, identifier)
+                                completion(imageWithCorrectedOrientation.cgImage, identifier)
                             }
                         }
                     })
