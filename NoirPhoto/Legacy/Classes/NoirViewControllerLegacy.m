@@ -163,13 +163,6 @@ void loadGaindLUT()
 
 - (void)viewDidLoad
 {
-    //bret
-    imagePickerOnScreen = NO;
-    //init picker
-	imagePicker = [[UIImagePickerController alloc] init];
-	imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-	imagePicker.delegate = self;
-
 	_bRendering = NO;
 	_bSavingOriginPhoto = NO;
 
@@ -349,15 +342,15 @@ void loadGaindLUT()
     [self.view insertSubview:_vignetteView atIndex:1];
 }
 
--(void)loadWithSavedPhoto:(UIImage *)image {
-	//set tint and adjust position
-	[_ctrlPadView chooseTintsBtnForIndex:self.preset.tintIndex bNeedReturn:NO];
-	[_ctrlPadView setAdjustsForExpinside:self.preset.expInside expOutside:self.preset.expOutside contrast:self.preset.contrast];
-	[self changeTintMaskForIndex:self.preset.tintIndex];
-
-	[self initUsedPropertiesAndUIForOriginPhoto:image];
-
-}
+//-(void)loadWithSavedPhoto:(UIImage *)image {
+//	//set tint and adjust position
+//	[_ctrlPadView chooseTintsBtnForIndex:self.preset.tintIndex bNeedReturn:NO];
+//	[_ctrlPadView setAdjustsForExpinside:self.preset.expInside expOutside:self.preset.expOutside contrast:self.preset.contrast];
+//	[self changeTintMaskForIndex:self.preset.tintIndex];
+//
+//	[self initUsedPropertiesAndUIForOriginPhoto:image];
+//
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -531,125 +524,6 @@ void loadGaindLUT()
 	self.preset = [self presetReadFromPlistByIndex:self.presetsChooseIndex];
 }
 
-//UIImagePickerController
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-	//if(_bSavingOriginPhoto) return;
-    //bret
-    imagePickerOnScreen = NO;
-	NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
-    UIImage * selected = [info objectForKey:UIImagePickerControllerOriginalImage];
-
-    [self pickPhoto:assetURL image:selected];
-
-	if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
-	{
-		[self.imagePickerPopover dismissPopoverAnimated:YES];
-		self.loadBtn.enabled = YES;
-	}
-	else
-	{
-        [picker dismissViewControllerAnimated:YES completion:^{}];
-	}
-
-}
-
--(void)pickPhoto:(NSURL*)assetURL image:(UIImage*)selected {
-
-	if(selected == nil) return;
-
-//	float version = [[[UIDevice currentDevice] systemVersion] floatValue];
-//
-//	if (version > 4.1) {
-
-		ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-		[library assetForURL:assetURL
-				 resultBlock:^(ALAsset *asset)  {
-					 NSDictionary *metadata = asset.defaultRepresentation.metadata;
-
-					 //NSLog(@"metadata=, %@", metadata);
-
-					 //imageMetadata = nil;
-					 self.imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:metadata];
-					 //[self addEntriesFromDictionary:metadata];
-
-					 NSLog(@"loadImageMetadataFromPic=%@", self.imageMetadata);
-
-					 NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-					 NSString *path=[paths    objectAtIndex:0];
-					 NSString *filename=[path stringByAppendingPathComponent:metadata_plist];
-
-					 [imageMetadata writeToFile:filename  atomically:YES];
-				 }
-				failureBlock:^(NSError *error) {
-				}];
-//	} else {
-//		imageMetadata = nil;
-//
-//		NSFileManager *fileManage = [NSFileManager defaultManager];
-//		NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-//		NSString *path=[paths    objectAtIndex:0];
-//		[fileManage removeItemAtPath:[path stringByAppendingPathComponent: metadata_plist] error:nil];
-//
-//
-//	}
-
-	//NSLog(@"selected origation: %d", selected.imageOrientation);
-
-	/*
-
-	 //save the source photo
-	 self.sourcePhoto = selected;
-
-	 //save the orientation
-	 _sourceOrientation = selected.imageOrientation;
-
-	 //calculate the render Rect
-	 CGRect photoPlaceRect = [self photoRenderRectForImageSize:selected.size withImageViewRect:photo_view_rect];
-
-	 //got self.photo
-	 self.photo = [self imageWithImage:selected scaledToSize:CGSizeMake(photoPlaceRect.size.width, photoPlaceRect.size.height)];
-
-	 //add alpha
-	 self.photo = [self imageAddAlphaForImage:self.photo];
-
-
-	 //got photo renderRect
-	 _photoRenderRect = [self photoRenderRectForImageSize:self.photo.size withImageViewRect:photo_view_rect];
-
-
-	 //render the photo
-	 [self renderPhotoViewForPreset:self.preset useImage:self.photo changeType:typeNone actioning:NO];
-
-
-	 //set vignette position
-	 Parameter *param = [self parameterWithPreset:self.preset];
-	 [_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
-
-
-	 //make out the adjustPhoto
-	 self.adjustPhoto = [self imageWithImage:self.photo scaledToSize:CGSizeMake(self.photo.size.width/2,self.photo.size.height/2)];
-	 self.adjustPhoto = [self imageAddAlphaForImage:self.adjustPhoto];
-	 */
-
-
-	//初始化使用限制过的的图片
-	[self initUsedPropertiesAndUIForOriginPhoto:selected];
-
-	//save origin photo
-	_bSavingOriginPhoto = YES;
-	[NSThread detachNewThreadSelector:@selector(saveOriginPhoto:) toTarget:self withObject:self.sourcePhoto];
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    //bret
-    imagePickerOnScreen = NO;
-    [picker dismissViewControllerAnimated:YES completion:^{}];
-}
-
-
-
 
 //VignetteDelegate
 -(void)vignetteViewDidChange:(Parameter*)parameter isFinal:(BOOL)isFinal bChangePresetState:(BOOL)bChange
@@ -782,50 +656,7 @@ void loadGaindLUT()
     #warning("### - need to split this into single responsibilities and un link it from storyboards")
 	if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
-		if(imagePickerPopover==nil){
-
-			UIPopoverController *ipPopover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
-			self.imagePickerPopover = ipPopover;
-
-			self.imagePickerPopover.delegate = self;
-			self.imagePickerPopover.popoverContentSize = CGSizeMake(320, 480);
-
-            //self.imagePickerPopover.popoverArrowDirection = UIPopoverArrowDirectionAny;
-
-		}
-
-		UIButton *btn = (UIButton*)sender;
-		CGRect popFrom;
-		if(btn == self.loadBtn)
-		{
-			popFrom = btn.bounds;
-		}
-		else
-		{
-			popFrom = CGRectMake(585, 795, 50, 50);
-		}
-
-//        CGAffineTransform m = CGAffineTransformMakeRotation(M_PI/2.0);
-//        imagePickerPopover.transform = m;
-
-		[self.imagePickerPopover presentPopoverFromRect:popFrom
-												 inView:btn
-							   permittedArrowDirections:UIPopoverArrowDirectionAny
-											   animated:YES];
-
 		self.loadBtn.enabled = NO;
-	}
-	else
-	{
-        imagePickerOnScreen = YES;
-//        [self presentViewController:imagePicker animated:TRUE completion:nil];
-        //[self.view.window.rootViewController presentViewController:imagePicker animated:YES completion:nil];
-//		UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//		picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//		picker.delegate = self;
-//		[self presentModalViewController:picker animated:YES];
-//		[picker release];
-
 	}
 }
 -(IBAction)infoAction:(id)sender

@@ -41,7 +41,7 @@ typedef struct {
 
 
 //@class QuartzView;
-@interface NoirViewControllerLegacy : UIViewController <UIPopoverControllerDelegate, VignetteDelegate, ControlPadViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface NoirViewControllerLegacy : UIViewController <UIPopoverControllerDelegate, VignetteDelegate, ControlPadViewDelegate, UINavigationControllerDelegate> {
 
 	UIImageView			 *photoView;
 	UIImageView			 *photoFullView;
@@ -93,8 +93,6 @@ typedef struct {
 	BOOL				 _bPreseting;  //是否正处于preset状态下，只要任何一个操作更改，都不再处于preset状态
 
 	UIPopoverController *imagePickerPopover;
-	UIImagePickerController *imagePicker;
-    BOOL imagePickerOnScreen; //bret
 
 
 	UIView *blackBackground;
@@ -204,9 +202,6 @@ typedef struct {
 
 
 
-#pragma mark Loading
--(void)pickPhoto:(NSURL*)assetURL image:(UIImage*)image;
--(void)loadWithSavedPhoto:(UIImage*)image;
 
 
 
