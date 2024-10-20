@@ -84,7 +84,6 @@
 @synthesize mCircleShow4;
 @synthesize mCircleRender;
 @synthesize mCircleSave;
-@synthesize imagePickerPopover;
 
 @synthesize _vignetteView;
 
@@ -557,14 +556,6 @@ void loadGaindLUT()
 		[self renderPhotoViewForPreset:self.preset useImage:self.adjustPhoto changeType:typeVignette actioning:YES];
 	}
 }
-
-//UIPopoverControllerDelegate
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-	//[popoverController release];
-	self.loadBtn.enabled = YES;
-}
-
 
 
 -(void)toggleFull
