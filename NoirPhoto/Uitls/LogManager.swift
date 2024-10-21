@@ -20,6 +20,7 @@ enum LogManagerCategory: String {
     case splashVC                   = "SplashViewController"
     case shareService               = "ShareService"
     case photoLibraryCoordinator    = "PhotoLibraryCoordinator"
+    case extensionUIImageUtil       = "ExtensionUIImageUtil"
 }
 
 

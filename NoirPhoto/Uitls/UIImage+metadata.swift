@@ -22,7 +22,9 @@ extension UIImage {
         if let data = self.cgImage?.dataProvider?.data,
            let source: CGImageSource = CGImageSourceCreateWithData(data, nil) {
             metadata = CGImageSourceCopyPropertiesAtIndex(source, 0, nil)
-            print("### -> got metatdata! \(metadata)")
+            AppDelegate().getAppLogger().logToConsole(String(describing: metadata),
+                                                      .info,
+                                                      .extensionUIImageUtil)
         }
         return metadata
     }
