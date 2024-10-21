@@ -20,11 +20,12 @@
 -(void)adjustExpinside:(float)expInside expOutside:(float)expOutside contrast:(float)contrast isFinal:(BOOL)isFinal;  //return the adjusts
 -(void)presetsResetToDefault;
 -(void)overWritePresetToIndex:(NSInteger)index;
+-(void)presentPresetsViewAlert:(UIAlertController *)alert;
 
 @end
 
 
-@interface ControlPadView : UIView <PresetsViewDelegate, TintsViewDelegate, AdjustViewDelegate, UIAlertViewDelegate> {
+@interface ControlPadView : UIView <PresetsViewDelegate, TintsViewDelegate, AdjustViewDelegate> {
 
 	PresetsView *_prestsView;
 	TintsView *_tintsView;

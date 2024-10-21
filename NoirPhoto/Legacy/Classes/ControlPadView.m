@@ -72,13 +72,22 @@
 }
 -(void)alertYouAction:(NSString*)title withMsg:(NSString*)alertMsg withOK:(NSString*)okMsg withCancel:(NSString*)cancelMsg
 {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:alertMsg delegate:self cancelButtonTitle:okMsg otherButtonTitles:cancelMsg, nil];
-	[alert setDelegate:self];
-	alert.message = alertMsg;
-	[alert show];
+
+    __weak ControlPadView *weakSelf = self;
+    UIAlertAction* okAction = [[UIAlertAction class] actionWithTitle:okMsg style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action){
+        if (weakSelf != nil && weakSelf.delegate != nil) {
+            [weakSelf.delegate presetsResetToDefault];
+        }
+    }];
+    UIAlertAction* cancelAction = [[UIAlertAction class] actionWithTitle:cancelMsg style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){}];
+    UIAlertController *alert = [[UIAlertController class] alertControllerWithTitle:title message:alertMsg preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:cancelAction];
+    [alert addAction:okAction];
+
+    if(self.delegate) {
+        [self.delegate presentPresetsViewAlert:alert];
+    }
 }
-
-
 
 
 
@@ -179,6 +188,12 @@
 		[self.delegate overWritePresetToIndex:index];
 	}
 }
+-(void)presentPresetsViewAlert:(UIAlertController *)alert
+{
+    if(self.delegate) {
+        [self.delegate presentPresetsViewAlert:alert];
+    }
+}
 
 //TintsViewDelegate
 -(void)tintsButtonChooseIndex:(NSInteger)index data:(id)data
@@ -195,18 +210,6 @@
 	if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(adjustExpinside:expOutside:contrast:isFinal:)])
 	{
 		[self.delegate adjustExpinside:expInside expOutside:expOutside contrast:contrast isFinal:isFinal];
-	}
-}
-
-//UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-	if(buttonIndex == 0)
-	{
-		if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(presetsResetToDefault)])
-		{
-			[self.delegate presetsResetToDefault];
-		}
 	}
 }
 

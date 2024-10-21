@@ -1872,6 +1872,10 @@ void loadGaindLUT()
 	}
 	return allTints;
 }
+-(void)presentPresetsViewAlert:(UIAlertController *)alert
+{
+    [self presentViewController:alert animated:true completion:nil];
+}
 
 
 

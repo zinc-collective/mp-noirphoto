@@ -12,7 +12,6 @@
 @implementation PresetsView
 @synthesize delegate;
 @synthesize _timer;
-@synthesize mAlert;
 
 
 #pragma mark -
@@ -251,48 +250,31 @@
 }
 -(void)alertYouAction:(NSString*)title withMsg:(NSString*)alertMsg withOK:(NSString*)okMsg withCancel:(NSString*)cancelMsg
 {
-	if(self.mAlert == nil)
-	{
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:alertMsg delegate:self cancelButtonTitle:cancelMsg otherButtonTitles:okMsg, nil];
-		self.mAlert = alert;
+    __weak PresetsView *weakSelf = self;
+    UIAlertAction* replaceAction = [[UIAlertAction class] actionWithTitle:@"Replace" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action){
+        if (weakSelf != nil) {
+            [weakSelf replacePreset];
+        }
+    }];
+    UIAlertAction* cancelAction = [[UIAlertAction class] actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){}];
+    UIAlertController *alert = [[UIAlertController class] alertControllerWithTitle:title message:alertMsg preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:cancelAction];
+    [alert addAction:replaceAction];
 
-		[self.mAlert setDelegate:self];
-	}
-
-	self.mAlert.hidden = YES;
-	[self.mAlert show];
+    if(self.delegate) {
+        [self.delegate presentPresetsViewAlert:alert];
+    }
 }
-
-
-
-
-
-#pragma mark -
-#pragma mark delegate functions
-//UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+- (void)replacePreset
 {
-	//add the target of button
-	for(UIButton *btn in _buttons)
-	{
-		if(btn.tag == _touchDownIndex)
-		{
-			[btn addTarget:self action:@selector(itemAction:) forControlEvents:UIControlEventTouchUpInside];
-			break;
-		}
-	}
-
-	if(buttonIndex == 1) //replace
-	{
-		if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(overWritePresetByIndex:)])
-		{
-			[self.delegate overWritePresetByIndex:_touchDownIndex];
-		}
-	}
+    if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(overWritePresetByIndex:)])
+    {
+        [self.delegate overWritePresetByIndex:_touchDownIndex];
+    }
 }
-- (void)didPresentAlertView:(UIAlertView *)alertView
+- (void)setSelectiorFor:(UIButton *)btn
 {
-	self.mAlert.hidden = NO;
+    [btn addTarget:self action:@selector(itemAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 
