@@ -108,7 +108,7 @@
 
 int briteLUT[256];
 int darkLUT[256];
-void loadGaindLUT()
+void loadGaindLUT(void)
 {
 	//load LUTs
 	//
