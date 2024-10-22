@@ -298,7 +298,7 @@ void loadGaindLUT()
 	[self.view addSubview:self.savingMaskView];
 
 	//add saving spinner
-	UIActivityIndicatorView *smSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    UIActivityIndicatorView *smSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
 	smSpinner.frame = CGRectMake((self.view.frame.size.width-25.0)/2, (self.view.frame.size.height-25.0)/2, 25.0, 25.0);
 	self.savingSpinner = smSpinner;
 	self.savingSpinner.hidden = YES;
