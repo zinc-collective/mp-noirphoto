@@ -176,6 +176,7 @@
 /* Begin PBXFileReference section */
 		6D12E29E2C8C2DF800A529E1 /* UIScene+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScene+Ext.swift"; sourceTree = "<group>"; };
 		6D3374D02C973C23004FC2D3 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		6D4385612CC964AF006B312A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		6DC38A472C84C11B0025DE7A /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		6DC5B2A42C85A92000B9219D /* PhotoLibraryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryCoordinator.swift; sourceTree = "<group>"; };
 		6DC5B2A62C86120500B9219D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -421,6 +422,7 @@
 		787581301CA2E98400100514 = {
 			isa = PBXGroup;
 			children = (
+				6D4385612CC964AF006B312A /* PrivacyInfo.xcprivacy */,
 				7875813B1CA2E98400100514 /* NoirPhoto */,
 				787581481CA2E98400100514 /* Info.plist */,
 				78D9FD2F1CEA19E000745DDE /* Bridge */,
