@@ -28,15 +28,13 @@ class SplashViewController: UIViewController {
     }
 
     @IBAction func handleInfo(sender: AnyObject) {
-        print("INFO")
+        self.logger?.logToConsole("INFO", .info, .splashVC)
         guard let vc = self.infoVC?() else { return }
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
     @IBAction func handleLibrary(_ sender: AnyObject) {
-        print("LIBRARY")
-
-        // Request photo access earlier so the photos window isn't black
+        self.logger?.logToConsole("LIBRARY", .info, .splashVC)
         PHPhotoLibrary.requestAuthorization { status in
             switch status {
             case .authorized:

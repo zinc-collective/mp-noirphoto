@@ -18,6 +18,8 @@ protocol AppLogger {
 
 enum LogManagerCategory: String {
     case splashVC                   = "SplashViewController"
+    case noirVC                     = "NoirViewController"
+    case noirLegacyVC               = "NoirViewControllerLegacy"
     case shareService               = "ShareService"
     case photoLibraryCoordinator    = "PhotoLibraryCoordinator"
     case extensionUIImageUtil       = "ExtensionUIImageUtil"
