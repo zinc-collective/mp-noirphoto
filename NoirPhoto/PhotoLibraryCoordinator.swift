@@ -251,12 +251,10 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
                                                       resultHandler: { [weak self] photo, info in
                     guard let img = photo else {
                         self?.logger?.logError(PhotoProviderError.ImageRequestDownloadFailed(info: info))
-                        DispatchQueue.main.async {
-                            if let vc = self?.picker?.presentingViewController {
-                                Alert.showAlert(on: vc,
-                                                title: String(localized: "PH_Title_LoadingError"),
-                                                message: String(localized: "PH_0002"))
-                            }
+                        if let vc = self?.picker?.presentingViewController {
+                            Alert.showAlert(on: vc,
+                                            title: String(localized: "PH_Title_LoadingError"),
+                                            message: String(localized: "PH_0002"))
                         }
                         return
                     }

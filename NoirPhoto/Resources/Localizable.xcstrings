@@ -202,6 +202,28 @@
           }
         }
       }
+    },
+    "PL_0000" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please grant permission to the photo library to use this app"
+          }
+        }
+      }
+    },
+    "PL_Title_Access_Required" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo Access Required"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
