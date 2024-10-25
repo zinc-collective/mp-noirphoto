@@ -17,6 +17,7 @@ protocol ImageEditorInterfaceProvider: UIViewController {
 
 // scales up the whole view, just like if we weren't supporting iPhone 6 or 6+
 class NoirViewController: NoirViewControllerLegacy {
+    @IBOutlet weak var progressView: UIProgressView!
     enum NoirError: LocalizedError {
         case shareOperationFailed
         case metaDataWriteFailed
@@ -62,7 +63,7 @@ class NoirViewController: NoirViewControllerLegacy {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupProgressView()
         let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(NoirViewController.onSwipeGripDown))
         downGesture.direction = .down
         
@@ -210,6 +211,10 @@ private extension NoirViewController {
             metadata = NSMutableDictionary.init(contentsOf: URL(fileURLWithPath: filename))
         }
         return metadata
+    }
+    
+    func setupProgressView() {
+        (imageProvider as? PhotoLibraryCoordinator)?.progressView = progressView
     }
 }
 

@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -11,6 +12,7 @@
             <connections>
                 <outlet property="infoBtn" destination="30" id="32"/>
                 <outlet property="loadBtn" destination="24" id="26"/>
+                <outlet property="progressView" destination="Kkw-02-4Uy" id="LWl-Rk-HlG"/>
                 <outlet property="saveBtn" destination="25" id="27"/>
                 <outlet property="tintMaskView" destination="33" id="34"/>
                 <outlet property="view" destination="6" id="7"/>
@@ -76,8 +78,20 @@
                     <rect key="frame" x="194" y="296" width="115" height="160"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Kkw-02-4Uy">
+                    <rect key="frame" x="50" y="40" width="220" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="12" id="1wP-Bc-PWQ"/>
+                    </constraints>
+                    <color key="progressTintColor" systemColor="tintColor"/>
+                </progressView>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Kkw-02-4Uy" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="50" id="UB5-BV-g8q"/>
+                <constraint firstItem="Kkw-02-4Uy" firstAttribute="top" secondItem="6" secondAttribute="top" constant="40" id="gIt-1S-agc"/>
+                <constraint firstAttribute="trailing" secondItem="Kkw-02-4Uy" secondAttribute="trailing" constant="50" id="qLB-ij-3tz"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="132" y="-4"/>
@@ -91,5 +105,8 @@
         <image name="btn_save.png" width="39.5" height="39.5"/>
         <image name="btn_save_sel.png" width="39.5" height="39.5"/>
         <image name="tint_mask_1.png" width="114.5" height="159.5"/>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

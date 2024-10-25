@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="infoBtn" destination="30" id="32"/>
                 <outlet property="loadBtn" destination="24" id="26"/>
+                <outlet property="progressView" destination="aOs-jW-9tL" id="36L-7m-vKh"/>
                 <outlet property="saveBtn" destination="25" id="27"/>
                 <outlet property="tintMaskView" destination="33" id="34"/>
                 <outlet property="view" destination="6" id="7"/>
@@ -76,8 +77,19 @@
                     <rect key="frame" x="259" y="897" width="382" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aOs-jW-9tL">
+                    <rect key="frame" x="50" y="80" width="668" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="MeJ-lz-dH0"/>
+                    </constraints>
+                </progressView>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="aOs-jW-9tL" secondAttribute="trailing" constant="50" id="H9z-iJ-fop"/>
+                <constraint firstItem="aOs-jW-9tL" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="50" id="OGh-ie-tbm"/>
+                <constraint firstItem="aOs-jW-9tL" firstAttribute="top" secondItem="6" secondAttribute="top" constant="80" id="XWI-wC-lMv"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="132" y="18"/>

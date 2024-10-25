@@ -67,6 +67,7 @@ class PhotoLibraryCoordinator {
         }
     }
 
+    var progressView: UIProgressView?
     var picker: PHPickerViewController?
     var logger: AppLogger?
     weak var parent: UIViewController?
@@ -84,6 +85,7 @@ class PhotoLibraryCoordinator {
                                           .info,
                                           .photoLibraryCoordinator)
             } else {
+                self.displayProgress(Float(progress))
                 self.logger?.logToConsole("###! -> Donwload Progress: \(progress) ==> \(String(describing: info))",
                                           .info,
                                           .photoLibraryCoordinator)
@@ -101,6 +103,7 @@ class PhotoLibraryCoordinator {
                                           .info,
                                           .photoLibraryCoordinator)
             } else {
+                self.displayProgress(Float(progress))
                 self.logger?.logToConsole("###! -> Donwload Progress: \(progress) ==> \(String(describing: info))",
                                           .info,
                                           .photoLibraryCoordinator)
@@ -112,6 +115,7 @@ class PhotoLibraryCoordinator {
         let options = PHAssetResourceRequestOptions()
         options.isNetworkAccessAllowed = true
         options.progressHandler = { progress in
+            self.displayProgress(Float(progress))
             self.logger?.logToConsole("###! -> Request Donwload Progress: \(progress)",
                                       .info,
                                       .photoLibraryCoordinator)
@@ -144,6 +148,13 @@ private extension PhotoLibraryCoordinator {
         guard let picker = self.picker else { return }
         picker.delegate = self
         parent?.present(picker, animated: true)
+    }
+    
+    func displayProgress(_ progress: Float) {
+        DispatchQueue.main.async {
+            self.progressView?.isHidden = progress >= 1.0
+            self.progressView?.setProgress(progress, animated: true)
+        }
     }
 }
 
