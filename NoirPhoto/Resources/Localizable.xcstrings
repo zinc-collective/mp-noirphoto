@@ -192,6 +192,30 @@
         }
       }
     },
+    "PH_0010" : {
+      "comment" : "If the library permission level is \".limited\"  and the selected image is NOT in that set, the  asset request returns nil.  This is likely the reason for this error",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to load image. Please ensure it is included in the limited set of photos from the Photo Library {PH_0010)"
+          }
+        }
+      }
+    },
+    "PH_0011" : {
+      "comment" : "If the library permission level is \".limited\"  and the selected image is NOT in that set, the  asset request returns nil.  This is likely the reason for this error",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to load image. Please ensure it is included in the limited set of photos from the Photo Library {PH_0011)"
+          }
+        }
+      }
+    },
     "PH_0012" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -199,6 +223,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unable to load HEIC image.  (PH_0012)"
+          }
+        }
+      }
+    },
+    "PH_Title_LimitedAccess_Image" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inaccessible Image"
           }
         }
       }

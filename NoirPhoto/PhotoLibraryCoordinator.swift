@@ -270,6 +270,20 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
                         completion(img.cgImage, identifier)
                     }
                 })
+            } else {
+                // nil UIImage asset"
+                guard let parent = self.parent else { return }
+                DispatchQueue.main.async {
+                    Alert.showAlert(on: parent,
+                                    title: String(localized: "PH_Title_LimitedAccess_Image"),
+                                    message: String(localized: "PH_0010")) { _ in
+                        DispatchQueue.main.async { [weak self] in
+                            guard let self = self,
+                                  let parent = self.parent else { return }
+                            PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: parent)
+                        }
+                    }
+                }
             }
         } else if itemProvider.canLoadObject(ofClass: PHLivePhoto.self) {
             if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [identifier],
@@ -311,6 +325,20 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
                         }
                     })
                 })
+            } else { 
+                // nil LivePhoto asset"
+                guard let parent = self.parent else { return }
+                DispatchQueue.main.async {
+                    Alert.showAlert(on: parent,
+                                    title: String(localized: "PH_Title_LimitedAccess_Image"),
+                                    message: String(localized: "PH_0011")) { _ in
+                        DispatchQueue.main.async { [weak self] in
+                            guard let self = self,
+                                  let parent = self.parent else { return }
+                            PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: parent)
+                        }
+                    }
+                }
             }
         } else {
             // The HEIC (format) Exception - it SHOULD work with UIImage.self; but it does not; so this is required.
