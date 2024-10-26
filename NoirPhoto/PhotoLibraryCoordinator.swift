@@ -131,7 +131,7 @@ class PhotoLibraryCoordinator {
 
 // MARK: - Private Methods
 private extension PhotoLibraryCoordinator {
-    func presentPicker(filter: PHPickerFilter?) {
+    func presentPicker(filter: PHPickerFilter?, delegate: PHPickerViewControllerDelegate? = nil) {
         var configuration = PHPickerConfiguration(photoLibrary: .shared())
         // Set the filter type according to the user’s selection.
         configuration.filter = filter
@@ -146,7 +146,7 @@ private extension PhotoLibraryCoordinator {
         
         self.picker = PHPickerViewController(configuration: configuration)
         guard let picker = self.picker else { return }
-        picker.delegate = self
+        picker.delegate = delegate ?? self
         parent?.present(picker, animated: true)
     }
     
@@ -203,7 +203,7 @@ extension PhotoLibraryCoordinator: PhotoProvider {
     
     func getPhoto(_ completion: @escaping (CGImage?, String?) -> Void) {
         self.imageCompletion = completion
-        self.presentPicker(filter: nil)
+        self.presentPicker(filter: nil, delegate: self)
     }
 }
 
