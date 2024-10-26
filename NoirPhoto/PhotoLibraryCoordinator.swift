@@ -134,7 +134,11 @@ private extension PhotoLibraryCoordinator {
     func presentPicker(filter: PHPickerFilter?, delegate: PHPickerViewControllerDelegate? = nil) {
         var configuration = PHPickerConfiguration(photoLibrary: .shared())
         // Set the filter type according to the user’s selection.
-        configuration.filter = filter
+        configuration.filter = filter ?? PHPickerFilter.any(of: [
+            .images,
+            .livePhotos,
+            .screenshots
+        ])
         // Set the mode to avoid transcoding, if possible, if your app supports arbitrary image/video encodings.
         configuration.preferredAssetRepresentationMode = .current
         // Set the selection behavior to respect the user’s selection order.
