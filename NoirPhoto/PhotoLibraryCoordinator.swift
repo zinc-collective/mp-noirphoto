@@ -24,6 +24,7 @@ protocol PhotoProviderDelegate : AnyObject {
 class PhotoLibraryCoordinator {
     enum PhotoProviderError: LocalizedError {
         case UnknownAssetLoadFailed(info: Dictionary<AnyHashable, Any>? = nil)
+        case ImageLoadingFailedHEIC(error: Error? = nil)
         case ImageRequestDownloadFailed(info: Dictionary<AnyHashable, Any>? = nil, error: Error? = nil)
         case LivePhotoRequestDownloadFailed(info: Dictionary<AnyHashable, Any>? = nil, error: Error? = nil)
         case RequestDownloadFailed(error: Error?)
@@ -37,6 +38,8 @@ class PhotoLibraryCoordinator {
                 return formatErrorMsg(errorCode: "PH_0003", info: info)
             case .ImageRequestDownloadFailed(let info, let error):
                 return formatErrorMsg(errorCode: "PH_0004", info: info, error: error)
+            case .ImageLoadingFailedHEIC(let error):
+                return formatErrorMsg(errorCode: "PH_0012", error: error)
             case .LivePhotoRequestDownloadFailed(let info, let error):
                 return formatErrorMsg(errorCode: "PH_0005", info: info, error: error)
             case .RequestDownloadFailed(let error):
@@ -310,13 +313,28 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
                 })
             }
         } else {
-            logger?.logError(PhotoProviderError.UnknownAssetLoadFailed(info: ["failedType": itemProvider.registeredTypeIdentifiers]))
-            guard let parent = self.parent else { return }
-            DispatchQueue.main.async {
-                Alert.showAlert(on: parent,
-                                title: String(localized: "PH_Title_LoadingError"),
-                                message: String(localized: "PH_0003"))
-            }
+            // The HEIC (format) Exception - it SHOULD work with UIImage.self; but it does not; so this is required.
+            // Forum references: https://forums.developer.apple.com/forums/thread/658135
+            _ = itemProvider.loadDataRepresentation(forTypeIdentifier: "public.heic", completionHandler: { [weak self] (data, error) in
+                if let imageData = data,
+                   let img = UIImage(data: imageData) {
+                    let imageWithCorrectedOrientation = img.rotateCameraImageToProperOrientation(CGFloat(MAXFLOAT))
+                    DispatchQueue.main.async {
+                        completion(imageWithCorrectedOrientation.cgImage, "NO ID")
+                    }
+                } else {
+                    guard let self = self else { return }
+                    logger?.logError(PhotoProviderError.ImageLoadingFailedHEIC(error: error))
+                    logger?.logError(PhotoProviderError.UnknownAssetLoadFailed(info: ["failedType": itemProvider.registeredTypeIdentifiers]))
+                    
+                    guard let parent = self.parent else { return }
+                    DispatchQueue.main.async {
+                        Alert.showAlert(on: parent,
+                                        title: String(localized: "PH_Title_LoadingError"),
+                                        message: String(localized: "PH_0003"))
+                    }
+                }
+            })
         }
     }
 }
