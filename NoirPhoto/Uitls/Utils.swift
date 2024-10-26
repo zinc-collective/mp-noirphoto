@@ -23,6 +23,7 @@ enum Alert {
         let action = UIAlertAction(title: "OK", style: .default, handler: handler)
         alert.addAction(action)
         DispatchQueue.main.async {
+            viewController.presentedViewController?.dismiss(animated: false)
             viewController.present(alert, animated: true)
         }
     }
