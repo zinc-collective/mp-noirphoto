@@ -91,7 +91,7 @@ class PhotoLibraryCoordinator {
                                           .photoLibraryCoordinator)
             } else {
                 self.displayProgress(Float(progress))
-                self.logger?.logToConsole("###! -> Donwload Progress: \(progress) ==> \(String(describing: info))",
+                self.logger?.logToConsole("###! -> Download Progress: \(progress) ==> \(String(describing: info))",
                                           .info,
                                           .photoLibraryCoordinator)
             }
@@ -109,7 +109,7 @@ class PhotoLibraryCoordinator {
                                           .photoLibraryCoordinator)
             } else {
                 self.displayProgress(Float(progress))
-                self.logger?.logToConsole("###! -> Donwload Progress: \(progress) ==> \(String(describing: info))",
+                self.logger?.logToConsole("###! -> Download Progress: \(progress) ==> \(String(describing: info))",
                                           .info,
                                           .photoLibraryCoordinator)
             }
@@ -121,7 +121,7 @@ class PhotoLibraryCoordinator {
         options.isNetworkAccessAllowed = true
         options.progressHandler = { progress in
             self.displayProgress(Float(progress))
-            self.logger?.logToConsole("###! -> Request Donwload Progress: \(progress)",
+            self.logger?.logToConsole("###! -> Request Download Progress: \(progress)",
                                       .info,
                                       .photoLibraryCoordinator)
         }
