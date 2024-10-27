@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Photos
 import Sentry
 
 let SaveOriginPhotoPath = "/Documents/origin_photo.jpg"

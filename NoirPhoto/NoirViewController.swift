@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Photos
 
 
 protocol ImageEditorInterfaceProvider: UIViewController {
@@ -128,27 +127,26 @@ class NoirViewController: NoirViewControllerLegacy {
 #warning("### - need to verify the entire photo selection flow from splash screen & NoirVC")
 #warning("### - need to verify the iPad behavior")
     @IBAction func handleLibrary(_ sender: AnyObject) {
-        // Request photo access earlier so the photos window isn't black
-        PHPhotoLibrary.requestAuthorization { status in
-            switch status {
-            case .authorized:
-                print("AUTHORIZED NOIR")
-            case .restricted:
-                print("RESTRICTED NOIR")
-            case .denied:
-                print("DENIED NOIR")
-            default:
-                // place for .NotDetermined - in this callback status is already determined so should never get here
-                break
-            }
-            
+        let failureHandler: PhotoProvider.FailureCompletion = {
             DispatchQueue.main.async {
-                self.openPicker()
+                Alert.showAlert(on: self,
+                                title: String(localized: "PL_Title_Access_Required"),
+                                message: String(localized: "PL_0000"),
+                                action: { _ in
+                    guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                    UIApplication.shared.open(url)
+                })
             }
         }
+        let successHandler: PhotoProvider.SuccessCompletion = { [weak self] image, assetIdentifier in
+            guard let self = self,
+                  let image = image,
+                  let assetIdentifier = assetIdentifier else { return }
+            self.delegate?.providerDidPickImage(UIImage(cgImage: image), assetIdentifier: assetIdentifier)
+        }
+        imageProvider?.getPhoto(success: successHandler, failure: failureHandler)
     }
 }
-
 
 // MARK: Private Methods
 private extension NoirViewController {
@@ -174,15 +172,6 @@ private extension NoirViewController {
     func renderPhoto() -> UIImage {
         let source = self.sourcePhoto.rotateCameraImageToProperOrientation(CGFloat(MAXFLOAT))
         return self.image(for: self.preset, use: source)
-    }
-    
-    func openPicker() {
-        self.imageProvider?.getPhoto({ [weak self] image, assetIdentifier in
-            guard let self = self,
-                  let image = image,
-                  let assetIdentifier = assetIdentifier else { return }
-            self.delegate?.providerDidPickImage(UIImage(cgImage: image), assetIdentifier: assetIdentifier)
-        })
     }
     
     // MARK: Metadata helpers

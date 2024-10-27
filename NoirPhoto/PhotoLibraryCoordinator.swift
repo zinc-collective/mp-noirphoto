@@ -11,9 +11,11 @@ import PhotosUI
 
 
 protocol PhotoProvider {
+    typealias SuccessCompletion = (CGImage?, String?) -> Void
+    typealias FailureCompletion = () -> Void
     func getMetaData(assetURL: NSURL) -> NSMutableDictionary?
     func getMetaData(assetIdentifier: String, completion: @escaping (Result<NSMutableDictionary?, Error>) -> Void)
-    func getPhoto(_ completion: @escaping (CGImage?, String?) -> Void)
+    func getPhoto(success: @escaping SuccessCompletion, failure: @escaping FailureCompletion)
 }
 
 protocol PhotoProviderDelegate : AnyObject {
@@ -208,9 +210,28 @@ extension PhotoLibraryCoordinator: PhotoProvider {
         }
     }
     
-    func getPhoto(_ completion: @escaping (CGImage?, String?) -> Void) {
-        self.imageCompletion = completion
-        self.presentPicker(filter: nil, delegate: self)
+    func getPhoto(success: @escaping (CGImage?, String?) -> Void, failure: @escaping () -> Void = {}) {
+        self.imageCompletion = success
+        
+        let permissionHandler: (PHAuthorizationStatus) -> Void = { status in
+            let managerCategory: LogManagerCategory = .photoLibraryCoordinator // this is not correct the category
+            switch status {
+            case .notDetermined, .denied, .restricted:
+                self.logger?.logToConsole("DENIED COORDINATOR", .info, managerCategory)
+                failure()
+            case .authorized, .limited:
+                // The user explicitly granted this app access to the photo library.
+                let msg = status == .authorized ? "AUTHORIZED COORDINATOR" : "LIMITED COORDINATOR"
+                self.logger?.logToConsole(msg, .info, managerCategory)
+                DispatchQueue.main.async {
+                    self.presentPicker(filter: nil, delegate: self)
+                }
+            default:
+                failure()
+                preconditionFailure("there is a status case that has not been considered")
+            }
+        }
+        PHPhotoLibrary.requestAuthorization(for: .readWrite, handler: permissionHandler)
     }
 }
 

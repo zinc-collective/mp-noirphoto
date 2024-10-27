@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Photos
 
 
 class SplashViewController: UIViewController {
@@ -34,33 +33,24 @@ class SplashViewController: UIViewController {
     }
 
     @IBAction func handleLibrary(_ sender: AnyObject) {
-        self.logger?.logToConsole("LIBRARY", .info, .splashVC)
-        PHPhotoLibrary.requestAuthorization { status in
-            switch status {
-            case .authorized:
-                print("AUTHORIZED")
-            case .restricted:
-                print("RESTRICTED")
-            case .denied:
-                print("DENIED")
-            default:
-                // place for .NotDetermined - in this callback status is already determined so should never get here
-                break
-            }
-
+        let failureHandler: PhotoProvider.FailureCompletion = {
             DispatchQueue.main.async {
-                self.openPicker()
+                Alert.showAlert(on: self,
+                                title: String(localized: "PL_Title_Access_Required"),
+                                message: String(localized: "PL_0000"),
+                                action: { _ in
+                    guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                    UIApplication.shared.open(url)
+                })
             }
         }
-    }
-    
-    func openPicker() {
-        self.imageProvider?.getPhoto({ [weak self] image, assetIdentifier in
+        let successHandler: PhotoProvider.SuccessCompletion = { [weak self] image, assetIdentifier in
             guard let self = self,
                   let image = image,
                   let assetIdentifier = assetIdentifier else { return }
             self.delegate?.providerDidPickImage(UIImage(cgImage: image), assetIdentifier: assetIdentifier)
-        })
+        }
+        imageProvider?.getPhoto(success: successHandler, failure: failureHandler)
     }
 }
 
