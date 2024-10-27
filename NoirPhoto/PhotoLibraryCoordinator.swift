@@ -13,7 +13,6 @@ import PhotosUI
 protocol PhotoProvider {
     typealias SuccessCompletion = (CGImage?, String?) -> Void
     typealias FailureCompletion = () -> Void
-    func getMetaData(assetURL: NSURL) -> NSMutableDictionary?
     func getMetaData(assetIdentifier: String, completion: @escaping (Result<NSMutableDictionary?, Error>) -> Void)
     func getPhoto(success: @escaping SuccessCompletion, failure: @escaping FailureCompletion)
 }
@@ -173,10 +172,6 @@ private extension PhotoLibraryCoordinator {
 
 // MARK: - PhotoProvider
 extension PhotoLibraryCoordinator: PhotoProvider {
-    func getMetaData(assetURL: NSURL) -> NSMutableDictionary? {
-        return NSMutableDictionary(dictionary: [String: Any]())
-    }
-    
     func getMetaData(assetIdentifier: String, completion: @escaping (Result<NSMutableDictionary?, Error>) -> Void) {
         // from: https://codermite.com/t/extracting-image-meta-data-from-a-picture/
         if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject {
