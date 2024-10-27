@@ -22,9 +22,19 @@ enum Alert {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: handler)
         alert.addAction(action)
-        DispatchQueue.main.async {
+        DispatchQueue.mainAsyncIfNeeded {
             viewController.presentedViewController?.dismiss(animated: false)
             viewController.present(alert, animated: true)
+        }
+    }
+}
+
+extension DispatchQueue {
+    static func mainAsyncIfNeeded(execute work: @escaping () -> Void) {
+        if Thread.isMainThread {
+            work()
+        } else {
+            main.async(execute: work)
         }
     }
 }

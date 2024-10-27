@@ -153,14 +153,17 @@ private extension PhotoLibraryCoordinator {
         // Set the preselected asset identifiers with the identifiers that the app tracks.
         configuration.preselectedAssetIdentifiers = []
         
-        self.picker = PHPickerViewController(configuration: configuration)
-        guard let picker = self.picker else { return }
-        picker.delegate = delegate ?? self
-        parent?.present(picker, animated: true)
+        DispatchQueue.mainAsyncIfNeeded { [weak self] in
+            guard let self = self else { return }
+            self.picker = PHPickerViewController(configuration: configuration)
+            guard let picker = self.picker else { return }
+            picker.delegate = delegate ?? self
+            parent?.present(picker, animated: true)
+        }
     }
     
     func displayProgress(_ progress: Float) {
-        DispatchQueue.main.async {
+        DispatchQueue.mainAsyncIfNeeded {
             self.progressView?.isHidden = progress >= 1.0
             self.progressView?.setProgress(progress, animated: true)
         }
@@ -223,9 +226,7 @@ extension PhotoLibraryCoordinator: PhotoProvider {
                 // The user explicitly granted this app access to the photo library.
                 let msg = status == .authorized ? "AUTHORIZED COORDINATOR" : "LIMITED COORDINATOR"
                 self.logger?.logToConsole(msg, .info, managerCategory)
-                DispatchQueue.main.async {
-                    self.presentPicker(filter: nil, delegate: self)
-                }
+                self.presentPicker(filter: nil, delegate: self)
             default:
                 failure()
                 preconditionFailure("there is a status case that has not been considered")
@@ -280,11 +281,9 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
                     guard let img = photo else {
                         self?.logger?.logError(PhotoProviderError.ImageRequestDownloadFailed(info: info))
                         guard let parent = self?.parent else { return }
-                        DispatchQueue.main.async {
-                            Alert.showAlert(on: parent,
-                                            title: String(localized: "PH_Title_LoadingError"),
-                                            message: String(localized: "PH_0002"))
-                        }
+                        Alert.showAlert(on: parent,
+                                        title: String(localized: "PH_Title_LoadingError"),
+                                        message: String(localized: "PH_0002"))
                         return
                     }
                     DispatchQueue.main.async {
@@ -294,15 +293,13 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
             } else {
                 // nil UIImage asset"
                 guard let parent = self.parent else { return }
-                DispatchQueue.main.async {
-                    Alert.showAlert(on: parent,
-                                    title: String(localized: "PH_Title_LimitedAccess_Image"),
-                                    message: String(localized: "PH_0010")) { _ in
-                        DispatchQueue.main.async { [weak self] in
-                            guard let self = self,
-                                  let parent = self.parent else { return }
-                            PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: parent)
-                        }
+                Alert.showAlert(on: parent,
+                                title: String(localized: "PH_Title_LimitedAccess_Image"),
+                                message: String(localized: "PH_0010")) { _ in
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self,
+                              let parent = self.parent else { return }
+                        PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: parent)
                     }
                 }
             }
@@ -330,11 +327,9 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
                         guard error == nil else {
                             self?.logger?.logError(PhotoProviderError.RequestDownloadFailed(error: error))
                             guard let parent = self?.parent else { return }
-                            DispatchQueue.main.async {
-                                Alert.showAlert(on: parent,
-                                                title: String(localized: "PH_Title_LoadingError"),
-                                                message: String(localized: "PH_0001"))
-                            }
+                            Alert.showAlert(on: parent,
+                                            title: String(localized: "PH_Title_LoadingError"),
+                                            message: String(localized: "PH_0001"))
                             return
                         }
                         
@@ -349,15 +344,13 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
             } else { 
                 // nil LivePhoto asset"
                 guard let parent = self.parent else { return }
-                DispatchQueue.main.async {
-                    Alert.showAlert(on: parent,
-                                    title: String(localized: "PH_Title_LimitedAccess_Image"),
-                                    message: String(localized: "PH_0011")) { _ in
-                        DispatchQueue.main.async { [weak self] in
-                            guard let self = self,
-                                  let parent = self.parent else { return }
-                            PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: parent)
-                        }
+                Alert.showAlert(on: parent,
+                                title: String(localized: "PH_Title_LimitedAccess_Image"),
+                                message: String(localized: "PH_0011")) { _ in
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self,
+                              let parent = self.parent else { return }
+                        PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: parent)
                     }
                 }
             }
@@ -377,11 +370,9 @@ extension PhotoLibraryCoordinator: PHPickerViewControllerDelegate {
                     logger?.logError(PhotoProviderError.UnknownAssetLoadFailed(info: ["failedType": itemProvider.registeredTypeIdentifiers]))
                     
                     guard let parent = self.parent else { return }
-                    DispatchQueue.main.async {
-                        Alert.showAlert(on: parent,
-                                        title: String(localized: "PH_Title_LoadingError"),
-                                        message: String(localized: "PH_0003"))
-                    }
+                    Alert.showAlert(on: parent,
+                                    title: String(localized: "PH_Title_LoadingError"),
+                                    message: String(localized: "PH_0003"))
                 }
             })
         }

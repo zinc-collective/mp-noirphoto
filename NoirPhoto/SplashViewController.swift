@@ -34,15 +34,13 @@ class SplashViewController: UIViewController {
 
     @IBAction func handleLibrary(_ sender: AnyObject) {
         let failureHandler: PhotoProvider.FailureCompletion = {
-            DispatchQueue.main.async {
-                Alert.showAlert(on: self,
-                                title: String(localized: "PL_Title_Access_Required"),
-                                message: String(localized: "PL_0000"),
-                                action: { _ in
-                    guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-                    UIApplication.shared.open(url)
-                })
-            }
+            Alert.showAlert(on: self,
+                            title: String(localized: "PL_Title_Access_Required"),
+                            message: String(localized: "PL_0000"),
+                            action: { _ in
+                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                UIApplication.shared.open(url)
+            })
         }
         let successHandler: PhotoProvider.SuccessCompletion = { [weak self] image, assetIdentifier in
             guard let self = self,
