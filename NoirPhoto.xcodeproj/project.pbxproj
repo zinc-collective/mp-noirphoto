@@ -1054,6 +1054,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7G5K7Y23NM;
 				INFOPLIST_FILE = NoirPhoto/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1061,7 +1062,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.3.0;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.redgiantsoftware.noir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1078,6 +1079,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7G5K7Y23NM;
 				INFOPLIST_FILE = NoirPhoto/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1085,7 +1087,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.3.0;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.redgiantsoftware.noir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
