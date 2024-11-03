@@ -90,7 +90,7 @@
                             <constraint firstAttribute="top" secondItem="fGS-eK-eKd" secondAttribute="top" id="4IP-eu-kip"/>
                             <constraint firstItem="fGS-eK-eKd" firstAttribute="centerX" secondItem="r1r-4r-x2F" secondAttribute="centerX" id="8sU-fk-czS"/>
                             <constraint firstAttribute="trailing" secondItem="7Q1-Ch-3Nx" secondAttribute="trailing" id="Al8-5g-o52"/>
-                            <constraint firstItem="UTF-52-x16" firstAttribute="bottom" secondItem="7Q1-Ch-3Nx" secondAttribute="top" constant="41" id="CLE-SS-5gd"/>
+                            <constraint firstItem="UTF-52-x16" firstAttribute="bottom" secondItem="7Q1-Ch-3Nx" secondAttribute="top" constant="48" id="CLE-SS-5gd"/>
                             <constraint firstItem="Q2s-DE-Ck9" firstAttribute="leading" secondItem="r1r-4r-x2F" secondAttribute="leading" id="Fgf-rs-FA4"/>
                             <constraint firstItem="ckS-hN-HwQ" firstAttribute="bottom" secondItem="Q2s-DE-Ck9" secondAttribute="bottom" constant="-5" id="KlI-Lb-stl">
                                 <variation key="heightClass=regular-widthClass=regular" constant="11"/>
