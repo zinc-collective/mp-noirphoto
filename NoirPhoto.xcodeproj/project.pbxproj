@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D12E29F2C8C2DF800A529E1 /* UIScene+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D12E29E2C8C2DF800A529E1 /* UIScene+Ext.swift */; };
+		6D18F3D72CDD0DB000C45A19 /* Splash-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D18F3D62CDD0DB000C45A19 /* Splash-iPad.storyboard */; };
 		6D3374D12C973C23004FC2D3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 6D3374D02C973C23004FC2D3 /* Localizable.xcstrings */; };
 		6D89EDAD2CD62DE5004B2386 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D89EDAC2CD62DE5004B2386 /* Launch Screen.storyboard */; };
 		6DC38A482C84C11B0025DE7A /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC38A472C84C11B0025DE7A /* LogManager.swift */; };
@@ -176,6 +177,7 @@
 
 /* Begin PBXFileReference section */
 		6D12E29E2C8C2DF800A529E1 /* UIScene+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScene+Ext.swift"; sourceTree = "<group>"; };
+		6D18F3D62CDD0DB000C45A19 /* Splash-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Splash-iPad.storyboard"; path = "Splash/Splash-iPad.storyboard"; sourceTree = "<group>"; };
 		6D3374D02C973C23004FC2D3 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		6D4385612CC964AF006B312A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		6D89EDAC2CD62DE5004B2386 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				783B0F1E1CA5A4DD002A77AB /* Splash.storyboard */,
+				6D18F3D62CDD0DB000C45A19 /* Splash-iPad.storyboard */,
 				78330FA81CA43D6F00B04CFD /* SplashViewController.swift */,
 			);
 			name = Splash;
@@ -877,6 +880,7 @@
 				787582B51CA2EC3800100514 /* adjust_mask@2x.png in Resources */,
 				787582B61CA2EC3800100514 /* btn_home_info@2x.png in Resources */,
 				787582181CA2EC2400100514 /* preset_review_mask_iPad.png in Resources */,
+				6D18F3D72CDD0DB000C45A19 /* Splash-iPad.storyboard in Resources */,
 				787582D01CA2EC3800100514 /* tint_btn_sel_2@2x.png in Resources */,
 				787583271CA2EC5900100514 /* Icon-76.png in Resources */,
 				787582B31CA2EC3800100514 /* adjust_in_out4@2x.png in Resources */,

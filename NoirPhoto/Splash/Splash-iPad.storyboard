@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="ipad10_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
@@ -10,29 +10,29 @@
         <!--Splash View Controller-->
         <scene sceneID="ZJk-cu-MQF">
             <objects>
-                <viewController storyboardIdentifier="Splash" id="d3d-20-KLX" customClass="SplashViewController" customModule="NoirPhoto" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Splash-iPad" id="d3d-20-KLX" customClass="SplashViewController" customModule="NoirPhoto" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VFO-3T-CsQ"/>
                         <viewControllerLayoutGuide type="bottom" id="aNG-nY-Xrp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="r1r-4r-x2F">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashFull" translatesAutoresizingMaskIntoConstraints="NO" id="Q2s-DE-Ck9">
-                                <rect key="frame" x="0.0" y="228.66666666666669" width="393" height="589.33333333333326"/>
+                                <rect key="frame" x="0.0" y="-70" width="820" height="1230"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Q2s-DE-Ck9" secondAttribute="height" multiplier="2:3" id="jwM-Ik-X44"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SplashBottom" translatesAutoresizingMaskIntoConstraints="NO" id="7Q1-Ch-3Nx">
-                                <rect key="frame" x="0.0" y="519.66666666666663" width="393" height="298.33333333333337"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SplashBottom-iPad" translatesAutoresizingMaskIntoConstraints="NO" id="7Q1-Ch-3Nx">
+                                <rect key="frame" x="0.0" y="892" width="820" height="268"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="7Q1-Ch-3Nx" secondAttribute="height" multiplier="320:243" id="CTF-fI-16R"/>
+                                    <constraint firstAttribute="width" secondItem="7Q1-Ch-3Nx" secondAttribute="height" multiplier="768:251" id="CRO-1K-iSK"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SdQ-Yx-00g" userLabel="picker">
-                                <rect key="frame" x="0.0" y="228.66666666666669" width="393" height="589.33333333333326"/>
+                                <rect key="frame" x="0.0" y="130" width="819" height="1024"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="SdQ-Yx-00g" secondAttribute="height" multiplier="2:3" id="5Ew-11-jWT"/>
                                 </constraints>
@@ -54,10 +54,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ckS-hN-HwQ" userLabel="info">
-                                <rect key="frame" x="360" y="789" width="24" height="24"/>
+                                <rect key="frame" x="746" y="1103" width="62" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="bDP-oB-rXK"/>
-                                    <constraint firstAttribute="height" constant="24" id="yli-IY-RZO"/>
+                                    <constraint firstAttribute="width" constant="62" id="bDP-oB-rXK"/>
+                                    <constraint firstAttribute="height" constant="50" id="yli-IY-RZO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                                 <state key="normal" image="SplashInfoButton">
@@ -72,14 +72,14 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UTF-52-x16">
-                                <rect key="frame" x="0.0" y="305.66666666666669" width="393" height="262.00000000000006"/>
+                                <rect key="frame" x="0.0" y="355.5" width="820" height="546.5"/>
                                 <color key="backgroundColor" red="0.015686274510000001" green="0.015686274510000001" blue="0.015686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="UTF-52-x16" secondAttribute="height" multiplier="3:2" id="7V6-Ef-UQc"/>
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SplashTitle" translatesAutoresizingMaskIntoConstraints="NO" id="fGS-eK-eKd">
-                                <rect key="frame" x="31.666666666666657" y="59" width="330" height="268"/>
+                                <rect key="frame" x="245" y="24" width="330" height="268"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="330" id="4F1-kv-rfJ"/>
                                     <constraint firstAttribute="width" secondItem="fGS-eK-eKd" secondAttribute="height" multiplier="64:52" id="gup-03-g8x"/>
@@ -93,23 +93,19 @@
                             <constraint firstItem="fGS-eK-eKd" firstAttribute="top" secondItem="VFO-3T-CsQ" secondAttribute="bottom" id="4IP-eu-kip"/>
                             <constraint firstItem="fGS-eK-eKd" firstAttribute="centerX" secondItem="r1r-4r-x2F" secondAttribute="centerX" id="8sU-fk-czS"/>
                             <constraint firstAttribute="trailing" secondItem="7Q1-Ch-3Nx" secondAttribute="trailing" id="Al8-5g-o52"/>
-                            <constraint firstItem="UTF-52-x16" firstAttribute="bottom" secondItem="7Q1-Ch-3Nx" secondAttribute="top" constant="48" id="CLE-SS-5gd"/>
+                            <constraint firstItem="UTF-52-x16" firstAttribute="bottom" secondItem="7Q1-Ch-3Nx" secondAttribute="top" constant="10" id="CLE-SS-5gd"/>
                             <constraint firstItem="Q2s-DE-Ck9" firstAttribute="leading" secondItem="r1r-4r-x2F" secondAttribute="leading" id="Fgf-rs-FA4"/>
-                            <constraint firstItem="ckS-hN-HwQ" firstAttribute="bottom" secondItem="Q2s-DE-Ck9" secondAttribute="bottom" constant="-5" id="KlI-Lb-stl">
-                                <variation key="heightClass=regular-widthClass=regular" constant="11"/>
-                            </constraint>
+                            <constraint firstItem="ckS-hN-HwQ" firstAttribute="bottom" secondItem="Q2s-DE-Ck9" secondAttribute="bottom" constant="-7" id="KlI-Lb-stl"/>
                             <constraint firstItem="aNG-nY-Xrp" firstAttribute="top" secondItem="Q2s-DE-Ck9" secondAttribute="bottom" id="UWD-9e-8UT"/>
                             <constraint firstAttribute="trailing" secondItem="UTF-52-x16" secondAttribute="trailing" id="aJb-2Q-htz"/>
-                            <constraint firstItem="ckS-hN-HwQ" firstAttribute="trailing" secondItem="Q2s-DE-Ck9" secondAttribute="trailing" constant="-9" id="bRc-at-ngm">
-                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                            </constraint>
+                            <constraint firstItem="ckS-hN-HwQ" firstAttribute="trailing" secondItem="Q2s-DE-Ck9" secondAttribute="trailing" constant="-12" id="bRc-at-ngm"/>
                             <constraint firstItem="aNG-nY-Xrp" firstAttribute="top" secondItem="7Q1-Ch-3Nx" secondAttribute="bottom" id="c0N-kU-ixq"/>
                             <constraint firstItem="UTF-52-x16" firstAttribute="leading" secondItem="r1r-4r-x2F" secondAttribute="leading" id="d1t-Yp-yOa"/>
                             <constraint firstItem="7Q1-Ch-3Nx" firstAttribute="leading" secondItem="r1r-4r-x2F" secondAttribute="leading" id="hDp-Hx-9vw"/>
-                            <constraint firstItem="Q2s-DE-Ck9" firstAttribute="bottom" secondItem="SdQ-Yx-00g" secondAttribute="bottom" id="qFr-sh-RhM"/>
+                            <constraint firstItem="Q2s-DE-Ck9" firstAttribute="bottom" secondItem="SdQ-Yx-00g" secondAttribute="bottom" constant="6" id="qFr-sh-RhM"/>
                             <constraint firstItem="UTF-52-x16" firstAttribute="top" secondItem="r1r-4r-x2F" secondAttribute="top" id="wa1-k0-RvR"/>
                             <constraint firstItem="SdQ-Yx-00g" firstAttribute="leading" secondItem="r1r-4r-x2F" secondAttribute="leading" id="xth-Rn-rmQ"/>
-                            <constraint firstAttribute="trailing" secondItem="SdQ-Yx-00g" secondAttribute="trailing" id="zS1-cL-f1l"/>
+                            <constraint firstAttribute="trailing" secondItem="SdQ-Yx-00g" secondAttribute="trailing" constant="1" id="zS1-cL-f1l"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -123,15 +119,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kfg-Yc-XWb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="897" y="505"/>
+            <point key="canvasLocation" x="967" y="471"/>
         </scene>
     </scenes>
     <resources>
-        <image name="SplashBottom" width="320" height="243.5"/>
-        <image name="SplashButton" width="320" height="480"/>
-        <image name="SplashButton-Highlight" width="320" height="480"/>
+        <image name="SplashBottom-iPad" width="384" height="125.5"/>
+        <image name="SplashButton" width="768" height="1024"/>
+        <image name="SplashButton-Highlight" width="768" height="1024"/>
         <image name="SplashFull" width="768" height="1024"/>
-        <image name="SplashInfoButton" width="23.5" height="23.5"/>
+        <image name="SplashInfoButton" width="39" height="39"/>
         <image name="SplashTitle" width="320" height="235"/>
     </resources>
 </document>

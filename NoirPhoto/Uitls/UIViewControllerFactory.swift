@@ -44,8 +44,9 @@ class UIViewControllerFactory: ViewControllerFactory {
     }
     
     func createSplashViewController(viewController: ImageEditorInterfaceProvider) -> SplashViewController {
-        let splashController: SplashViewController = UIStoryboard(name: "Splash", bundle: nil)
-                                    .instantiateViewController(withIdentifier: "SplashViewController") as! SplashViewController
+        let nibName: String = self.isIPad ? "Splash-iPad" : "Splash"
+        let splashController: SplashViewController = UIStoryboard(name: nibName, bundle: nil)
+                                    .instantiateViewController(withIdentifier: nibName) as! SplashViewController
         let coordinator = createLibrary(splashController)
         coordinator.logger = createLogger()
         
