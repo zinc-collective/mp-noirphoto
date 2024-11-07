@@ -108,8 +108,14 @@
                             <constraint firstAttribute="trailing" secondItem="SdQ-Yx-00g" secondAttribute="trailing" constant="1" id="zS1-cL-f1l"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="UTF-52-x16"/>
+                            </mask>
                             <mask key="constraints">
+                                <exclude reference="aJb-2Q-htz"/>
+                                <exclude reference="d1t-Yp-yOa"/>
                                 <exclude reference="wa1-k0-RvR"/>
+                                <exclude reference="CLE-SS-5gd"/>
                             </mask>
                         </variation>
                     </view>
