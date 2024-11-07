@@ -77,7 +77,7 @@
                     <rect key="frame" x="259" y="897" width="382" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aOs-jW-9tL">
+                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aOs-jW-9tL">
                     <rect key="frame" x="50" y="80" width="668" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="16" id="MeJ-lz-dH0"/>
