@@ -38,3 +38,40 @@ extension DispatchQueue {
         }
     }
 }
+
+
+extension UIView {
+    enum OffsetGuide: CaseIterable {
+        case top
+        case bottom
+        case leading
+        case trailing
+    }
+    
+    func pinToEdges(of superview: UIView, constrainToMargins: Bool = false, offsets: [OffsetGuide: Double] = [:]) {
+        var rules: [NSLayoutConstraint]?
+        translatesAutoresizingMaskIntoConstraints = false
+        if constrainToMargins {
+            rules = [
+                topAnchor.constraint(equalTo: superview.layoutMarginsGuide.topAnchor, constant: offsets[.top] ?? 0),
+                leadingAnchor.constraint(equalTo: superview.layoutMarginsGuide.leadingAnchor, constant: offsets[.leading] ?? 0),
+                trailingAnchor.constraint(equalTo: superview.layoutMarginsGuide.trailingAnchor, constant: offsets[.trailing] ?? 0),
+                bottomAnchor.constraint(equalTo: superview.layoutMarginsGuide.bottomAnchor, constant: offsets[.bottom] ?? 0)
+            ]
+        } else {
+            rules = [
+                topAnchor.constraint(equalTo: superview.topAnchor, constant: offsets[.top] ?? 0),
+                leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: offsets[.leading] ?? 0),
+                trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: offsets[.trailing] ?? 0),
+                bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: offsets[.bottom] ?? 0)
+            ]
+        }
+        NSLayoutConstraint.activate(rules!)
+    }
+    
+    func addSubviews(_ views: UIView...) {
+        for view in views {
+            addSubview(view)
+        }
+    }
+}
