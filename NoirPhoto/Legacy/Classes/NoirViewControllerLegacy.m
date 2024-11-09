@@ -24,25 +24,28 @@
 #define ctrl_pad_head 35
 #define ctrl_pad_head_ipad 125
 
-#define IPHONE5_HEIGHT_DIFFERENCE 88 //568-480
+#define STARTING_HEIGHT 236.5
+#define STARTING_HEIGHT_IPAD 768.0 + IPAD_HEIGHT_DIFFERENCE - ctrl_pad_head_ipad
+#define IPHONE5_HEIGHT_DIFFERENCE 183
+#define IPAD_HEIGHT_DIFFERENCE 258
 
 #define photo_view_rect				CGRectMake(0.0, 0.0, 320.0, 240.0)
 #define ellipse_view_rect			CGRectMake(0.0, 0.0, 320.0, 240.0)
-#define ctrl_pad_view_rect			CGRectMake(0.0, 236.5, 320.0, 243.5)
+#define ctrl_pad_view_rect			CGRectMake(0.0, STARTING_HEIGHT, 320.0, 243.5)
 #define photo_full_view_rect				CGRectMake(0.0, 0.0, 320.0, 480)
 #define photo_full_view_rect2				CGRectMake(0.0, 0.0, 320.0, (480 - ctrl_pad_head))
 #define ellipse_full_view_rect			CGRectMake(0.0, 0.0, 320.0, 480)
 
 #define photo_view_rect_iphone5				CGRectMake(0.0, 0.0, 320.0, 240.0+IPHONE5_HEIGHT_DIFFERENCE)
 #define ellipse_view_rect_iphone5			CGRectMake(0.0, 0.0, 320.0, 240.0+IPHONE5_HEIGHT_DIFFERENCE)
-#define ctrl_pad_view_rect_iphone5			CGRectMake(0.0, 236.5+IPHONE5_HEIGHT_DIFFERENCE, 320.0, 243.5)
+#define ctrl_pad_view_rect_iphone5            CGRectMake(0.0, STARTING_HEIGHT+IPHONE5_HEIGHT_DIFFERENCE, 320.0, 243.5)
 #define photo_full_view_rect_iphone5				CGRectMake(0.0, 0.0, 320.0, 480+IPHONE5_HEIGHT_DIFFERENCE)
 #define photo_full_view_rect2_iphone5				CGRectMake(0.0, 0.0, 320.0, ((480+IPHONE5_HEIGHT_DIFFERENCE) - ctrl_pad_head))
 #define ellipse_full_view_rect_iphone5			CGRectMake(0.0, 0.0, 320.0, 480+IPHONE5_HEIGHT_DIFFERENCE)
 
-#define photo_view_rect_ipad			CGRectMake(0.0, 0.0, 768.0, 768.0)
-#define ellipse_view_rect_ipad			CGRectMake(0.0, 0.0, 768.0, 768.0)
-#define ctrl_pad_view_rect_ipad			CGRectMake(0.0, 768.0, 768.0, 256.0)
+#define photo_view_rect_ipad			CGRectMake(0.0, 0.0, 768.0, STARTING_HEIGHT_IPAD)
+#define ellipse_view_rect_ipad			CGRectMake(0.0, 0.0, 768.0, STARTING_HEIGHT_IPAD)
+#define ctrl_pad_view_rect_ipad            CGRectMake(0.0, STARTING_HEIGHT_IPAD, 768.0, 256.0)
 #define photo_full_view_rect_ipad			CGRectMake(0.0, 0.0, 768.0, 1024.0)
 #define photo_full_view_rect_ipad2			CGRectMake(0.0, 0.0, 768.0, (1024.0-ctrl_pad_head_ipad))
 #define ellipse_full_view_rect_ipad			CGRectMake(0.0, 0.0, 768.0, 1024.0)
@@ -307,24 +310,30 @@ void loadGaindLUT(void)
 
 
     //bret button fix-up for the 4 inch display
+    CGFloat offset = 0.0;
     if (IS_IPHONE_5)
     {
-        CGRect frame = loadBtn.frame;
-        frame.origin.y += IPHONE5_HEIGHT_DIFFERENCE;
-        loadBtn.frame = frame;
-
-        frame = saveBtn.frame;
-        frame.origin.y += IPHONE5_HEIGHT_DIFFERENCE;
-        saveBtn.frame = frame;
-
-        frame = infoBtn.frame;
-        frame.origin.y += IPHONE5_HEIGHT_DIFFERENCE;
-        infoBtn.frame = frame;
-
-        frame = tintMaskView.frame;
-        frame.origin.y += IPHONE5_HEIGHT_DIFFERENCE;
-        tintMaskView.frame = frame;
+        offset = IPHONE5_HEIGHT_DIFFERENCE;
     }
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
+    {
+        offset = IPAD_HEIGHT_DIFFERENCE/2+4;
+    }
+    CGRect frame = loadBtn.frame;
+    frame.origin.y += offset;
+    loadBtn.frame = frame;
+
+    frame = saveBtn.frame;
+    frame.origin.y += offset;
+    saveBtn.frame = frame;
+
+    frame = infoBtn.frame;
+    frame.origin.y += offset;
+    infoBtn.frame = frame;
+
+    frame = tintMaskView.frame;
+    frame.origin.y += offset;
+    tintMaskView.frame = frame;
 }
 
 -(void)buildVignetteView {
