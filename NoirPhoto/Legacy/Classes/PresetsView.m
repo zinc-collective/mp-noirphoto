@@ -304,17 +304,6 @@
 {
 	[self stopTimer];
 
-	//remove the target of button
-	for(UIButton *btn in _buttons)
-	{
-		if(btn.tag == _touchDownIndex)
-		{
-			[btn removeTarget:self action:@selector(itemAction:) forControlEvents:UIControlEventTouchUpInside];
-			break;
-		}
-	}
-
-
 	//alert
 	[self alertYouAction:@"Update Preset" withMsg:@"Replace this preset with the current settings?" withOK:@"Replace" withCancel:@"Cancel"];
 }
