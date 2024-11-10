@@ -124,8 +124,7 @@ class NoirViewController: NoirViewControllerLegacy {
         return true
     }
     
-#warning("### - need to verify the entire photo selection flow from splash screen & NoirVC")
-#warning("### - need to verify the iPad behavior")
+
     @IBAction func handleLibrary(_ sender: AnyObject) {
         let failureHandler: PhotoProvider.FailureCompletion = {
             Alert.showAlert(on: self,
