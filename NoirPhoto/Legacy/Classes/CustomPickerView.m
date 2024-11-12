@@ -82,34 +82,6 @@
     } completion:nil];
 }
 
--(void)setTheCurrentValue2:(float)value
-{
-	_bOutSet = YES;
-
-	float visibleHeight = _scrollView.frame.size.height;
-	CGPoint contentOffset = _scrollView.contentOffset;
-	float totalHeight = _useHeight;
-
-	float curUseValue = value - _minValue;
-	float curPresent = curUseValue/(_maxValue - _minValue);
-	float perUseHeight = totalHeight * curPresent;
-
-	float offsetY = perUseHeight + _useOffset - visibleHeight/2;
-
-
-	//move to new offset Y
-	[UIView beginAnimations:@"movement" context:nil];
-	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
-	[UIView setAnimationDuration:0];
-
-	contentOffset.y = offsetY;
-	_scrollView.contentOffset = contentOffset;
-
-	[UIView commitAnimations];
-
-}
-
-
 
 #pragma mark -
 #pragma mark in use functions
