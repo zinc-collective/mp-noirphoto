@@ -26,7 +26,7 @@
 
 		//add adjust mask view
 		NSString *maskName = @"adjust_mask.png";
-		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+		if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 		{
 			maskName = @"adjust_mask-iPad.png";
 		}
@@ -50,7 +50,7 @@
 #pragma mark in use functions
 -(void)addAdjusts
 {
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) //ipad
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) //ipad
 	{
 		//add outside picker
 		_expOutsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(1.0, 0.0, 66.0, 183.0) image:[UIImage imageNamed:@"adjust_in_out-iPad.png"] topOffset:44 btmOffset:38.0];

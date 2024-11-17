@@ -1,14 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoirViewController">
             <connections>
                 <outlet property="infoBtn" destination="30" id="32"/>
                 <outlet property="loadBtn" destination="24" id="26"/>
+                <outlet property="progressView" destination="Kkw-02-4Uy" id="LWl-Rk-HlG"/>
                 <outlet property="saveBtn" destination="25" id="27"/>
                 <outlet property="tintMaskView" destination="33" id="34"/>
                 <outlet property="view" destination="6" id="7"/>
@@ -19,74 +23,90 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="24">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24">
                     <rect key="frame" x="209" y="413" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                     <state key="normal" backgroundImage="btn_load.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="disabled" backgroundImage="btn_load_sel.png"/>
                     <state key="selected" backgroundImage="btn_load_sel.png"/>
                     <state key="highlighted" backgroundImage="btn_load_sel.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
-                        <action selector="loadAction:" destination="-1" eventType="touchUpInside" id="28"/>
+                        <action selector="handleLibrary:" destination="-1" eventType="touchUpInside" id="IOy-9A-SQi"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="25" userLabel="Share Btn">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25" userLabel="Share Btn">
                     <rect key="frame" x="264" y="414" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                     <state key="normal" backgroundImage="btn_save.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="disabled" backgroundImage="btn_save_sel.png"/>
                     <state key="selected" backgroundImage="btn_save_sel.png"/>
                     <state key="highlighted" backgroundImage="btn_save_sel.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="onTapShare" destination="-1" eventType="touchUpInside" id="c5Z-fX-nCv"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="30">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="30">
                     <rect key="frame" x="289" y="454" width="24" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                     <state key="normal" backgroundImage="btn_home_info.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="disabled" backgroundImage="btn_home_info_sel.png"/>
                     <state key="selected" backgroundImage="btn_home_info_sel.png"/>
                     <state key="highlighted" backgroundImage="btn_home_info_sel.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
-                        <action selector="infoAction:" destination="-1" eventType="touchUpInside" id="31"/>
+                        <action selector="handleInfo:" destination="-1" eventType="touchUpInside" id="VDr-eH-bv6"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="tint_mask_1.png" id="33">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="tint_mask_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="33">
                     <rect key="frame" x="194" y="296" width="115" height="160"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Kkw-02-4Uy">
+                    <rect key="frame" x="50" y="40" width="220" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="12" id="1wP-Bc-PWQ"/>
+                    </constraints>
+                    <color key="progressTintColor" systemColor="tintColor"/>
+                </progressView>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Kkw-02-4Uy" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="50" id="UB5-BV-g8q"/>
+                <constraint firstItem="Kkw-02-4Uy" firstAttribute="top" secondItem="6" secondAttribute="top" constant="40" id="gIt-1S-agc"/>
+                <constraint firstAttribute="trailing" secondItem="Kkw-02-4Uy" secondAttribute="trailing" constant="50" id="qLB-ij-3tz"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="132" y="-4"/>
         </view>
     </objects>
     <resources>
-        <image name="btn_home_info.png" width="24" height="24"/>
-        <image name="btn_home_info_sel.png" width="24" height="24"/>
-        <image name="btn_load.png" width="40" height="40"/>
-        <image name="btn_load_sel.png" width="40" height="40"/>
-        <image name="btn_save.png" width="40" height="40"/>
-        <image name="btn_save_sel.png" width="40" height="40"/>
-        <image name="tint_mask_1.png" width="115" height="160"/>
+        <image name="btn_home_info.png" width="23.5" height="23.5"/>
+        <image name="btn_home_info_sel.png" width="23.5" height="23.5"/>
+        <image name="btn_load.png" width="39.5" height="39.5"/>
+        <image name="btn_load_sel.png" width="39.5" height="39.5"/>
+        <image name="btn_save.png" width="39.5" height="39.5"/>
+        <image name="btn_save_sel.png" width="39.5" height="39.5"/>
+        <image name="tint_mask_1.png" width="114.5" height="159.5"/>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

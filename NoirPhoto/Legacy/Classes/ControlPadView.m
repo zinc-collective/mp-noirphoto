@@ -37,7 +37,7 @@
 
 		//add background view
 		NSString *imageName = @"ctrl_pad_bg.png";
-		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+		if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 		{
 			imageName = @"ctrl_pad_bg-iPad.png";
 		}
@@ -72,13 +72,22 @@
 }
 -(void)alertYouAction:(NSString*)title withMsg:(NSString*)alertMsg withOK:(NSString*)okMsg withCancel:(NSString*)cancelMsg
 {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:alertMsg delegate:self cancelButtonTitle:okMsg otherButtonTitles:cancelMsg, nil];
-	[alert setDelegate:self];
-	alert.message = alertMsg;
-	[alert show];
+
+    __weak ControlPadView *weakSelf = self;
+    UIAlertAction* okAction = [[UIAlertAction class] actionWithTitle:okMsg style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action){
+        if (weakSelf != nil && weakSelf.delegate != nil) {
+            [weakSelf.delegate presetsResetToDefault];
+        }
+    }];
+    UIAlertAction* cancelAction = [[UIAlertAction class] actionWithTitle:cancelMsg style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){}];
+    UIAlertController *alert = [[UIAlertController class] alertControllerWithTitle:title message:alertMsg preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:cancelAction];
+    [alert addAction:okAction];
+
+    if(self.delegate) {
+        [self.delegate presentPresetsViewAlert:alert];
+    }
 }
-
-
 
 
 
@@ -91,7 +100,7 @@
 
 	if(_prestsView == nil)
 	{
-		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+		if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 		{
 			_prestsView = [[PresetsView alloc] initWithFrame:presets_rect_iPad items:nil dele:self btnWidth:80.0 btnHeight:80.0];
 		}
@@ -112,7 +121,7 @@
 
 	if(_tintsView == nil)
 	{
-		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+		if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 		{
 			_tintsView = [[TintsView alloc] initWithFrame:tints_rect_iPad items:nil dele:self posformat:pfLine btnWidth:85 btnHeight:85];
 		}
@@ -131,7 +140,7 @@
 	if(_adjustView == nil)
 	{
 		CGRect adjustFrame = adjusts_rect;
-		if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+		if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 		{
 			adjustFrame = adjusts_rect_iPad;
 		}
@@ -179,6 +188,12 @@
 		[self.delegate overWritePresetToIndex:index];
 	}
 }
+-(void)presentPresetsViewAlert:(UIAlertController *)alert
+{
+    if(self.delegate) {
+        [self.delegate presentPresetsViewAlert:alert];
+    }
+}
 
 //TintsViewDelegate
 -(void)tintsButtonChooseIndex:(NSInteger)index data:(id)data
@@ -195,18 +210,6 @@
 	if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(adjustExpinside:expOutside:contrast:isFinal:)])
 	{
 		[self.delegate adjustExpinside:expInside expOutside:expOutside contrast:contrast isFinal:isFinal];
-	}
-}
-
-//UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-	if(buttonIndex == 0)
-	{
-		if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(presetsResetToDefault)])
-		{
-			[self.delegate presetsResetToDefault];
-		}
 	}
 }
 

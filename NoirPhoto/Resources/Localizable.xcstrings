@@ -1,0 +1,276 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "control pad reset alert Cancel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "control pad reset alert message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want reset to default preset?"
+          }
+        }
+      }
+    },
+    "control pad reset alert OK" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "control pad reset alert title" : {
+      "comment" : "alert messages",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noir"
+          }
+        }
+      }
+    },
+    "N_0001" : {
+      "comment" : "Share operation failed",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to share item. (N_0001)"
+          }
+        }
+      }
+    },
+    "N_0002" : {
+      "comment" : "metadata write failed. Unknown reason.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Write Error (N_0002)"
+          }
+        }
+      }
+    },
+    "N_0003" : {
+      "comment" : "metadata write failed. File path not found",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Write Error (N_0003)"
+          }
+        }
+      }
+    },
+    "PH_0000" : {
+      "comment" : "General Error for unspecified error case in the PhotoProvider",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to load image.  (PH_0000)"
+          }
+        }
+      }
+    },
+    "PH_0001" : {
+      "comment" : "The full version of the selected LiveImage is not on device and this app is unable to download selected image from iCloud",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image download failed (PH_0001)"
+          }
+        }
+      }
+    },
+    "PH_0002" : {
+      "comment" : "The full version of the selected UImage is not on device and this app is unable to download selected image from iCloud",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image download failed (PH_0002)"
+          }
+        }
+      }
+    },
+    "PH_0003" : {
+      "comment" : "The asset  identifier is for an unsupported file type - unable to process resource",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to load image.  (PH_0003)"
+          }
+        }
+      }
+    },
+    "PH_0004" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to load image.  (PH_0004)"
+          }
+        }
+      }
+    },
+    "PH_0005" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to load image.  (PH_0005)"
+          }
+        }
+      }
+    },
+    "PH_0006" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to load image.  (PH_0006)"
+          }
+        }
+      }
+    },
+    "PH_0007" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot fetch data from PHAsset (PH_0007)"
+          }
+        }
+      }
+    },
+    "PH_0008" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot create image source (PH_0008)"
+          }
+        }
+      }
+    },
+    "PH_0009" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot fetch image properties (PH_0009)"
+          }
+        }
+      }
+    },
+    "PH_0010" : {
+      "comment" : "If the library permission level is \".limited\"  and the selected image is NOT in that set, the  asset request returns nil.  This is likely the reason for this error",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to load image. Please ensure it is included in the limited set of photos from the Photo Library {PH_0010)"
+          }
+        }
+      }
+    },
+    "PH_0011" : {
+      "comment" : "If the library permission level is \".limited\"  and the selected image is NOT in that set, the  asset request returns nil.  This is likely the reason for this error",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to load image. Please ensure it is included in the limited set of photos from the Photo Library {PH_0011)"
+          }
+        }
+      }
+    },
+    "PH_0012" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to load HEIC image.  (PH_0012)"
+          }
+        }
+      }
+    },
+    "PH_Title_LimitedAccess_Image" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inaccessible Image"
+          }
+        }
+      }
+    },
+    "PH_Title_LoadingError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading Error"
+          }
+        }
+      }
+    },
+    "PL_0000" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please grant permission to the photo library to use this app"
+          }
+        }
+      }
+    },
+    "PL_Title_Access_Required" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo Access Required"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

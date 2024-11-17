@@ -1,14 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoirViewController">
             <connections>
                 <outlet property="infoBtn" destination="30" id="32"/>
                 <outlet property="loadBtn" destination="24" id="26"/>
+                <outlet property="progressView" destination="aOs-jW-9tL" id="36L-7m-vKh"/>
                 <outlet property="saveBtn" destination="25" id="27"/>
                 <outlet property="tintMaskView" destination="33" id="34"/>
                 <outlet property="view" destination="6" id="7"/>
@@ -19,65 +22,77 @@
             <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="24">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24">
                     <rect key="frame" x="649" y="906" width="47" height="47"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                     <state key="normal" backgroundImage="btn_load-iPad.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="disabled" backgroundImage="btn_load_sel-iPad.png"/>
                     <state key="selected" backgroundImage="btn_load_sel-iPad.png"/>
                     <state key="highlighted" backgroundImage="btn_load_sel-iPad.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
-                        <action selector="loadAction:" destination="-1" eventType="touchUpInside" id="28"/>
+                        <action selector="handleLibrary:" destination="-1" eventType="touchUpInside" id="DiB-AR-5an"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="25" userLabel="Share Btn">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25" userLabel="Share Btn">
                     <rect key="frame" x="705" y="907" width="47" height="47"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                     <state key="normal" backgroundImage="btn_save-iPad.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="disabled" backgroundImage="btn_save_sel-iPad.png"/>
                     <state key="selected" backgroundImage="btn_save_sel-iPad.png"/>
                     <state key="highlighted" backgroundImage="btn_save_sel-iPad.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="onTapShare" destination="-1" eventType="touchUpInside" id="O5h-p9-rQa"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="30">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="30">
                     <rect key="frame" x="707" y="973" width="39" height="39"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                     <state key="normal" backgroundImage="btn_home_info-iPad.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="disabled" backgroundImage="btn_home_info_sel-iPad.png"/>
                     <state key="selected" backgroundImage="btn_home_info_sel-iPad.png"/>
                     <state key="highlighted" backgroundImage="btn_home_info_sel-iPad.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
-                        <action selector="infoAction:" destination="-1" eventType="touchUpInside" id="31"/>
+                        <action selector="handleInfo:" destination="-1" eventType="touchUpInside" id="XLy-vk-bhn"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="tint_mask_iPad_0.png" id="33">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="tint_mask_iPad_0.png" translatesAutoresizingMaskIntoConstraints="NO" id="33">
                     <rect key="frame" x="259" y="897" width="382" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aOs-jW-9tL">
+                    <rect key="frame" x="50" y="80" width="668" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="MeJ-lz-dH0"/>
+                    </constraints>
+                </progressView>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="aOs-jW-9tL" secondAttribute="trailing" constant="50" id="H9z-iJ-fop"/>
+                <constraint firstItem="aOs-jW-9tL" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="50" id="OGh-ie-tbm"/>
+                <constraint firstItem="aOs-jW-9tL" firstAttribute="top" secondItem="6" secondAttribute="top" constant="80" id="XWI-wC-lMv"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="132" y="18"/>
         </view>
     </objects>
     <resources>

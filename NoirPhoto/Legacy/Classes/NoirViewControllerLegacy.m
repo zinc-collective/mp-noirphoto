@@ -24,25 +24,28 @@
 #define ctrl_pad_head 35
 #define ctrl_pad_head_ipad 125
 
-#define IPHONE5_HEIGHT_DIFFERENCE 88 //568-480
+#define STARTING_HEIGHT 236.5
+#define STARTING_HEIGHT_IPAD 768.0 + IPAD_HEIGHT_DIFFERENCE - ctrl_pad_head_ipad
+#define IPHONE5_HEIGHT_DIFFERENCE 183
+#define IPAD_HEIGHT_DIFFERENCE 258
 
 #define photo_view_rect				CGRectMake(0.0, 0.0, 320.0, 240.0)
 #define ellipse_view_rect			CGRectMake(0.0, 0.0, 320.0, 240.0)
-#define ctrl_pad_view_rect			CGRectMake(0.0, 236.5, 320.0, 243.5)
+#define ctrl_pad_view_rect			CGRectMake(0.0, STARTING_HEIGHT, 320.0, 243.5)
 #define photo_full_view_rect				CGRectMake(0.0, 0.0, 320.0, 480)
 #define photo_full_view_rect2				CGRectMake(0.0, 0.0, 320.0, (480 - ctrl_pad_head))
 #define ellipse_full_view_rect			CGRectMake(0.0, 0.0, 320.0, 480)
 
 #define photo_view_rect_iphone5				CGRectMake(0.0, 0.0, 320.0, 240.0+IPHONE5_HEIGHT_DIFFERENCE)
 #define ellipse_view_rect_iphone5			CGRectMake(0.0, 0.0, 320.0, 240.0+IPHONE5_HEIGHT_DIFFERENCE)
-#define ctrl_pad_view_rect_iphone5			CGRectMake(0.0, 236.5+IPHONE5_HEIGHT_DIFFERENCE, 320.0, 243.5)
+#define ctrl_pad_view_rect_iphone5            CGRectMake(0.0, STARTING_HEIGHT+IPHONE5_HEIGHT_DIFFERENCE, 320.0, 243.5)
 #define photo_full_view_rect_iphone5				CGRectMake(0.0, 0.0, 320.0, 480+IPHONE5_HEIGHT_DIFFERENCE)
 #define photo_full_view_rect2_iphone5				CGRectMake(0.0, 0.0, 320.0, ((480+IPHONE5_HEIGHT_DIFFERENCE) - ctrl_pad_head))
 #define ellipse_full_view_rect_iphone5			CGRectMake(0.0, 0.0, 320.0, 480+IPHONE5_HEIGHT_DIFFERENCE)
 
-#define photo_view_rect_ipad			CGRectMake(0.0, 0.0, 768.0, 768.0)
-#define ellipse_view_rect_ipad			CGRectMake(0.0, 0.0, 768.0, 768.0)
-#define ctrl_pad_view_rect_ipad			CGRectMake(0.0, 768.0, 768.0, 256.0)
+#define photo_view_rect_ipad			CGRectMake(0.0, 0.0, 768.0, STARTING_HEIGHT_IPAD)
+#define ellipse_view_rect_ipad			CGRectMake(0.0, 0.0, 768.0, STARTING_HEIGHT_IPAD)
+#define ctrl_pad_view_rect_ipad            CGRectMake(0.0, STARTING_HEIGHT_IPAD, 768.0, 256.0)
 #define photo_full_view_rect_ipad			CGRectMake(0.0, 0.0, 768.0, 1024.0)
 #define photo_full_view_rect_ipad2			CGRectMake(0.0, 0.0, 768.0, (1024.0-ctrl_pad_head_ipad))
 #define ellipse_full_view_rect_ipad			CGRectMake(0.0, 0.0, 768.0, 1024.0)
@@ -84,7 +87,6 @@
 @synthesize mCircleShow4;
 @synthesize mCircleRender;
 @synthesize mCircleSave;
-@synthesize imagePickerPopover;
 
 @synthesize _vignetteView;
 
@@ -109,7 +111,7 @@
 
 int briteLUT[256];
 int darkLUT[256];
-void loadGaindLUT()
+void loadGaindLUT(void)
 {
 	//load LUTs
 	//
@@ -149,7 +151,7 @@ void loadGaindLUT()
 - (NSUInteger)supportedInterfaceOrientations
 {
 	NSUInteger mask = 0;
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
     {
 		mask = UIInterfaceOrientationMaskPortrait;
 	} else
@@ -163,13 +165,6 @@ void loadGaindLUT()
 
 - (void)viewDidLoad
 {
-    //bret
-    imagePickerOnScreen = NO;
-    //init picker
-	imagePicker = [[UIImagePickerController alloc] init];
-	imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-	imagePicker.delegate = self;
-
 	_bRendering = NO;
 	_bSavingOriginPhoto = NO;
 
@@ -199,7 +194,7 @@ void loadGaindLUT()
 	CGRect photoViewRect = photo_view_rect;
     if (IS_IPHONE_5)
         photoViewRect = photo_view_rect_iphone5;
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		photoViewRect = photo_view_rect_ipad;
 	}
@@ -211,7 +206,7 @@ void loadGaindLUT()
 
 
 	// baiwei for full view
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		//init phont full view
 		CGRect photoFullViewRect = photo_full_view_rect_ipad;
@@ -266,18 +261,8 @@ void loadGaindLUT()
 	 [self.view insertSubview:_ellipseView atIndex:1];
 	 */
 
-	//add vignette view
-	CGRect ellipseViewRect = ellipse_view_rect;
-    if (IS_IPHONE_5)
-        ellipseViewRect = ellipse_view_rect_iphone5;
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		ellipseViewRect = ellipse_view_rect_ipad;
-	}
-
-	_vignetteView = [[VignetteView alloc] initWithFrame:ellipseViewRect];
-	_vignetteView.delegate = self;
-	[self.view insertSubview:_vignetteView atIndex:1];
+    //add vignette view
+    [self buildVignetteView];
 
 	//initialize data
 	self.tints = [self tintsInitialization];
@@ -296,7 +281,7 @@ void loadGaindLUT()
 	CGRect ctrlPadViewRect = ctrl_pad_view_rect;
     if (IS_IPHONE_5)
         ctrlPadViewRect = ctrl_pad_view_rect_iphone5;
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		ctrlPadViewRect = ctrl_pad_view_rect_ipad;
 	}
@@ -316,7 +301,7 @@ void loadGaindLUT()
 	[self.view addSubview:self.savingMaskView];
 
 	//add saving spinner
-	UIActivityIndicatorView *smSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    UIActivityIndicatorView *smSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
 	smSpinner.frame = CGRectMake((self.view.frame.size.width-25.0)/2, (self.view.frame.size.height-25.0)/2, 25.0, 25.0);
 	self.savingSpinner = smSpinner;
 	self.savingSpinner.hidden = YES;
@@ -325,35 +310,55 @@ void loadGaindLUT()
 
 
     //bret button fix-up for the 4 inch display
+    CGFloat offset = 0.0;
     if (IS_IPHONE_5)
     {
-        CGRect frame = loadBtn.frame;
-        frame.origin.y += IPHONE5_HEIGHT_DIFFERENCE;
-        loadBtn.frame = frame;
-
-        frame = saveBtn.frame;
-        frame.origin.y += IPHONE5_HEIGHT_DIFFERENCE;
-        saveBtn.frame = frame;
-
-        frame = infoBtn.frame;
-        frame.origin.y += IPHONE5_HEIGHT_DIFFERENCE;
-        infoBtn.frame = frame;
-
-        frame = tintMaskView.frame;
-        frame.origin.y += IPHONE5_HEIGHT_DIFFERENCE;
-        tintMaskView.frame = frame;
+        offset = IPHONE5_HEIGHT_DIFFERENCE;
     }
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
+    {
+        offset = IPAD_HEIGHT_DIFFERENCE/2+4;
+    }
+    CGRect frame = loadBtn.frame;
+    frame.origin.y += offset;
+    loadBtn.frame = frame;
+
+    frame = saveBtn.frame;
+    frame.origin.y += offset;
+    saveBtn.frame = frame;
+
+    frame = infoBtn.frame;
+    frame.origin.y += offset;
+    infoBtn.frame = frame;
+
+    frame = tintMaskView.frame;
+    frame.origin.y += offset;
+    tintMaskView.frame = frame;
 }
 
--(void)loadWithSavedPhoto:(UIImage *)image {
-	//set tint and adjust position
-	[_ctrlPadView chooseTintsBtnForIndex:self.preset.tintIndex bNeedReturn:NO];
-	[_ctrlPadView setAdjustsForExpinside:self.preset.expInside expOutside:self.preset.expOutside contrast:self.preset.contrast];
-	[self changeTintMaskForIndex:self.preset.tintIndex];
+-(void)buildVignetteView {
+    CGRect ellipseViewRect = ellipse_view_rect;
+    if (IS_IPHONE_5)
+        ellipseViewRect = ellipse_view_rect_iphone5;
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
+    {
+        ellipseViewRect = ellipse_view_rect_ipad;
+    }
 
-	[self initUsedPropertiesAndUIForOriginPhoto:image];
-
+    _vignetteView = [[VignetteView alloc] initWithFrame:ellipseViewRect];
+    _vignetteView.delegate = self;
+    [self.view insertSubview:_vignetteView atIndex:1];
 }
+
+//-(void)loadWithSavedPhoto:(UIImage *)image {
+//	//set tint and adjust position
+//	[_ctrlPadView chooseTintsBtnForIndex:self.preset.tintIndex bNeedReturn:NO];
+//	[_ctrlPadView setAdjustsForExpinside:self.preset.expInside expOutside:self.preset.expOutside contrast:self.preset.contrast];
+//	[self changeTintMaskForIndex:self.preset.tintIndex];
+//
+//	[self initUsedPropertiesAndUIForOriginPhoto:image];
+//
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -492,7 +497,7 @@ void loadGaindLUT()
     // "Obtain the appropriate review under preset picture and set it to items inside" (via Google Translate)
 	self.mCircleImageName = [self circleImageNameForState:1];//@"circle_preset.png";
 
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		UIImage *renImage = [self imageForPreset:self.preset useImage:[UIImage imageNamed:self.mPresetReviewImageName]];//@"preset_review.png"
 		UIImage *image    = [UIImage imageNamed:self.mPresetReviewMaskImageName];//[self imageCompiledForOriginImage:renImage maskImage:[UIImage imageNamed:self.mPresetReviewMaskImageName]];//@"preset_review_mask.png"
@@ -526,125 +531,6 @@ void loadGaindLUT()
 	self.presetsItems = [self presetsItemsFromPlist:presets_plist_current];
 	self.preset = [self presetReadFromPlistByIndex:self.presetsChooseIndex];
 }
-
-//UIImagePickerController
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-	//if(_bSavingOriginPhoto) return;
-    //bret
-    imagePickerOnScreen = NO;
-	NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
-    UIImage * selected = [info objectForKey:UIImagePickerControllerOriginalImage];
-
-    [self pickPhoto:assetURL image:selected];
-
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		[self.imagePickerPopover dismissPopoverAnimated:YES];
-		self.loadBtn.enabled = YES;
-	}
-	else
-	{
-        [picker dismissViewControllerAnimated:YES completion:^{}];
-	}
-
-}
-
--(void)pickPhoto:(NSURL*)assetURL image:(UIImage*)selected {
-
-	if(selected == nil) return;
-
-//	float version = [[[UIDevice currentDevice] systemVersion] floatValue];
-//
-//	if (version > 4.1) {
-
-		ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-		[library assetForURL:assetURL
-				 resultBlock:^(ALAsset *asset)  {
-					 NSDictionary *metadata = asset.defaultRepresentation.metadata;
-
-					 //NSLog(@"metadata=, %@", metadata);
-
-					 //imageMetadata = nil;
-					 self.imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:metadata];
-					 //[self addEntriesFromDictionary:metadata];
-
-					 NSLog(@"loadImageMetadataFromPic=%@", self.imageMetadata);
-
-					 NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-					 NSString *path=[paths    objectAtIndex:0];
-					 NSString *filename=[path stringByAppendingPathComponent:metadata_plist];
-
-					 [imageMetadata writeToFile:filename  atomically:YES];
-				 }
-				failureBlock:^(NSError *error) {
-				}];
-//	} else {
-//		imageMetadata = nil;
-//
-//		NSFileManager *fileManage = [NSFileManager defaultManager];
-//		NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-//		NSString *path=[paths    objectAtIndex:0];
-//		[fileManage removeItemAtPath:[path stringByAppendingPathComponent: metadata_plist] error:nil];
-//
-//
-//	}
-
-	//NSLog(@"selected origation: %d", selected.imageOrientation);
-
-	/*
-
-	 //save the source photo
-	 self.sourcePhoto = selected;
-
-	 //save the orientation
-	 _sourceOrientation = selected.imageOrientation;
-
-	 //calculate the render Rect
-	 CGRect photoPlaceRect = [self photoRenderRectForImageSize:selected.size withImageViewRect:photo_view_rect];
-
-	 //got self.photo
-	 self.photo = [self imageWithImage:selected scaledToSize:CGSizeMake(photoPlaceRect.size.width, photoPlaceRect.size.height)];
-
-	 //add alpha
-	 self.photo = [self imageAddAlphaForImage:self.photo];
-
-
-	 //got photo renderRect
-	 _photoRenderRect = [self photoRenderRectForImageSize:self.photo.size withImageViewRect:photo_view_rect];
-
-
-	 //render the photo
-	 [self renderPhotoViewForPreset:self.preset useImage:self.photo changeType:typeNone actioning:NO];
-
-
-	 //set vignette position
-	 Parameter *param = [self parameterWithPreset:self.preset];
-	 [_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
-
-
-	 //make out the adjustPhoto
-	 self.adjustPhoto = [self imageWithImage:self.photo scaledToSize:CGSizeMake(self.photo.size.width/2,self.photo.size.height/2)];
-	 self.adjustPhoto = [self imageAddAlphaForImage:self.adjustPhoto];
-	 */
-
-
-	//初始化使用限制过的的图片
-	[self initUsedPropertiesAndUIForOriginPhoto:selected];
-
-	//save origin photo
-	_bSavingOriginPhoto = YES;
-	[NSThread detachNewThreadSelector:@selector(saveOriginPhoto:) toTarget:self withObject:self.sourcePhoto];
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    //bret
-    imagePickerOnScreen = NO;
-    [picker dismissViewControllerAnimated:YES completion:^{}];
-}
-
-
 
 
 //VignetteDelegate
@@ -680,158 +566,80 @@ void loadGaindLUT()
 	}
 }
 
-//UIPopoverControllerDelegate
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-	//[popoverController release];
-	self.loadBtn.enabled = YES;
-}
-
-
 
 -(void)toggleFull
 {
-    [UIView beginAnimations:@"rotate" context:nil];
-    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-    [UIView setAnimationDuration:0.3];
-    [UIView setAnimationDelegate:self];
-    //[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:photoFullView cache:YES];
+    [[UIView class] animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        if (self->isFull == NO) {
 
-    if (isFull == NO) {
+            Parameter *param = [self parameterWithPreset:self.preset];
 
-        Parameter *param = [self parameterWithPreset:self.preset];
+            if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+                self->ctrl_pad_offset = 256 - ctrl_pad_head_ipad;
+                self->photoView.frame = photo_full_view_rect_ipad2;
+            } else { //iphone
+                self->ctrl_pad_offset = 240 - ctrl_pad_head;
+                self->photoView.frame = photo_full_view_rect2;
 
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            ctrl_pad_offset = 256 - ctrl_pad_head_ipad;
-            photoView.frame = photo_full_view_rect_ipad2;
-        } else { //iphone
-            ctrl_pad_offset = 240 - ctrl_pad_head;
-            photoView.frame = photo_full_view_rect2;
-
-            if (IS_IPHONE_5) {
-                photoView.frame = photo_full_view_rect2_iphone5;
+                if (IS_IPHONE_5) {
+                    self->photoView.frame = photo_full_view_rect2_iphone5;
+                }
             }
+
+            self->photoView.image = self->renderedPhoto;
+
+            //full vignette view
+            self->_vignetteView.frame = self->photoView.frame;
+
+            self->_photoRenderRect2 = self->_photoRenderRect;
+            self->_photoRenderRect = [self photoRenderRectForImageSize:self.photo.size withImageViewRect:self->photoView.frame];
+            [self->_vignetteView setVignetteForParam:param photoRect:self->_photoRenderRect];
+
+            [self->fullBtn  setImage:[UIImage imageNamed:@"up_panel.png"] forState:UIControlStateNormal];
+
+            self->_ctrlPadView.center = CGPointMake(self->_ctrlPadView.center.x, self->_ctrlPadView.center.y+self->ctrl_pad_offset);
+            self->tintMaskView.center = CGPointMake(self->tintMaskView.center.x, self->tintMaskView.center.y+self->ctrl_pad_offset);
+            self->loadBtn.center = CGPointMake(self->loadBtn.center.x, self->loadBtn.center.y+self->ctrl_pad_offset);
+            self->saveBtn.center = CGPointMake(self->saveBtn.center.x, self->saveBtn.center.y+self->ctrl_pad_offset);
+            self->infoBtn.center = CGPointMake(self->infoBtn.center.x, self->infoBtn.center.y+self->ctrl_pad_offset);
+
+            [self->_ctrlPadView addSubview:self->fullBtn];
+
+            self->isFull = YES;
+        } else { //full
+            if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+                self->photoView.frame = photo_view_rect_ipad;
+                self->photoView.image = self->renderedPhoto;
+
+                self->_vignetteView.frame = photo_view_rect_ipad;
+            } else { //iphone
+                self->photoView.frame = photo_view_rect;
+                if (IS_IPHONE_5)
+                    self->photoView.frame = photo_view_rect_iphone5;
+
+                self->photoView.image = self->renderedPhoto;
+
+                self->_vignetteView.frame = photo_view_rect;
+                if (IS_IPHONE_5)
+                    self->_vignetteView.frame = photo_view_rect_iphone5;
+            }
+
+                [self->fullBtn  setImage:[UIImage imageNamed:@"down_panel.png"] forState:UIControlStateNormal];
+
+                self->_ctrlPadView.center = CGPointMake(self->_ctrlPadView.center.x, self->_ctrlPadView.center.y-self->ctrl_pad_offset);
+                self->tintMaskView.center = CGPointMake(self->tintMaskView.center.x, self->tintMaskView.center.y-self->ctrl_pad_offset);
+                self->loadBtn.center = CGPointMake(self->loadBtn.center.x, self->loadBtn.center.y-self->ctrl_pad_offset);
+                self->saveBtn.center = CGPointMake(self->saveBtn.center.x, self->saveBtn.center.y-self->ctrl_pad_offset);
+                self->infoBtn.center = CGPointMake(self->infoBtn.center.x, self->infoBtn.center.y-self->ctrl_pad_offset);
+
+            Parameter *param = [self parameterWithPreset:self.preset];
+
+                self->_photoRenderRect = self->_photoRenderRect2;
+                [self->_vignetteView setVignetteForParam:param photoRect:self->_photoRenderRect];
+
+                self->isFull = NO;
         }
-
-        photoView.image = renderedPhoto;
-
-        //full vignette view
-        _vignetteView.frame = photoView.frame;
-
-        _photoRenderRect2 = _photoRenderRect;
-        _photoRenderRect = [self photoRenderRectForImageSize:self.photo.size withImageViewRect:photoView.frame];
-        [_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
-
-        [fullBtn  setImage:[UIImage imageNamed:@"up_panel.png"] forState:UIControlStateNormal];
-
-        _ctrlPadView.center = CGPointMake(_ctrlPadView.center.x, _ctrlPadView.center.y+ctrl_pad_offset);
-        tintMaskView.center = CGPointMake(tintMaskView.center.x, tintMaskView.center.y+ctrl_pad_offset);
-        loadBtn.center = CGPointMake(loadBtn.center.x, loadBtn.center.y+ctrl_pad_offset);
-        saveBtn.center = CGPointMake(saveBtn.center.x, saveBtn.center.y+ctrl_pad_offset);
-        infoBtn.center = CGPointMake(infoBtn.center.x, infoBtn.center.y+ctrl_pad_offset);
-
-        [_ctrlPadView addSubview:fullBtn];
-
-        isFull = YES;
-    } else { //full
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            photoView.frame = photo_view_rect_ipad;
-            photoView.image = renderedPhoto;
-
-            _vignetteView.frame = photo_view_rect_ipad;
-        } else { //iphone
-            photoView.frame = photo_view_rect;
-            if (IS_IPHONE_5)
-                photoView.frame = photo_view_rect_iphone5;
-
-            photoView.image = renderedPhoto;
-
-            _vignetteView.frame = photo_view_rect;
-            if (IS_IPHONE_5)
-                _vignetteView.frame = photo_view_rect_iphone5;
-        }
-
-        [fullBtn  setImage:[UIImage imageNamed:@"down_panel.png"] forState:UIControlStateNormal];
-
-        _ctrlPadView.center = CGPointMake(_ctrlPadView.center.x, _ctrlPadView.center.y-ctrl_pad_offset);
-        tintMaskView.center = CGPointMake(tintMaskView.center.x, tintMaskView.center.y-ctrl_pad_offset);
-        loadBtn.center = CGPointMake(loadBtn.center.x, loadBtn.center.y-ctrl_pad_offset);
-        saveBtn.center = CGPointMake(saveBtn.center.x, saveBtn.center.y-ctrl_pad_offset);
-        infoBtn.center = CGPointMake(infoBtn.center.x, infoBtn.center.y-ctrl_pad_offset);
-
-        Parameter *param = [self parameterWithPreset:self.preset];
-
-        _photoRenderRect = _photoRenderRect2;
-        [_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
-
-        isFull = NO;
-    }
-
-
-    [UIView commitAnimations];
-}
-
--(IBAction)loadAction:(id)sender
-{
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		if(imagePickerPopover==nil){
-
-			UIPopoverController *ipPopover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
-			self.imagePickerPopover = ipPopover;
-
-			self.imagePickerPopover.delegate = self;
-			self.imagePickerPopover.popoverContentSize = CGSizeMake(320, 480);
-
-            //self.imagePickerPopover.popoverArrowDirection = UIPopoverArrowDirectionAny;
-
-		}
-
-		UIButton *btn = (UIButton*)sender;
-		CGRect popFrom;
-		if(btn == self.loadBtn)
-		{
-			popFrom = btn.bounds;
-		}
-		else
-		{
-			popFrom = CGRectMake(585, 795, 50, 50);
-		}
-
-//        CGAffineTransform m = CGAffineTransformMakeRotation(M_PI/2.0);
-//        imagePickerPopover.transform = m;
-
-		[self.imagePickerPopover presentPopoverFromRect:popFrom
-												 inView:btn
-							   permittedArrowDirections:UIPopoverArrowDirectionAny
-											   animated:YES];
-
-		self.loadBtn.enabled = NO;
-	}
-	else
-	{
-        imagePickerOnScreen = YES;
-        [self presentViewController:imagePicker animated:TRUE completion:nil];
-        //[self.view.window.rootViewController presentViewController:imagePicker animated:YES completion:nil];
-//		UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//		picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//		picker.delegate = self;
-//		[self presentModalViewController:picker animated:YES];
-//		[picker release];
-
-	}
-}
--(IBAction)infoAction:(id)sender
-{
-	NSString *infoNibName = @"Info";
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		infoNibName = @"Info-iPad";
-	}
-
-    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Info" bundle:NULL];
-    UIViewController * vc = [sb instantiateViewControllerWithIdentifier:@"InfoViewController"];
-    [self.navigationController pushViewController:vc animated:true];
+    } completion:nil];
 }
 
 -(void)initElementsForControlPad
@@ -882,7 +690,7 @@ void loadGaindLUT()
 		//根据preset获取相应的review图片，并设定到items里面
 		self.mCircleImageName = [self circleImageNameForState:1];//@"circle_preset.png";
 
-		if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+		if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 		{
 			UIImage *renImage = [self imageForPreset:apreset useImage:[UIImage imageNamed:self.mPresetReviewImageName]];//@"preset_review.png"
 			UIImage *image    = [UIImage imageNamed:self.mPresetReviewMaskImageName];//[self imageCompiledForOriginImage:renImage maskImage:[UIImage imageNamed:self.mPresetReviewMaskImageName]];//@"preset_review_mask.png"
@@ -985,7 +793,7 @@ void loadGaindLUT()
 		NSString *imageName    = [NSString stringWithFormat:@"tint_btn_%d.png", i];
 		NSString *imageNameSel = [NSString stringWithFormat:@"tint_btn_sel_%d.png", i];
 
-		if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+		if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 		{
 			imageName    = [NSString stringWithFormat:@"tint_btn_iPad_%d.png", i];
 			imageNameSel = [NSString stringWithFormat:@"tint_btn_sel_iPad_%d.png", i];
@@ -1124,10 +932,11 @@ void loadGaindLUT()
 
 	ffRenderArguments renderArgs = [self argumentsWithPreset:apreset];
 	self.renderedPhoto = [self renderForArguments:renderArgs useImage:image changeType:changeType];
-	self.photoView.image = self.renderedPhoto;
-
-	self.photoFullView.image = self.renderedPhoto;
-
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        self.photoView.image = self.renderedPhoto;
+        self.photoFullView.image = self.renderedPhoto;
+    });
+    
 	_bRendering = NO;
 }
 
@@ -1162,7 +971,7 @@ void loadGaindLUT()
     // draw source image on the context
 	[maskImage drawInRect:CGRectMake(0.0, 0.0, maskImage.size.width, maskImage.size.height)];
 
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		[originImage drawInRect:CGRectMake(oriX+2, oriY-2, originImage.size.width, originImage.size.height)];
 	}
@@ -1177,7 +986,7 @@ void loadGaindLUT()
 
 	//这个地方是把preset的图片缩小一半，用在本来都用大图的时候，暂时可以注释掉
     // "This place is reduced to half of the preset picture, could have been used in a large image, it can temporarily comment" (via Google Translate)
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+	if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone)
 	{
 		BOOL bIphone4 = [self checkIfiPhone4];
 		if(!bIphone4)
@@ -1327,7 +1136,7 @@ void loadGaindLUT()
 
 	if(state == 1)        //circle for preset
 	{
-		if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+		if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 		{
 			imageName = @"circle_preset_4.png";
 		}
@@ -1428,7 +1237,7 @@ void loadGaindLUT()
 
 -(void)setPresetUseImageForDevice
 {
-	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if(UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		self.mPresetReviewImageName			= @"preset_review_iPad.png";
 		self.mPresetReviewMaskImageName		= @"preset_review_mask_iPad.png";
@@ -1532,7 +1341,9 @@ void loadGaindLUT()
 }
 -(void)initUsedPropertiesAndUIForOriginPhoto:(UIImage*)originPhoto
 {
-	[NSThread detachNewThreadSelector:@selector(startWait) toTarget:self withObject:nil];
+	dispatch_async(dispatch_get_main_queue(), ^{
+        [self startWait];
+    });
 
 
 	//注意：调用这个函数之前，必须保证self.preset已经初始化过了
@@ -1542,7 +1353,7 @@ void loadGaindLUT()
     if (IS_IPHONE_5)
         photoViewRect = photo_view_rect_iphone5;
 
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		photoViewRect = photo_view_rect_ipad;
 	}
@@ -1555,7 +1366,7 @@ void loadGaindLUT()
 	//限制一下图片的大小，如果过大，就裁剪到合适的尺寸
     // "Click image size restrictions, if too large, cut to the appropriate size"  (via Google Translate)
 	float limitPixel;
-	if(UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)
+	if(UIDevice.currentDevice.userInterfaceIdiom != UIUserInterfaceIdiomPad)
 	{
 		if([self checkIfPureiPhone4NotIncludeIPod4])
 		{
@@ -1600,7 +1411,7 @@ void loadGaindLUT()
     CGRect photoPlaceRect = [self photoRenderRectForImageSize:originPhoto.size withImageViewRect:photoViewRect];
 
 	//got self.photo
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		//self.photo = [self imageWithImage:originPhoto scaledToSize:CGSizeMake(photoPlaceRect.size.width/2, photoPlaceRect.size.height/2)];
 		self.photo = [self imageWithImage:originPhoto scaledToSize:CGSizeMake(photoPlaceRect.size.width*1.2, photoPlaceRect.size.height*1.2) renderedForUI:NO];
@@ -1647,7 +1458,7 @@ void loadGaindLUT()
 
 
 	//make out the adjustPhoto
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		self.adjustPhoto = [self imageWithImage:self.photo scaledToSize:CGSizeMake(self.photo.size.width/2,self.photo.size.height/2) renderedForUI:YES];
 	}
@@ -1663,7 +1474,9 @@ void loadGaindLUT()
 	[_vignetteView setVignetteForParam:param photoRect:_photoRenderRect];
 
 
-	[self stopWait];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self stopWait];
+    });
 }
 -(void)saveOriginPhoto:(UIImage*)image
 {
@@ -1684,7 +1497,7 @@ void loadGaindLUT()
 -(void)changeTintMaskForIndex:(NSInteger)index
 {
 	NSString *tintMaskName = [NSString stringWithFormat:@"tint_mask_%zd.png", index];
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		tintMaskName = [NSString stringWithFormat:@"tint_mask_iPad_%zd.png", index];
 	}
@@ -2060,6 +1873,10 @@ void loadGaindLUT()
 		[allTints addObject:tint];
 	}
 	return allTints;
+}
+-(void)presentPresetsViewAlert:(UIAlertController *)alert
+{
+    [self presentViewController:alert animated:true completion:nil];
 }
 
 

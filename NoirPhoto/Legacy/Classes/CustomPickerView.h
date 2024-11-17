@@ -44,8 +44,6 @@
 -(void)setParameters:(float)minValue maxValue:(float)maxValue useHeight:(float)useHeight useOffset:(float)useOffset;
 -(void)setTheCurrentValue:(float)value;
 
--(void)setTheCurrentValue2:(float)value;
-
 #pragma mark -
 #pragma mark in use functions
 -(void)pickTheCurrentValue:(BOOL)bFinalPick;

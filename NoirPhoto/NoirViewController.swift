@@ -7,88 +7,237 @@
 //
 
 import UIKit
-import Photos
-import ImageIO
-import MobileCoreServices
+
+
+protocol ImageEditorInterfaceProvider: UIViewController {
+    func pickPhoto(_ assetIdentifier: String, image: UIImage)
+}
+
 
 // scales up the whole view, just like if we weren't supporting iPhone 6 or 6+
 class NoirViewController: NoirViewControllerLegacy {
-
+    @IBOutlet weak var progressView: UIProgressView!
+    enum NoirError: LocalizedError {
+        case shareOperationFailed
+        case metaDataWriteFailed
+        case metaDataWritePathNotFound
+        
+        public var errorDescription: String? {
+            switch self {
+            case .shareOperationFailed:
+                String(localized: "N_0001")
+            case .metaDataWriteFailed:
+                String(localized: "N_0002")
+            case .metaDataWritePathNotFound:
+                String(localized: "N_0003")
+            }
+        }
+    }
+    var logger: AppLogger?
+    var infoVC: (() -> UIViewController)?
+    var imageProvider: PhotoProvider?
+    weak var delegate : PhotoProviderDelegate?
+    var viewController : ImageEditorInterfaceProvider?
+    private var shareAgent: (any ShareableActivityProvider)?
+    private var shareCompletion: ShareableActivityProvider.ProviderCompletion?
+    
+    convenience init(nibName: String?,
+                     bundle: Bundle?,
+                     shareAgent: (any ShareableActivityProvider)?,
+                     shareCompletion: ShareableActivityProvider.ProviderCompletion? = nil) {
+        self.init(nibName: nibName, bundle: bundle)
+        self.shareAgent = shareAgent
+        self.shareCompletion = shareCompletion
+    }
+    
+    
     // SCALE HACK: remove me once we change the UI
-    override func viewWillAppear(animated: Bool) {
-        if (UI_USER_INTERFACE_IDIOM() == .Phone) {
+    override func viewWillAppear(_ animated: Bool) {
+        if (UIDevice.current.userInterfaceIdiom == .phone) {
             let scale = self.view.frame.size.width / CGFloat(320)
             self.view.transform = CGAffineTransformMakeScale(scale, scale)
             super.viewWillAppear(animated)
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupProgressView()
         let downGesture = UISwipeGestureRecognizer(target: self, action: #selector(NoirViewController.onSwipeGripDown))
-        downGesture.direction = .Down
-
+        downGesture.direction = .down
+        
         let upGesture = UISwipeGestureRecognizer(target: self, action: #selector(NoirViewController.onSwipeGripUp))
-        upGesture.direction = .Up
-
+        upGesture.direction = .up
+        
         self.fullBtn.addGestureRecognizer(downGesture)
         self.fullBtn.addGestureRecognizer(upGesture)
     }
-
+    
     @IBAction func onSwipeGripDown() {
-        print("SWIPE DOWN")
-
         if (!isFull) {
             self.toggleFull()
         }
-
     }
-
+    
     @IBAction func onSwipeGripUp() {
-        print("SWIPE UP")
-
         if (isFull) {
             self.toggleFull()
         }
     }
-
+    
     @IBAction func onTapShare() {
-        // TODO: render after share like in Plastic Bullet? Or in the background?
-
-        let meta = UIImage.stripOrientationMetadata(self.imageMetadata)
-
-        if let data = self.renderPhoto().imageWithMetadata(meta) {
-            let activity = UIActivityViewController(activityItems: [data], applicationActivities: nil)
-
-            activity.popoverPresentationController?.sourceView = self.view
-            activity.popoverPresentationController?.sourceRect = self.saveBtn.frame
-            activity.completionWithItemsHandler = { activity, completed, returnedItems, error in
-                if activity == UIActivityTypeSaveToCameraRoll && completed {
+        let completion: ShareableActivityProvider.ProviderCompletion = self.shareCompletion ?? { [weak self] activity, completed, returnedItems, error in
+            guard let self = self else { return }
+            
+            if completed {
+                if activity == .saveToCameraRoll {
                     self.savePhotoFeedback()
                 }
+            } else {
+                self.logger?.logError(NoirError.shareOperationFailed)
+                self.logger?.logToConsole("Share Operation Failed",
+                                          .debug,
+                                          .shareService)
             }
-            self.presentViewController(activity, animated: true, completion: nil)
+            if let error = error {
+                self.logger?.logError(error)
+                self.logger?.logToConsole("Share Operation Error",
+                                          .debug,
+                                          .shareService)
+            }
         }
+        
+        shareAgent?.shareItem(sender: self,
+                              sourceRect: self.saveBtn.frame,
+                              data: getShareData(),
+                              title: "Share your image from Noir Photo",
+                              subtitle: nil,
+                              completion: completion)
     }
+    
+    @IBAction func handleInfo(_ sender: AnyObject) {
+        guard let vc = self.infoVC?() else { return }
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    override var prefersStatusBarHidden : Bool {
+        return true
+    }
+    
 
+    @IBAction func handleLibrary(_ sender: AnyObject) {
+        let failureHandler: PhotoProvider.FailureCompletion = {
+            Alert.showAlert(on: self,
+                            title: String(localized: "PL_Title_Access_Required"),
+                            message: String(localized: "PL_0000"),
+                            action: { _ in
+                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                UIApplication.shared.open(url)
+            })
+        }
+        let successHandler: PhotoProvider.SuccessCompletion = { [weak self] image, assetIdentifier in
+            guard let self = self,
+                  let image = image,
+                  let assetIdentifier = assetIdentifier else { return }
+            self.delegate?.providerDidPickImage(UIImage(cgImage: image), assetIdentifier: assetIdentifier)
+        }
+        imageProvider?.getPhoto(success: successHandler, failure: failureHandler)
+    }
+}
+
+// MARK: Private Methods
+private extension NoirViewController {
+    func getShareData() -> Data? {
+        let meta = UIImage.stripOrientationMetadata(self.imageMetadata ?? [:])
+
+        if let data = self.renderPhoto().imageWithMetadata(meta) {
+            return data
+        } else { return nil }
+    }
+    
     func savePhotoFeedback() {
-        let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: .Alert)
-        self.presentViewController(alert, animated: true, completion: { _ in
+        let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: .alert)
+        self.present(alert, animated: true, completion: {
             delay(0.5) {
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             }
         })
 
     }
 
+    // TODO: render after share like in Plastic Bullet? Or in the background?
     func renderPhoto() -> UIImage {
         let source = self.sourcePhoto.rotateCameraImageToProperOrientation(CGFloat(MAXFLOAT))
-        return self.imageForPreset(self.preset, useImage: source)
+        return self.image(for: self.preset, use: source)
     }
-
-    override func prefersStatusBarHidden() -> Bool {
-        return true
+    
+    // MARK: Metadata helpers
+    func metadataFilePath() -> String? {
+        let path: String? = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+        return path?.appending("metadata_plist")
     }
+    
+    func writeMetadataToFile(_ metadata: NSDictionary) {
+        if let filename = metadataFilePath() {
+            // write to filename
+            do {
+               try metadata.write(to: URL(fileURLWithPath: filename))
+            } catch {
+                self.logger?.logError(NoirError.metaDataWriteFailed)
+            }
+        } else {
+            self.logger?.logError(NoirError.metaDataWritePathNotFound)
+        }
+    }
+    
+    func readMetadataFromFile() -> NSMutableDictionary? {
+        var metadata: NSMutableDictionary?
+        if let filename = metadataFilePath(),
+           FileManager.default.fileExists(atPath: filename) {
+            metadata = NSMutableDictionary.init(contentsOf: URL(fileURLWithPath: filename))
+        }
+        return metadata
+    }
+    
+    func setupProgressView() {
+        (imageProvider as? PhotoLibraryCoordinator)?.progressView = progressView
+    }
+}
 
+
+// MARK: - delegate ImageEditor
+extension NoirViewController: ImageEditorInterfaceProvider {
+    func pickPhoto(_ assetIdentifier: String, image: UIImage) {
+        // stop timers
+        _vignetteFullView?.stopTimer()
+        _vignetteView?.stopTimer()
+        
+        DispatchQueue.mainAsyncIfNeeded { [weak self] in
+            guard let self = self else { return }
+            
+            self.initUsedPropertiesAndUI(forOriginPhoto: image)
+            self.saveOriginPhoto(image)
+        }
+        
+        imageProvider?.getMetaData(assetIdentifier: assetIdentifier) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let metadata):
+                if let metadata = metadata {
+                    self.imageMetadata = NSMutableDictionary(dictionary: metadata)
+                    self.writeMetadataToFile(metadata)
+                }
+            case .failure(let error):
+                self.logger?.logToConsole("error: \(error)", .info, .photoLibraryCoordinator)
+            }
+        }
+    }
+}
+
+
+// MARK: - delegate PhotoProviderDelegate
+extension NoirViewController: PhotoProviderDelegate {
+    func providerDidPickImage(_ image: UIImage, assetIdentifier: String) {
+        self.pickPhoto(assetIdentifier, image: image)
+    }
 }
