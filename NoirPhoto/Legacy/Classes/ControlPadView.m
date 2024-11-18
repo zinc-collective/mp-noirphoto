@@ -151,8 +151,8 @@
         [self.adjustView setDelegate:self];
         [self addSubview:self.adjustView];
     }
-    
-    [self.adjustView setAdjustByExpinside:expInside expOutside:expOutside contrast:contrast];
+//    [self.adjustView setAdjustByExpinside:expInside expOutside:expOutside contrast:contrast];
+    [self.adjustView setAdjustByExpinside:0.0 expOutside:0.0 contrast:0.0];
 }
 -(void)rotatePresetShowViewForTransform:(CGAffineTransform)transfm
 {

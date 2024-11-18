@@ -7,6 +7,7 @@
 //
 
 #import "AdjustView.h"
+#import "NoirPhoto-Swift.h"
 
 
 
@@ -52,13 +53,18 @@
 	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) //ipad
 	{
 		//add outside picker
-		self.expOutsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(1.0, 0.0, 66.0, 183.0) image:[UIImage imageNamed:@"adjust_in_out-iPad.png"] topOffset:44 btmOffset:38.0];
-		[self.expOutsidePicker setParameters:-4.0 maxValue:4.0 useHeight:294.0 useOffset:91.5];
+        self.expOutsidePicker = [[VerticalPickerView alloc] init];
+        [self.expOutsidePicker setImage:[UIImage imageNamed:@"adjust_in_out-iPad.png"]];
+//		self.expOutsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(1.0, 0.0, 66.0, 183.0) image:[UIImage imageNamed:@"adjust_in_out-iPad.png"] topOffset:44 btmOffset:38.0];
+//		[self.expOutsidePicker setParameters:-4.0 maxValue:4.0 useHeight:294.0 useOffset:91.5];
+//        [self.expOutsidePicker setParameters:-4.0 maxValue:4.0 useHeight:0.0 useOffset:0.0];
+        [self.expOutsidePicker setParameters:-4.0 maxValue:4.0 defaultValue:0.0];
 		self.expOutsidePicker.defaultValue = 0.0;
 		self.expOutsidePicker.delegate = self;
 		[self addSubview:self.expOutsidePicker];
-
-
+//        [self.expOutsidePicker startVerticalPickerView];
+//
+//
 		//add inside picker
 		self.expInsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(77.0, 0.0, 66.0, 183.0) image:[UIImage imageNamed:@"adjust_in_out-iPad.png"] topOffset:44 btmOffset:38.0];
 		[self.expInsidePicker setParameters:-4.0 maxValue:4.0 useHeight:294.0 useOffset:91.5];
@@ -76,28 +82,28 @@
 	}
 	else //iphone
 	{
-		//add outside picker
-		self.expOutsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(1.0, 0.0, 49.0, 152.0) image:[UIImage imageNamed:@"adjust_in_out.png"] topOffset:40.5 btmOffset:36.0];
-		[self.expOutsidePicker setParameters:-4.0 maxValue:4.0 useHeight:219.0 useOffset:76.0];
-		self.expOutsidePicker.defaultValue = 0.0;
-		self.expOutsidePicker.delegate = self;
-		[self addSubview:self.expOutsidePicker];
-
-
-		//add inside picker
-		self.expInsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(57.0, 0.0, 49.0, 152.0) image:[UIImage imageNamed:@"adjust_in_out.png"] topOffset:40.5 btmOffset:36.0];
-		[self.expInsidePicker setParameters:-4.0 maxValue:4.0 useHeight:219 useOffset:76.0];
-		self.expInsidePicker.defaultValue = 0.0;
-		self.expInsidePicker.delegate = self;
-		[self addSubview:self.expInsidePicker];
-
-
-		//add contrast picker
-		self.expContrastPicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(113.0, 0.0, 49.0, 152.0) image:[UIImage imageNamed:@"adjust_contrast.png"] topOffset:40.5 btmOffset:36.0];
-		[self.expContrastPicker setParameters:1.0 maxValue:4.0 useHeight:219.0 useOffset:76.0];
-		self.expContrastPicker.defaultValue = 2.0;
-		self.expContrastPicker.delegate = self;
-		[self addSubview:self.expContrastPicker];
+//		//add outside picker
+//		self.expOutsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(1.0, 0.0, 49.0, 152.0) image:[UIImage imageNamed:@"adjust_in_out.png"] topOffset:40.5 btmOffset:36.0];
+//		[self.expOutsidePicker setParameters:-4.0 maxValue:4.0 useHeight:219.0 useOffset:76.0];
+//		self.expOutsidePicker.defaultValue = 0.0;
+//		self.expOutsidePicker.delegate = self;
+//		[self addSubview:self.expOutsidePicker];
+//
+//
+//		//add inside picker
+//		self.expInsidePicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(57.0, 0.0, 49.0, 152.0) image:[UIImage imageNamed:@"adjust_in_out.png"] topOffset:40.5 btmOffset:36.0];
+//		[self.expInsidePicker setParameters:-4.0 maxValue:4.0 useHeight:219 useOffset:76.0];
+//		self.expInsidePicker.defaultValue = 0.0;
+//		self.expInsidePicker.delegate = self;
+//		[self addSubview:self.expInsidePicker];
+//
+//
+//		//add contrast picker
+//		self.expContrastPicker = [[CustomPickerView alloc] initWithFrame:CGRectMake(113.0, 0.0, 49.0, 152.0) image:[UIImage imageNamed:@"adjust_contrast.png"] topOffset:40.5 btmOffset:36.0];
+//		[self.expContrastPicker setParameters:1.0 maxValue:4.0 useHeight:219.0 useOffset:76.0];
+//		self.expContrastPicker.defaultValue = 2.0;
+//		self.expContrastPicker.delegate = self;
+//		[self addSubview:self.expContrastPicker];
 	}
 }
 

@@ -63,17 +63,25 @@
 {
 	_bOutSet = YES;
 // all of this needs to be dynamic.   need a function to pass in new frame after autolayout is complete.  Is there an onLayoutChange callback I can use instead of a public function?
-	float visibleHeight = _scrollView.frame.size.height;
-    NSLog(@"## - setTheCurrentValue: %.2f", visibleHeight);
+//	float visibleHeight = _scrollView.frame.size.height;
+    float visibleHeight = 199.0;
+    NSLog(@"## - setTheCurrentValue: %.2f, _minValue: %.2f, _maxValue: %.2f", value, _minValue, _maxValue);
     CGFloat duration = 0.3f;
 	float totalHeight = _useHeight;
+    float LIVEtotalHeight = _scrollView.contentSize.height;
+//    float totalHeight = _scrollView.contentLayoutGuide.layoutFrame.size.height;
 
 	float curUseValue = value - _minValue;
 	float curPresent = curUseValue/(_maxValue - _minValue);
 	float perUseHeight = totalHeight * curPresent;
 
-	float offsetY = perUseHeight + _useOffset - visibleHeight/2;
-
+    float offsetY = perUseHeight + _useOffset - visibleHeight/2;
+    NSLog(@"####> - visibleHeight: %.2f, totalHeight: %.2f, offsetY: %.2f, _useOffset: %.2f, LIVEtotalHeight(content height): %.2f",
+          visibleHeight,
+          totalHeight,
+          offsetY,
+          _useOffset,
+          LIVEtotalHeight);
 
 	//move to new offset Y
     [[UIView class] animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
@@ -120,9 +128,7 @@
         [_scrollView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor],
         [_scrollView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor],
         [_scrollView.topAnchor constraintEqualToAnchor:self.topAnchor],
-        [_scrollView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor],
-        [_imageView.widthAnchor constraintEqualToAnchor:self.widthAnchor],
-        [_imageView.heightAnchor constraintEqualToAnchor:self.widthAnchor multiplier:_originalImaageRatio]
+        [_scrollView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor]
       ];
       // Need to scale the image proportionally and set the constraint above
       [NSLayoutConstraint activateConstraints:constraints];
@@ -132,8 +138,24 @@
         // 47.8..., 41.3...
         // from topOffset:44 btmOffset:38.0
         NSLog(@"## - _scaledTopOffset: %.2f -- _scaledBtmOffset: %.2f", _scaledTopOffset, _scaledBtmOffset);
-      _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, (_imageView.frame.size.height + _scaledTopOffset + _scaledBtmOffset));
+//      _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, (_imageView.frame.size.height + _scaledTopOffset + _scaledBtmOffset));
+        NSArray<NSLayoutConstraint *> *constraints2 = @[
+            [_scrollView.contentLayoutGuide.widthAnchor constraintEqualToAnchor:_scrollView.widthAnchor],
+            [_scrollView.contentLayoutGuide.heightAnchor constraintEqualToAnchor:_scrollView.widthAnchor multiplier:_originalImaageRatio],
+            [_imageView.widthAnchor constraintEqualToAnchor:_scrollView.contentLayoutGuide.widthAnchor],
+            [_imageView.heightAnchor constraintEqualToAnchor:_scrollView.contentLayoutGuide.widthAnchor multiplier:_originalImaageRatio] //this could be wrong
+        ];
+        [NSLayoutConstraint activateConstraints:constraints2];
+        [self layoutIfNeeded];
+        NSLog(@"#### - _originaScrolllHeight: %.2f, _originaImageFrame: %@, NEWIMAGEVIEWSIZE: %@, CONTENTSIZE: %@, NEWSCROLLSIZE: %@",
+              _originaScrolllHeight,
+              NSStringFromCGSize(_originaImageFrame),
+              NSStringFromCGSize(_imageView.frame.size),
+              NSStringFromCGSize(_scrollView.contentSize),
+              NSStringFromCGSize(_scrollView.frame.size));
     }
+    
+    [self setParameters:-4.0 maxValue:4.0 useHeight:_scrollView.contentSize.height useOffset:0.0];
     
     //add image
 //    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake((frame.size.width-image.size.width)/2, topOffset, image.size.width, image.size.height)];
@@ -176,7 +198,7 @@
 		curValue = _minValue + curUseValue;
 	}
 
-	NSLog(@"curValue : %f", curValue);
+	NSLog(@"curValue : %f - contentOffest(Y): %f", curValue, contentOffset.y);
 
 	//return to delegate
 	if(self.delegate &&[(NSObject*)self.delegate respondsToSelector:@selector(currentValueFromCustomPicker:value:isFinal:)])

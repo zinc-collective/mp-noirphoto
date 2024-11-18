@@ -15,6 +15,7 @@
 #define contrast_slider_default_valut 2.0
 
 
+@class VerticalPickerView;
 @class AdjustView;
 @protocol AdjustViewDelegate <NSObject>
 @optional
@@ -25,9 +26,9 @@
 @interface AdjustView : UIView <CustomPickerDelegate> {
 
 
-	CustomPickerView *_expInsidePicker;
-	CustomPickerView *_expOutsidePicker;
-	CustomPickerView *_expContrastPicker;
+//	CustomPickerView *_expInsidePicker;
+//	CustomPickerView *_expOutsidePicker;
+//	CustomPickerView *_expContrastPicker;
 
 	float _expInside;
 	float _expOutside;
@@ -37,7 +38,7 @@
 }
 
 @property (nonatomic, weak) id<AdjustViewDelegate> delegate;
-@property (nonatomic, retain) CustomPickerView* expOutsidePicker;
+@property (nonatomic, retain) VerticalPickerView* expOutsidePicker;
 @property (nonatomic, retain) CustomPickerView* expInsidePicker;
 @property (nonatomic, retain) CustomPickerView* expContrastPicker;
 @property (nonatomic, retain) UIImageView* adjustMaskView;

@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     ctrlPadConfig: ctrlPadConfig)
         vc.infoVC = createFactoryInfoViewController(configuration: config)
         vc.logger = LogManager()
-        vc.imageProvider = PhotoLibraryCoordinator(parent: vc as! UIViewController)
+        vc.imageProvider = PhotoLibraryCoordinator(parent: vc as UIViewController)
         let splashController: SplashViewController = UIStoryboard(name: "Splash", bundle: nil)
                                     .instantiateViewController(withIdentifier: "SplashViewController") as! SplashViewController
         splashController.logger = LogManager()
