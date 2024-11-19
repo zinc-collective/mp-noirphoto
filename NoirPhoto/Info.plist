@@ -44,7 +44,7 @@
 		</dict>
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Access to your photos is required to use this app</string>
+	<string>Allow access to your photos to add artistic, stylized filters to the photos you choose to make available.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
